@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="YrvQ7b" name="orionaudio" projectType="audioplug" jucerVersion="5.4.4"
+              headerPath="/Users/lilyh/Documents/music tech/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              pluginVST3Category="Delay,Distortion,Filter,Fx,Pitch Shift,Reverb,Stereo"
+              pluginFormats="buildAU,buildVST,buildVST3">
+  <MAINGROUP id="PeSdbo" name="orionaudio">
+    <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
+      <FILE id="phCcGO" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="lP2bu0" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="QI1euY" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="QcXnEk" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="blf983" name="OrionFileTreeComponent.h" compile="0" resource="0"
+            file="Source/OrionFileTreeComponent.h"/>
+      <FILE id="AtkpZR" name="OrionFileBrowser.h" compile="0" resource="0"
+            file="Source/OrionFileBrowser.h"/>
+      <FILE id="cmnvf2" name="OrionBrowser.h" compile="0" resource="0" file="Source/OrionBrowser.h"/>
+      <FILE id="E5E3MV" name="OrionButton.h" compile="0" resource="0" file="Source/OrionButton.h"/>
+      <FILE id="FkGNxt" name="SimpleSynth.cpp" compile="1" resource="0" file="Source/SimpleSynth.cpp"/>
+      <FILE id="XuVhbb" name="SimpleSynth.h" compile="0" resource="0" file="Source/SimpleSynth.h"/>
+      <FILE id="e2UK8L" name="OrionSamplerVoice.h" compile="0" resource="0"
+            file="Source/OrionSamplerVoice.h"/>
+      <FILE id="N3OXtC" name="OrionSamplerSound.h" compile="0" resource="0"
+            file="Source/OrionSamplerSound.h"/>
+      <FILE id="xuyjMu" name="Analyser.h" compile="0" resource="0" file="Source/Analyser.h"/>
+      <FILE id="rqcjBl" name="panpos.h" compile="0" resource="0" file="Source/panpos.h"/>
+      <FILE id="lcZSxX" name="delay.h" compile="0" resource="0" file="Source/delay.h"/>
+      <FILE id="QCI8dX" name="compressor.h" compile="0" resource="0" file="Source/compressor.h"/>
+      <FILE id="SX0UuW" name="Envelope.cpp" compile="1" resource="0" file="Source/Envelope.cpp"/>
+      <FILE id="hMwgfL" name="Envelope.h" compile="0" resource="0" file="Source/Envelope.h"/>
+      <FILE id="yJIKrs" name="EQ.h" compile="0" resource="0" file="Source/EQ.h"/>
+      <FILE id="eYXuHI" name="OrionRotarySlider.h" compile="0" resource="0"
+            file="Source/OrionRotarySlider.h"/>
+      <FILE id="ChsMKI" name="OrionEffectComp.cpp" compile="1" resource="0"
+            file="Source/OrionEffectComp.cpp"/>
+      <FILE id="isZNvX" name="OrionEffectComp.h" compile="0" resource="0"
+            file="Source/OrionEffectComp.h"/>
+      <FILE id="KybSt3" name="OrionEffectDelay.cpp" compile="1" resource="0"
+            file="Source/OrionEffectDelay.cpp"/>
+      <FILE id="GWn6yo" name="OrionEffectDelay.h" compile="0" resource="0"
+            file="Source/OrionEffectDelay.h"/>
+      <FILE id="FgAig8" name="OrionEffectReverb.cpp" compile="1" resource="0"
+            file="Source/OrionEffectReverb.cpp"/>
+      <FILE id="YY3sCT" name="OrionEffectReverb.h" compile="0" resource="0"
+            file="Source/OrionEffectReverb.h"/>
+      <FILE id="H8JOeC" name="OrionEffectsConfiguration.cpp" compile="1"
+            resource="0" file="Source/OrionEffectsConfiguration.cpp"/>
+      <FILE id="UVih5j" name="OrionEffectsConfiguration.h" compile="0" resource="0"
+            file="Source/OrionEffectsConfiguration.h"/>
+      <FILE id="faoKEn" name="OrionClipConfiguration.cpp" compile="1" resource="0"
+            file="Source/OrionClipConfiguration.cpp"/>
+      <FILE id="HW6304" name="OrionClipConfiguration.h" compile="0" resource="0"
+            file="Source/OrionClipConfiguration.h"/>
+      <FILE id="DsVfs4" name="OrionEQConfiguration.cpp" compile="1" resource="0"
+            file="Source/OrionEQConfiguration.cpp"/>
+      <FILE id="aDHQ2z" name="OrionEQConfiguration.h" compile="0" resource="0"
+            file="Source/OrionEQConfiguration.h"/>
+      <FILE id="GL0UMo" name="OrionGlobalVars.h" compile="0" resource="0"
+            file="Source/OrionGlobalVars.h"/>
+      <FILE id="XBZNAq" name="OrionEnvConfiguration.cpp" compile="1" resource="0"
+            file="Source/OrionEnvConfiguration.cpp"/>
+      <FILE id="Vue7Dl" name="OrionEnvConfiguration.h" compile="0" resource="0"
+            file="Source/OrionEnvConfiguration.h"/>
+      <FILE id="moLjQ8" name="OrionTabComponent.cpp" compile="1" resource="0"
+            file="Source/OrionTabComponent.cpp"/>
+      <FILE id="MVqq3r" name="OrionTabComponent.h" compile="0" resource="0"
+            file="Source/OrionTabComponent.h"/>
+      <FILE id="d9CoCl" name="OrionTabButton.h" compile="0" resource="0"
+            file="Source/OrionTabButton.h"/>
+    </GROUP>
+    <GROUP id="{7A6553AB-6E6B-EA2D-75C7-9554276FF724}" name="assets">
+      <GROUP id="{2149852F-3B2C-6D16-6C58-DECBB63B12C2}" name="graphics">
+        <FILE id="OQFFkl" name="00compressorBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/00compressorBackground.png"/>
+        <FILE id="hQMoC1" name="00delayBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/00delayBackground.png"/>
+        <FILE id="HHu0Lq" name="00orionEnvBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/00orionEnvBackground.png"/>
+        <FILE id="zTfjAT" name="00reverbBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/00reverbBackground.png"/>
+        <FILE id="YcnGm3" name="a.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/a.png"/>
+        <FILE id="xlkArr" name="a_button.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/a_button.png"/>
+        <FILE id="K1qXyn" name="appdir.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/appdir.png"/>
+        <FILE id="ixjjaO" name="arrow.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/arrow.png"/>
+        <FILE id="A6kHLG" name="check.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/check.png"/>
+        <FILE id="TcuTXl" name="clap_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clap_off.png"/>
+        <FILE id="d1a3Hq" name="clap_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clap_on.png"/>
+        <FILE id="u84W6q" name="clap_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/clap_selected.png"/>
+        <FILE id="oGnDNa" name="clip_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clip_off.png"/>
+        <FILE id="bX86ha" name="clip_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clip_on.png"/>
+        <FILE id="tB1BTv" name="clip_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/clip_selected.png"/>
+        <FILE id="AUneM3" name="compressorBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/compressorBackground.png"/>
+        <FILE id="foZOLD" name="crash_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/crash_off.png"/>
+        <FILE id="MXDRXa" name="crash_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/crash_on.png"/>
+        <FILE id="Wm4nky" name="crash_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/crash_selected.png"/>
+        <FILE id="SsqH1Y" name="delayBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/delayBackground.png"/>
+        <FILE id="dPx3iI" name="env_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/env_off.png"/>
+        <FILE id="aDQWZW" name="env_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/env_on.png"/>
+        <FILE id="CGNgJU" name="env_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/env_selected.png"/>
+        <FILE id="AdM662" name="EQ_Background.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/EQ_Background.png"/>
+        <FILE id="iY1AFt" name="eq_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/eq_off.png"/>
+        <FILE id="FLdE8A" name="eq_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/eq_on.png"/>
+        <FILE id="m9iWxj" name="eq_selected.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/eq_selected.png"/>
+        <FILE id="Em4b4s" name="expand.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/expand.png"/>
+        <FILE id="f01npo" name="file.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/file.png"/>
+        <FILE id="bpe89g" name="fx_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/fx_off.png"/>
+        <FILE id="TYHuXp" name="fx_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/fx_on.png"/>
+        <FILE id="twT2Qi" name="fx_selected.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/fx_selected.png"/>
+        <FILE id="Q6ug30" name="headphone_button.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/headphone_button.png"/>
+        <FILE id="feksHE" name="hh-c_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hh-c_off.png"/>
+        <FILE id="U02zQH" name="hh-c_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/hh-c_selected.png"/>
+        <FILE id="iLMhLV" name="hh-o_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hh-o_off.png"/>
+        <FILE id="FLuP3w" name="hh-o_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/hh-o_selected.png"/>
+        <FILE id="aGqya7" name="hhc_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hhc_off.png"/>
+        <FILE id="aT3m8I" name="hhc_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hhc_on.png"/>
+        <FILE id="pGNl86" name="hho_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hho_off.png"/>
+        <FILE id="oD13tm" name="hho_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hho_on.png"/>
+        <FILE id="hpV0ER" name="kick_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/kick_off.png"/>
+        <FILE id="CYoibI" name="kick_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/kick_on.png"/>
+        <FILE id="YKMxNx" name="kick_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/kick_selected.png"/>
+        <FILE id="Ez5OiP" name="knob_1.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/knob_1.png"/>
+        <FILE id="ZC5L1G" name="knob_2.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/knob_2.png"/>
+        <FILE id="PT9fnv" name="logo.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/logo.png"/>
+        <FILE id="HvDeM8" name="m.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/m.png"/>
+        <FILE id="DZUspx" name="meter.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/meter.png"/>
+        <FILE id="P8s2nP" name="navigator_background.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/navigator_background.png"/>
+        <FILE id="r5z68r" name="off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/off.png"/>
+        <FILE id="yu4p5p" name="On.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/On.png"/>
+        <FILE id="AtYoXz" name="orionBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/orionBackground.png"/>
+        <FILE id="VCCrzA" name="orionClipBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/orionClipBackground.png"/>
+        <FILE id="JtNnVF" name="orionEnvBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/orionEnvBackground.png"/>
+        <FILE id="VLtiis" name="perc_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/perc_off.png"/>
+        <FILE id="ewG3Ce" name="perc_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/perc_on.png"/>
+        <FILE id="nWoLme" name="perc_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/perc_selected.png"/>
+        <FILE id="MUjoUe" name="power_button.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/power_button.png"/>
+        <FILE id="DW4s1c" name="profile.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/profile.png"/>
+        <FILE id="ncg7EY" name="question.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/question.png"/>
+        <FILE id="FYtQw5" name="reverbBackground.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/reverbBackground.png"/>
+        <FILE id="exsA7F" name="s.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/s.png"/>
+        <FILE id="rQvEjP" name="selected.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/selected.png"/>
+        <FILE id="pzLVEq" name="settings.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/settings.png"/>
+        <FILE id="of2Qwj" name="snap_0ff.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snap_0ff.png"/>
+        <FILE id="SbECGj" name="snap_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snap_off.png"/>
+        <FILE id="jjJYUR" name="snap_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snap_on.png"/>
+        <FILE id="GTFhlC" name="snap_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/snap_selected.png"/>
+        <FILE id="OKkehP" name="snare_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snare_off.png"/>
+        <FILE id="QuNqME" name="snare_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snare_on.png"/>
+        <FILE id="MA1Lja" name="snare_selected.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/snare_selected.png"/>
+        <FILE id="zY9Evi" name="sound_file.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/sound_file.png"/>
+        <FILE id="IIiYvw" name="volume.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/volume.png"/>
+        <FILE id="b7DN4M" name="wrench_button.png" compile="0" resource="1"
+              file="../JUCE Files/Orion Plugin/assets/graphics/wrench_button.png"/>
+      </GROUP>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../../Documents/music tech/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../Documents/music_tech/JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_VST3_CAN_REPLACE_VST2="0" JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>
