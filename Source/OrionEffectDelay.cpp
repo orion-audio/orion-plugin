@@ -65,7 +65,7 @@ processor(p)
     addAndMakeVisible(delayFeedbackLabel);
     delayFeedbackLabel.setText ("Feedback", dontSendNotification);
     //delayFeedbackLabel.attachToComponent (&delayFeedbackSlider, false);
-    delayFeedbackLabel.setBounds(WidthTmp*1.1/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
+    delayFeedbackLabel.setBounds(WidthTmp*1.12/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     
     
@@ -83,7 +83,7 @@ processor(p)
     addAndMakeVisible(delayColorLabel);
     delayColorLabel.setText ("Color", dontSendNotification);
     //delayColorLabel.attachToComponent (&delayColorSlider, false);
-    delayColorLabel.setBounds(WidthTmp*2.2/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
+    delayColorLabel.setBounds(WidthTmp*2.22/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
 
 
     
@@ -111,7 +111,7 @@ processor(p)
     addAndMakeVisible(delayPanLabel);
     delayPanLabel.setText ("Pan", dontSendNotification);
     //delayPanLabel.attachToComponent (&delayPanSlider, false);
-    delayPanLabel.setBounds(WidthTmp*0.22/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
+    delayPanLabel.setBounds(WidthTmp*0.23/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     
     

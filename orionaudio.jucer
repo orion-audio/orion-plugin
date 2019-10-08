@@ -2,9 +2,9 @@
 
 <JUCERPROJECT id="YrvQ7b" name="orionaudio" projectType="audioplug" jucerVersion="5.4.4"
               headerPath="/Users/lilyh/Documents/music tech/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
-              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
               pluginVST3Category="Delay,Distortion,Filter,Fx,Pitch Shift,Reverb,Stereo"
-              pluginFormats="buildAU,buildVST,buildVST3">
+              pluginFormats="buildAU,buildStandalone,buildVST3">
   <MAINGROUP id="PeSdbo" name="orionaudio">
     <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
       <FILE id="phCcGO" name="PluginProcessor.cpp" compile="1" resource="0"

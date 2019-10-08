@@ -24,6 +24,7 @@ processor(p)
     effectCompSerial = serial;
     
     int WidthTmp = (OrionGlobalWidth/10)*4;
+    int WidthTmp2 = (OrionGlobalWidth/10)*3;
     int HeightTmp = OrionGlobalHeight/3;
     
     //cout<<"Height 2: "<<HeightTmp<<endl;//!!!!!!!
@@ -35,63 +36,63 @@ processor(p)
     //cout<<"Height: "<<getHeight()/3<<endl;
     
     // slider initialization values
-    
+    //=====================================================================
     compRatioSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-    compRatioSlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
+    compRatioSlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
     compRatioSlider.setRange(1.0f, 100.0f);
     compRatioSlider.setValue(1.0f);
     compRatioSlider.setTextValueSuffix (":1");
     //compRatioSlider.addListener(this);
-    compRatioSlider.setBounds(WidthTmp/4*2, HeightTmp/4, HeightTmp/3, HeightTmp/3);/* local: X, Y, W， H */
+    compRatioSlider.setBounds(WidthTmp/4*2, HeightTmp/4, WidthTmp2*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     addAndMakeVisible(compRatioSlider);
     compRatioSlider.setVisible(true);
     
     addAndMakeVisible(compRatioLabel);
     compRatioLabel.setText ("Ratio", dontSendNotification);
-    compRatioLabel.attachToComponent (&compRatioSlider, false);
+    compRatioLabel.setBounds(WidthTmp*1.55/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
+    //compRatioLabel.attachToComponent (&compRatioSlider, false);
     
-    
-    
+    //=====================================================================
     compAttackSlider.setSliderStyle(Slider::SliderStyle::Rotary);
     compAttackSlider.setRange(0.1f, 80.0f);
     compAttackSlider.setValue(0.1f);
     compAttackSlider.setTextValueSuffix (" ms");
-    compAttackSlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
-    compAttackSlider.setBounds(WidthTmp/4*3, HeightTmp/4, HeightTmp/3, HeightTmp/3);/* local: X, Y, W， H */
+    compAttackSlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
+    compAttackSlider.setBounds(WidthTmp/4*3, HeightTmp/4, WidthTmp2*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     //compAttackSlider->addListener(this);
     addAndMakeVisible(compAttackSlider);
     compAttackSlider.setVisible(true);
     
     addAndMakeVisible(compAttackLabel);
     compAttackLabel.setText ("Attack", dontSendNotification);
-    compAttackLabel.attachToComponent (&compAttackSlider, false);
+    //compAttackLabel.attachToComponent (&compAttackSlider, false);
+    compAttackLabel.setBounds(WidthTmp*2.3/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     
     
-    
+    //=====================================================================
     compReleaseSlider.setSliderStyle(Slider::SliderStyle::Rotary);
     compReleaseSlider.setRange(0.1f, 1000.0f);
     compReleaseSlider.setValue(0.1f);
     compReleaseSlider.setTextValueSuffix (" ms");
-    compReleaseSlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
-    compReleaseSlider.setBounds(WidthTmp/4*2, HeightTmp/4*2, HeightTmp/3, HeightTmp/3);/* local: X, Y, W， H */
+    compReleaseSlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
+    compReleaseSlider.setBounds(WidthTmp/4*2, HeightTmp/4 + HeightTmp/3, WidthTmp2*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     //compReleaseSlider.addListener(this);
     addAndMakeVisible(compReleaseSlider);
     compReleaseSlider.setVisible(true);
     
     addAndMakeVisible(compReleaseLabel);
     compReleaseLabel.setText ("Release", dontSendNotification);
-    
-    compReleaseLabel.setBounds(WidthTmp/4*2.0, HeightTmp/4*2.3, HeightTmp/3, HeightTmp/3*1.3);
-    compReleaseLabel.attachToComponent (&compReleaseSlider, false);
+    compReleaseLabel.setBounds(WidthTmp*1.53/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp2/3, HeightTmp/20);
+    //compReleaseLabel.attachToComponent (&compReleaseSlider, false);
 
-
+    //=====================================================================
     compGainSlider.setSliderStyle(Slider::SliderStyle::Rotary);
     compGainSlider.setRange(0.0f, 40.0f);
     compGainSlider.setValue(0.1f);
     compGainSlider.setTextValueSuffix (" db");
-    compGainSlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
-    compGainSlider.setBounds(WidthTmp/4*3, HeightTmp/4*2, HeightTmp/3, HeightTmp/3);/* local: X, Y, W， H */
+    compGainSlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
+    compGainSlider.setBounds(WidthTmp/4*3, HeightTmp/4 + HeightTmp/3, WidthTmp2*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     //compGainSlider->addListener(this);
     addAndMakeVisible(compGainSlider);
     compGainSlider.setVisible(true);
@@ -99,13 +100,13 @@ processor(p)
     addAndMakeVisible(compGainLabel);
     compGainLabel.setText ("Gain", dontSendNotification);
     
-    compGainLabel.setBounds(WidthTmp/4*3.1, HeightTmp/4*2.3, HeightTmp/3, HeightTmp/3*1.3);
-    compGainLabel.attachToComponent (&compGainSlider, false);
+    compGainLabel.setBounds(WidthTmp*2.4/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp2/3, HeightTmp/20);
+    //compGainLabel.attachToComponent (&compGainSlider, false);
     
     
     
     
-    
+    //=====================================================================
     compThreshSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
     compThreshSlider.setRange(-60.0f, 0.0f);
     compThreshSlider.setValue(-60.0f);
@@ -119,10 +120,12 @@ processor(p)
     addAndMakeVisible(compThreshLabel);
     compThreshLabel.setText ("Thresh", dontSendNotification);
     compThreshLabel.setBounds(WidthTmp/4*1.5, HeightTmp/4*2.3, HeightTmp/3, HeightTmp/3*1.3);
-    compThreshLabel.attachToComponent (&compThreshSlider, false);
+    //compThreshLabel.attachToComponent (&compThreshSlider, false);
     
+    
+    //=====================================================================
     compSwitchButton.setButtonText(translate("On/Off"));
-    compSwitchButton.setBounds(215, 24, 150, 24);
+    compSwitchButton.setBounds(WidthTmp2*3.3/3, HeightTmp/10, WidthTmp2/3.1, HeightTmp/10);
     addAndMakeVisible(compSwitchButton);
     
     //sends value of the sliders to the tree state in the processor

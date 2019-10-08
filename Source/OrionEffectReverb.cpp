@@ -39,12 +39,12 @@ processor(p)
     //=====================================================================
     //delayTimeSlider = new Slider("delayTimeSlider"+String(effectDelaySerial));
     reverbPredelaySlider.setSliderStyle(Slider::SliderStyle::Rotary);
-    reverbPredelaySlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
+    reverbPredelaySlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
     reverbPredelaySlider.setRange(0.0f, 0.5f);
     reverbPredelaySlider.setValue(0.0f);
     reverbPredelaySlider.setTextValueSuffix (" ms");
     //delayTimeSlider.onValueChange = [this] { delayTimeSlider.setValue (delayTimeSlider.getValue() * 10000, dontSendNotification); };
-    reverbPredelaySlider.setBounds(0, HeightTmp/4, HeightTmp/3, HeightTmp/3);/* local: X, Y, W， H */
+    reverbPredelaySlider.setBounds(WidthTmp*0.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     addAndMakeVisible(reverbPredelaySlider);
     reverbPredelaySlider.setVisible(true);
     
@@ -62,18 +62,20 @@ processor(p)
     
     addAndMakeVisible(reverbPredelayLabel);
     reverbPredelayLabel.setText ("Pre-Delay", dontSendNotification);
-    reverbPredelayLabel.attachToComponent (&reverbPredelaySlider, false);
+    reverbPredelayLabel.setBounds(WidthTmp*0.1/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
+    
+    //reverbPredelayLabel.attachToComponent (&reverbPredelaySlider, false);
     
     
     
     
     //=====================================================================
     reverbSizeSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-    reverbSizeSlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
+    reverbSizeSlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
     reverbSizeSlider.setRange(0.0f, 0.95f);
     reverbSizeSlider.setValue(0.0f);
     reverbSizeSlider.setTextValueSuffix (" ms");
-    reverbSizeSlider.setBounds(WidthTmp/3, HeightTmp/4, HeightTmp/3, HeightTmp/3);/* local: X, Y, W， H */
+    reverbSizeSlider.setBounds(WidthTmp*1.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     addAndMakeVisible(reverbSizeSlider);
     reverbSizeSlider.setVisible(true);
     
@@ -91,7 +93,9 @@ processor(p)
     
     addAndMakeVisible(reverbSizeLabel);
     reverbSizeLabel.setText ("Size", dontSendNotification);
-    reverbSizeLabel.attachToComponent (&reverbSizeSlider, false);
+    //reverbSizeLabel.attachToComponent (&reverbSizeSlider, false);
+    reverbSizeLabel.setBounds(WidthTmp*1.25/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
+    
     
     
     
@@ -99,11 +103,11 @@ processor(p)
     
     //=====================================================================
     reverbColorSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-    reverbColorSlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
+    reverbColorSlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
     reverbColorSlider.setRange(-1.0f, 1.0f);
     reverbColorSlider.setValue(0.0f);
     reverbSizeSlider.setTextValueSuffix (" ms");
-    reverbColorSlider.setBounds(WidthTmp/3*2, HeightTmp/4, HeightTmp/3, HeightTmp/3);/* local: X, Y, W， H */
+    reverbColorSlider.setBounds(WidthTmp*2.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     addAndMakeVisible(reverbColorSlider);
     reverbColorSlider.setVisible(true);
     
@@ -118,17 +122,17 @@ processor(p)
     
     addAndMakeVisible(reverbColorLabel);
     reverbColorLabel.setText ("Color", dontSendNotification);
-    reverbColorLabel.attachToComponent (&reverbColorSlider, false);
-    
+    //reverbColorLabel.attachToComponent (&reverbColorSlider, false);
+    reverbColorLabel.setBounds(WidthTmp*2.2/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     
     //=====================================================================
     reverbDecaySlider.setSliderStyle(Slider::SliderStyle::Rotary);
-    reverbDecaySlider.setTextBoxStyle(Slider::TextBoxRight, true, 45.0, 15.0);
+    reverbDecaySlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
     reverbDecaySlider.setRange(-1.0f, 1.0f);
     reverbDecaySlider.setValue(0.0f);
     reverbDecaySlider.setTextValueSuffix (" %");
-    reverbDecaySlider.setBounds(0, HeightTmp/4*2, HeightTmp/3, HeightTmp/3.2);/* local: X, Y, W， H */
+    reverbDecaySlider.setBounds(WidthTmp*0.1/3, HeightTmp/4 + HeightTmp/3, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     addAndMakeVisible(reverbDecaySlider);
     reverbDecaySlider.setVisible(true);
     
@@ -143,8 +147,8 @@ processor(p)
     
     addAndMakeVisible(reverbDecayLabel);
     reverbDecayLabel.setText ("Decay", dontSendNotification);
-    reverbDecayLabel.attachToComponent (&reverbDecaySlider, false);
-    
+    //reverbDecayLabel.attachToComponent (&reverbDecaySlider, false);
+    reverbDecayLabel.setBounds(WidthTmp*0.18/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     //=====================================================================
     reverbDrySlider.setSliderStyle(Slider::SliderStyle::LinearHorizontal);
@@ -152,7 +156,7 @@ processor(p)
     reverbDrySlider.setRange(0.0f, 1.0f);
     reverbDrySlider.setValue(0.3f);
     reverbDrySlider.setTextValueSuffix (" ms");
-    reverbDrySlider.setBounds(WidthTmp/3, HeightTmp/4*2, HeightTmp/3*2, HeightTmp/3);/* local: X, Y, W， H */
+    reverbDrySlider.setBounds(WidthTmp/3, HeightTmp/4 + HeightTmp/3, WidthTmp*2*0.9/3, HeightTmp/3);/* local: X, Y, W， H */
     addAndMakeVisible(reverbDrySlider);
     reverbDrySlider.setVisible(true);
     
@@ -167,11 +171,11 @@ processor(p)
     
     addAndMakeVisible(reverbDryLabel);
     reverbDryLabel.setText ("Wet                                 Dry", dontSendNotification);
-    reverbDryLabel.attachToComponent (&reverbDrySlider, false);
-    
+    //reverbDryLabel.attachToComponent (&reverbDrySlider, false);
+    reverbDryLabel.setBounds(WidthTmp*1.1/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp*2/3, HeightTmp/20);
     
     reverbSwitchButton.setButtonText(translate("On/Off"));
-    reverbSwitchButton.setBounds(215, 24, 150, 24);
+    reverbSwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
     addAndMakeVisible(reverbSwitchButton);
     
     
@@ -218,7 +222,7 @@ void OrionEffectReverb::paint (Graphics& g)
     //    g.setFont (14.0f);
     //    g.drawText ("OrionEffectDelay", getLocalBounds(),
     //                Justification::centred, true);   // draw some placeholder text
-    g.fillAll(Colours::lightgrey);/* 颜色 */
+    g.fillAll(Colours::grey);/* 颜色 */
     
     /* Customize the sliders*/
     OrionRotarySlider* cusRotarySliderlook = new OrionRotarySlider();

@@ -132,7 +132,9 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     snapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snapButton);
     
-    AppDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),juce::Drawable::createFromImageFile(*appFileOn).release(),juce::Drawable::createFromImageFile(*appFileOn).release());
+    AppDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
+                     juce::Drawable::createFromImageFile(*appFileOn).release(),
+                     juce::Drawable::createFromImageFile(*appFileOn).release());
     //AppDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ appdirClicked(); };
     
     AppDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
@@ -230,8 +232,10 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     tabComponentChanged(0);
     
-
     
+    midiOutput = MidiOutput::createNewDevice("Mails from Orion Audio Output");
+    midiOutput->startBackgroundThread ();
+
 }
 
 
@@ -400,8 +404,11 @@ void OrionaudioAudioProcessorEditor::kickButtonClicked()
             indices[0] = kickButton.index;
          //  std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-        
-    }
+        midiOutput->sendMessageNow(MidiMessage::noteOn(1, 36, 1.f));
+    }else{
+        processor.synth.noteOff(1, 36, 0, false/*没有淡出*/);
+        midiOutput->sendMessageNow(MidiMessage::noteOff(1, 36, 0.f));
+    };
     
 
     
@@ -431,8 +438,13 @@ void OrionaudioAudioProcessorEditor::snareButtonClicked()
             indices[1] = snareButton.index;
          //   std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
+        
+        midiOutput->sendMessageNow(MidiMessage::noteOn(1, 38, 1.f));
        
-    }//else{processor.synth.noteOff(1, 38, 0, false/*没有淡出*/);};
+    }else{
+        processor.synth.noteOff(1, 38, 0, false/*没有淡出*/);
+        midiOutput->sendMessageNow(MidiMessage::noteOff(1, 38, 0.f));
+    };
     
     
 }
@@ -461,7 +473,12 @@ void OrionaudioAudioProcessorEditor::clapButtonClicked()
            // std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
         
-    }//else{processor.synth.noteOff(1, 39, 0, false/*没有淡出*/);};
+        midiOutput->sendMessageNow(MidiMessage::noteOn(1, 39, 1.f));
+        
+    }else{
+        processor.synth.noteOff(1, 39, 0, false/*没有淡出*/);
+        midiOutput->sendMessageNow(MidiMessage::noteOff(1, 39, 0.f));
+    };
     
     
 }
@@ -490,7 +507,13 @@ void OrionaudioAudioProcessorEditor::percButtonClicked()
             indices[3] = percButton.index;
           //  std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-    }//else{processor.synth.noteOff(1, 41, 0, false/*没有淡出*/);};
+        
+        midiOutput->sendMessageNow(MidiMessage::noteOn(1, 41, 1.f));
+        
+    }else{
+        processor.synth.noteOff(1, 41, 0, false/*没有淡出*/);
+        midiOutput->sendMessageNow(MidiMessage::noteOff(1, 41, 0.f));
+    };
     
     
 }
@@ -519,8 +542,12 @@ void OrionaudioAudioProcessorEditor::HiHatButtonClicked()
             //std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
         
+        midiOutput->sendMessageNow(MidiMessage::noteOn(1, 42, 1.f));
         
-    }//else{processor.synth.noteOff(1, 42, 0, false);};
+    }else{
+        processor.synth.noteOff(1, 42, 0, false);
+        midiOutput->sendMessageNow(MidiMessage::noteOff(1, 42, 0.f));
+    };
     
     
     
@@ -549,8 +576,12 @@ void OrionaudioAudioProcessorEditor::cymbalButtonClicked()
           //  std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
         
+        midiOutput->sendMessageNow(MidiMessage::noteOn(1, 43, 1.f));
         
-    }//else{processor.synth.noteOff(1, 43, 0, false);};
+    }else{
+        processor.synth.noteOff(1, 43, 0, false);
+        midiOutput->sendMessageNow(MidiMessage::noteOff(1, 43, 0.f));
+    };
     
     
 }
@@ -578,8 +609,12 @@ void OrionaudioAudioProcessorEditor::snapButtonClicked()
           // std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
         
+        midiOutput->sendMessageNow(MidiMessage::noteOn(1, 46, 1.f));
         
-    }//else{processor.synth.noteOff(1, 46, 0, false);};
+    }else{
+        processor.synth.noteOff(1, 46, 0, false);
+        midiOutput->sendMessageNow(MidiMessage::noteOff(1, 46, 0.f));
+    };
     
 }
 

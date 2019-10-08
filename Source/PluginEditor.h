@@ -103,6 +103,7 @@ private:
     AudioFormatManager formatManager;
     double startTime;
     
+    std::unique_ptr<MidiOutput> midiOutput; 
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };
