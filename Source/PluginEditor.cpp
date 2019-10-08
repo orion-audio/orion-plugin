@@ -71,86 +71,110 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     crashFileOff = new File(skinfolder.getChildFile("crash_off.png"));
     crashFileOn  = new File(skinfolder.getChildFile("crash_on.png"));
     appFileOn    = new File(skinfolder.getChildFile("appdir.png"));
- kickButton.setImages(juce::Drawable::createFromImageFile(*kickFileOff),juce::Drawable::createFromImageFile(*kickFileOn),juce::Drawable::createFromImageFile(*kickFileOn));
+ kickButton.setImages(juce::Drawable::createFromImageFile(*kickFileOff).release(),
+                      juce::Drawable::createFromImageFile(*kickFileOn).release(),
+                      juce::Drawable::createFromImageFile(*kickFileOn).release());
     kickButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ kickButtonClicked(); };
     kickButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     kickButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&kickButton);
     
-    snareButton.setImages(juce::Drawable::createFromImageFile(*snareFileOff),juce::Drawable::createFromImageFile(*snareFileOn),juce::Drawable::createFromImageFile(*snareFileOn));
+    snareButton.setImages(juce::Drawable::createFromImageFile(*snareFileOff).release(),
+                          juce::Drawable::createFromImageFile(*snareFileOn).release(),
+                          juce::Drawable::createFromImageFile(*snareFileOn).release());
     snareButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snareButtonClicked(); };
     snareButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snareButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snareButton);
     
     
-    clapButton.setImages(juce::Drawable::createFromImageFile(*clapFileOff),juce::Drawable::createFromImageFile(*clapFileOn),juce::Drawable::createFromImageFile(*clapFileOn));
+    clapButton.setImages(juce::Drawable::createFromImageFile(*clapFileOff).release(),
+                         juce::Drawable::createFromImageFile(*clapFileOn).release(),
+                         juce::Drawable::createFromImageFile(*clapFileOn).release());
     clapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ clapButtonClicked(); };
     clapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     clapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&clapButton);
     
     
-    percButton.setImages(juce::Drawable::createFromImageFile(*percFileOff),juce::Drawable::createFromImageFile(*percFileOn),juce::Drawable::createFromImageFile(*percFileOn));
+    percButton.setImages(juce::Drawable::createFromImageFile(*percFileOff).release(),
+                         juce::Drawable::createFromImageFile(*percFileOn).release(),
+                         juce::Drawable::createFromImageFile(*percFileOn).release());
     percButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ percButtonClicked(); };
     percButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     percButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&percButton);
     
     
-    HiHatButton.setImages(juce::Drawable::createFromImageFile(*hhcFileOff),juce::Drawable::createFromImageFile(*hhcFileOn),juce::Drawable::createFromImageFile(*hhcFileOn));
+    HiHatButton.setImages(juce::Drawable::createFromImageFile(*hhcFileOff).release(),
+                          juce::Drawable::createFromImageFile(*hhcFileOn).release(),
+                          juce::Drawable::createFromImageFile(*hhcFileOn).release());
     HiHatButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ HiHatButtonClicked(); };
     HiHatButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     HiHatButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&HiHatButton);
     
     
-    cymbalButton.setImages(juce::Drawable::createFromImageFile(*hhoFileOff),juce::Drawable::createFromImageFile(*hhoFileOn),juce::Drawable::createFromImageFile(*hhoFileOn));
+    cymbalButton.setImages(juce::Drawable::createFromImageFile(*hhoFileOff).release(),
+                           juce::Drawable::createFromImageFile(*hhoFileOn).release(),
+                           juce::Drawable::createFromImageFile(*hhoFileOn).release());
     cymbalButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ cymbalButtonClicked(); };
     cymbalButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     cymbalButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&cymbalButton);
     
     
-    snapButton.setImages(juce::Drawable::createFromImageFile(*crashFileOff),juce::Drawable::createFromImageFile(*crashFileOn),juce::Drawable::createFromImageFile(*crashFileOn));
+    snapButton.setImages(juce::Drawable::createFromImageFile(*crashFileOff).release(),
+                         juce::Drawable::createFromImageFile(*crashFileOn).release(),
+                         juce::Drawable::createFromImageFile(*crashFileOn).release());
     snapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snapButtonClicked(); };
     snapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snapButton);
     
-    AppDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    AppDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),juce::Drawable::createFromImageFile(*appFileOn).release(),juce::Drawable::createFromImageFile(*appFileOn).release());
     //AppDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ appdirClicked(); };
     
     AppDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     AppDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&AppDir);
     
-    DeskDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    DeskDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
+                      juce::Drawable::createFromImageFile(*appFileOn).release(),
+                      juce::Drawable::createFromImageFile(*appFileOn).release());
    // DeskDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ deskdirClicked(); };
     DeskDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DeskDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DeskDir);
     
-    DownDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    DownDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
+                      juce::Drawable::createFromImageFile(*appFileOn).release(),
+                      juce::Drawable::createFromImageFile(*appFileOn).release());
     //DownDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ downdirClicked(); };
-    DownDir.setColour(TextButton::buttonColomeurId, Colours::darkgrey);
+    DownDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DownDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DownDir);
     
-    MusicDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    MusicDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
+                       juce::Drawable::createFromImageFile(*appFileOn).release(),
+                       juce::Drawable::createFromImageFile(*appFileOn).release());
    // MusicDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ musicdirClicked(); };
     MusicDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     MusicDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&MusicDir);
     
-    DocDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    DocDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
+                     juce::Drawable::createFromImageFile(*appFileOn).release(),
+                     juce::Drawable::createFromImageFile(*appFileOn).release());
    // DocDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ docdirClicked(); };
     DocDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DocDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DocDir);
     
     
-    HomDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    HomDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
+                     juce::Drawable::createFromImageFile(*appFileOn).release(),
+                     juce::Drawable::createFromImageFile(*appFileOn).release());
     //HomDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ homedirClicked(); };
     HomDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     HomDir.setEnabled(true);//防止用户多次按
