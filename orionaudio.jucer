@@ -4,7 +4,7 @@
               headerPath="/Users/lilyh/Documents/music tech/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginVST3Category="Delay,Distortion,Filter,Fx,Pitch Shift,Reverb,Stereo"
-              pluginFormats="buildAU,buildVST,buildVST3">
+              pluginFormats="buildAU,buildVST3">
   <MAINGROUP id="PeSdbo" name="orionaudio">
     <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
       <FILE id="phCcGO" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -72,110 +72,106 @@
       <FILE id="d9CoCl" name="OrionTabButton.h" compile="0" resource="0"
             file="Source/OrionTabButton.h"/>
     </GROUP>
-    <GROUP id="{7A6553AB-6E6B-EA2D-75C7-9554276FF724}" name="assets">
-      <GROUP id="{2149852F-3B2C-6D16-6C58-DECBB63B12C2}" name="graphics">
-        <FILE id="OQFFkl" name="00compressorBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/00compressorBackground.png"/>
-        <FILE id="hQMoC1" name="00delayBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/00delayBackground.png"/>
-        <FILE id="HHu0Lq" name="00orionEnvBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/00orionEnvBackground.png"/>
-        <FILE id="zTfjAT" name="00reverbBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/00reverbBackground.png"/>
-        <FILE id="YcnGm3" name="a.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/a.png"/>
-        <FILE id="xlkArr" name="a_button.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/a_button.png"/>
-        <FILE id="K1qXyn" name="appdir.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/appdir.png"/>
-        <FILE id="ixjjaO" name="arrow.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/arrow.png"/>
-        <FILE id="A6kHLG" name="check.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/check.png"/>
-        <FILE id="TcuTXl" name="clap_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clap_off.png"/>
-        <FILE id="d1a3Hq" name="clap_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clap_on.png"/>
-        <FILE id="u84W6q" name="clap_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/clap_selected.png"/>
-        <FILE id="oGnDNa" name="clip_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clip_off.png"/>
-        <FILE id="bX86ha" name="clip_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/clip_on.png"/>
-        <FILE id="tB1BTv" name="clip_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/clip_selected.png"/>
-        <FILE id="AUneM3" name="compressorBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/compressorBackground.png"/>
-        <FILE id="foZOLD" name="crash_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/crash_off.png"/>
-        <FILE id="MXDRXa" name="crash_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/crash_on.png"/>
-        <FILE id="Wm4nky" name="crash_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/crash_selected.png"/>
-        <FILE id="SsqH1Y" name="delayBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/delayBackground.png"/>
-        <FILE id="dPx3iI" name="env_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/env_off.png"/>
-        <FILE id="aDQWZW" name="env_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/env_on.png"/>
-        <FILE id="CGNgJU" name="env_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/env_selected.png"/>
-        <FILE id="AdM662" name="EQ_Background.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/EQ_Background.png"/>
-        <FILE id="iY1AFt" name="eq_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/eq_off.png"/>
-        <FILE id="FLdE8A" name="eq_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/eq_on.png"/>
-        <FILE id="m9iWxj" name="eq_selected.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/eq_selected.png"/>
-        <FILE id="Em4b4s" name="expand.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/expand.png"/>
-        <FILE id="f01npo" name="file.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/file.png"/>
-        <FILE id="bpe89g" name="fx_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/fx_off.png"/>
-        <FILE id="TYHuXp" name="fx_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/fx_on.png"/>
-        <FILE id="twT2Qi" name="fx_selected.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/fx_selected.png"/>
-        <FILE id="Q6ug30" name="headphone_button.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/headphone_button.png"/>
-        <FILE id="feksHE" name="hh-c_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hh-c_off.png"/>
-        <FILE id="U02zQH" name="hh-c_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/hh-c_selected.png"/>
-        <FILE id="iLMhLV" name="hh-o_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hh-o_off.png"/>
-        <FILE id="FLuP3w" name="hh-o_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/hh-o_selected.png"/>
-        <FILE id="aGqya7" name="hhc_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hhc_off.png"/>
-        <FILE id="aT3m8I" name="hhc_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hhc_on.png"/>
-        <FILE id="pGNl86" name="hho_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hho_off.png"/>
-        <FILE id="oD13tm" name="hho_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/hho_on.png"/>
-        <FILE id="hpV0ER" name="kick_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/kick_off.png"/>
-        <FILE id="CYoibI" name="kick_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/kick_on.png"/>
-        <FILE id="YKMxNx" name="kick_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/kick_selected.png"/>
-        <FILE id="Ez5OiP" name="knob_1.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/knob_1.png"/>
-        <FILE id="ZC5L1G" name="knob_2.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/knob_2.png"/>
-        <FILE id="PT9fnv" name="logo.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/logo.png"/>
-        <FILE id="HvDeM8" name="m.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/m.png"/>
-        <FILE id="DZUspx" name="meter.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/meter.png"/>
-        <FILE id="P8s2nP" name="navigator_background.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/navigator_background.png"/>
-        <FILE id="r5z68r" name="off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/off.png"/>
-        <FILE id="yu4p5p" name="On.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/On.png"/>
-        <FILE id="AtYoXz" name="orionBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/orionBackground.png"/>
-        <FILE id="VCCrzA" name="orionClipBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/orionClipBackground.png"/>
-        <FILE id="JtNnVF" name="orionEnvBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/orionEnvBackground.png"/>
-        <FILE id="VLtiis" name="perc_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/perc_off.png"/>
-        <FILE id="ewG3Ce" name="perc_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/perc_on.png"/>
-        <FILE id="nWoLme" name="perc_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/perc_selected.png"/>
-        <FILE id="MUjoUe" name="power_button.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/power_button.png"/>
-        <FILE id="DW4s1c" name="profile.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/profile.png"/>
-        <FILE id="ncg7EY" name="question.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/question.png"/>
-        <FILE id="FYtQw5" name="reverbBackground.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/reverbBackground.png"/>
-        <FILE id="exsA7F" name="s.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/s.png"/>
-        <FILE id="rQvEjP" name="selected.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/selected.png"/>
-        <FILE id="pzLVEq" name="settings.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/settings.png"/>
-        <FILE id="of2Qwj" name="snap_0ff.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snap_0ff.png"/>
-        <FILE id="SbECGj" name="snap_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snap_off.png"/>
-        <FILE id="jjJYUR" name="snap_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snap_on.png"/>
-        <FILE id="GTFhlC" name="snap_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/snap_selected.png"/>
-        <FILE id="OKkehP" name="snare_off.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snare_off.png"/>
-        <FILE id="QuNqME" name="snare_on.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/snare_on.png"/>
-        <FILE id="MA1Lja" name="snare_selected.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/snare_selected.png"/>
-        <FILE id="zY9Evi" name="sound_file.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/sound_file.png"/>
-        <FILE id="IIiYvw" name="volume.png" compile="0" resource="1" file="../JUCE Files/Orion Plugin/assets/graphics/volume.png"/>
-        <FILE id="b7DN4M" name="wrench_button.png" compile="0" resource="1"
-              file="../JUCE Files/Orion Plugin/assets/graphics/wrench_button.png"/>
-      </GROUP>
-    </GROUP>
+    <FILE id="FANUh2" name="00compressorBackground.png" compile="0" resource="1"
+          file="assets/graphics/00compressorBackground.png"/>
+    <FILE id="PhBfWM" name="00delayBackground.png" compile="0" resource="1"
+          file="assets/graphics/00delayBackground.png"/>
+    <FILE id="k7mZ6h" name="00orionEnvBackground.png" compile="0" resource="1"
+          file="assets/graphics/00orionEnvBackground.png"/>
+    <FILE id="iVSmSB" name="00reverbBackground.png" compile="0" resource="1"
+          file="assets/graphics/00reverbBackground.png"/>
+    <FILE id="mO6R2K" name="a_button.png" compile="0" resource="1" file="assets/graphics/a_button.png"/>
+    <FILE id="TBDYZd" name="a.png" compile="0" resource="1" file="assets/graphics/a.png"/>
+    <FILE id="wVLcgx" name="appdir.png" compile="0" resource="1" file="assets/graphics/appdir.png"/>
+    <FILE id="bNFDd2" name="arrow.png" compile="0" resource="1" file="assets/graphics/arrow.png"/>
+    <FILE id="N28QpU" name="check.png" compile="0" resource="1" file="assets/graphics/check.png"/>
+    <FILE id="P3ulW4" name="clap_off.png" compile="0" resource="1" file="assets/graphics/clap_off.png"/>
+    <FILE id="FIkLel" name="clap_on.png" compile="0" resource="1" file="assets/graphics/clap_on.png"/>
+    <FILE id="JjmuVc" name="clap_selected.png" compile="0" resource="1"
+          file="assets/graphics/clap_selected.png"/>
+    <FILE id="WSdVhb" name="clip_off.png" compile="0" resource="1" file="assets/graphics/clip_off.png"/>
+    <FILE id="ILksMt" name="clip_on.png" compile="0" resource="1" file="assets/graphics/clip_on.png"/>
+    <FILE id="NhGIh7" name="clip_selected.png" compile="0" resource="1"
+          file="assets/graphics/clip_selected.png"/>
+    <FILE id="fEHJri" name="compressorBackground.png" compile="0" resource="1"
+          file="assets/graphics/compressorBackground.png"/>
+    <FILE id="z1U7xk" name="crash_off.png" compile="0" resource="1" file="assets/graphics/crash_off.png"/>
+    <FILE id="lLqzos" name="crash_on.png" compile="0" resource="1" file="assets/graphics/crash_on.png"/>
+    <FILE id="otlUJy" name="crash_selected.png" compile="0" resource="1"
+          file="assets/graphics/crash_selected.png"/>
+    <FILE id="yZip1a" name="delayBackground.png" compile="0" resource="1"
+          file="assets/graphics/delayBackground.png"/>
+    <FILE id="IGZSvq" name="env_off.png" compile="0" resource="1" file="assets/graphics/env_off.png"/>
+    <FILE id="pBO2pI" name="env_on.png" compile="0" resource="1" file="assets/graphics/env_on.png"/>
+    <FILE id="eYwFCk" name="env_selected.png" compile="0" resource="1"
+          file="assets/graphics/env_selected.png"/>
+    <FILE id="nDmNOu" name="EQ_Background.png" compile="0" resource="1"
+          file="assets/graphics/EQ_Background.png"/>
+    <FILE id="xSOOJP" name="eq_off.png" compile="0" resource="1" file="assets/graphics/eq_off.png"/>
+    <FILE id="ZXTeld" name="eq_on.png" compile="0" resource="1" file="assets/graphics/eq_on.png"/>
+    <FILE id="Hqs0Gz" name="eq_selected.png" compile="0" resource="1" file="assets/graphics/eq_selected.png"/>
+    <FILE id="ZSGCaa" name="expand.png" compile="0" resource="1" file="assets/graphics/expand.png"/>
+    <FILE id="fTwChA" name="file.png" compile="0" resource="1" file="assets/graphics/file.png"/>
+    <FILE id="FUQzcC" name="fx_off.png" compile="0" resource="1" file="assets/graphics/fx_off.png"/>
+    <FILE id="ATuZYz" name="fx_on.png" compile="0" resource="1" file="assets/graphics/fx_on.png"/>
+    <FILE id="taK4ke" name="fx_selected.png" compile="0" resource="1" file="assets/graphics/fx_selected.png"/>
+    <FILE id="dmqE4u" name="headphone_button.png" compile="0" resource="1"
+          file="assets/graphics/headphone_button.png"/>
+    <FILE id="wOYvuc" name="hh-c_off.png" compile="0" resource="1" file="assets/graphics/hh-c_off.png"/>
+    <FILE id="COKNHE" name="hh-c_selected.png" compile="0" resource="1"
+          file="assets/graphics/hh-c_selected.png"/>
+    <FILE id="aauqK7" name="hh-o_off.png" compile="0" resource="1" file="assets/graphics/hh-o_off.png"/>
+    <FILE id="uLcXIM" name="hh-o_selected.png" compile="0" resource="1"
+          file="assets/graphics/hh-o_selected.png"/>
+    <FILE id="tCIXKK" name="hhc_off.png" compile="0" resource="1" file="assets/graphics/hhc_off.png"/>
+    <FILE id="Yd18xS" name="hhc_on.png" compile="0" resource="1" file="assets/graphics/hhc_on.png"/>
+    <FILE id="gmW6mL" name="hho_off.png" compile="0" resource="1" file="assets/graphics/hho_off.png"/>
+    <FILE id="RYyS4m" name="hho_on.png" compile="0" resource="1" file="assets/graphics/hho_on.png"/>
+    <FILE id="iXQkkZ" name="kick_off.png" compile="0" resource="1" file="assets/graphics/kick_off.png"/>
+    <FILE id="dvEc4V" name="kick_on.png" compile="0" resource="1" file="assets/graphics/kick_on.png"/>
+    <FILE id="ZQxwtl" name="kick_selected.png" compile="0" resource="1"
+          file="assets/graphics/kick_selected.png"/>
+    <FILE id="qnlpjT" name="knob_1.png" compile="0" resource="1" file="assets/graphics/knob_1.png"/>
+    <FILE id="MmeR2Q" name="knob_2.png" compile="0" resource="1" file="assets/graphics/knob_2.png"/>
+    <FILE id="N1Kq7W" name="logo.png" compile="0" resource="1" file="assets/graphics/logo.png"/>
+    <FILE id="Jcv2qx" name="m.png" compile="0" resource="1" file="assets/graphics/m.png"/>
+    <FILE id="iZADes" name="meter.png" compile="0" resource="1" file="assets/graphics/meter.png"/>
+    <FILE id="aouBzF" name="navigator_background.png" compile="0" resource="1"
+          file="assets/graphics/navigator_background.png"/>
+    <FILE id="vQdiuj" name="off.png" compile="0" resource="1" file="assets/graphics/off.png"/>
+    <FILE id="c745M2" name="On.png" compile="0" resource="1" file="assets/graphics/On.png"/>
+    <FILE id="Kab0oD" name="orionBackground.png" compile="0" resource="1"
+          file="assets/graphics/orionBackground.png"/>
+    <FILE id="M1CqxK" name="orionClipBackground.png" compile="0" resource="1"
+          file="assets/graphics/orionClipBackground.png"/>
+    <FILE id="aJISAQ" name="orionEnvBackground.png" compile="0" resource="1"
+          file="assets/graphics/orionEnvBackground.png"/>
+    <FILE id="ZA5YcE" name="perc_off.png" compile="0" resource="1" file="assets/graphics/perc_off.png"/>
+    <FILE id="A56y60" name="perc_on.png" compile="0" resource="1" file="assets/graphics/perc_on.png"/>
+    <FILE id="hSG9Pk" name="perc_selected.png" compile="0" resource="1"
+          file="assets/graphics/perc_selected.png"/>
+    <FILE id="pZZs2n" name="power_button.png" compile="0" resource="1"
+          file="assets/graphics/power_button.png"/>
+    <FILE id="s9Wr0g" name="profile.png" compile="0" resource="1" file="assets/graphics/profile.png"/>
+    <FILE id="BM0Sb3" name="question.png" compile="0" resource="1" file="assets/graphics/question.png"/>
+    <FILE id="Cmgkhm" name="reverbBackground.png" compile="0" resource="1"
+          file="assets/graphics/reverbBackground.png"/>
+    <FILE id="SYvTkK" name="s.png" compile="0" resource="1" file="assets/graphics/s.png"/>
+    <FILE id="qJiu2D" name="selected.png" compile="0" resource="1" file="assets/graphics/selected.png"/>
+    <FILE id="J2sp0r" name="settings.png" compile="0" resource="1" file="assets/graphics/settings.png"/>
+    <FILE id="yj9fc5" name="snap_0ff.png" compile="0" resource="1" file="assets/graphics/snap_0ff.png"/>
+    <FILE id="VSz7XS" name="snap_off.png" compile="0" resource="1" file="assets/graphics/snap_off.png"/>
+    <FILE id="WvTZXm" name="snap_on.png" compile="0" resource="1" file="assets/graphics/snap_on.png"/>
+    <FILE id="FTVoHC" name="snap_selected.png" compile="0" resource="1"
+          file="assets/graphics/snap_selected.png"/>
+    <FILE id="mClEfH" name="snare_off.png" compile="0" resource="1" file="assets/graphics/snare_off.png"/>
+    <FILE id="qt3tm4" name="snare_on.png" compile="0" resource="1" file="assets/graphics/snare_on.png"/>
+    <FILE id="gEzhQI" name="snare_selected.png" compile="0" resource="1"
+          file="assets/graphics/snare_selected.png"/>
+    <FILE id="l5WWd9" name="sound_file.png" compile="0" resource="1" file="assets/graphics/sound_file.png"/>
+    <FILE id="vbYtBX" name="volume.png" compile="0" resource="1" file="assets/graphics/volume.png"/>
+    <FILE id="SSuWYA" name="wrench_button.png" compile="0" resource="1"
+          file="assets/graphics/wrench_button.png"/>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">

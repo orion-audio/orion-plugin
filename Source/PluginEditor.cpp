@@ -55,7 +55,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     resourcefolder = File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources");
    
     skinfolder   = resourcefolder.getChildFile("skin").getChildFile("pictures");
-    background   = new File(skinfolder.getChildFile("orionBackground.png"));
+    background   = ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize);
     kickFileOff  = new File(skinfolder.getChildFile("kick_off.png"));
     kickFileOn   = new File(skinfolder.getChildFile("kick_on.png"));
     snareFileOff = new File(skinfolder.getChildFile("snare_off.png"));
@@ -71,86 +71,128 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     crashFileOff = new File(skinfolder.getChildFile("crash_off.png"));
     crashFileOn  = new File(skinfolder.getChildFile("crash_on.png"));
     appFileOn    = new File(skinfolder.getChildFile("appdir.png"));
- kickButton.setImages(juce::Drawable::createFromImageFile(*kickFileOff),juce::Drawable::createFromImageFile(*kickFileOn),juce::Drawable::createFromImageFile(*kickFileOn));
+    
+    std::unique_ptr<Drawable> buttonOff;
+    std::unique_ptr<Drawable> buttonOn;
+    
+    buttonOff = Drawable::createFromImageData(BinaryData::kick_off_png, BinaryData::kick_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
+
+ kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     kickButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ kickButtonClicked(); };
     kickButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     kickButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&kickButton);
     
-    snareButton.setImages(juce::Drawable::createFromImageFile(*snareFileOff),juce::Drawable::createFromImageFile(*snareFileOn),juce::Drawable::createFromImageFile(*snareFileOn));
+//    buttonOff = Drawable::createFromImageFile(*snareFileOff);
+//    buttonOn = Drawable::createFromImageFile(*snareFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::snare_off_png, BinaryData::snare_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::snare_on_png, BinaryData::snare_on_pngSize);
+
+    
+    snareButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     snareButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snareButtonClicked(); };
     snareButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snareButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snareButton);
     
+//    buttonOff = Drawable::createFromImageFile(*clapFileOff);
+//    buttonOn = Drawable::createFromImageFile(*clapFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::clap_off_png, BinaryData::clap_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::clap_on_png, BinaryData::clap_on_pngSize);
+
     
-    clapButton.setImages(juce::Drawable::createFromImageFile(*clapFileOff),juce::Drawable::createFromImageFile(*clapFileOn),juce::Drawable::createFromImageFile(*clapFileOn));
+    clapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     clapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ clapButtonClicked(); };
     clapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     clapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&clapButton);
     
     
-    percButton.setImages(juce::Drawable::createFromImageFile(*percFileOff),juce::Drawable::createFromImageFile(*percFileOn),juce::Drawable::createFromImageFile(*percFileOn));
+//    buttonOff = Drawable::createFromImageFile(*percFileOff);
+//    buttonOn = Drawable::createFromImageFile(*percFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::perc_off_png, BinaryData::perc_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::perc_on_png, BinaryData::perc_on_pngSize);
+
+    
+    percButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     percButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ percButtonClicked(); };
     percButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     percButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&percButton);
     
     
-    HiHatButton.setImages(juce::Drawable::createFromImageFile(*hhcFileOff),juce::Drawable::createFromImageFile(*hhcFileOn),juce::Drawable::createFromImageFile(*hhcFileOn));
+//    buttonOff = Drawable::createFromImageFile(*hhcFileOff);
+//    buttonOn = Drawable::createFromImageFile(*hhcFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::hhc_off_png, BinaryData::hhc_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::hhc_on_png, BinaryData::hhc_on_pngSize);
+
+    HiHatButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     HiHatButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ HiHatButtonClicked(); };
     HiHatButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     HiHatButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&HiHatButton);
     
     
-    cymbalButton.setImages(juce::Drawable::createFromImageFile(*hhoFileOff),juce::Drawable::createFromImageFile(*hhoFileOn),juce::Drawable::createFromImageFile(*hhoFileOn));
+//    buttonOff = Drawable::createFromImageFile(*hhoFileOff);
+//    buttonOn = Drawable::createFromImageFile(*hhoFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::hho_off_png, BinaryData::hho_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::hho_on_png, BinaryData::hho_on_pngSize);
+
+    
+    cymbalButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     cymbalButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ cymbalButtonClicked(); };
     cymbalButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     cymbalButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&cymbalButton);
     
+//    buttonOff = Drawable::createFromImageFile(*crashFileOff);
+//    buttonOn = Drawable::createFromImageFile(*crashFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::crash_off_png, BinaryData::crash_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::crash_on_png, BinaryData::crash_on_pngSize);
+
     
-    snapButton.setImages(juce::Drawable::createFromImageFile(*crashFileOff),juce::Drawable::createFromImageFile(*crashFileOn),juce::Drawable::createFromImageFile(*crashFileOn));
+    snapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     snapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snapButtonClicked(); };
     snapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snapButton);
     
-    AppDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+//    buttonOn = Drawable::createFromImageFile(*appFileOn);
+    buttonOn = Drawable::createFromImageData(BinaryData::appdir_png, BinaryData::appdir_pngSize);
+
+    AppDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
     //AppDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ appdirClicked(); };
-    
     AppDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     AppDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&AppDir);
-    
-    DeskDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+        
+    DeskDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
    // DeskDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ deskdirClicked(); };
     DeskDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DeskDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DeskDir);
     
-    DownDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    DownDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
     //DownDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ downdirClicked(); };
-    DownDir.setColour(TextButton::buttonColomeurId, Colours::darkgrey);
+    DownDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DownDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DownDir);
     
-    MusicDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    MusicDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
    // MusicDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ musicdirClicked(); };
     MusicDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     MusicDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&MusicDir);
     
-    DocDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    DocDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
    // DocDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ docdirClicked(); };
     DocDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DocDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DocDir);
     
     
-    HomDir.setImages(juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn),juce::Drawable::createFromImageFile(*appFileOn));
+    HomDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
     //HomDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ homedirClicked(); };
     HomDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     HomDir.setEnabled(true);//防止用户多次按
@@ -231,7 +273,7 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
     RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(ImageCache::getFromFile(*background), 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
+    g.drawImageWithin(background, 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
     /*
     OrionBrowser* custablook = new OrionBrowser();
     

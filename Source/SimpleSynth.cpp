@@ -66,8 +66,7 @@ void SimpleSynth::loadSamples()
         }
     }
     int MidiNote;
-    audiofolder =  File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("audio").getChildFile("demo");
-    File* file;
+    audiofolder =  File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("audio").getChildFile("demo");
     String dir;
     String filename;
     for(int i = 0; i < MAX_VOICES; i++)
@@ -114,15 +113,13 @@ void SimpleSynth::loadSamples()
                 break;
                 
         }
-        file = new File(audiofolder.getChildFile(dir).getChildFile(filename));
-        reader = audioFormatManager.createReaderFor(*file);
+        File file(audiofolder.getChildFile(dir).getChildFile(filename));
+        std::unique_ptr<AudioFormatReader> reader;
+        reader.reset(audioFormatManager.createReaderFor(file));
         BigInteger note;
         note.setBit(MidiNote);
-        OrionSamplerSound *sampler = new OrionSamplerSound(String(i), *reader, note, MidiNote, 0.0f, 10.0f, 10.0f);
+        OrionSamplerSound *sampler = new OrionSamplerSound(String(i), *reader.get(), note, MidiNote, 0.0f, 10.0f, 10.0f);
         addSound(sampler);
-        
-        reader = nullptr;
-        delete file;
     }
     
     
@@ -151,12 +148,12 @@ void SimpleSynth::changeSamples(int index,const String &f,int midi)//index shoul
     }
     //const String f = files[0];
     file = new File(f);
-    reader = audioFormatManager.createReaderFor(*file);
+    std::unique_ptr<AudioFormatReader> reader;
+    reader.reset(audioFormatManager.createReaderFor(*file));
     BigInteger note;
     note.setBit(midi);
     OrionSamplerSound *sampler = new OrionSamplerSound(String(index), *reader, note, midi, 0.0f, 10.0f, 10.0f);
     addSound(sampler);
-    reader = nullptr;
     delete file;
 
    

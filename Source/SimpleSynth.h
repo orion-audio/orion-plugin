@@ -17,6 +17,7 @@ class SimpleSynth : public Synthesiser
 //,public AudioProcessorValueTreeState::Listener
 {
 public:
+    
     void setup(double sr);
     void loadSamples();
     void noteOn(int midiChannel,
@@ -30,7 +31,6 @@ private:
     File audiofolder;
     AudioFormatManager audioFormatManager;
     File* file;
-    ScopedPointer<AudioFormatReader> reader;
     bool isChokeGroupActive;
     
     
