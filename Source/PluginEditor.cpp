@@ -50,12 +50,12 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     File* crashFileOff;
     File* crashFileOn;
     File* appFileOn;
-    
-    
+
+
     resourcefolder = File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources");
-   
+
     skinfolder   = resourcefolder.getChildFile("skin").getChildFile("pictures");
-    background   = new File(skinfolder.getChildFile("orionBackground.png"));
+    background   = ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize);
     kickFileOff  = new File(skinfolder.getChildFile("kick_off.png"));
     kickFileOn   = new File(skinfolder.getChildFile("kick_on.png"));
     snareFileOff = new File(skinfolder.getChildFile("snare_off.png"));
@@ -71,130 +71,146 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     crashFileOff = new File(skinfolder.getChildFile("crash_off.png"));
     crashFileOn  = new File(skinfolder.getChildFile("crash_on.png"));
     appFileOn    = new File(skinfolder.getChildFile("appdir.png"));
- kickButton.setImages(juce::Drawable::createFromImageFile(*kickFileOff).release(),
-                      juce::Drawable::createFromImageFile(*kickFileOn).release(),
-                      juce::Drawable::createFromImageFile(*kickFileOn).release());
+
+    std::unique_ptr<Drawable> buttonOff;
+    std::unique_ptr<Drawable> buttonOn;
+
+    buttonOff = Drawable::createFromImageData(BinaryData::kick_off_png, BinaryData::kick_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
+
+ kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     kickButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ kickButtonClicked(); };
     kickButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     kickButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&kickButton);
-    
-    snareButton.setImages(juce::Drawable::createFromImageFile(*snareFileOff).release(),
-                          juce::Drawable::createFromImageFile(*snareFileOn).release(),
-                          juce::Drawable::createFromImageFile(*snareFileOn).release());
+
+//    buttonOff = Drawable::createFromImageFile(*snareFileOff);
+//    buttonOn = Drawable::createFromImageFile(*snareFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::snare_off_png, BinaryData::snare_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::snare_on_png, BinaryData::snare_on_pngSize);
+
+
+    snareButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     snareButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snareButtonClicked(); };
     snareButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snareButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snareButton);
-    
-    
-    clapButton.setImages(juce::Drawable::createFromImageFile(*clapFileOff).release(),
-                         juce::Drawable::createFromImageFile(*clapFileOn).release(),
-                         juce::Drawable::createFromImageFile(*clapFileOn).release());
+
+//    buttonOff = Drawable::createFromImageFile(*clapFileOff);
+//    buttonOn = Drawable::createFromImageFile(*clapFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::clap_off_png, BinaryData::clap_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::clap_on_png, BinaryData::clap_on_pngSize);
+
+
+    clapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     clapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ clapButtonClicked(); };
     clapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     clapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&clapButton);
-    
-    
-    percButton.setImages(juce::Drawable::createFromImageFile(*percFileOff).release(),
-                         juce::Drawable::createFromImageFile(*percFileOn).release(),
-                         juce::Drawable::createFromImageFile(*percFileOn).release());
+
+
+//    buttonOff = Drawable::createFromImageFile(*percFileOff);
+//    buttonOn = Drawable::createFromImageFile(*percFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::perc_off_png, BinaryData::perc_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::perc_on_png, BinaryData::perc_on_pngSize);
+
+
+    percButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     percButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ percButtonClicked(); };
     percButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     percButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&percButton);
-    
-    
-    HiHatButton.setImages(juce::Drawable::createFromImageFile(*hhcFileOff).release(),
-                          juce::Drawable::createFromImageFile(*hhcFileOn).release(),
-                          juce::Drawable::createFromImageFile(*hhcFileOn).release());
+
+
+//    buttonOff = Drawable::createFromImageFile(*hhcFileOff);
+//    buttonOn = Drawable::createFromImageFile(*hhcFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::hhc_off_png, BinaryData::hhc_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::hhc_on_png, BinaryData::hhc_on_pngSize);
+
+    HiHatButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     HiHatButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ HiHatButtonClicked(); };
     HiHatButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     HiHatButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&HiHatButton);
-    
-    
-    cymbalButton.setImages(juce::Drawable::createFromImageFile(*hhoFileOff).release(),
-                           juce::Drawable::createFromImageFile(*hhoFileOn).release(),
-                           juce::Drawable::createFromImageFile(*hhoFileOn).release());
+
+
+//    buttonOff = Drawable::createFromImageFile(*hhoFileOff);
+//    buttonOn = Drawable::createFromImageFile(*hhoFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::hho_off_png, BinaryData::hho_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::hho_on_png, BinaryData::hho_on_pngSize);
+
+
+    cymbalButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     cymbalButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ cymbalButtonClicked(); };
     cymbalButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     cymbalButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&cymbalButton);
-    
-    
-    snapButton.setImages(juce::Drawable::createFromImageFile(*crashFileOff).release(),
-                         juce::Drawable::createFromImageFile(*crashFileOn).release(),
-                         juce::Drawable::createFromImageFile(*crashFileOn).release());
+
+//    buttonOff = Drawable::createFromImageFile(*crashFileOff);
+//    buttonOn = Drawable::createFromImageFile(*crashFileOn);
+    buttonOff = Drawable::createFromImageData(BinaryData::crash_off_png, BinaryData::crash_off_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::crash_on_png, BinaryData::crash_on_pngSize);
+
+
+    snapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
     snapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snapButtonClicked(); };
     snapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snapButton);
-    
-    AppDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
-                     juce::Drawable::createFromImageFile(*appFileOn).release(),
-                     juce::Drawable::createFromImageFile(*appFileOn).release());
+
+//    buttonOn = Drawable::createFromImageFile(*appFileOn);
+    buttonOn = Drawable::createFromImageData(BinaryData::appdir_png, BinaryData::appdir_pngSize);
+
+    AppDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
     //AppDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ appdirClicked(); };
-    
     AppDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     AppDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&AppDir);
-    
-    DeskDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
-                      juce::Drawable::createFromImageFile(*appFileOn).release(),
-                      juce::Drawable::createFromImageFile(*appFileOn).release());
+
+    DeskDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
    // DeskDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ deskdirClicked(); };
     DeskDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DeskDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DeskDir);
-    
-    DownDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
-                      juce::Drawable::createFromImageFile(*appFileOn).release(),
-                      juce::Drawable::createFromImageFile(*appFileOn).release());
+
+    DownDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
     //DownDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ downdirClicked(); };
     DownDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DownDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DownDir);
-    
-    MusicDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
-                       juce::Drawable::createFromImageFile(*appFileOn).release(),
-                       juce::Drawable::createFromImageFile(*appFileOn).release());
+
+    MusicDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
    // MusicDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ musicdirClicked(); };
     MusicDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     MusicDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&MusicDir);
-    
-    DocDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
-                     juce::Drawable::createFromImageFile(*appFileOn).release(),
-                     juce::Drawable::createFromImageFile(*appFileOn).release());
+
+    DocDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
    // DocDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ docdirClicked(); };
     DocDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DocDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DocDir);
-    
-    
-    HomDir.setImages(juce::Drawable::createFromImageFile(*appFileOn).release(),
-                     juce::Drawable::createFromImageFile(*appFileOn).release(),
-                     juce::Drawable::createFromImageFile(*appFileOn).release());
+
+
+    HomDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
     //HomDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ homedirClicked(); };
     HomDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     HomDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&HomDir);
-    
+
     //set up up button's images
     Path arrowPath;
     arrowPath.addArrow ({ 50.0f, 100.0f, 50.0f, 0.0f }, 40.0f, 100.0f, 50.0f);
-    
+
     DrawablePath arrowImage;
     arrowImage.setFill (Colours::black.withAlpha (0.4f));
     arrowImage.setPath (arrowPath);
     UpBut.setImages(&arrowImage);
     addAndMakeVisible(&UpBut);
-    
+
     FileTreeComponent* pTreeComponent = static_cast<FileTreeComponent*> (filebrowser.getDisplayComponent());
     OrionFileTreeComponent* poTree    = static_cast<OrionFileTreeComponent*> (filebrowser.getDisplayComponent());
-    
+
     if(poTree)
     {
         std::cout<<"you really in? "<<"\n";
@@ -217,22 +233,22 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
             std::cout<<"yes i am"<<std::endl;
         }
         */
-        
+
         pTreeComponent->setDragAndDropDescription("DragAndDrop");
         std::cout<<"description "<<pTreeComponent->getDragAndDropDescription()<<"\n";
     }
-    
+
     formatManager.registerBasicFormats();
-    
+
     for (int i=0;i<7;i++)
     {
         tabComponent[i] = new OrionTabComponent(processor,i);
 
     }
-    
+
     tabComponentChanged(0);
-    
-    
+
+
     midiOutput = MidiOutput::createNewDevice("Mails from Orion Audio Output");
     midiOutput->startBackgroundThread ();
 
@@ -249,7 +265,7 @@ OrionaudioAudioProcessorEditor::~OrionaudioAudioProcessorEditor()
 void OrionaudioAudioProcessorEditor::tabComponentChanged(int serial)
 {
     tabComponent[serial]->setBounds(0, (OrionGlobalHeight/3)*2, OrionGlobalWidth, OrionGlobalHeight/3);
-    
+
     addAndMakeVisible(tabComponent[serial]);
 }
 //==============================================================================
@@ -259,20 +275,20 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
     RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(ImageCache::getFromFile(*background), 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
+    g.drawImageWithin(background, 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
     /*
     OrionBrowser* custablook = new OrionBrowser();
-    
+
     if(auto* newl = dynamic_cast<juce::LookAndFeel*> (custablook))
     {
         filebrowser.setLookAndFeel(newl);
     }
     */
     //auto* preview = dynamic_cast<Component*> (filebrowser.getPreviewComponent());
-   
+
     //display->setBounds (0, 75, 195, 228);
     //addAndMakeVisible(display);
-    
+
     File subdir;
     if(AppDir.isDown()==true)
     {
@@ -302,7 +318,7 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     {
         upbutClicked();
     }
-    
+
     //std::cout<<"which dir "<<whichdir<<"\n";
     if(changed == 1)
     {
@@ -329,7 +345,7 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     }
         changed = 0;
     }
-    
+
     auto* display = dynamic_cast<Component*> (filebrowser.getDisplayComponent());
     display->setBounds(0, 323, 195, 278);
     addAndMakeVisible(display);
@@ -337,8 +353,8 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
 
     auto* list = dynamic_cast<Component*> (&mainlist);
     list->setBounds(0, 75, 195, 228);
-    
-  
+
+
 }
 
 void OrionaudioAudioProcessorEditor::resized()
@@ -347,8 +363,8 @@ void OrionaudioAudioProcessorEditor::resized()
     snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);//draw the play button
     clapButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 225, 100, 112);//draw the open button
     percButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 225, 100, 112);//draw the play button
-    
-    
+
+
     HiHatButton.setBounds(OrionGlobalWidth/2 - 125, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     cymbalButton.setBounds(OrionGlobalWidth/2 + 25, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     snapButton.setBounds(OrionGlobalWidth/2 + 175, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
@@ -379,7 +395,7 @@ void OrionaudioAudioProcessorEditor::addMessageToList (const MidiMessage& messag
 
 void OrionaudioAudioProcessorEditor::kickButtonClicked()
 {
-    
+
     if (kickButton.isDown())
     {
         processor.synth.noteOn(1, 36, 120);
@@ -387,20 +403,20 @@ void OrionaudioAudioProcessorEditor::kickButtonClicked()
         //midiSequence.addEvent(noteOn, ticks);
         //message.setTimeStamp(Time::getMillisecondCounterHiRes()*0.001-startTime);
         //addMessageToList(message);
-        
+
         tabComponent[1]->setVisible(false);
         tabComponent[2]->setVisible(false);
         tabComponent[3]->setVisible(false);
         tabComponent[4]->setVisible(false);
         tabComponent[5]->setVisible(false);
         tabComponent[6]->setVisible(false);
-        
+
         tabComponent[0]->setVisible(true);
         tabComponentChanged(0);
         if(kickButton.index != indices[0] and kickButton.index == 6)//the index has changed and it's the just dropped one
         {
              draganddropped(0);
-            
+
             indices[0] = kickButton.index;
          //  std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
@@ -409,9 +425,9 @@ void OrionaudioAudioProcessorEditor::kickButtonClicked()
         processor.synth.noteOff(1, 36, 0, false/*没有淡出*/);
         midiOutput->sendMessageNow(MidiMessage::noteOff(1, 36, 0.f));
     };
-    
 
-    
+
+
 }
 
 void OrionaudioAudioProcessorEditor::snareButtonClicked()
@@ -428,25 +444,25 @@ void OrionaudioAudioProcessorEditor::snareButtonClicked()
         tabComponent[4]->setVisible(false);
         tabComponent[5]->setVisible(false);
         tabComponent[6]->setVisible(false);
-        
+
         tabComponent[1]->setVisible(true);
         tabComponentChanged(1);
-        
+
         if(snareButton.index != indices[1] and snareButton.index == 6)//the index has changed and it's the just dropped one
         {
             draganddropped(1);
             indices[1] = snareButton.index;
          //   std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-        
+
         midiOutput->sendMessageNow(MidiMessage::noteOn(1, 38, 1.f));
-       
+
     }else{
         processor.synth.noteOff(1, 38, 0, false/*没有淡出*/);
         midiOutput->sendMessageNow(MidiMessage::noteOff(1, 38, 0.f));
     };
-    
-    
+
+
 }
 
 void OrionaudioAudioProcessorEditor::clapButtonClicked()
@@ -463,7 +479,7 @@ void OrionaudioAudioProcessorEditor::clapButtonClicked()
         tabComponent[4]->setVisible(false);
         tabComponent[5]->setVisible(false);
         tabComponent[6]->setVisible(false);
-        
+
         tabComponent[2]->setVisible(true);
         tabComponentChanged(2);
         if(clapButton.index != indices[2] and clapButton.index == 6)//the index has changed and it's the just dropped one
@@ -472,15 +488,15 @@ void OrionaudioAudioProcessorEditor::clapButtonClicked()
             indices[2] = clapButton.index;
            // std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-        
+
         midiOutput->sendMessageNow(MidiMessage::noteOn(1, 39, 1.f));
-        
+
     }else{
         processor.synth.noteOff(1, 39, 0, false/*没有淡出*/);
         midiOutput->sendMessageNow(MidiMessage::noteOff(1, 39, 0.f));
     };
-    
-    
+
+
 }
 
 void OrionaudioAudioProcessorEditor::percButtonClicked()
@@ -497,25 +513,25 @@ void OrionaudioAudioProcessorEditor::percButtonClicked()
         tabComponent[4]->setVisible(false);
         tabComponent[5]->setVisible(false);
         tabComponent[6]->setVisible(false);
-        
+
         tabComponent[3]->setVisible(true);
         tabComponentChanged(3);
-        
+
         if(percButton.index != indices[3] and percButton.index == 6)//the index has changed and it's the just dropped one
         {
             draganddropped(3);
             indices[3] = percButton.index;
           //  std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-        
+
         midiOutput->sendMessageNow(MidiMessage::noteOn(1, 41, 1.f));
-        
+
     }else{
         processor.synth.noteOff(1, 41, 0, false/*没有淡出*/);
         midiOutput->sendMessageNow(MidiMessage::noteOff(1, 41, 0.f));
     };
-    
-    
+
+
 }
 
 
@@ -531,26 +547,26 @@ void OrionaudioAudioProcessorEditor::HiHatButtonClicked()
         tabComponent[3]->setVisible(false);
         tabComponent[5]->setVisible(false);
         tabComponent[6]->setVisible(false);
-        
+
         tabComponent[4]->setVisible(true);
         tabComponentChanged(4);
-        
+
         if(HiHatButton.index != indices[4] and HiHatButton.index == 6)//the index has changed and it's the just dropped one
         {
             draganddropped(4);
             indices[4] = HiHatButton.index;
             //std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-        
+
         midiOutput->sendMessageNow(MidiMessage::noteOn(1, 42, 1.f));
-        
+
     }else{
         processor.synth.noteOff(1, 42, 0, false);
         midiOutput->sendMessageNow(MidiMessage::noteOff(1, 42, 0.f));
     };
-    
-    
-    
+
+
+
 }
 
 void OrionaudioAudioProcessorEditor::cymbalButtonClicked()
@@ -565,25 +581,25 @@ void OrionaudioAudioProcessorEditor::cymbalButtonClicked()
         tabComponent[3]->setVisible(false);
         tabComponent[4]->setVisible(false);
         tabComponent[6]->setVisible(false);
-        
+
         tabComponent[5]->setVisible(true);
         tabComponentChanged(5);
-       
+
         if(cymbalButton.index != indices[5] and cymbalButton.index == 6)//the index has changed and it's the just dropped one
         {
             draganddropped(5);
             indices[5] = cymbalButton.index;
           //  std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-        
+
         midiOutput->sendMessageNow(MidiMessage::noteOn(1, 43, 1.f));
-        
+
     }else{
         processor.synth.noteOff(1, 43, 0, false);
         midiOutput->sendMessageNow(MidiMessage::noteOff(1, 43, 0.f));
     };
-    
-    
+
+
 }
 
 void OrionaudioAudioProcessorEditor::snapButtonClicked()
@@ -598,24 +614,24 @@ void OrionaudioAudioProcessorEditor::snapButtonClicked()
         tabComponent[3]->setVisible(false);
         tabComponent[4]->setVisible(false);
         tabComponent[5]->setVisible(false);
-        
+
         tabComponent[6]->setVisible(true);
         tabComponentChanged(6);
-        
+
         if(snapButton.index != indices[6] and snapButton.index == 6)//the index has changed and it's the just dropped one
         {
              draganddropped(6);
             indices[6] = snapButton.index;
           // std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-        
+
         midiOutput->sendMessageNow(MidiMessage::noteOn(1, 46, 1.f));
-        
+
     }else{
         processor.synth.noteOff(1, 46, 0, false);
         midiOutput->sendMessageNow(MidiMessage::noteOff(1, 46, 0.f));
     };
-    
+
 }
 
 void OrionaudioAudioProcessorEditor::appdirClicked()
@@ -623,7 +639,7 @@ void OrionaudioAudioProcessorEditor::appdirClicked()
     //change the below directory
     whichdir = 1;
     changed = 1;
-    
+
 }
 
 void OrionaudioAudioProcessorEditor::deskdirClicked()
@@ -659,7 +675,7 @@ void OrionaudioAudioProcessorEditor::homedirClicked()
 void OrionaudioAudioProcessorEditor::upbutClicked()
 {
     filebrowser.goUp();
-    
+
 };
 
 void OrionaudioAudioProcessorEditor::lookupindex(int index,int ref)
@@ -715,7 +731,7 @@ void OrionaudioAudioProcessorEditor::lookupindex(int index,int ref)
             indices[6] = snapButton.index;
             }
             break;
-            
+
     }
 }
 
@@ -733,12 +749,10 @@ void OrionaudioAudioProcessorEditor::draganddropped(int index)
             //buttons[i].index = buttons[i].index - 1;
             //std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-       
-        
+
+
     }
-    
-    
-  
+
+
+
 }
-
-

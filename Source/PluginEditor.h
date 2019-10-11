@@ -44,7 +44,7 @@ private:
     //FileTreeComponent tree;
     
     File resourcefolder,skinfolder;
-    File* background;
+    Image background;
     File* clipbackground;
     File* envbackground;
     File* eqbackground;

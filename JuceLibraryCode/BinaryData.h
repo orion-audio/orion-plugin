@@ -20,11 +20,11 @@ namespace BinaryData
     extern const char*   _00reverbBackground_png;
     const int            _00reverbBackground_pngSize = 92001;
 
-    extern const char*   a_png;
-    const int            a_pngSize = 3863;
-
     extern const char*   a_button_png;
     const int            a_button_pngSize = 2024;
+
+    extern const char*   a_png;
+    const int            a_pngSize = 3863;
 
     extern const char*   appdir_png;
     const int            appdir_pngSize = 11409;
