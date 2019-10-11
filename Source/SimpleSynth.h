@@ -17,7 +17,7 @@ class SimpleSynth : public Synthesiser
 //,public AudioProcessorValueTreeState::Listener
 {
 public:
-    
+
     void setup(double sr);
     void loadSamples();
     void noteOn(int midiChannel,
@@ -26,12 +26,12 @@ public:
     typedef enum Sounds{KICK=0, SNARE, CLAP, PERC, HIHAT, CYMBAL, SNAP}Sounds_t;
     double sampleRate;
     void changeSamples(int index,const String &f,int midi);
- 
+
 private:
     File audiofolder;
     AudioFormatManager audioFormatManager;
     File* file;
     bool isChokeGroupActive;
-    
-    
+
+
 };

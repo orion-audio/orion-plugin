@@ -16,7 +16,7 @@
 void SimpleSynth::setup(double sr) {
     sampleRate = sr;
     // add voices to our sampler
-    
+
     for (int i = 0; i < MAX_VOICES; i++) {
         auto* voice = new OrionSamplerVoice(sampleRate,i);
         //auto* voice = new SamplerVoice();
@@ -47,17 +47,17 @@ void SimpleSynth::setup(double sr) {
                 break;
         }
         addVoice(voice);
-        
+
     }
     audioFormatManager.registerBasicFormats();
     loadSamples();
-    
+
 }
 
 void SimpleSynth::loadSamples()
 {
-   
-    
+
+
     if(getNumSounds() != 0)
     {
         for(int i = 0; i < getNumSounds(); i++)
@@ -111,7 +111,7 @@ void SimpleSynth::loadSamples()
                 break;
             default:
                 break;
-                
+
         }
         File file(audiofolder.getChildFile(dir).getChildFile(filename));
         std::unique_ptr<AudioFormatReader> reader;
@@ -121,9 +121,9 @@ void SimpleSynth::loadSamples()
         OrionSamplerSound *sampler = new OrionSamplerSound(String(i), *reader.get(), note, MidiNote, 0.0f, 10.0f, 10.0f);
         addSound(sampler);
     }
-    
-    
-    
+
+
+
 }
 
 void SimpleSynth::changeSamples(int index,const String &f,int midi)//index should imply which instrument it is, but in this case index is the sequence
@@ -140,7 +140,7 @@ void SimpleSynth::changeSamples(int index,const String &f,int midi)//index shoul
         std::cout<<"no you are not\n";
     }
      */
-    
+
     if(getNumSounds() != 0 and index < getNumSounds())
     {
         //std::cout<<"who did you lose "<<getNumSounds()<<" "<<index<<"\n";
@@ -156,8 +156,8 @@ void SimpleSynth::changeSamples(int index,const String &f,int midi)//index shoul
     addSound(sampler);
     delete file;
 
-   
-    
+
+
 }
 
 
@@ -185,7 +185,7 @@ void SimpleSynth::noteOn(int midiChannel,
                     }
                 }
             }
-            
+
             for(int i = 0; i < getNumVoices(); i++)
             {
                 if(auto* voice = dynamic_cast<OrionSamplerVoice*> (getVoice(i)))
@@ -200,6 +200,3 @@ void SimpleSynth::noteOn(int midiChannel,
         }
     }
 }
-
-
-
