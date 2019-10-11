@@ -18,6 +18,7 @@
 #include "Orionlist.h"
 #include "OrionFileBrowser.h"
 #include "OrionFileTreeComponent.h"
+#include "DraggableFileBrowserComponent.h"
 //==============================================================================
 /**
 */
@@ -35,13 +36,15 @@ public:
     std::unique_ptr<AudioFormatReaderSource> playSource;
      OrionFileBrowser filebrowser;
 private:
-
+    std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     OrionaudioAudioProcessor& processor;
     //ScopedPointer<OrionTabComponent> tabComponent;
     OrionTabComponent *tabComponent[7];
     //FileBrowserComponent filebrowser;
    
     //FileTreeComponent tree;
+    
+    
     
     File resourcefolder,skinfolder;
     Image background;
@@ -96,7 +99,7 @@ private:
     DrawableButton DownDir;
     DrawableButton MusicDir;
     DrawableButton DocDir;
-     DrawableButton HomDir;
+    DrawableButton HomDir;
     DrawableButton UpBut;
     int whichdir {0};
     int changed {0};

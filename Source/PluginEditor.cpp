@@ -27,7 +27,6 @@ filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHom
 //tree(DirectoryContentsList(nullptr,TimeSliceThread("thread")))
 mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001)
 {
-    setSize (OrionGlobalWidth, OrionGlobalHeight);
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
     for (int i=0;i<7;i++)
     {
@@ -248,8 +247,11 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     tabComponentChanged(0);
     
-
+    fileBrowser.reset(new DraggableFileBrowserComponent());
+    addAndMakeVisible(fileBrowser.get());
     
+    setSize (OrionGlobalWidth, OrionGlobalHeight);
+
 }
 
 
@@ -264,7 +266,7 @@ void OrionaudioAudioProcessorEditor::tabComponentChanged(int serial)
 {
     tabComponent[serial]->setBounds(0, (OrionGlobalHeight/3)*2, OrionGlobalWidth, OrionGlobalHeight/3);
     
-    addAndMakeVisible(tabComponent[serial]);
+//    addAndMakeVisible(tabComponent[serial]);
 }
 //==============================================================================
 
@@ -366,14 +368,14 @@ void OrionaudioAudioProcessorEditor::resized()
     HiHatButton.setBounds(OrionGlobalWidth/2 - 125, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     cymbalButton.setBounds(OrionGlobalWidth/2 + 25, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     snapButton.setBounds(OrionGlobalWidth/2 + 175, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
-    filebrowser.setBounds(0, 75, 200, OrionGlobalHeight-175);
-    AppDir.setBounds(0, 75, 195, 228/10);
-    DeskDir.setBounds(0, 75+228/10, 195, 228/10);
-    DownDir.setBounds(0, 75+228/10*2, 195, 228/10);
-    MusicDir.setBounds(0, 75+228/10*3, 195, 228/10);
-    DocDir.setBounds(0, 75+228/10*4, 195, 228/10);
-    HomDir.setBounds(0, 75+228/10*5, 195, 228/10);
-    UpBut.setBounds(195,323,20,228/10);
+    fileBrowser->setBounds(0, 75, 200, OrionGlobalHeight-175);
+//    AppDir.setBounds(0, 75, 195, 228/10);
+//    DeskDir.setBounds(0, 75+228/10, 195, 228/10);
+//    DownDir.setBounds(0, 75+228/10*2, 195, 228/10);
+//    MusicDir.setBounds(0, 75+228/10*3, 195, 228/10);
+//    DocDir.setBounds(0, 75+228/10*4, 195, 228/10);
+//    HomDir.setBounds(0, 75+228/10*5, 195, 228/10);
+//    UpBut.setBounds(195,323,20,228/10);
 }
 
 void OrionaudioAudioProcessorEditor::addMessageToList (const MidiMessage& message)
