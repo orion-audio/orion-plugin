@@ -42,8 +42,7 @@ public:
     void removeListener(FileComponentListener* listener)
     {
         for (int i = 0; i < listeners.size(); i++){
-            if (listeners[i] == listener)
-                DBG("FOUND");
+            if (listeners[i] == listener){}
         }
     }
     

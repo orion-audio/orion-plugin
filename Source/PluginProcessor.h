@@ -19,6 +19,11 @@
 class OrionaudioAudioProcessor  : public AudioProcessor
 {
 public:
+    struct OutputLevels
+    {
+        float left = 0;
+        float right = 0;
+    };
    
     //==============================================================================
     OrionaudioAudioProcessor();
@@ -61,7 +66,13 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
-    
+    float getOutputLevel(int channel)
+    {
+        if (channel == 0)
+            return outputLevels.left;
+        else
+            return outputLevels.right;
+    }
     
     AudioTransportSource transport;
     
@@ -80,7 +91,7 @@ public:
      //unsigned int OrionGlobalTabIndex = 0;/*  储存 Tab 的变量 */
 private:
     //==============================================================================
-    
+    std::unique_ptr<MidiOutput> midiOutput;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessor)
     AudioBuffer<float> mDelayBuffer;
@@ -88,7 +99,7 @@ private:
     int mWritePosition { 0 };
     int mSampleRate { 441000 };
     
-   
+    OutputLevels outputLevels;
     
     Analyser<float> inputAnalyser;
     Analyser<float> outputAnalyser;

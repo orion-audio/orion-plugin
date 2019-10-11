@@ -45,9 +45,15 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 //     })
 
 {
+    if (JUCEApplication::isStandaloneApp())
+    {
+        midiOutput = MidiOutput::createNewDevice("Orion Audio");
+        midiOutput->startBackgroundThread();
+    }
+
     undoManager = new UndoManager();
     valueTree = new AudioProcessorValueTreeState(*this, undoManager);
-    synth.setup(48000);
+    synth.setup(48000, midiOutput.get());
     for(int i = 0;i < synth.getNumVoices(); i++)
     {
    
@@ -129,6 +135,8 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
         }
     }
     valueTree->state = ValueTree("OrionParameters");
+    
+    
     
 }
 
@@ -265,7 +273,9 @@ void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
         buffer.clear (i, 0, buffer.getNumSamples());    
     }
     
-    
+    outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples())    ;
+    outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
+
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     //inputAnalyser.addAudioData (buffer, 0, getTotalNumInputChannels());
 

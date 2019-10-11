@@ -1,17 +1,8 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "OrionGlobalVars.h"
 using namespace std;
+using namespace juce;
 //==============================================================================
 
 
@@ -250,6 +241,17 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
     
+    waveWiggle.reset(new WaveWiggle());
+    addAndMakeVisible(waveWiggle.get());
+    
+    meterLeft.reset(new CircularMeter());
+    meterLeft->updaterFunction = [this] { return processor.getOutputLevel(0); };
+    addAndMakeVisible(meterLeft.get());
+    
+    meterRight.reset(new CircularMeter());
+    meterRight->updaterFunction = [this] { return processor.getOutputLevel(1); };
+    addAndMakeVisible(meterRight.get());
+    
     setSize (OrionGlobalWidth, OrionGlobalHeight);
 
 }
@@ -369,6 +371,12 @@ void OrionaudioAudioProcessorEditor::resized()
     cymbalButton.setBounds(OrionGlobalWidth/2 + 25, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     snapButton.setBounds(OrionGlobalWidth/2 + 175, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     fileBrowser->setBounds(0, 75, 200, OrionGlobalHeight-175);
+    
+    waveWiggle->setBounds(435, 458, 557, 64);
+    
+    meterLeft->setBounds(1072, 383, 17, 90);
+    meterRight->setBounds(1092, 383, 17, 90);
+
 //    AppDir.setBounds(0, 75, 195, 228/10);
 //    DeskDir.setBounds(0, 75+228/10, 195, 228/10);
 //    DownDir.setBounds(0, 75+228/10*2, 195, 228/10);
@@ -400,6 +408,7 @@ void OrionaudioAudioProcessorEditor::kickButtonClicked()
     {
         processor.synth.noteOn(1, 36, 120);
         juce::MidiMessage::noteOn(1, 36, (uint8) 120);
+        waveWiggle->startAnimation();
         //midiSequence.addEvent(noteOn, ticks);
         //message.setTimeStamp(Time::getMillisecondCounterHiRes()*0.001-startTime);
         //addMessageToList(message);
@@ -718,12 +727,7 @@ void OrionaudioAudioProcessorEditor::draganddropped(int index)
             //buttons[i].index = buttons[i].index - 1;
             //std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
         }
-       
-        
     }
-    
-    
-  
 }
 
 

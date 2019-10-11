@@ -19,6 +19,8 @@
 #include "OrionFileBrowser.h"
 #include "OrionFileTreeComponent.h"
 #include "DraggableFileBrowserComponent.h"
+#include "WaveWiggle.h"
+#include "CircularMeter.h"
 //==============================================================================
 /**
 */
@@ -36,7 +38,14 @@ public:
     std::unique_ptr<AudioFormatReaderSource> playSource;
      OrionFileBrowser filebrowser;
 private:
+    
+    
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
+    std::unique_ptr<WaveWiggle> waveWiggle;
+    
+    std::unique_ptr<CircularMeter> meterLeft;
+    std::unique_ptr<CircularMeter> meterRight;
+    
     OrionaudioAudioProcessor& processor;
     //ScopedPointer<OrionTabComponent> tabComponent;
     OrionTabComponent *tabComponent[7];
