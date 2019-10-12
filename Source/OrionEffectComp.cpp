@@ -145,7 +145,7 @@ OrionEffectComp::~OrionEffectComp()
     compReleaseTree = nullptr;
     compGainTree = nullptr;
     compThreshTree = nullptr;
-    
+    setLookAndFeel(nullptr);
 }
 
 void OrionEffectComp::paint (Graphics& g)

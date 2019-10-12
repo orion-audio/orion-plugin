@@ -11,8 +11,8 @@
 #include "DraggableFileBrowserComponent.h"
 
 DraggableFileBrowserComponent::DraggableFileBrowserComponent() : scannerThread("scanner"),
-    filter("", "", ""),
     viewPort("view"),
+    filter("*.wav; *.mp3; *.aiff", "*", ""),
     currentDirectory(nullptr, scannerThread)
 {
     addAndMakeVisible(windowComponent);

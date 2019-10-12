@@ -168,6 +168,7 @@ processor(p)
 
 OrionEffectDelay::~OrionEffectDelay()
 {
+    setLookAndFeel(nullptr);
     delayTimeTree = nullptr;
     delayFeedbackTree = nullptr;
     delayColorTree = nullptr;

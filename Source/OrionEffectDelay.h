@@ -46,9 +46,12 @@ public:
    //void componentMovedOrResized (Component& component, bool /*wasMoved*/, bool /*wasResized*/) override;
 
 private:
+    
   
     OrionaudioAudioProcessor& processor;
     
+    LookAndFeel_V4 rotarySliderLAFV1;
+
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayTimeTree;
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayFeedbackTree;
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayColorTree;
@@ -74,7 +77,6 @@ private:
     Label delayDryWetLabel;
     
     
-    LookAndFeel_V4 rotarySliderLAFV1;
     rotarySliderLookAndFeelTest rotarySliderLookAndFeelTest;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionEffectDelay)

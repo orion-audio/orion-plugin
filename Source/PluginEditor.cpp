@@ -14,7 +14,7 @@ OrionaudioAudioProcessorEditor::OrionaudioAudioProcessorEditor (OrionaudioAudioP
 DeskDir("Desktop",DrawableButton::ButtonStyle::ImageFitted),DownDir("Downloads",DrawableButton::ButtonStyle::ImageFitted),
 MusicDir("Music",DrawableButton::ButtonStyle::ImageFitted),DocDir("Documents",DrawableButton::ButtonStyle::ImageFitted),
 HomDir("Home",DrawableButton::ButtonStyle::ImageFitted), UpBut("Up",DrawableButton::ImageOnButtonBackground),
-filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHomeDirectory),1,nullptr),
+filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHomeDirectory),nullptr,nullptr),
 //tree(DirectoryContentsList(nullptr,TimeSliceThread("thread")))
 mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001)
 {
@@ -232,7 +232,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     for (int i=0;i<7;i++)
     {
-        tabComponent[i] = new OrionTabComponent(processor,i);
+        tabComponent[i] = std::make_unique<OrionTabComponent>(processor,i);
 
     }
     
@@ -348,9 +348,9 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
         changed = 0;
     }
     
-    auto* display = dynamic_cast<Component*> (filebrowser.getDisplayComponent());
-    display->setBounds(0, 323, 195, 278);
-    addAndMakeVisible(display);
+//    auto* display = dynamic_cast<Component*> (filebrowser.getDisplayComponent());
+//    display->setBounds(0, 323, 195, 278);
+//    addAndMakeVisible(display);
     //std::cout<<"is dragging? "<<filebrowser.isDragAndDropActive()<<"\n";
 
     auto* list = dynamic_cast<Component*> (&mainlist);

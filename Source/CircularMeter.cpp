@@ -45,7 +45,6 @@ void CircularMeter::paint (Graphics& g)
     if (updaterFunction != nullptr)
     {
         level = updaterFunction();
-        DBG(level);
         for (int i = 0; i < numCircles; i++){
             if (level > i * (1.f / numCircles))
             {
