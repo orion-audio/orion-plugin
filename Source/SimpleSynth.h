@@ -18,7 +18,7 @@ class SimpleSynth : public Synthesiser
 {
 public:
     
-    void setup(double sr, MidiOutput* midiout);
+    void setup(double sr);
     void loadSamples();
     void noteOn(int midiChannel,
                 int midiNoteNumber,
@@ -28,7 +28,6 @@ public:
     void changeSamples(int index,const String &f,int midi);
  
 private:
-    MidiOutput* midiOutput;
     File audiofolder;
     AudioFormatManager audioFormatManager;
     File* file;

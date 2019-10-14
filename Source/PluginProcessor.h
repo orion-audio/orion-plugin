@@ -74,6 +74,11 @@ public:
             return outputLevels.right;
     }
     
+    MidiOutput* getMidiOutput()
+    {
+        return midiOutput.get();
+    }
+    
     AudioTransportSource transport;
     
     
@@ -86,12 +91,15 @@ public:
     ScopedPointer<AudioProcessorValueTreeState> valueTree;
     ScopedPointer<UndoManager> undoManager;
     
+    
    
     //------------------------------------
      //unsigned int OrionGlobalTabIndex = 0;/*  储存 Tab 的变量 */
+
+
 private:
-    //==============================================================================
     std::unique_ptr<MidiOutput> midiOutput;
+
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessor)
     AudioBuffer<float> mDelayBuffer;

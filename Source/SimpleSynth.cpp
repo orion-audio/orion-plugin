@@ -13,11 +13,10 @@
 #define MAX_VOICES 7
 
 
-void SimpleSynth::setup(double sr, MidiOutput* midiOut) {
+void SimpleSynth::setup(double sr) {
     sampleRate = sr;
     // add voices to our sampler
     
-    midiOutput = midiOut;
     
     for (int i = 0; i < MAX_VOICES; i++) {
         auto* voice = new OrionSamplerVoice(sampleRate,i);
@@ -170,10 +169,6 @@ void SimpleSynth::noteOn(int midiChannel,
                          int midiNoteNumber,
                          float velocity)
 {
-    MidiMessage message = MidiMessage::noteOn(midiChannel, midiNoteNumber, (uint8)velocity);
-    message.setTimeStamp(0);
-    if (midiOutput!=nullptr)
-        midiOutput->sendMessageNow(message);
 
     //const ScopedLock sl(lock);
     //std::cout<<"number of sounds"<<getNumSounds();

@@ -362,10 +362,10 @@
  #define JucePlugin_Enable_IAA             0
 #endif
 #ifndef  JucePlugin_Name
- #define JucePlugin_Name                   "orionaudio"
+ #define JucePlugin_Name                   "Orion Plugin"
 #endif
 #ifndef  JucePlugin_Desc
- #define JucePlugin_Desc                   "orionaudio"
+ #define JucePlugin_Desc                   "Orion Plugin"
 #endif
 #ifndef  JucePlugin_Manufacturer
  #define JucePlugin_Manufacturer           "Orion"
@@ -422,16 +422,16 @@
  #define JucePlugin_AUSubType              JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_AUExportPrefix
- #define JucePlugin_AUExportPrefix         orionaudioAU
+ #define JucePlugin_AUExportPrefix         OrionPluginAU
 #endif
 #ifndef  JucePlugin_AUExportPrefixQuoted
- #define JucePlugin_AUExportPrefixQuoted   "orionaudioAU"
+ #define JucePlugin_AUExportPrefixQuoted   "OrionPluginAU"
 #endif
 #ifndef  JucePlugin_AUManufacturerCode
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
 #endif
 #ifndef  JucePlugin_CFBundleIdentifier
- #define JucePlugin_CFBundleIdentifier     com.Orion.orionaudio
+ #define JucePlugin_CFBundleIdentifier     com.Orion.OrionPlugin
 #endif
 #ifndef  JucePlugin_RTASCategory
  #define JucePlugin_RTASCategory           0
@@ -449,7 +449,7 @@
  #define JucePlugin_RTASDisableMultiMono   0
 #endif
 #ifndef  JucePlugin_AAXIdentifier
- #define JucePlugin_AAXIdentifier          com.Orion.orionaudio
+ #define JucePlugin_AAXIdentifier          com.Orion.OrionPlugin
 #endif
 #ifndef  JucePlugin_AAXManufacturerCode
  #define JucePlugin_AAXManufacturerCode    JucePlugin_ManufacturerCode
@@ -473,7 +473,7 @@
  #define JucePlugin_IAASubType             JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_IAAName
- #define JucePlugin_IAAName                "Orion: orionaudio"
+ #define JucePlugin_IAAName                "Orion: Orion Plugin"
 #endif
 #ifndef  JucePlugin_VSTNumMidiInputs
  #define JucePlugin_VSTNumMidiInputs       16

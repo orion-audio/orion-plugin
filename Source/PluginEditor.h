@@ -25,9 +25,33 @@
 //==============================================================================
 /**
 */
-class OrionaudioAudioProcessorEditor  : public AudioProcessorEditor
+class OrionaudioAudioProcessorEditor : public AudioProcessorEditor
 {
 public:
+    
+    enum MidiNotes : int
+    {
+        kick = 36,
+        snare = 38,
+        clap = 39,
+        perc = 41,
+        hhc = 42,
+        hho = 43,
+        snap = 46
+    };
+    
+    enum Tabs : int
+    {
+        kickTab = 0,
+        snareTab,
+        percTab,
+        hhcTab,
+        hhoTab,
+        clapTab,
+        snapTab
+    };
+
+    
     OrionaudioAudioProcessorEditor (OrionaudioAudioProcessor&);
     ~OrionaudioAudioProcessorEditor();
 
@@ -64,6 +88,8 @@ private:
     
     void addMessageToList (const MidiMessage& message);
     
+    void drumButtonClicked(int midiNote, int tabIndex);
+
     void kickButtonClicked();
     void snareButtonClicked();
     void clapButtonClicked();

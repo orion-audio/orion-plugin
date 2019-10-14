@@ -5,15 +5,22 @@ using namespace std;
 using namespace juce;
 //==============================================================================
 
-
-//OrionSamplerSound* aaa;
-
 OrionaudioAudioProcessorEditor::OrionaudioAudioProcessorEditor (OrionaudioAudioProcessor& p)
-: AudioProcessorEditor (&p), processor (p)
-,kickButton(p,"KICK",DrawableButton::ButtonStyle::ImageFitted ),snareButton(p,"SNARE",DrawableButton::ButtonStyle::ImageFitted ),clapButton(p,"CLAP",DrawableButton::ButtonStyle::ImageFitted ), percButton(p,"PERC",DrawableButton::ButtonStyle::ImageFitted ), HiHatButton(p,"HH-C",DrawableButton::ButtonStyle::ImageFitted ), cymbalButton(p,"HH-O",DrawableButton::ButtonStyle::ImageFitted ), snapButton(p,"CRASH",DrawableButton::ButtonStyle::ImageFitted),AppDir("Applications",DrawableButton::ButtonStyle::ImageFitted),
-DeskDir("Desktop",DrawableButton::ButtonStyle::ImageFitted),DownDir("Downloads",DrawableButton::ButtonStyle::ImageFitted),
-MusicDir("Music",DrawableButton::ButtonStyle::ImageFitted),DocDir("Documents",DrawableButton::ButtonStyle::ImageFitted),
-HomDir("Home",DrawableButton::ButtonStyle::ImageFitted), UpBut("Up",DrawableButton::ImageOnButtonBackground),
+: AudioProcessorEditor (&p), processor (p),
+kickButton(p,"KICK",DrawableButton::ButtonStyle::ImageFitted),
+snareButton(p,"SNARE",DrawableButton::ButtonStyle::ImageFitted ),
+clapButton(p,"CLAP",DrawableButton::ButtonStyle::ImageFitted ),
+percButton(p,"PERC",DrawableButton::ButtonStyle::ImageFitted ),
+HiHatButton(p,"HH-C",DrawableButton::ButtonStyle::ImageFitted ),
+cymbalButton(p,"HH-O",DrawableButton::ButtonStyle::ImageFitted ),
+snapButton(p,"CRASH",DrawableButton::ButtonStyle::ImageFitted),
+AppDir("Applications",DrawableButton::ButtonStyle::ImageFitted),
+DeskDir("Desktop",DrawableButton::ButtonStyle::ImageFitted),
+DownDir("Downloads",DrawableButton::ButtonStyle::ImageFitted),
+MusicDir("Music",DrawableButton::ButtonStyle::ImageFitted),
+DocDir("Documents",DrawableButton::ButtonStyle::ImageFitted),
+HomDir("Home",DrawableButton::ButtonStyle::ImageFitted),
+UpBut("Up",DrawableButton::ImageOnButtonBackground),
 filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHomeDirectory),nullptr,nullptr),
 //tree(DirectoryContentsList(nullptr,TimeSliceThread("thread")))
 mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001)
@@ -69,86 +76,73 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     buttonOn = Drawable::createFromImageData(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
 
  kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    kickButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ kickButtonClicked(); };
+    kickButton.onClick = [this] { drumButtonClicked(MidiNotes::kick, Tabs::kickTab); };
     kickButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     kickButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&kickButton);
     
-//    buttonOff = Drawable::createFromImageFile(*snareFileOff);
-//    buttonOn = Drawable::createFromImageFile(*snareFileOn);
     buttonOff = Drawable::createFromImageData(BinaryData::snare_off_png, BinaryData::snare_off_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::snare_on_png, BinaryData::snare_on_pngSize);
 
     
     snareButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    snareButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snareButtonClicked(); };
+    snareButton.onClick = [this] { drumButtonClicked(MidiNotes::snare, Tabs::snareTab); };
     snareButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snareButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snareButton);
     
-//    buttonOff = Drawable::createFromImageFile(*clapFileOff);
-//    buttonOn = Drawable::createFromImageFile(*clapFileOn);
     buttonOff = Drawable::createFromImageData(BinaryData::clap_off_png, BinaryData::clap_off_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::clap_on_png, BinaryData::clap_on_pngSize);
 
     
     clapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    clapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ clapButtonClicked(); };
+    clapButton.onClick = [this] { drumButtonClicked(MidiNotes::clap, Tabs::clapTab); };
     clapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     clapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&clapButton);
     
     
-//    buttonOff = Drawable::createFromImageFile(*percFileOff);
-//    buttonOn = Drawable::createFromImageFile(*percFileOn);
     buttonOff = Drawable::createFromImageData(BinaryData::perc_off_png, BinaryData::perc_off_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::perc_on_png, BinaryData::perc_on_pngSize);
 
     
     percButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    percButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ percButtonClicked(); };
+    percButton.onClick = [this] { drumButtonClicked(MidiNotes::perc, Tabs::percTab); };
     percButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     percButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&percButton);
     
     
-//    buttonOff = Drawable::createFromImageFile(*hhcFileOff);
-//    buttonOn = Drawable::createFromImageFile(*hhcFileOn);
     buttonOff = Drawable::createFromImageData(BinaryData::hhc_off_png, BinaryData::hhc_off_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::hhc_on_png, BinaryData::hhc_on_pngSize);
 
     HiHatButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    HiHatButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ HiHatButtonClicked(); };
+    HiHatButton.onClick = [this] { drumButtonClicked(MidiNotes::hhc, Tabs::hhcTab); };
     HiHatButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     HiHatButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&HiHatButton);
     
     
-//    buttonOff = Drawable::createFromImageFile(*hhoFileOff);
-//    buttonOn = Drawable::createFromImageFile(*hhoFileOn);
     buttonOff = Drawable::createFromImageData(BinaryData::hho_off_png, BinaryData::hho_off_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::hho_on_png, BinaryData::hho_on_pngSize);
 
     
     cymbalButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    cymbalButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ cymbalButtonClicked(); };
+    cymbalButton.onClick = [this] { drumButtonClicked(MidiNotes::hho, Tabs::hhoTab); };
     cymbalButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     cymbalButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&cymbalButton);
     
-//    buttonOff = Drawable::createFromImageFile(*crashFileOff);
-//    buttonOn = Drawable::createFromImageFile(*crashFileOn);
     buttonOff = Drawable::createFromImageData(BinaryData::crash_off_png, BinaryData::crash_off_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::crash_on_png, BinaryData::crash_on_pngSize);
 
     
     snapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    snapButton.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ snapButtonClicked(); };
+    snapButton.onClick = [this] { drumButtonClicked(MidiNotes::snap, Tabs::snapTab); };
     snapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snapButton);
     
-//    buttonOn = Drawable::createFromImageFile(*appFileOn);
     buttonOn = Drawable::createFromImageData(BinaryData::appdir_png, BinaryData::appdir_pngSize);
 
     AppDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
@@ -268,7 +262,7 @@ void OrionaudioAudioProcessorEditor::tabComponentChanged(int serial)
 {
     tabComponent[serial]->setBounds(0, (OrionGlobalHeight/3)*2, OrionGlobalWidth, OrionGlobalHeight/3);
     
-//    addAndMakeVisible(tabComponent[serial]);
+//    addAndMakeVisible(tabComponent[serial].get());
 }
 //==============================================================================
 
@@ -370,7 +364,7 @@ void OrionaudioAudioProcessorEditor::resized()
     HiHatButton.setBounds(OrionGlobalWidth/2 - 125, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     cymbalButton.setBounds(OrionGlobalWidth/2 + 25, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
     snapButton.setBounds(OrionGlobalWidth/2 + 175, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
-    fileBrowser->setBounds(0, 75, 200, OrionGlobalHeight-175);
+    fileBrowser->setBounds(0, 75, 200, OrionGlobalHeight-375);
     
     waveWiggle->setBounds(435, 458, 557, 64);
     
@@ -399,6 +393,14 @@ void OrionaudioAudioProcessorEditor::addMessageToList (const MidiMessage& messag
                                        seconds,
                                        millis);
     //logMessage (timecode + "  -  " + getMidiMessageDescription (message));
+}
+
+void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabIndex)
+{
+    waveWiggle->startAnimation();
+    processor.synth.noteOn(1, midiNote, 120);
+    processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
+
 }
 
 void OrionaudioAudioProcessorEditor::kickButtonClicked()

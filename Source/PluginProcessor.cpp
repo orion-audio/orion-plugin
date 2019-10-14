@@ -45,15 +45,13 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 //     })
 
 {
-    if (JUCEApplication::isStandaloneApp())
-    {
-        midiOutput = MidiOutput::createNewDevice("Orion Audio");
+    midiOutput = MidiOutput::createNewDevice("Orion Audio");
+    if (midiOutput != nullptr)
         midiOutput->startBackgroundThread();
-    }
-
+    
     undoManager = new UndoManager();
     valueTree = new AudioProcessorValueTreeState(*this, undoManager);
-    synth.setup(48000, midiOutput.get());
+    synth.setup(48000);
     for(int i = 0;i < synth.getNumVoices(); i++)
     {
    
