@@ -1,12 +1,4 @@
-/*
-  ==============================================================================
 
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
 
 #pragma once
 
@@ -19,12 +11,39 @@
 #include "OrionFileBrowser.h"
 #include "OrionFileTreeComponent.h"
 #include "DraggableFileBrowserComponent.h"
+#include "WaveWiggle.h"
+#include "CircularMeter.h"
+#include <array>
 //==============================================================================
 /**
 */
-class OrionaudioAudioProcessorEditor  : public AudioProcessorEditor
+class OrionaudioAudioProcessorEditor : public AudioProcessorEditor
 {
 public:
+    
+    enum MidiNotes : int
+    {
+        kick = 36,
+        snare = 38,
+        clap = 39,
+        perc = 41,
+        hhc = 42,
+        hho = 43,
+        snap = 46
+    };
+    
+    enum Tabs : int
+    {
+        kickTab = 0,
+        snareTab,
+        percTab,
+        hhcTab,
+        hhoTab,
+        clapTab,
+        snapTab
+    };
+
+    
     OrionaudioAudioProcessorEditor (OrionaudioAudioProcessor&);
     ~OrionaudioAudioProcessorEditor();
 
@@ -32,32 +51,43 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     void tabComponentChanged(int serial);
-
+ 
     std::unique_ptr<AudioFormatReaderSource> playSource;
-     OrionFileBrowser filebrowser;
+//     OrionFileBrowser filebrowser;
 private:
+    
+    
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
+    std::unique_ptr<WaveWiggle> waveWiggle;
+    
+    std::unique_ptr<CircularMeter> meterLeft;
+    std::unique_ptr<CircularMeter> meterRight;
+    
     OrionaudioAudioProcessor& processor;
     //ScopedPointer<OrionTabComponent> tabComponent;
-    OrionTabComponent *tabComponent[7];
-    //FileBrowserComponent filebrowser;
-
-    //FileTreeComponent tree;
-
+    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
+    FileBrowserComponent filebrowser;
+   
+//    FileTreeComponent tree;
+    
+    
+    
     File resourcefolder,skinfolder;
     Image background;
     File* clipbackground;
     File* envbackground;
     File* eqbackground;
-
+    
     void addMessageToList (const MidiMessage& message);
+    
+    void drumButtonClicked(int midiNote, int tabIndex);
 
     void kickButtonClicked();
     void snareButtonClicked();
     void clapButtonClicked();
     void percButtonClicked();
-
-
+    
+    
     void HiHatButtonClicked();
     void cymbalButtonClicked();
     void snapButtonClicked();
@@ -68,30 +98,30 @@ private:
     void docdirClicked();
     void homedirClicked();
     void upbutClicked();
-
+    
     void lookupindex(int index,int ref);
     void draganddropped(int index);
     TextButton instrumentTriggers[6];
-
+    
     //ComboBox directory;
     //PopupMenu dir;
     Orionlist maindir;
     ListBox mainlist;
-
+    
     //DrawableButton kickButton;
     OrionButton kickButton;
     OrionButton snareButton;
     OrionButton clapButton;
     OrionButton percButton;
-
+    
     OrionButton HiHatButton;
     OrionButton cymbalButton;
     OrionButton snapButton;
-
+    
     int indices[7];
    // std::vector<OrionButton>& buttons;
-
-
+    
+    
     DrawableButton AppDir;
     DrawableButton DeskDir;
     DrawableButton DownDir;
@@ -103,8 +133,7 @@ private:
     int changed {0};
     AudioFormatManager formatManager;
     double startTime;
-
-    std::unique_ptr<MidiOutput> midiOutput;
-
+    
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };

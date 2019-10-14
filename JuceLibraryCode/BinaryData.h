@@ -44,11 +44,17 @@ namespace BinaryData
     extern const char*   clap_on_png;
     const int            clap_on_pngSize = 17780;
 
+    extern const char*   clap_selected_png;
+    const int            clap_selected_pngSize = 5649;
+
     extern const char*   clip_off_png;
     const int            clip_off_pngSize = 1628;
 
     extern const char*   clip_on_png;
     const int            clip_on_pngSize = 5610;
+
+    extern const char*   clip_selected_png;
+    const int            clip_selected_pngSize = 3913;
 
     extern const char*   compressorBackground_png;
     const int            compressorBackground_pngSize = 334848;
@@ -58,6 +64,9 @@ namespace BinaryData
 
     extern const char*   crash_on_png;
     const int            crash_on_pngSize = 18944;
+
+    extern const char*   crash_selected_png;
+    const int            crash_selected_pngSize = 6268;
 
     extern const char*   delayBackground_png;
     const int            delayBackground_pngSize = 160663;
@@ -80,6 +89,9 @@ namespace BinaryData
     extern const char*   eq_on_png;
     const int            eq_on_pngSize = 5538;
 
+    extern const char*   eq_selected_png;
+    const int            eq_selected_pngSize = 4946;
+
     extern const char*   expand_png;
     const int            expand_pngSize = 2109;
 
@@ -92,17 +104,32 @@ namespace BinaryData
     extern const char*   fx_on_png;
     const int            fx_on_pngSize = 5358;
 
+    extern const char*   fx_selected_png;
+    const int            fx_selected_pngSize = 4824;
+
     extern const char*   headphone_button_png;
     const int            headphone_button_pngSize = 2092;
 
     extern const char*   hhc_off_png;
-    const int            hhc_off_pngSize = 6137;
+    const int            hhc_off_pngSize = 5693;
+
+    extern const char*   hhc_selected_png;
+    const int            hhc_selected_pngSize = 3899;
+
+    extern const char*   hho_off_png;
+    const int            hho_off_pngSize = 5880;
+
+    extern const char*   hho_selected_png;
+    const int            hho_selected_pngSize = 3788;
+
+    extern const char*   hhc_off_png2;
+    const int            hhc_off_png2Size = 6137;
 
     extern const char*   hhc_on_png;
     const int            hhc_on_pngSize = 16866;
 
-    extern const char*   hho_off_png;
-    const int            hho_off_pngSize = 6073;
+    extern const char*   hho_off_png2;
+    const int            hho_off_png2Size = 6073;
 
     extern const char*   hho_on_png;
     const int            hho_on_pngSize = 17067;
@@ -112,6 +139,9 @@ namespace BinaryData
 
     extern const char*   kick_on_png;
     const int            kick_on_pngSize = 18022;
+
+    extern const char*   kick_selected_png;
+    const int            kick_selected_pngSize = 6010;
 
     extern const char*   knob_1_png;
     const int            knob_1_pngSize = 1865;
@@ -152,6 +182,9 @@ namespace BinaryData
     extern const char*   perc_on_png;
     const int            perc_on_pngSize = 17598;
 
+    extern const char*   perc_selected_png;
+    const int            perc_selected_pngSize = 5131;
+
     extern const char*   power_button_png;
     const int            power_button_pngSize = 2297;
 
@@ -176,14 +209,23 @@ namespace BinaryData
     extern const char*   snap_0ff_png;
     const int            snap_0ff_pngSize = 7976;
 
+    extern const char*   snap_off_png;
+    const int            snap_off_pngSize = 9339;
+
     extern const char*   snap_on_png;
     const int            snap_on_pngSize = 18302;
+
+    extern const char*   snap_selected_png;
+    const int            snap_selected_pngSize = 6176;
 
     extern const char*   snare_off_png;
     const int            snare_off_pngSize = 8603;
 
     extern const char*   snare_on_png;
     const int            snare_on_pngSize = 18758;
+
+    extern const char*   snare_selected_png;
+    const int            snare_selected_pngSize = 5857;
 
     extern const char*   sound_file_png;
     const int            sound_file_pngSize = 5643;
@@ -195,11 +237,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-<<<<<<< HEAD
-    const int namedResourceListSize = 61;
-=======
     const int namedResourceListSize = 76;
->>>>>>> origin/dev
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];
