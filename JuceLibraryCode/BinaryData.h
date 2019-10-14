@@ -110,26 +110,20 @@ namespace BinaryData
     extern const char*   headphone_button_png;
     const int            headphone_button_pngSize = 2092;
 
-    extern const char*   hhc_off_png;
-    const int            hhc_off_pngSize = 5693;
-
     extern const char*   hhc_selected_png;
     const int            hhc_selected_pngSize = 3899;
-
-    extern const char*   hho_off_png;
-    const int            hho_off_pngSize = 5880;
 
     extern const char*   hho_selected_png;
     const int            hho_selected_pngSize = 3788;
 
-    extern const char*   hhc_off_png2;
-    const int            hhc_off_png2Size = 6137;
+    extern const char*   hhc_off_png;
+    const int            hhc_off_pngSize = 6137;
 
     extern const char*   hhc_on_png;
     const int            hhc_on_pngSize = 16866;
 
-    extern const char*   hho_off_png2;
-    const int            hho_off_png2Size = 6073;
+    extern const char*   hho_off_png;
+    const int            hho_off_pngSize = 6073;
 
     extern const char*   hho_on_png;
     const int            hho_on_pngSize = 17067;
@@ -237,7 +231,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 76;
+    const int namedResourceListSize = 74;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

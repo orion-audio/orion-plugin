@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" jucerVersion="5.4.4"
               headerPath="/Users/lilyh/Documents/music tech/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
-              pluginVST3Category="Fx,Stereo" pluginFormats="buildAU,buildStandalone,buildVST3"
+              pluginVST3Category="Fx,Stereo" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               companyName="Orion" pluginAUMainType="'aufx'" pluginManufacturerCode="Orio"
               pluginCode="orpg">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
@@ -131,10 +131,8 @@
         <FILE id="taK4ke" name="fx_selected.png" compile="0" resource="1" file="assets/graphics/fx_selected.png"/>
         <FILE id="dmqE4u" name="headphone_button.png" compile="0" resource="1"
               file="assets/graphics/headphone_button.png"/>
-        <FILE id="wOYvuc" name="hh-c_off.png" compile="0" resource="1" file="assets/graphics/hh-c_off.png"/>
         <FILE id="COKNHE" name="hh-c_selected.png" compile="0" resource="1"
               file="assets/graphics/hh-c_selected.png"/>
-        <FILE id="aauqK7" name="hh-o_off.png" compile="0" resource="1" file="assets/graphics/hh-o_off.png"/>
         <FILE id="uLcXIM" name="hh-o_selected.png" compile="0" resource="1"
               file="assets/graphics/hh-o_selected.png"/>
         <FILE id="tCIXKK" name="hhc_off.png" compile="0" resource="1" file="assets/graphics/hhc_off.png"/>
