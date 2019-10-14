@@ -386,7 +386,8 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     waveWiggle->startAnimation();
     processor.synth.noteOn(1, midiNote, 120);
-    processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
+    if (processor.getMidiOutput() != nullptr)
+        processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
     for (int i = 0; i < 7; i++){
         if (i == tabIndex)
             tabComponent[i]->setVisible(true);

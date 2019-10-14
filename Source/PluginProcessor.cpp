@@ -140,6 +140,7 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 
 OrionaudioAudioProcessor::~OrionaudioAudioProcessor()
 {
+    
 }
 
 
@@ -178,11 +179,12 @@ bool OrionaudioAudioProcessor::producesMidi() const
 
 bool OrionaudioAudioProcessor::isMidiEffect() const
 {
-   #if JucePlugin_IsMidiEffect
-    return true;
-   #else
+//   #if JucePlugin_IsMidiEffect
+//    return true;
+//   #else
+//    return false;
+//   #endif
     return false;
-   #endif
 }
 
 double OrionaudioAudioProcessor::getTailLengthSeconds() const
@@ -212,6 +214,7 @@ const String OrionaudioAudioProcessor::getProgramName (int index)
 
 void OrionaudioAudioProcessor::changeProgramName (int index, const String& newName)
 {
+    
 }
 
 
@@ -227,7 +230,6 @@ void OrionaudioAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     mDelayBuffer.setSize(numInputChannels, delayBufferSize);
     mSampleRate = sampleRate;
     synth.setCurrentPlaybackSampleRate(sampleRate);
-
 }
 
 void OrionaudioAudioProcessor::releaseResources()
@@ -262,17 +264,12 @@ bool OrionaudioAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
-    auto totalNumInputChannels = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
-    
-   
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-    {
-        buffer.clear (i, 0, buffer.getNumSamples());    
-    }
-    
-    outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples())    ;
-    outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
+    DBG("PROCESS");
+    outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples()) ;
+    if (buffer.getNumChannels() > 1)
+        outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
+    else
+        outputLevels.right = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     //inputAnalyser.addAudioData (buffer, 0, getTotalNumInputChannels());

@@ -69,7 +69,7 @@ void SimpleSynth::loadSamples()
         }
     }
     int MidiNote;
-    audiofolder =  File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("audio").getChildFile("demo");
+    audiofolder = File("/Library/Application\ Support/Orion/Orion\ Plugin/Samples");
     String dir;
     String filename;
     for(int i = 0; i < MAX_VOICES; i++)

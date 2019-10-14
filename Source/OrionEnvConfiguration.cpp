@@ -230,7 +230,6 @@ OrionEnvConfiguration::~OrionEnvConfiguration()
     envDecayBendTree = nullptr;
     envReleaseBendTree = nullptr;
     
-    
     envSwitchButtonAttachment = nullptr;
 
 }
