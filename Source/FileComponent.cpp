@@ -18,8 +18,12 @@ FileComponent::FileComponent(File f, int i) : Button("")
     name = f.getFileName();
     
     fileIndex = i;
-    
-    Image image = ImageCache::getFromMemory(BinaryData::file_png, BinaryData::file_pngSize);
+    Image image;
+    if (file.isDirectory())
+        image = ImageCache::getFromMemory(BinaryData::file_png, BinaryData::file_pngSize);
+    else
+        image = ImageCache::getFromMemory(BinaryData::sound_file_png, BinaryData::sound_file_pngSize);
+
     setImage(image);
 }
 

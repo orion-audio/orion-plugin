@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "FileComponent.h"
 
-class DraggableFileBrowserComponent : public Component, public ChangeListener, public FileComponentListener
+class DraggableFileBrowserComponent : public Component, public ChangeListener, public FileComponentListener, public FileDragAndDropTarget
 {
 public:
     
@@ -56,12 +56,13 @@ public:
         
             int w = getWidth() * .25;
             
-            int windowHeight = w * 1.2 * ceil((float)(numFiles + 1) / 4.f);
+            int windowHeight = (w / 2) + w * 1.2 * ceil((float)(numFiles + 1) / 4.f);
             if (windowHeight < getHeight())
                 windowHeight = getHeight();
             
             setSize(getWidth(), windowHeight);
             Rectangle<int> area(0, 0, getWidth() / 4, getWidth() / 4);
+            area.translate(0, w / 2);
             
             while(fileCounter <= numFiles)
             {
@@ -105,7 +106,14 @@ public:
     
     virtual void fileClicked(int index) override;
     
+    // target methods
+    virtual bool isInterestedInFileDrag (const StringArray &files) override;
+    
+    virtual void filesDropped (const StringArray &files, int x, int y) override;
 private:
+    
+    std::unique_ptr<ImageButton> backButton;
+    
     int currentHighlighted = -1;
     
     DirectoryWindowComponent windowComponent;

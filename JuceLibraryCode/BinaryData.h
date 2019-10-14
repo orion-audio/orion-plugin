@@ -8,6 +8,9 @@
 
 namespace BinaryData
 {
+    extern const char*   back_arrow_png;
+    const int            back_arrow_pngSize = 15605;
+
     extern const char*   _00compressorBackground_png;
     const int            _00compressorBackground_pngSize = 213101;
 
@@ -192,7 +195,11 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
+<<<<<<< HEAD
     const int namedResourceListSize = 61;
+=======
+    const int namedResourceListSize = 76;
+>>>>>>> origin/dev
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

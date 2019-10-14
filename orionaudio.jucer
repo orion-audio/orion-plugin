@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="YrvQ7b" name="orionaudio" projectType="audioplug" jucerVersion="5.4.4"
+<JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" jucerVersion="5.4.4"
               headerPath="/Users/lilyh/Documents/music tech/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
+<<<<<<< HEAD
               pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
               pluginVST3Category="Delay,Distortion,Filter,Fx,Pitch Shift,Reverb,Stereo"
               pluginFormats="buildAU,buildStandalone,buildVST3">
   <MAINGROUP id="PeSdbo" name="orionaudio">
+=======
+              pluginCharacteristicsValue="pluginWantsMidiIn" pluginVST3Category="Fx,Instrument,Stereo"
+              pluginFormats="buildAU,buildStandalone,buildVST3" companyName="Orion">
+  <MAINGROUP id="PeSdbo" name="Orion Plugin">
+>>>>>>> origin/dev
     <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
+      <FILE id="pBWaAs" name="CircularMeter.cpp" compile="1" resource="0"
+            file="Source/CircularMeter.cpp"/>
+      <FILE id="SjLzye" name="CircularMeter.h" compile="0" resource="0" file="Source/CircularMeter.h"/>
+      <FILE id="AiuoXS" name="WaveWiggle.h" compile="0" resource="0" file="Source/WaveWiggle.h"/>
       <FILE id="TP6ogQ" name="DraggableFileBrowserComponent.cpp" compile="1"
             resource="0" file="Source/DraggableFileBrowserComponent.cpp"/>
       <FILE id="k98kkO" name="DraggableFileBrowserComponent.h" compile="0"
@@ -81,6 +91,7 @@
     </GROUP>
     <GROUP id="{75D64110-A5DC-ADE9-A5A7-BFA0BFB10FC6}" name="assets">
       <GROUP id="{A4E239E6-8742-F8FF-2622-56CC7297C1AB}" name="graphics">
+        <FILE id="R0JJMT" name="back_arrow.png" compile="0" resource="1" file="assets/graphics/back_arrow.png"/>
         <FILE id="FANUh2" name="00compressorBackground.png" compile="0" resource="1"
               file="assets/graphics/00compressorBackground.png"/>
         <FILE id="PhBfWM" name="00delayBackground.png" compile="0" resource="1"
@@ -185,7 +196,7 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX">
+    <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug"/>
         <CONFIGURATION isDebug="0" name="Release"/>
