@@ -39,7 +39,7 @@ public:
     OrionEffectsConfiguration* effectConfiguration;
     OrionEnvConfiguration* envConfiguration;
     OrionClipConfiguration* clipConfiguration;
-    ScopedPointer<TabbedComponent> tabbedComponent;
+    std::unique_ptr<TabbedComponent> tabbedComponent;
 private:
     OrionaudioAudioProcessor& processor;
     //OrionTabButton custablook;

@@ -13,6 +13,15 @@ class OrionTabButton    : public LookAndFeel_V2
 {
 private:
     File skinfolder;
+    Image envtab_sel = ImageCache::getFromMemory(BinaryData::env_on_png, BinaryData::env_on_pngSize);
+    Image envtab_off = ImageCache::getFromMemory(BinaryData::env_off_png, BinaryData::env_off_pngSize);
+    Image fxtab_sel = ImageCache::getFromMemory(BinaryData::fx_on_png, BinaryData::fx_on_pngSize);
+    Image fxtab_off = ImageCache::getFromMemory(BinaryData::fx_off_png, BinaryData::fx_off_pngSize);
+    Image eqtab_sel = ImageCache::getFromMemory(BinaryData::eq_on_png, BinaryData::eq_on_pngSize);
+    Image eqtab_off = ImageCache::getFromMemory(BinaryData::eq_off_png, BinaryData::env_off_pngSize);
+    Image cliptab_sel = ImageCache::getFromMemory(BinaryData::clip_on_png, BinaryData::clip_on_pngSize);
+    Image cliptab_off = ImageCache::getFromMemory(BinaryData::clip_off_png, BinaryData::clip_off_pngSize);
+    /*
     String ENVon = "env_selected.png";
     String FXon = "fx_selected.png";
     String EQon = "EQ_on.png";
@@ -21,8 +30,10 @@ private:
     String FX = "fx_off.png";
     String EQ = "eq_off.png";
     String CLIP = "clip_off.png";
-    String filename;
-    File* file;
+     */
+    //String filename;
+    //File* file;
+    Image* theone;
     
 public:
     enum ButtonType
@@ -35,38 +46,49 @@ public:
     int state = 0;
     OrionTabButton(ButtonType button, bool isdown)
     {
-        skinfolder = File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("skin").getChildFile("pictures");
+        //skinfolder = File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("skin").getChildFile("pictures");
+        
         
         //file = new File("/Users/lilyh/Downloads/TBOff.png");
         switch (button)
         {
             case envelope:
-                if (isdown) filename = ENVon;
-                else filename = ENV;
+                if (isdown) theone = &envtab_sel;
+                else theone = &envtab_off;
                 break;
             case fx:
-                if (isdown) filename = FXon;
-                else filename = FX;
+                if (isdown) theone = &fxtab_sel;
+                else theone = &fxtab_off;
                 break;
             case eq:
-                if (isdown) filename = EQon;
-                else filename = EQ;
+                if (isdown) theone = &eqtab_sel;
+                else theone = &eqtab_off;
                 break;
             case clip:
-                if (isdown) filename = CLIPon;
-                else filename = CLIP;
+                if (isdown) theone = &cliptab_sel;
+                else theone = &cliptab_off;
                 break;
         }
         
         
-        file = new File(skinfolder.getChildFile(filename));
+       // file = new File(skinfolder.getChildFile(filename));
+        
+       // buttonOff = Drawable::createFromImageData(BinaryData::kick_off_png, BinaryData::kick_off_pngSize);
+        //buttonOn = Drawable::createFromImageData(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
+        
+        //kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
+        
     };
 
 
     void drawTabButton (TabBarButton& button, Graphics& g, bool isMouseOver, bool isMouseDown) override
     {
         
-        g.drawImageWithin(ImageCache::getFromFile(*file), button.getActiveArea().getX(),button.getActiveArea().getY(), button.getActiveArea().getWidth(), button.getActiveArea().getHeight(), juce::RectanglePlacement::centred);
+       
+        //g.drawImageWithin(*theone, button.getActiveArea().getX(),button.getActiveArea().getY(), button.getActiveArea().getWidth(), button.getActiveArea().getHeight(), juce::RectanglePlacement::centred);
+        
+        g.drawImageWithin(*theone, 0,0, button.getActiveArea().getWidth(), button.getActiveArea().getHeight(), juce::RectanglePlacement::centred);
+        
 
     };
     
