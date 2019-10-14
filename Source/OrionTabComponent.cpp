@@ -15,7 +15,7 @@
 //==============================================================================
 OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): processor(p)
 {
-    tabbedComponent = new TabbedComponent(TabbedButtonBar::TabsAtTop);
+    tabbedComponent.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
     TabSerial       = serial;
     
     effectConfiguration = new OrionEffectsConfiguration(p,serial);
@@ -46,11 +46,10 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
         tabbedComponent->getTabbedButtonBar().getTabButton(i)->setBounds(OrionGlobalWidth/4*i, 0, 30, 25);
     }
     
-    //tabbedComponent->getLookAndFeel().drawDrawableButton(g, *dbut, false, true);
+
+    addAndMakeVisible(tabbedComponent.get());
     
-    //addAndMakeVisible(tabbedComponent);
-    
-    //effectConfiguration = new OrionEffectsConfiguration(p);
+  
 }
 
 OrionTabComponent::~OrionTabComponent()
@@ -76,27 +75,38 @@ void OrionTabComponent::paint (Graphics& g)
        You should replace everything in this method with your own
        drawing code..
     */
-
+    
 
     for (int i=0; i < tabbedComponent->getNumTabs(); i++)
     {
         auto* temp = tabbedComponent->getTabbedButtonBar().getTabButton(i);
         temp->setBounds(OrionGlobalWidth/4*i, 0, 100, 25);
        
+        auto* but = tabbedComponent->getTabbedButtonBar().getTabButton(i);
+        
+        OrionTabButton* custablook = new OrionTabButton(gettype(but->getButtonText()), tabbedComponent->getTabbedButtonBar().getTabButton(i)->isFrontTab());
+        
+        but->setLookAndFeel(custablook);
+        
+        /*
         if(auto* but = dynamic_cast<Button*> (tabbedComponent->getTabbedButtonBar().getTabButton(i)))
         {
 
             OrionTabButton* custablook = new OrionTabButton(gettype(but->getButtonText()), tabbedComponent->getTabbedButtonBar().getTabButton(i)->isFrontTab());
-          
-            if(auto* newl = dynamic_cast<juce::LookAndFeel*> (custablook))
-            {
-                but->setLookAndFeel(newl);
-            }
+            
+            but->setLookAndFeel(custablook);
+            //custablook->drawTabButton(*but, g, false, true);
+            //if(auto* newl = dynamic_cast<juce::LookAndFeel*> (custablook))
+            //{
+            //    but->setLookAndFeel(newl);
+                
+            //}
         }
+         */
 
     }
     //tabbedComponent->getLookAndFeel().drawDrawableButton(g, *dbut, false, true);
-    addAndMakeVisible(tabbedComponent);
+    addAndMakeVisible(tabbedComponent.get());
     
     g.fillAll(Colours::black);
     
