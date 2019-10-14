@@ -262,7 +262,7 @@ void OrionaudioAudioProcessorEditor::tabComponentChanged(int serial)
 {
     tabComponent[serial]->setBounds(0, (OrionGlobalHeight/3)*2, OrionGlobalWidth, OrionGlobalHeight/3);
     
-//    addAndMakeVisible(tabComponent[serial].get());
+    addAndMakeVisible(tabComponent[serial].get());
 }
 //==============================================================================
 
@@ -400,6 +400,14 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     waveWiggle->startAnimation();
     processor.synth.noteOn(1, midiNote, 120);
     processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
+    for (int i = 0; i < 7; i++){
+        if (i == tabIndex)
+            tabComponent[i]->setVisible(true);
+        else
+            tabComponent[i]->setVisible(false);
+    }
+    
+    tabComponentChanged(tabIndex);
 
 }
 
