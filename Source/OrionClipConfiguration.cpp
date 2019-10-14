@@ -20,10 +20,11 @@ OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : pr
 
 void OrionClipConfiguration::paint (Graphics& g)
 {
-    clipbackground = new File(File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("skin").getChildFile("pictures").getChildFile("orionClipBackground.png"));
+    
+    Image clipbackground = ImageCache::getFromMemory(BinaryData::orionClipBackground_png, BinaryData::orionClipBackground_pngSize);
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
     RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(ImageCache::getFromFile(*clipbackground), 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
+    g.drawImageWithin(clipbackground, 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
     
 }
 

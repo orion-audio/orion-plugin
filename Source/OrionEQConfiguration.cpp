@@ -48,10 +48,11 @@ void OrionEQConfiguration::paint(Graphics& g)
     const Colour outputColour = Colours::indianred;
     Graphics::ScopedSaveState state (g);
     //********for the vertical lines*************
-    eqbackground = new File(File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("skin").getChildFile("pictures").getChildFile("EQ_Background.png"));
+    
+    Image eqbackground = ImageCache::getFromMemory(BinaryData::EQ_Background_png, BinaryData::EQ_Background_pngSize);
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
     RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(ImageCache::getFromFile(*eqbackground), 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
+    g.drawImageWithin(eqbackground, 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
     
     g.setFont (12.0f);
     g.setColour (Colours::silver);

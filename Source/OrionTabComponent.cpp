@@ -88,24 +88,10 @@ void OrionTabComponent::paint (Graphics& g)
         
         but->setLookAndFeel(custablook);
         
-        /*
-        if(auto* but = dynamic_cast<Button*> (tabbedComponent->getTabbedButtonBar().getTabButton(i)))
-        {
-
-            OrionTabButton* custablook = new OrionTabButton(gettype(but->getButtonText()), tabbedComponent->getTabbedButtonBar().getTabButton(i)->isFrontTab());
-            
-            but->setLookAndFeel(custablook);
-            //custablook->drawTabButton(*but, g, false, true);
-            //if(auto* newl = dynamic_cast<juce::LookAndFeel*> (custablook))
-            //{
-            //    but->setLookAndFeel(newl);
-                
-            //}
-        }
-         */
+    
 
     }
-    //tabbedComponent->getLookAndFeel().drawDrawableButton(g, *dbut, false, true);
+  
     addAndMakeVisible(tabbedComponent.get());
     
     g.fillAll(Colours::black);

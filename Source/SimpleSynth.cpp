@@ -34,13 +34,16 @@ void SimpleSynth::setup(double sr) {
             case PERC:
                 voice->setMidiNote(41);
                 break;
-            case HIHAT:
+            case SNAP:
+                voice->setMidiNote(46);
+                break;
+            case HHC:
                 voice->setMidiNote(42);
                 break;
-            case CYMBAL:
+            case HHO:
                 voice->setMidiNote(43);
                 break;
-            case SNAP:
+            case CRASH:
                 voice->setMidiNote(46);
                 break;
             default:
@@ -93,20 +96,25 @@ void SimpleSynth::loadSamples()
                  dir = "Percs";
                  filename = "basic-perc.wav";
                 break;
-            case HIHAT:
+            case SNAP:
                  MidiNote = 42;
-                dir = "HHO";
-                filename = "HiHatOp(11).wav";
+                dir = "Snaps";
+                filename = "HHPSNP1.wav";
                 //filename = "test.wav";
                 break;
-            case CYMBAL:
+            case HHC:
                  MidiNote = 43;
-                dir = "Crash";
-                filename = "Crash_01.wav";
+                dir = "HHC";
+                filename = "MetroHihat.wav";
                 break;
-            case SNAP:
+            case HHO:
                  MidiNote = 46;
-                dir = "Snaps";
+                dir = "HHO";
+                filename = "HiHatOp(10).WAV";
+                break;
+            case CRASH:
+                MidiNote = 46;
+                dir = "Crash";
                 filename = "HHPSNP1.WAV";
                 break;
             default:

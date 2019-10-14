@@ -116,9 +116,12 @@ private:
     OrionButton clapButton;
     OrionButton percButton;
     
-    OrionButton HiHatButton;
-    OrionButton cymbalButton;
     OrionButton snapButton;
+    OrionButton hhcButton;//this used to be hihat
+    OrionButton hhoButton;//cymbal
+    OrionButton crashButton;//snap
+    
+    
     
     int indices[7];
    // std::vector<OrionButton>& buttons;
