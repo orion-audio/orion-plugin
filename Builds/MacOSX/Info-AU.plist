@@ -37,11 +37,11 @@
         <key>factoryFunction</key>
         <string>OrionPluginAUFactory</string>
         <key>manufacturer</key>
-        <string>Manu</string>
+        <string>Orio</string>
         <key>type</key>
-        <string>aumf</string>
+        <string>aufx</string>
         <key>subtype</key>
-        <string>Yrvq</string>
+        <string>orpg</string>
         <key>version</key>
         <integer>65536</integer>
         <key>resourceUsage</key>

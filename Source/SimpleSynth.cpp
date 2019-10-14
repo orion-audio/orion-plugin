@@ -35,13 +35,13 @@ void SimpleSynth::setup(double sr) {
                 voice->setMidiNote(41);
                 break;
             case SNAP:
-                voice->setMidiNote(46);
-                break;
-            case HHC:
                 voice->setMidiNote(42);
                 break;
-            case HHO:
+            case HHC:
                 voice->setMidiNote(43);
+                break;
+            case HHO:
+                voice->setMidiNote(44);
                 break;
             case CRASH:
                 voice->setMidiNote(46);
@@ -100,7 +100,6 @@ void SimpleSynth::loadSamples()
                  MidiNote = 42;
                 dir = "Snaps";
                 filename = "HHPSNP1.wav";
-                //filename = "test.wav";
                 break;
             case HHC:
                  MidiNote = 43;
@@ -108,7 +107,7 @@ void SimpleSynth::loadSamples()
                 filename = "MetroHihat.wav";
                 break;
             case HHO:
-                 MidiNote = 46;
+                 MidiNote = 44;
                 dir = "HHO";
                 filename = "HiHatOp(10).WAV";
                 break;
