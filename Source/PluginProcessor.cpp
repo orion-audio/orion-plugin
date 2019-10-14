@@ -264,7 +264,6 @@ bool OrionaudioAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
-    DBG("PROCESS");
     outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples()) ;
     if (buffer.getNumChannels() > 1)
         outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
