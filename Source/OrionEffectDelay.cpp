@@ -169,6 +169,11 @@ processor(p)
 OrionEffectDelay::~OrionEffectDelay()
 {
     setLookAndFeel(nullptr);
+    delayTimeSlider.setLookAndFeel(nullptr);
+    delayFeedbackSlider.setLookAndFeel(nullptr);
+    delayColorSlider.setLookAndFeel(nullptr);
+    delayPanSlider.setLookAndFeel(nullptr);
+    delayDryWetSlider.setLookAndFeel(nullptr);
     delayTimeTree = nullptr;
     delayFeedbackTree = nullptr;
     delayColorTree = nullptr;

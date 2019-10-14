@@ -216,5 +216,17 @@ void OrionEnvConfiguration::resized()
 
 OrionEnvConfiguration::~OrionEnvConfiguration()
 {
+    envAttackTree = nullptr;
+    envHoldTree = nullptr;
+    envDecayTree = nullptr;
+    envReleaseTree = nullptr;
     
+    envAttackBendTree = nullptr;
+    envSustainTree = nullptr;
+    envDecayBendTree = nullptr;
+    envReleaseBendTree = nullptr;
+    
+    
+    envSwitchButtonAttachment = nullptr;
+
 }
