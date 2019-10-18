@@ -33,22 +33,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     }
    // buttons[0]=kickButton;
     //std::vector<OrionButton>& buttons{kickButton, snareButton,clapButton, percButton, HiHatButton, cymbalButton, snapButton};
-    File* kickFileOff;
-    File* kickFileOn;
-    File* snareFileOff;
-    File* snareFileOn;
-    File* clapFileOff;
-    File* clapFileOn;
-    File* percFileOff;
-    File* percFileOn;
-    File* hhcFileOn;
-    File* hhcFileOff;
-    File* hhoFileOn;
-    File* hhoFileOff;
-    File* crashFileOff;
-    File* crashFileOn;
-    File* appFileOn;
-    
     /*
     resourcefolder = File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources");
    
