@@ -17,6 +17,9 @@
 //==============================================================================
 /**
 */
+
+typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+
 class OrionaudioAudioProcessorEditor : public AudioProcessorEditor
 {
 public:

@@ -63,7 +63,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     buttonOn = Drawable::createFromImageData(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
 
  kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    kickButton.onClick = [this] { drumButtonClicked(MidiNotes::kick, Tabs::kickTab); };
+    kickButton.onClick = [&] { drumButtonClicked(MidiNotes::kick, Tabs::kickTab); };
     kickButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     kickButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&kickButton);
