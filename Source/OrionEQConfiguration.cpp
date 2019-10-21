@@ -33,7 +33,7 @@ static int   clickRadius = 4;
 OrionEQConfiguration::OrionEQConfiguration(OrionaudioAudioProcessor& p,int serial) : processor(p)
 {
     EQserial = serial;
-    setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
+    setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight*9/30);
     frame.setText (TRANS ("Output"));
     frame.setTextLabelPosition (Justification::centred);
     addAndMakeVisible (frame);

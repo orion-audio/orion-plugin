@@ -78,8 +78,8 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     buttonOff = Drawable::createFromImageData(BinaryData::kick_off_png, BinaryData::kick_off_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
 
- kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    kickButton.onClick = [this] { drumButtonClicked(MidiNotes::kick, Tabs::kickTab); };
+    kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
+    kickButton.onStateChange = [this] { drumButtonClicked(MidiNotes::kick, Tabs::kickTab, kickButton.isDown()); };
     kickButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     kickButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&kickButton);
@@ -89,7 +89,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 
     
     snareButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    snareButton.onClick = [this] { drumButtonClicked(MidiNotes::snare, Tabs::snareTab); };
+    snareButton.onStateChange = [this] { drumButtonClicked(MidiNotes::snare, Tabs::snareTab, snareButton.isDown()); };
     snareButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snareButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snareButton);
@@ -99,7 +99,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 
     
     clapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    clapButton.onClick = [this] { drumButtonClicked(MidiNotes::clap, Tabs::clapTab); };
+    clapButton.onStateChange = [this] { drumButtonClicked(MidiNotes::clap, Tabs::clapTab, clapButton.isDown()); };
     clapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     clapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&clapButton);
@@ -110,7 +110,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 
     
     percButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    percButton.onClick = [this] { drumButtonClicked(MidiNotes::perc, Tabs::percTab); };
+    percButton.onStateChange = [this] { drumButtonClicked(MidiNotes::perc, Tabs::percTab, percButton.isDown()); };
     percButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     percButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&percButton);
@@ -120,7 +120,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     
     snapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    snapButton.onClick = [this] { drumButtonClicked(MidiNotes::perc, Tabs::percTab); };
+    snapButton.onStateChange = [this] { drumButtonClicked(MidiNotes::perc, Tabs::percTab, snapButton.isDown()); };
     snapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     snapButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&snapButton);
@@ -131,7 +131,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     buttonOn = Drawable::createFromImageData(BinaryData::hhc_on_png, BinaryData::hhc_on_pngSize);
 
     hhcButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    hhcButton.onClick = [this] { drumButtonClicked(MidiNotes::hhc, Tabs::hhcTab); };
+    hhcButton.onStateChange = [this] { drumButtonClicked(MidiNotes::hhc, Tabs::hhcTab, hhcButton.isDown()); };
     hhcButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     hhcButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&hhcButton);
@@ -142,7 +142,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 
     
     hhoButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    hhoButton.onClick = [this] { drumButtonClicked(MidiNotes::hho, Tabs::hhoTab); };
+    hhoButton.onStateChange = [this] { drumButtonClicked(MidiNotes::hho, Tabs::hhoTab, hhoButton.isDown()); };
     hhoButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     hhoButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&hhoButton);
@@ -152,7 +152,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 
     
     crashButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    crashButton.onClick = [this] { drumButtonClicked(MidiNotes::snap, Tabs::snapTab); };
+    crashButton.onStateChange = [this] { drumButtonClicked(MidiNotes::snap, Tabs::snapTab, crashButton.isDown()); };
     crashButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
     crashButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&crashButton);
@@ -341,19 +341,21 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
 
 void OrionaudioAudioProcessorEditor::resized()
 {
-    kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);//draw the open button
-    snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);//draw the play button
-    clapButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 225, 100, 112);//draw the open button
-    percButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 225, 100, 112);//draw the play button
+    kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);
+    snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);
+    clapButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 225, 100, 112);
+    percButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 225, 100, 112);
     
-    snapButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
-    hhoButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
-    hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
-    crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);//draw the stop button
+    snapButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 100, 100, 112);
+    hhoButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 100, 100, 112);
+    hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);
+    crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);
    
     fileBrowser->setBounds(0, 75, 200, OrionGlobalHeight-375);
     
     waveWiggle->setBounds(435, 458, 557, 64);
+    //waveWiggle->setBounds(JUCE_LIVE_CONSTANT(435), 458, 557, 64);
+    
     
     meterLeft->setBounds(1072, 383, 17, 90);
     meterRight->setBounds(1092, 383, 17, 90);
@@ -382,21 +384,27 @@ void OrionaudioAudioProcessorEditor::addMessageToList (const MidiMessage& messag
     //logMessage (timecode + "  -  " + getMidiMessageDescription (message));
 }
 
-void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabIndex)
+void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabIndex, bool isDown)
 {
-    waveWiggle->startAnimation();
-    processor.synth.noteOn(1, midiNote, 120);
-    if (processor.getMidiOutput() != nullptr)
-        processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
-    for (int i = 0; i < 7; i++){
-        if (i == tabIndex)
-            tabComponent[i]->setVisible(true);
-        else
-            tabComponent[i]->setVisible(false);
+    if(isDown){
+        waveWiggle->startAnimation();
+        processor.synth.noteOn(1, midiNote, 120);
+        if (processor.getMidiOutput() != nullptr)
+            processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
+        for (int i = 0; i < 7; i++){
+            if (i == tabIndex)
+                tabComponent[i]->setVisible(true);
+            else
+                tabComponent[i]->setVisible(false);
+        }
+        
+        tabComponentChanged(tabIndex);
+    }else{
+        processor.synth.noteOff(1, midiNote, 0, false/*没有淡出*/);
+        if (processor.getMidiOutput() != nullptr)
+            processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOff(1, midiNote, 0.f));
     }
     
-    tabComponentChanged(tabIndex);
-
 }
 
 

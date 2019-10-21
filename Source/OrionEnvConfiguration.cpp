@@ -18,7 +18,7 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     envSerial = serial;
     
     int WidthTmp = OrionGlobalWidth;
-    int HeightTmp = OrionGlobalHeight/3;
+    int HeightTmp = OrionGlobalHeight*9/30;
     
     int textboxHeight = OrionGlobalHeight/60;
     int knobWidth = OrionGlobalWidth*1/25;

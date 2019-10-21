@@ -82,7 +82,7 @@ private:
     
     void addMessageToList (const MidiMessage& message);
     
-    void drumButtonClicked(int midiNote, int tabIndex);
+    void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
 
     void kickButtonClicked();
     void snareButtonClicked();
@@ -93,6 +93,8 @@ private:
     void HiHatButtonClicked();
     void cymbalButtonClicked();
     void snapButtonClicked();
+    
+    
     void appdirClicked();
     void deskdirClicked();
     void downdirClicked();

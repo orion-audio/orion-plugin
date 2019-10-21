@@ -15,7 +15,7 @@
 //==============================================================================
 OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : processor(p)
 {
-    setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
+    setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight*9/30);
 }
 
 void OrionClipConfiguration::paint (Graphics& g)

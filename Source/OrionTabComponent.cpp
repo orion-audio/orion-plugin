@@ -80,7 +80,7 @@ void OrionTabComponent::paint (Graphics& g)
     for (int i=0; i < tabbedComponent->getNumTabs(); i++)
     {
         auto* temp = tabbedComponent->getTabbedButtonBar().getTabButton(i);
-        temp->setBounds(OrionGlobalWidth/4*i, 0, 100, 25);
+        temp->setBounds(OrionGlobalWidth/4*i, 0, 100, OrionGlobalHeight/30);
        
         auto* but = tabbedComponent->getTabbedButtonBar().getTabButton(i);
         
@@ -88,8 +88,6 @@ void OrionTabComponent::paint (Graphics& g)
         
         but->setLookAndFeel(custablook);
         
-    
-
     }
   
     addAndMakeVisible(tabbedComponent.get());

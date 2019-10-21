@@ -26,7 +26,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
 
 void OrionEffectsConfiguration::paint(Graphics& g)
 {
-    g.fillAll(Colours::darkgoldenrod);
+    g.fillAll(Colours::blue);
     
 }
 
