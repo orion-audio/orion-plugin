@@ -74,8 +74,10 @@ public:
             controlPoints[i + 1].direction = (controlPoints[i + 1].targetY - controlPoints[i + 1].startingY) / 6 ;
             controlPoints[i + 1].y = controlPoints[i + 1].targetY;
             height *= 1.2;
+            
         }
-
+        
+       
     }
 
     void paint (Graphics& g) override
@@ -86,9 +88,10 @@ public:
         p.startNewSubPath(0, getHeight() / 2);
         
         int x = 0;
-        int w = getWidth() * 0.045;
+        //int w = getWidth() * 0.045;
+        int w = getWidth() * 0.020;
         
-        for (int i = 0; i < 24; i++){
+        for (int i = 0; i < 23; i++){
             p.quadraticTo(x - w / 2,
                           controlPoints[i].y,
                           x,
@@ -96,6 +99,16 @@ public:
             x += w;
 
         }
+        
+        for (int i = 23; i > 0; i--){
+            p.quadraticTo(x - w / 2,
+                          controlPoints[i].y,
+                          x,
+                          controlPoints[i].targetY);
+            x += w;
+            
+        }
+        
         
         g.strokePath(p, PathStrokeType(2.f));
         
