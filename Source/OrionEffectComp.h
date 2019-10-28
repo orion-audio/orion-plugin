@@ -19,7 +19,7 @@
 
 typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
 
-class OrionEffectComp    : public Component,
+class OrionEffectComp : public Component,
                            public Slider::Listener
 {
 public:
@@ -47,7 +47,6 @@ private:
     Slider compReleaseSlider;
     Slider compGainSlider;
     Slider compThreshSlider;
-    
     
     ToggleButton compSwitchButton;
     
