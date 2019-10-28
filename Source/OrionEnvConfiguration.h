@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "OrionRotarySlider.h"
 
+typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
 //==============================================================================
 class OrionEnvConfiguration    : public Component
 {
@@ -25,15 +26,15 @@ public:
 private:
     OrionaudioAudioProcessor& processor;
     
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envAttackTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envHoldTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envDecayTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envReleaseTree;
+    std::unique_ptr<SliderAttachment> envAttackTree;
+    std::unique_ptr<SliderAttachment> envHoldTree;
+    std::unique_ptr<SliderAttachment> envDecayTree;
+    std::unique_ptr<SliderAttachment> envReleaseTree;
     
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envAttackBendTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envSustainTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envDecayBendTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envReleaseBendTree;
+    std::unique_ptr<SliderAttachment> envAttackBendTree;
+    std::unique_ptr<SliderAttachment> envSustainTree;
+    std::unique_ptr<SliderAttachment> envDecayBendTree;
+    std::unique_ptr<SliderAttachment> envReleaseBendTree;
     
     
     ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> envSwitchButtonAttachment;

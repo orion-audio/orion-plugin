@@ -169,16 +169,19 @@ processor(p)
 OrionEffectDelay::~OrionEffectDelay()
 {
     setLookAndFeel(nullptr);
+
     delayTimeSlider.setLookAndFeel(nullptr);
     delayFeedbackSlider.setLookAndFeel(nullptr);
     delayColorSlider.setLookAndFeel(nullptr);
     delayPanSlider.setLookAndFeel(nullptr);
     delayDryWetSlider.setLookAndFeel(nullptr);
-    delayTimeTree = nullptr;
-    delayFeedbackTree = nullptr;
-    delayColorTree = nullptr;
-    delayPanTree = nullptr;
-    delayDryWetTree = nullptr;
+    
+    
+    delayTimeTree.reset();
+    delayFeedbackTree.reset();
+    delayColorTree.reset();
+    delayPanTree.reset();
+    delayDryWetTree.reset();
 }
 
 void OrionEffectDelay::paint (Graphics& g)
