@@ -2,7 +2,6 @@
 
 <JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" jucerVersion="5.4.5"
               headerPath="/Users/lilyh/Documents/music tech/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
-              pluginVST3Category="Fx,Stereo" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               pluginVST3Category="Fx,Stereo" pluginFormats="buildAU,buildStandalone,buildVST3"
               companyName="Orion" pluginAUMainType="'aufx'" pluginManufacturerCode="Orio"
               pluginCode="orpg">

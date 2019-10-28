@@ -24,7 +24,7 @@ public:
     int envSerial;
 private:
     OrionaudioAudioProcessor& processor;
-    
+    Rectangle<int>          plotFrame;
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envAttackTree;
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envHoldTree;
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envDecayTree;
