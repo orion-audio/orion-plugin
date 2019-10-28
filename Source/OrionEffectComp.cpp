@@ -25,7 +25,9 @@ processor(p)
     
     int WidthTmp = (OrionGlobalWidth/10)*4;
     int WidthTmp2 = (OrionGlobalWidth/10)*3;
-    int HeightTmp = OrionGlobalHeight/3;
+    int HeightTmp = OrionGlobalHeight*9/30;
+    
+    int knobHeight = WidthTmp2*0.9/3;
     
     //cout<<"Height 2: "<<HeightTmp<<endl;//!!!!!!!
     

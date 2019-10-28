@@ -26,7 +26,7 @@ processor(p)
     //setSize (OrionGlobalWidth, getHeight);
     
     int WidthTmp = (OrionGlobalWidth/10)*3;
-    int HeightTmp = OrionGlobalHeight/3;
+    int HeightTmp = OrionGlobalHeight*9/30;
     
     setBounds((OrionGlobalWidth/10)*4, 0, WidthTmp, HeightTmp);/* Global: X, Y, W， H */
     //cout<<"Reverb Width: "<< OrionGlobalWidth <<endl;//!!!!!!!!
