@@ -79,10 +79,10 @@ void OrionLookAndFeel::drawTabButton (TabBarButton& button, Graphics& g, bool is
     if (properties.contains("tabButtonType"))
     {
         int type = properties["tabButtonType"];
-        if (isMouseDown)
-              g.drawImageWithin(tabButtonImages[type]->onImage, 0,0, button.getActiveArea().getWidth(), button.getActiveArea().getHeight(), juce::RectanglePlacement::centred);
+        if (button.isDown() || button.getToggleState())
+              g.drawImage(tabButtonImages[type]->onImage, button.getLocalBounds().toFloat(), juce::RectanglePlacement::centred);
         else
-            g.drawImageWithin(tabButtonImages[type]->offImage, 0,0, button.getActiveArea().getWidth(), button.getActiveArea().getHeight(), juce::RectanglePlacement::centred);
+            g.drawImage(tabButtonImages[type]->offImage, button.getLocalBounds().toFloat(), juce::RectanglePlacement::centred);
     }
     else
         jassertfalse;

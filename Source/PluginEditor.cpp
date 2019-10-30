@@ -235,7 +235,7 @@ OrionaudioAudioProcessorEditor::~OrionaudioAudioProcessorEditor()
 void OrionaudioAudioProcessorEditor::tabComponentChanged(int serial)
 {
 //    tabComponent[serial]->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
-//    
+//
 //    addAndMakeVisible(tabComponent[serial].get());
 }
 //==============================================================================
@@ -326,7 +326,7 @@ void OrionaudioAudioProcessorEditor::resized()
 //        tabComponent[i]->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
 //    }
 
-    tabComponents->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
+    tabComponents->setBounds(0, getHeight() - getHeight() / 3, getWidth(), getHeight() / 3);
 
     kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);
     snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);
