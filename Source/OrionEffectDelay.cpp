@@ -36,8 +36,9 @@ processor(p)
     delayTimeSlider.setRange(0.0f, 0.5f);
     delayTimeSlider.setValue(0.1f);
     delayTimeSlider.setTextValueSuffix (" ms");
-
+    delayTimeSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     delayTimeSlider.setBounds(WidthTmp*0.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
+    delayPanSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     addAndMakeVisible(delayTimeSlider);
     delayTimeSlider.setVisible(true);
     
@@ -45,9 +46,6 @@ processor(p)
     delayTimeLabel.setText ("Time", dontSendNotification);
     //delayTimeLabel.attachToComponent (&delayTimeSlider, false);
     delayTimeLabel.setBounds(WidthTmp*0.2/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
-
-    
-    
     
     //=====================================================================
     delayFeedbackSlider.setSliderStyle(Slider::SliderStyle::Rotary);
@@ -56,6 +54,7 @@ processor(p)
     delayFeedbackSlider.setValue(0.0f);
     delayFeedbackSlider.setTextValueSuffix (" %");
     delayFeedbackSlider.setBounds(WidthTmp*1.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
+    delayFeedbackSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     addAndMakeVisible(delayFeedbackSlider);
     delayFeedbackSlider.setVisible(true);
     
@@ -76,6 +75,7 @@ processor(p)
     delayColorSlider.setRange(-1.0f, 1.0f);
     delayColorSlider.setValue(0.0f);
     delayColorSlider.setBounds(WidthTmp*2.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
+    delayColorSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     addAndMakeVisible(delayColorSlider);
     delayColorSlider.setVisible(true);
     
@@ -106,16 +106,11 @@ processor(p)
     addAndMakeVisible(delayPanSlider);
     delayPanSlider.setVisible(true);
     
-
-    
     addAndMakeVisible(delayPanLabel);
     delayPanLabel.setText ("Pan", dontSendNotification);
     //delayPanLabel.attachToComponent (&delayPanSlider, false);
     delayPanLabel.setBounds(WidthTmp*0.23/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
-    
-    
-    
-    
+      
     //=====================================================================
     delayDryWetSlider.setSliderStyle(Slider::SliderStyle::LinearHorizontal);
     delayDryWetSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 0, 0);
@@ -128,11 +123,10 @@ processor(p)
     
     
     addAndMakeVisible(delayDryWetLabel);
-    delayDryWetLabel.setText ("Wet                                 Dry", dontSendNotification);
+    delayDryWetLabel.setText ("Wet Dry", dontSendNotification);
     //delayDryWetLabel.attachToComponent (&delayDryWetSlider, false);
     delayDryWetLabel.setBounds(WidthTmp*1.1/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp*2/3, HeightTmp/20);
 
-    
     
     delaySwitchButton.setButtonText(translate("On/Off"));
     delaySwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
@@ -206,18 +200,7 @@ void OrionEffectDelay::paint (Graphics& g)
 //    g.drawRect(sliderDryWet);
     
     
-    
-    /* Customize the sliders*/
-    OrionRotarySlider* cusRotarySliderlook = new OrionRotarySlider();
-    if(auto* newl = dynamic_cast<juce::LookAndFeel*> (cusRotarySliderlook))
-    {
-        delayColorSlider.setLookAndFeel(newl);
-        delayFeedbackSlider.setLookAndFeel(newl);
-        delayTimeSlider.setLookAndFeel(newl);
-        delayPanSlider.setLookAndFeel(newl);
-    }
-
-    
+        
 }
 
 void OrionEffectDelay::resized()

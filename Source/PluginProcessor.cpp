@@ -135,7 +135,6 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
     valueTree->state = ValueTree("OrionParameters");
     
     
-    
 }
 
 OrionaudioAudioProcessor::~OrionaudioAudioProcessor()

@@ -54,9 +54,6 @@ public:
                 else theone = &cliptab_off;
                 break;
         }
-        
-        
-
     };
 
 

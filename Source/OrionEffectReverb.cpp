@@ -225,14 +225,14 @@ void OrionEffectReverb::paint (Graphics& g)
     g.fillAll(Colours::grey);/* 颜色 */
     
     /* Customize the sliders*/
-    OrionRotarySlider* cusRotarySliderlook = new OrionRotarySlider();
-    if(auto* newl = dynamic_cast<juce::LookAndFeel*> (cusRotarySliderlook))
-    {
-        reverbColorSlider.setLookAndFeel(newl);
-        reverbSizeSlider.setLookAndFeel(newl);
-        reverbPredelaySlider.setLookAndFeel(newl);
-        reverbDecaySlider.setLookAndFeel(newl);
-    }
+//    OrionRotarySlider* cusRotarySliderlook = new OrionRotarySlider();
+//    if(auto* newl = dynamic_cast<juce::LookAndFeel*> (cusRotarySliderlook))
+//    {
+//        reverbColorSlider.setLookAndFeel(newl);
+//        reverbSizeSlider.setLookAndFeel(newl);
+//        reverbPredelaySlider.setLookAndFeel(newl);
+//        reverbDecaySlider.setLookAndFeel(newl);
+//    }
 }
 
 void OrionEffectReverb::resized()

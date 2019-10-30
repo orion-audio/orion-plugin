@@ -30,7 +30,7 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
-    OrionTabButton::ButtonType gettype(String type);
+    OrionTabButton::ButtonType getType(String type);
     
     int TabSerial;
     unsigned int tabIndex = 3;

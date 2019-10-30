@@ -1,6 +1,9 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "OrionGlobalVars.h"
+
+#define NUM_TABS 4
+
 using namespace std;
 using namespace juce;
 //==============================================================================
@@ -216,6 +219,12 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     meterRight->updaterFunction = [this] { return processor.getOutputLevel(1); };
     addAndMakeVisible(meterRight.get());
     
+    constrainer.setFixedAspectRatio((float)OrionGlobalWidth/OrionGlobalHeight);
+//    constrainer.setSizeLimits(OrionGlobalWidth / 2, OrionGlobalHeight / 2, OrionGlobalWidth * 2, OrionGlobalHeight * 2);
+    
+    cornerComponent.reset(new OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>(this, this, &constrainer));
+    addAndMakeVisible(cornerComponent.get());
+    
     setSize (OrionGlobalWidth, OrionGlobalHeight);
 
 }
@@ -325,6 +334,13 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
 
 void OrionaudioAudioProcessorEditor::resized()
 {
+    cornerComponent->setBounds(getWidth() - 50, getHeight() - 50, 50, 50);
+    
+    for (int i = 0; i < NUM_TABS; i++)
+    {
+        tabComponent[i]->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
+    }
+
     kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);
     snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);
     clapButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 225, 100, 112);
@@ -335,10 +351,9 @@ void OrionaudioAudioProcessorEditor::resized()
     hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);
     crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);
    
-    fileBrowser->setBounds(0, 75, 200, OrionGlobalHeight-375);
+    fileBrowser->setBounds(0, getHeight() * .11, getWidth() * .17, getHeight() * .56);
     
     waveWiggle->setBounds(435, 458, 557, 64);
-    //waveWiggle->setBounds(JUCE_LIVE_CONSTANT(435), 458, 557, 64);
     
     
     meterLeft->setBounds(1072, 383, 17, 90);
@@ -519,3 +534,7 @@ void OrionaudioAudioProcessorEditor::draganddropped(int index)
 }
 
 
+void OrionaudioAudioProcessorEditor::setDefaultSize()
+{
+    
+}

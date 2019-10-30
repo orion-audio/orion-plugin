@@ -14,6 +14,7 @@
 #include "WaveWiggle.h"
 #include "CircularMeter.h"
 #include <array>
+#include "OrionResizableCornerComponent.h"
 //==============================================================================
 /**
 */
@@ -56,7 +57,12 @@ public:
  
     std::unique_ptr<AudioFormatReaderSource> playSource;
 //     OrionFileBrowser filebrowser;
+    
+    void setDefaultSize();
 private:
+    
+    std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>> cornerComponent;
+    ComponentBoundsConstrainer constrainer;
     
     
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;

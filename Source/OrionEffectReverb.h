@@ -16,7 +16,7 @@
 //==============================================================================
 /*
  */
-class OrionEffectReverb    : public Component,
+class OrionEffectReverb : public Component,
                             public Slider::Listener
 {
 public:

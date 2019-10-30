@@ -29,7 +29,6 @@ void CircularMeter::paint (Graphics& g)
     bool isVertical = getHeight() >= getWidth();
     
     g.setColour(Colours::black);
-//    g.drawRect(getLocalBounds());
     auto area = getLocalBounds();
     area = area.removeFromTop(getHeight() / numCircles);
     g.setColour(findColour(ColourIds::backgroundColourId));
