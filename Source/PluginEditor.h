@@ -15,10 +15,13 @@
 #include "CircularMeter.h"
 #include <array>
 #include "OrionResizableCornerComponent.h"
+#include "ResizableContainer.h"
+#include "TabComponentHolder.h"
+
 //==============================================================================
 /**
 */
-class OrionaudioAudioProcessorEditor : public AudioProcessorEditor
+class OrionaudioAudioProcessorEditor : public AudioProcessorEditor, public ResizableContainer
 {
 public:
     
@@ -71,9 +74,11 @@ private:
     std::unique_ptr<CircularMeter> meterLeft;
     std::unique_ptr<CircularMeter> meterRight;
     
+    std::unique_ptr<TabComponentHolder> tabComponents;
+    
     OrionaudioAudioProcessor& processor;
     //ScopedPointer<OrionTabComponent> tabComponent;
-    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
+//    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
     FileBrowserComponent filebrowser;
    
 //    FileTreeComponent tree;

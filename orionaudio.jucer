@@ -7,6 +7,10 @@
               pluginCode="orpg">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
+      <FILE id="whk6QC" name="TabComponentHolder.h" compile="0" resource="0"
+            file="Source/TabComponentHolder.h"/>
+      <FILE id="qbcWVW" name="ResizableContainer.h" compile="0" resource="0"
+            file="Source/ResizableContainer.h"/>
       <FILE id="tnwesx" name="OrionLookAndFeel.cpp" compile="1" resource="0"
             file="Source/OrionLookAndFeel.cpp"/>
       <FILE id="IwECoD" name="OrionLookAndFeel.h" compile="0" resource="0"

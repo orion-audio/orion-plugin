@@ -28,7 +28,7 @@ processor(p)
     float WidthTmp = (OrionGlobalWidth/10)*3;
     float HeightTmp = OrionGlobalHeight*9/30;
     
-    setBounds((OrionGlobalWidth/10)*7, 0, WidthTmp, HeightTmp);/* Global: X, Y, W， H */
+//    setBounds((OrionGlobalWidth/10)*7, 0, WidthTmp, HeightTmp);/* Global: X, Y, W， H */
 
     //=====================================================================
     delayTimeSlider.setSliderStyle(Slider::SliderStyle::Rotary);

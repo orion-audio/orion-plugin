@@ -196,15 +196,10 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
   
     
     formatManager.registerBasicFormats();
-    
-    for (int i=0;i<7;i++)
-    {
-        tabComponent[i] = std::make_unique<OrionTabComponent>(processor,i);
-
-    }
-    
-    tabComponentChanged(0);
-    
+        
+    tabComponents.reset(new TabComponentHolder(p));
+    addAndMakeVisible(tabComponents.get());
+        
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
     
@@ -220,7 +215,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(meterRight.get());
     
     constrainer.setFixedAspectRatio((float)OrionGlobalWidth/OrionGlobalHeight);
-//    constrainer.setSizeLimits(OrionGlobalWidth / 2, OrionGlobalHeight / 2, OrionGlobalWidth * 2, OrionGlobalHeight * 2);
+    constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
     
     cornerComponent.reset(new OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>(this, this, &constrainer));
     addAndMakeVisible(cornerComponent.get());
@@ -239,9 +234,9 @@ OrionaudioAudioProcessorEditor::~OrionaudioAudioProcessorEditor()
 //==============================================================================
 void OrionaudioAudioProcessorEditor::tabComponentChanged(int serial)
 {
-    tabComponent[serial]->setBounds(0, (OrionGlobalHeight/3)*2, OrionGlobalWidth, OrionGlobalHeight/3);
-    
-    addAndMakeVisible(tabComponent[serial].get());
+//    tabComponent[serial]->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
+//    
+//    addAndMakeVisible(tabComponent[serial].get());
 }
 //==============================================================================
 
@@ -251,18 +246,6 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
     RectanglePlacement orionBackgroundRectanglePlacement(64);
     g.drawImageWithin(background, 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
-    /*
-    OrionBrowser* custablook = new OrionBrowser();
-    
-    if(auto* newl = dynamic_cast<juce::LookAndFeel*> (custablook))
-    {
-        filebrowser.setLookAndFeel(newl);
-    }
-    */
-    //auto* preview = dynamic_cast<Component*> (filebrowser.getPreviewComponent());
-   
-    //display->setBounds (0, 75, 195, 228);
-    //addAndMakeVisible(display);
     
     File subdir;
     if(AppDir.isDown()==true)
@@ -334,12 +317,16 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
 
 void OrionaudioAudioProcessorEditor::resized()
 {
+    setUIScale(float(getWidth() / float(orion::defaultWidth)));
+    DBG(getUIScale());
     cornerComponent->setBounds(getWidth() - 50, getHeight() - 50, 50, 50);
     
-    for (int i = 0; i < NUM_TABS; i++)
-    {
-        tabComponent[i]->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
-    }
+//    for (int i = 0; i < NUM_TABS; i++)
+//    {
+//        tabComponent[i]->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
+//    }
+
+    tabComponents->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
 
     kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);
     snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);
@@ -353,8 +340,7 @@ void OrionaudioAudioProcessorEditor::resized()
    
     fileBrowser->setBounds(0, getHeight() * .11, getWidth() * .17, getHeight() * .56);
     
-    waveWiggle->setBounds(435, 458, 557, 64);
-    
+    setBoundsScaled(waveWiggle.get(), {373,388, 469, 64});
     
     meterLeft->setBounds(1072, 383, 17, 90);
     meterRight->setBounds(1092, 383, 17, 90);
@@ -385,20 +371,20 @@ void OrionaudioAudioProcessorEditor::addMessageToList (const MidiMessage& messag
 
 void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabIndex, bool isDown)
 {
-    if(isDown){
+    if(isDown)
+    {
         waveWiggle->startAnimation();
         processor.synth.noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
-        for (int i = 0; i < 7; i++){
-            if (i == tabIndex)
-                tabComponent[i]->setVisible(true);
-            else
-                tabComponent[i]->setVisible(false);
-        }
         
-        tabComponentChanged(tabIndex);
-    }else{
+        tabComponents->setCurrentTab(tabIndex);
+
+        
+    }
+    
+    else
+    {
         processor.synth.noteOff(1, midiNote, 0, false/*没有淡出*/);
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOff(1, midiNote, 0.f));
@@ -536,5 +522,5 @@ void OrionaudioAudioProcessorEditor::draganddropped(int index)
 
 void OrionaudioAudioProcessorEditor::setDefaultSize()
 {
-    
+    setSize(orion::defaultWidth, orion::defaultHeight);
 }

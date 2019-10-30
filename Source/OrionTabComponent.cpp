@@ -24,9 +24,9 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
     envConfiguration    = new OrionEnvConfiguration(p,serial);
     clipConfiguration   = new OrionClipConfiguration(p);
       
+    tabbedComponent->addTab(translate("ENV"), Colours::lightgrey, envConfiguration, true);
     tabbedComponent->addTab(translate("EQ"), Colours::lightgrey, eqConfiguration, true);
     tabbedComponent->addTab(translate("CLIP"), Colours::lightgrey, clipConfiguration, true);
-    tabbedComponent->addTab(translate("ENV"), Colours::lightgrey, envConfiguration, true);
     tabbedComponent->addTab(translate("FX"), Colours::lightgrey, effectConfiguration, true);
     
     tabbedComponent->setTabBarDepth(25);
@@ -35,7 +35,7 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
     
     OrionGlobalTabIndex = tabbedComponent->getCurrentTabIndex();
     
-    tabbedComponent->setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
+//    tabbedComponent->setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
     
 
     for (int i=0;i < tabbedComponent->getNumTabs(); i++)
@@ -43,7 +43,7 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
         auto* tabButton = tabbedComponent->getTabbedButtonBar().getTabButton(i);
         tabButton->getProperties().set("tabButtonType", i);
         tabButton->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
-            
+        
     }
     
     addAndMakeVisible(tabbedComponent.get());
@@ -70,17 +70,16 @@ void OrionTabComponent::paint (Graphics& g)
 {
     
     g.fillAll(Colours::black);
+    g.setColour(Colours::red);
+    g.fillRect(tabbedComponent->getTabbedButtonBar().getBounds());
     
 }
 
 void OrionTabComponent::resized()
 {
-//    tabIndex = tabbedComponent->getCurrentTabIndex();
-//    tabbedComponent->setCurrentTabIndex(tabIndex);
+    
     for (int i=0;i < tabbedComponent->getNumTabs(); i++)
     {
         tabbedComponent->getTabbedButtonBar().getTabButton(i)->setBounds(i * getWidth() / 4, 0, 30, 25);
     }
- 
-    
 }
