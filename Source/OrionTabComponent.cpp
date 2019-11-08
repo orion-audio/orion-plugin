@@ -22,10 +22,10 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
     eqConfiguration.reset(new OrionEQConfiguration(p,serial));
     envConfiguration.reset(new OrionEnvConfiguration(p,serial));
     clipConfiguration.reset(new OrionClipConfiguration(p));
-      
-    addTab(translate("ENV"), Colours::lightgrey, envConfiguration.get(), false);
+    
     addTab(translate("EQ"), Colours::lightgrey, eqConfiguration.get(), false);
     addTab(translate("CLIP"), Colours::lightgrey, clipConfiguration.get(), false);
+    addTab(translate("ENV"), Colours::lightgrey, envConfiguration.get(), false);
     addTab(translate("FX"), Colours::lightgrey, effectConfiguration.get(), false);
     
     setTabBarDepth(25);
@@ -52,7 +52,7 @@ OrionTabButton::ButtonType OrionTabComponent::getType(String type)
 {
     //String text = but.getButtonText();
     if(type =="ENV") return OrionTabButton::ButtonType::envelope;
-//    else if(type == "FX") return OrionTabButton::ButtonType::fx;
+    else if(type == "FX") return OrionTabButton::ButtonType::fx;
     else if(type == "EQ") return OrionTabButton::ButtonType::eq;
     else if(type == "CLIP") return OrionTabButton::ButtonType::clip;
     return OrionTabButton::ButtonType::envelope;
