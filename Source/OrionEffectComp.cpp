@@ -133,23 +133,27 @@ processor(p)
     //sends value of the sliders to the tree state in the processor
     // compRatio, compAttack, compRelease, compGain, compThresh
     
-    compRatioTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compRatio"+String(effectCompSerial), compRatioSlider);
-    compAttackTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compAttack"+String(effectCompSerial), compAttackSlider);
-    compReleaseTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compRelease"+String(effectCompSerial), compReleaseSlider);
-    compGainTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compGain"+String(effectCompSerial), compGainSlider);
-    compThreshTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compThresh"+String(effectCompSerial), compThreshSlider);
+    compRatioTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compRatio"+String(effectCompSerial), compRatioSlider));
     
-    compSwitchButtonAttachment = new AudioProcessorValueTreeState::ButtonAttachment (processor.getValueTree(), "compSwitch"+String(effectCompSerial), compSwitchButton);
+    compAttackTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compAttack"+String(effectCompSerial), compAttackSlider));
+    
+    compReleaseTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compRelease"+String(effectCompSerial), compReleaseSlider));
+    
+    compGainTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compGain"+String(effectCompSerial), compGainSlider));
+    
+    compThreshTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "compThresh"+String(effectCompSerial), compThreshSlider));
+    
+    compSwitchButtonAttachment.reset(new AudioProcessorValueTreeState::ButtonAttachment (processor.getValueTree(), "compSwitch"+String(effectCompSerial), compSwitchButton));
     
 }
 
 OrionEffectComp::~OrionEffectComp()
 {
-    compRatioTree = nullptr;
-    compAttackTree = nullptr;
-    compReleaseTree = nullptr;
-    compGainTree = nullptr;
-    compThreshTree = nullptr;
+    compRatioTree.reset();
+    compAttackTree.reset();
+    compReleaseTree.reset();
+    compGainTree.reset();
+    compThreshTree.reset();
     setLookAndFeel(nullptr);
 }
 

@@ -181,13 +181,14 @@ processor(p)
     
     
     //sends value of the sliders to the tree state in the processor
-    reverbPredelayTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbPredelay"+String(effectReverbSerial), reverbPredelaySlider);
-    reverbSizeTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbSize"+String(effectReverbSerial), reverbSizeSlider);
-    reverbColorTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbColor"+String(effectReverbSerial), reverbColorSlider);
-    reverbDecayTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbDecay"+String(effectReverbSerial), reverbDecaySlider);
-    reverbDryTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbDry"+String(effectReverbSerial), reverbDrySlider);
+   
+    reverbPredelayTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbPredelay"+String(effectReverbSerial), reverbPredelaySlider));
+    reverbSizeTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbSize"+String(effectReverbSerial), reverbSizeSlider));
+    reverbColorTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbColor"+String(effectReverbSerial), reverbColorSlider));
+    reverbDecayTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbDecay"+String(effectReverbSerial), reverbDecaySlider));
+    reverbDryTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbDry"+String(effectReverbSerial), reverbDrySlider));
     
-    reverbSwitchButtonAttachment = new AudioProcessorValueTreeState::ButtonAttachment (processor.getValueTree(), "reverbSwitch"+String(effectReverbSerial), reverbSwitchButton);
+    reverbSwitchButtonAttachment.reset(new AudioProcessorValueTreeState::ButtonAttachment (processor.getValueTree(), "reverbSwitch"+String(effectReverbSerial), reverbSwitchButton));
     //    delayTimeTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayTime"+String(effectDelaySerial), *delayTimeSlider);
     //    delayFeedbackTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayFeedback"+String(effectDelaySerial), *delayFeedbackSlider);
     //    delayColorTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayColor"+String(effectDelaySerial), *delayColorSlider);
@@ -202,11 +203,11 @@ processor(p)
 
 OrionEffectReverb::~OrionEffectReverb()
 {
-    reverbPredelayTree = nullptr;
-    reverbSizeTree = nullptr;
-    reverbColorTree = nullptr;
-    reverbDecayTree = nullptr;
-    reverbDryTree = nullptr;
+    reverbPredelayTree.reset();
+    reverbSizeTree.reset();
+    reverbColorTree.reset();
+    reverbDecayTree.reset();
+    reverbDryTree.reset();
 }
 
 void OrionEffectReverb::paint (Graphics& g)

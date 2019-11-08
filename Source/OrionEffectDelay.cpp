@@ -155,13 +155,13 @@ processor(p)
     
     //=====================================================================
     //sends value of the sliders to the tree state in the processor
-    delayTimeTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayTime"+String(effectDelaySerial), delayTimeSlider);
-    delayFeedbackTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayFeedback"+String(effectDelaySerial), delayFeedbackSlider);
-    delayColorTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayColor"+String(effectDelaySerial), delayColorSlider);
-    delayPanTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayPan"+String(effectDelaySerial), delayPanSlider);
-    delayDryWetTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayDryWet"+String(effectDelaySerial), delayDryWetSlider);
+    delayTimeTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayTime"+String(effectDelaySerial), delayTimeSlider));
+    delayFeedbackTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayFeedback"+String(effectDelaySerial), delayFeedbackSlider));
+    delayColorTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayColor"+String(effectDelaySerial), delayColorSlider));
+    delayPanTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayPan"+String(effectDelaySerial), delayPanSlider));
+    delayDryWetTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayDryWet"+String(effectDelaySerial), delayDryWetSlider));
     
-    delaySwitchButtonAttachment = new AudioProcessorValueTreeState::ButtonAttachment (processor.getValueTree(), "delaySwitch"+String(effectDelaySerial), delaySwitchButton);
+    delaySwitchButtonAttachment.reset(new AudioProcessorValueTreeState::ButtonAttachment (processor.getValueTree(), "delaySwitch"+String(effectDelaySerial), delaySwitchButton));
     
     
 }
@@ -169,16 +169,19 @@ processor(p)
 OrionEffectDelay::~OrionEffectDelay()
 {
     setLookAndFeel(nullptr);
+
     delayTimeSlider.setLookAndFeel(nullptr);
     delayFeedbackSlider.setLookAndFeel(nullptr);
     delayColorSlider.setLookAndFeel(nullptr);
     delayPanSlider.setLookAndFeel(nullptr);
     delayDryWetSlider.setLookAndFeel(nullptr);
-    delayTimeTree = nullptr;
-    delayFeedbackTree = nullptr;
-    delayColorTree = nullptr;
-    delayPanTree = nullptr;
-    delayDryWetTree = nullptr;
+    
+    
+    delayTimeTree.reset();
+    delayFeedbackTree.reset();
+    delayColorTree.reset();
+    delayPanTree.reset();
+    delayDryWetTree.reset();
 }
 
 void OrionEffectDelay::paint (Graphics& g)

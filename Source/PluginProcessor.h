@@ -84,18 +84,19 @@ public:
     
     //AudioProcessorValueTreeState tree;
     
-    AudioProcessorValueTreeState& getValueTree() { return *valueTree; }
+    AudioProcessorValueTreeState& getValueTree() { return parameters; }
     SimpleSynth& getSampler() {return synth;}
     
     SimpleSynth synth;
-    ScopedPointer<AudioProcessorValueTreeState> valueTree;
     ScopedPointer<UndoManager> undoManager;
     
-    
+    AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+
    
     //------------------------------------
      //unsigned int OrionGlobalTabIndex = 0;/*  储存 Tab 的变量 */
 
+    AudioProcessorValueTreeState parameters;
 
 private:
     std::unique_ptr<MidiOutput> midiOutput;

@@ -173,15 +173,15 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     
     
     //==================================================================
-    envAttackTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envAttack"+String(envSerial), envAttackSlider);
-    envHoldTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envHold"+String(envSerial), envHoldSlider);
-    envDecayTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envDecay"+String(envSerial), envDecaySlider);
-    envReleaseTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envRelease"+String(envSerial), envReleaseSlider);
+    envAttackTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envAttack"+String(envSerial), envAttackSlider));
+    envHoldTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envHold"+String(envSerial), envHoldSlider));
+    envDecayTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envDecay"+String(envSerial), envDecaySlider));
+    envReleaseTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envRelease"+String(envSerial), envReleaseSlider));
     
-    envAttackBendTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envAttackBend"+String(envSerial), envAttackBendSlider);
-    envSustainTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envSustain"+String(envSerial), envSustainSlider);
-    envDecayBendTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envDecayBend"+String(envSerial), envDecayBendSlider);
-    envReleaseBendTree = new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envReleaseBend"+String(envSerial), envReleaseBendSlider);
+    envAttackBendTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envAttackBend"+String(envSerial), envAttackBendSlider));
+    envSustainTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envSustain"+String(envSerial), envSustainSlider));
+    envDecayBendTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envDecayBend"+String(envSerial), envDecayBendSlider));
+    envReleaseBendTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envReleaseBend"+String(envSerial), envReleaseBendSlider));
 }
 
 void OrionEnvConfiguration::paint (Graphics& g)
@@ -248,16 +248,16 @@ void OrionEnvConfiguration::resized()
 
 OrionEnvConfiguration::~OrionEnvConfiguration()
 {
-    envAttackTree = nullptr;
-    envHoldTree = nullptr;
-    envDecayTree = nullptr;
-    envReleaseTree = nullptr;
+    envAttackTree.reset();
+    envHoldTree.reset();
+    envDecayTree.reset();
+    envReleaseTree.reset();
     
-    envAttackBendTree = nullptr;
-    envSustainTree = nullptr;
-    envDecayBendTree = nullptr;
-    envReleaseBendTree = nullptr;
+    envAttackBendTree.reset();
+    envSustainTree.reset();
+    envDecayBendTree.reset();
+    envReleaseBendTree.reset();
     
-    envSwitchButtonAttachment = nullptr;
+    envSwitchButtonAttachment.reset();
 
 }
