@@ -342,8 +342,8 @@ void OrionaudioAudioProcessorEditor::resized()
     
     setBoundsScaled(waveWiggle.get(), {373,388, 469, 64});
     
-    meterLeft->setBounds(1072, 383, 17, 90);
-    meterRight->setBounds(1092, 383, 17, 90);
+    setBoundsScaled(meterLeft.get(), 1072, 383, 17, 90);
+    setBoundsScaled(meterRight.get(), 1092, 383, 17, 90);
 
 //    AppDir.setBounds(0, 75, 195, 228/10);
 //    DeskDir.setBounds(0, 75+228/10, 195, 228/10);

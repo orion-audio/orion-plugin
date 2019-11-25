@@ -15,9 +15,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
 
     
     effectSerial = serial;
-    
-    setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
-    
+        
     addAndMakeVisible(&compGui);
     addAndMakeVisible(&reverbGui);
     addAndMakeVisible(&delayGui);
@@ -32,6 +30,17 @@ void OrionEffectsConfiguration::paint(Graphics& g)
 
 void OrionEffectsConfiguration::resized()
 {
+    Rectangle<int> area = getLocalBounds();
+    area = area.removeFromLeft(getWidth() / 3);
+    
+    compGui.setBounds(area);
+    
+    area.translate(getWidth() / 3, 0);
+    reverbGui.setBounds(area);
+    
+    area.translate(getWidth() / 3, 0);
+    delayGui.setBounds(area);
+
     
 }
 

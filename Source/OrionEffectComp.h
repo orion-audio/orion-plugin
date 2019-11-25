@@ -13,11 +13,14 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "OrionRotarySlider.h"
+#include "ResizableContainer.h"
+
 //==============================================================================
 /*
  */
-class OrionEffectComp    : public Component,
+class OrionEffectComp : public Component,
                            public Slider::Listener
+                    
 {
 public:
     OrionEffectComp(OrionaudioAudioProcessor&, int serial);
@@ -30,6 +33,9 @@ public:
     int effectCompSerial;
     
 private:
+    
+    Rectangle<int> paintArea;
+    
     OrionaudioAudioProcessor& processor;
     
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> compRatioTree;

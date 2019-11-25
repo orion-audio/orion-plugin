@@ -46,7 +46,7 @@ public:
    //void componentMovedOrResized (Component& component, bool /*wasMoved*/, bool /*wasResized*/) override;
 
 private:
-    
+    Rectangle<int> area;
   
     OrionaudioAudioProcessor& processor;
     

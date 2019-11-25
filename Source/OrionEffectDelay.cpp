@@ -36,15 +36,12 @@ processor(p)
     delayTimeSlider.setRange(0.0f, 0.5f);
     delayTimeSlider.setValue(0.1f);
     delayTimeSlider.setTextValueSuffix (" ms");
-    delayTimeSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     delayTimeSlider.setBounds(WidthTmp*0.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
-    delayPanSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     addAndMakeVisible(delayTimeSlider);
     delayTimeSlider.setVisible(true);
     
     addAndMakeVisible(delayTimeLabel);
     delayTimeLabel.setText ("Time", dontSendNotification);
-    //delayTimeLabel.attachToComponent (&delayTimeSlider, false);
     delayTimeLabel.setBounds(WidthTmp*0.2/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     //=====================================================================
@@ -54,7 +51,6 @@ processor(p)
     delayFeedbackSlider.setValue(0.0f);
     delayFeedbackSlider.setTextValueSuffix (" %");
     delayFeedbackSlider.setBounds(WidthTmp*1.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
-    delayFeedbackSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     addAndMakeVisible(delayFeedbackSlider);
     delayFeedbackSlider.setVisible(true);
     
@@ -63,7 +59,6 @@ processor(p)
     
     addAndMakeVisible(delayFeedbackLabel);
     delayFeedbackLabel.setText ("Feedback", dontSendNotification);
-    //delayFeedbackLabel.attachToComponent (&delayFeedbackSlider, false);
     delayFeedbackLabel.setBounds(WidthTmp*1.12/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     
@@ -75,7 +70,6 @@ processor(p)
     delayColorSlider.setRange(-1.0f, 1.0f);
     delayColorSlider.setValue(0.0f);
     delayColorSlider.setBounds(WidthTmp*2.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
-    delayColorSlider.setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     addAndMakeVisible(delayColorSlider);
     delayColorSlider.setVisible(true);
     
@@ -141,10 +135,10 @@ processor(p)
     
     /* Individual look and feel */
     rotarySliderLAFV1.setColour(Slider::thumbColourId, juce::Colours::green);
-    delayTimeSlider.setLookAndFeel(&rotarySliderLAFV1);
+//    delayTimeSlider.setLookAndFeel(&rotarySliderLAFV1);
     
     /* Customize Look and Feel class */
-    delayPanSlider.setLookAndFeel(&rotarySliderLookAndFeelTest);
+//    delayPanSlider.setLookAndFeel(&rotarySliderLookAndFeelTest);
     
     
     //=====================================================================
@@ -178,7 +172,9 @@ OrionEffectDelay::~OrionEffectDelay()
 void OrionEffectDelay::paint (Graphics& g)
 {
     /* Background color */
-    g.fillAll(Colours::grey);
+    g.fillAll(Colours::red);
+    g.setColour(Colours::black);
+    g.fillRect(area);
     
     /* Define Local Bound */
     float WidthTmp = (OrionGlobalWidth/10)*3;
@@ -205,15 +201,23 @@ void OrionEffectDelay::paint (Graphics& g)
 
 void OrionEffectDelay::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
+    area = getLocalBounds();
+    Rectangle<int> knobArea;
+    Rectangle<int> labelArea;
+    int w = getWidth();
+    int h = getHeight();
     
-    float WidthTmp = (OrionGlobalWidth/10)*3;
-    float HeightTmp = OrionGlobalHeight/3;
+    area.removeFromTop(getHeight() / 3);
+    area.setSize(area.getWidth(), area.getHeight() / 2);
+    area.translate(0, -area.getHeight() * .1);
+    area = area.removeFromLeft(w / 3);
+//    area.removeFromBottom(area.getHeight() / 2);
     
-    //int border =
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayTimeSlider.setBounds(knobArea);
+    delayTimeLabel.setBounds(labelArea);
     
-
 }
 void OrionEffectDelay::sliderValueChanged(Slider* slider)
 {
