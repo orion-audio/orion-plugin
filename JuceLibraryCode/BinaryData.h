@@ -8,9 +8,6 @@
 
 namespace BinaryData
 {
-    extern const char*   back_arrow_png;
-    const int            back_arrow_pngSize = 15605;
-
     extern const char*   _00compressorBackground_png;
     const int            _00compressorBackground_pngSize = 213101;
 
@@ -23,17 +20,32 @@ namespace BinaryData
     extern const char*   _00reverbBackground_png;
     const int            _00reverbBackground_pngSize = 92001;
 
-    extern const char*   a_button_png;
-    const int            a_button_pngSize = 2024;
-
     extern const char*   a_png;
     const int            a_pngSize = 3863;
+
+    extern const char*   a_button_png;
+    const int            a_button_pngSize = 2024;
 
     extern const char*   appdir_png;
     const int            appdir_pngSize = 11409;
 
     extern const char*   arrow_png;
     const int            arrow_pngSize = 12569;
+
+    extern const char*   arrow_back_png;
+    const int            arrow_back_pngSize = 15605;
+
+    extern const char*   arrow_down_png;
+    const int            arrow_down_pngSize = 12569;
+
+    extern const char*   arrow_foward_png;
+    const int            arrow_foward_pngSize = 12935;
+
+    extern const char*   arrow_up_png;
+    const int            arrow_up_pngSize = 12935;
+
+    extern const char*   back_arrow_png;
+    const int            back_arrow_pngSize = 15605;
 
     extern const char*   check_png;
     const int            check_pngSize = 460;
@@ -110,12 +122,6 @@ namespace BinaryData
     extern const char*   headphone_button_png;
     const int            headphone_button_pngSize = 2092;
 
-    extern const char*   hhc_selected_png;
-    const int            hhc_selected_pngSize = 3899;
-
-    extern const char*   hho_selected_png;
-    const int            hho_selected_pngSize = 3788;
-
     extern const char*   hhc_off_png;
     const int            hhc_off_pngSize = 6137;
 
@@ -133,9 +139,6 @@ namespace BinaryData
 
     extern const char*   kick_on_png;
     const int            kick_on_pngSize = 18022;
-
-    extern const char*   kick_selected_png;
-    const int            kick_selected_pngSize = 6010;
 
     extern const char*   knob_1_png;
     const int            knob_1_pngSize = 1865;
@@ -162,7 +165,7 @@ namespace BinaryData
     const int            On_pngSize = 16187;
 
     extern const char*   orionBackground_png;
-    const int            orionBackground_pngSize = 403717;
+    const int            orionBackground_pngSize = 400771;
 
     extern const char*   orionClipBackground_png;
     const int            orionClipBackground_pngSize = 206663;
@@ -231,7 +234,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 74;
+    const int namedResourceListSize = 75;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

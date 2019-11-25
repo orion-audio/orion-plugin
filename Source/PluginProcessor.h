@@ -74,6 +74,13 @@ public:
             return outputLevels.right;
     }
     
+    float getInputLevel()
+    {
+        return inputLevel;
+    }
+    
+    
+    
     MidiOutput* getMidiOutput()
     {
         return midiOutput.get();
@@ -94,7 +101,7 @@ public:
     
    
     //------------------------------------
-     //unsigned int OrionGlobalTabIndex = 0;/*  储存 Tab 的变量 */
+    //unsigned int OrionGlobalTabIndex = 0;/*  储存 Tab 的变量 */
 
 
 private:
@@ -108,6 +115,7 @@ private:
     int mSampleRate { 441000 };
     
     OutputLevels outputLevels;
+    float inputLevel;
     
     Analyser<float> inputAnalyser;
     Analyser<float> outputAnalyser;

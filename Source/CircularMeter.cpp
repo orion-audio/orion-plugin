@@ -31,38 +31,78 @@ void CircularMeter::paint (Graphics& g)
     g.setColour(Colours::black);
 //    g.drawRect(getLocalBounds());
     auto area = getLocalBounds();
-    area = area.removeFromTop(getHeight() / numCircles);
-    g.setColour(findColour(ColourIds::backgroundColourId));
-    int w = area.getWidth() * .6;
-    int h = w;
-    for (int i = 0; i < numCircles; i++){
-        g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
-        area.translate(0, area.getHeight());
-    }
     
-    float level = 0;
-    int numFilled = 0;
-    if (updaterFunction != nullptr)
-    {
-        level = updaterFunction();
+    if(isVertical){
+        area = area.removeFromTop(getHeight() / numCircles);
+        g.setColour(findColour(ColourIds::backgroundColourId));
+        int w = area.getWidth() * .6;
+        int h = w;
         for (int i = 0; i < numCircles; i++){
-            if (level > i * (1.f / numCircles))
-            {
-                numFilled++;
+            g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
+            area.translate(0, area.getHeight());
+        }
+        
+        float level = 0;
+        int numFilled = 0;
+        if (updaterFunction != nullptr)
+        {
+            level = updaterFunction();
+            DBG(level);
+            for (int i = 0; i < numCircles; i++){
+                if (level > i * (1.f / numCircles))
+                {
+                    numFilled++;
+                }
             }
         }
+        g.setColour(findColour(ColourIds::filledColourId));
+        area = getLocalBounds();
+        area = area.removeFromBottom(getHeight() / numCircles);
+        w = area.getWidth() * .6;
+        h = w;
+        for (int i = 0; i < numFilled; i++){
+            if (i == numCircles - 1)
+                g.setColour(findColour(ColourIds::clipColourId));
+            g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
+            area.translate(0, -area.getHeight());
+        }
+    }else if(!isVertical){
+        area = area.removeFromLeft(getWidth() / numCircles);///
+        
+        g.setColour(findColour(ColourIds::backgroundColourId));
+        int h = area.getHeight() * .6;
+        int w = h;
+        for (int i = 0; i < numCircles; i++){
+            g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
+            
+            area.translate(area.getWidth(), 0);
+        }
+        
+        float level = 0;
+        int numFilled = 0;
+        if (updaterFunction != nullptr)
+        {
+            level = updaterFunction();
+            for (int i = 0; i < numCircles; i++){
+                if (level > i * (1.f / numCircles))
+                {
+                    numFilled++;
+                }
+            }
+        }
+        g.setColour(findColour(ColourIds::filledColourId));
+        area = getLocalBounds();
+        area = area.removeFromLeft(getWidth() / numCircles);///
+        h = area.getHeight() * .6;
+        w = h;
+        for (int i = 0; i < numFilled; i++){
+            if (i == numCircles - 1)
+                g.setColour(findColour(ColourIds::clipColourId));
+            g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
+            area.translate(area.getWidth(), 0);
+        }
     }
-    g.setColour(findColour(ColourIds::filledColourId));
-    area = getLocalBounds();
-    area = area.removeFromBottom(getHeight() / numCircles);
-    w = area.getWidth() * .6;
-    h = w;
-    for (int i = 0; i < numFilled; i++){
-        if (i == numCircles - 1)
-            g.setColour(findColour(ColourIds::clipColourId));
-        g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
-        area.translate(0, -area.getHeight());
-    }
+
  
 }
 

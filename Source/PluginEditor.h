@@ -65,6 +65,8 @@ private:
     std::unique_ptr<CircularMeter> meterLeft;
     std::unique_ptr<CircularMeter> meterRight;
     
+    std::unique_ptr<CircularMeter> meterInput;
+    
     OrionaudioAudioProcessor& processor;
     //ScopedPointer<OrionTabComponent> tabComponent;
     std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
@@ -88,12 +90,11 @@ private:
     void snareButtonClicked();
     void clapButtonClicked();
     void percButtonClicked();
-    
-    
     void HiHatButtonClicked();
     void cymbalButtonClicked();
     void snapButtonClicked();
     
+    void dropDownButtonClicked();
     
     void appdirClicked();
     void deskdirClicked();
@@ -123,7 +124,7 @@ private:
     OrionButton hhoButton;//cymbal
     OrionButton crashButton;//snap
     
-    
+    OrionButton dropDownButton;
     
     int indices[7];
    // std::vector<OrionButton>& buttons;
@@ -141,6 +142,6 @@ private:
     AudioFormatManager formatManager;
     double startTime;
     
-    
+    bool dropDown = false;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };

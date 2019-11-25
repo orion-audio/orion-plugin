@@ -54,9 +54,7 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
     synth.setup(48000);
     for(int i = 0;i < synth.getNumVoices(); i++)
     {
-   
-        
-        
+
         valueTree->createAndAddParameter(String("compRatio" + String(i)), "compRatio", "", NormalisableRange<float>(1.0f, 30.0f, 1.0f), 1.0f, doubleToString, stringToDouble);
         valueTree->createAndAddParameter(String("compAttack" + String(i)), "compAttack", "", NormalisableRange<float>(0.1f, 80.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
         valueTree->createAndAddParameter(String("compRelease" + String(i)), "compRelease", "", NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
@@ -264,13 +262,16 @@ bool OrionaudioAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+    inputLevel = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
+    buffer.clear();
+    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples()) ;
     if (buffer.getNumChannels() > 1)
         outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
     else
         outputLevels.right = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
-
-    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    
+    
     //inputAnalyser.addAudioData (buffer, 0, getTotalNumInputChannels());
 
 }

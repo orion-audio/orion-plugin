@@ -32,7 +32,7 @@ public:
     
     void timerCallback() override;
 
-    int numCircles = 5;
+    int numCircles = 6;
     
     std::function<float()> updaterFunction;
     

@@ -15,6 +15,7 @@ hhcButton(p,"HH-C",DrawableButton::ButtonStyle::ImageFitted ),
 hhoButton(p,"HH-O",DrawableButton::ButtonStyle::ImageFitted ),
 snapButton(p,"CRASH",DrawableButton::ButtonStyle::ImageFitted),
 crashButton(p,"CRASH",DrawableButton::ButtonStyle::ImageFitted),
+dropDownButton(p,"DropDown",DrawableButton::ButtonStyle::ImageFitted),
 AppDir("Applications",DrawableButton::ButtonStyle::ImageFitted),
 DeskDir("Desktop",DrawableButton::ButtonStyle::ImageFitted),
 DownDir("Downloads",DrawableButton::ButtonStyle::ImageFitted),
@@ -141,6 +142,16 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     crashButton.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&crashButton);
     
+    //->
+    buttonOff = Drawable::createFromImageData(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
+    buttonOn = Drawable::createFromImageData(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
+    dropDownButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
+    dropDownButton.onClick = [this]/*capture this event 执行后面{}的指令*/{ dropDownButtonClicked(); };
+    dropDownButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
+    dropDownButton.setEnabled(true);//防止用户多次按
+    addAndMakeVisible(&dropDownButton);
+    
+    
     buttonOn = Drawable::createFromImageData(BinaryData::appdir_png, BinaryData::appdir_pngSize);
 
     AppDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
@@ -194,6 +205,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     formatManager.registerBasicFormats();
     
+    //TabComponent
     for (int i=0;i<7;i++)
     {
         tabComponent[i] = std::make_unique<OrionTabComponent>(processor,i);
@@ -201,12 +213,17 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     }
     
     tabComponentChanged(0);
+
     
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
     
     waveWiggle.reset(new WaveWiggle());
     addAndMakeVisible(waveWiggle.get());
+    
+    meterInput.reset(new CircularMeter());
+    meterInput->updaterFunction = [this] { return processor.getInputLevel();};
+    addAndMakeVisible(meterInput.get());
     
     meterLeft.reset(new CircularMeter());
     meterLeft->updaterFunction = [this] { return processor.getOutputLevel(0); };
@@ -216,7 +233,8 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     meterRight->updaterFunction = [this] { return processor.getOutputLevel(1); };
     addAndMakeVisible(meterRight.get());
     
-    setSize (OrionGlobalWidth, OrionGlobalHeight);
+    //setSize (OrionGlobalWidth, OrionGlobalHeight);
+    setSize (OrionGlobalWidth, OrionGlobalHeight*2/3);
 
 }
 
@@ -231,7 +249,7 @@ OrionaudioAudioProcessorEditor::~OrionaudioAudioProcessorEditor()
 void OrionaudioAudioProcessorEditor::tabComponentChanged(int serial)
 {
     tabComponent[serial]->setBounds(0, (OrionGlobalHeight/3)*2, OrionGlobalWidth, OrionGlobalHeight/3);
-    
+    //tabComponent[serial]->setBounds(0, 0, 0, 0);
     addAndMakeVisible(tabComponent[serial].get());
 }
 //==============================================================================
@@ -241,7 +259,14 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
     RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(background, 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
+    
+    if(dropDown){
+       g.drawImageWithin(background, 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
+    }else{g.drawImageWithin(background, 0, 0,getWidth(),getHeight(),orionBackgroundRectanglePlacement,false);}
+    
+    
+    
+    
     /*
     OrionBrowser* custablook = new OrionBrowser();
     
@@ -334,6 +359,8 @@ void OrionaudioAudioProcessorEditor::resized()
     hhoButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 100, 100, 112);
     hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);
     crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);
+    
+    dropDownButton.setBounds(OrionGlobalWidth/5.15701, OrionGlobalHeight*2.983/5, 50, 50);
    
     fileBrowser->setBounds(0, 75, 200, OrionGlobalHeight-375);
     
@@ -343,6 +370,8 @@ void OrionaudioAudioProcessorEditor::resized()
     
     meterLeft->setBounds(1072, 383, 17, 90);
     meterRight->setBounds(1092, 383, 17, 90);
+    
+    meterInput->setBounds(919, /*JUCE_LIVE_CONSTANT(*/23/*)*/, 135, 17);
 
 //    AppDir.setBounds(0, 75, 195, 228/10);
 //    DeskDir.setBounds(0, 75+228/10, 195, 228/10);
@@ -391,7 +420,20 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     
 }
 
-
+void OrionaudioAudioProcessorEditor::dropDownButtonClicked()
+{
+    dropDown = !dropDown;
+    std::unique_ptr<Drawable> buttonBackground;
+    if(dropDown){
+        setSize (OrionGlobalWidth, OrionGlobalHeight);
+        buttonBackground = Drawable::createFromImageData(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
+        dropDownButton.setImages(buttonBackground.get());
+    }else{
+        setSize (OrionGlobalWidth, OrionGlobalHeight*2/3);
+        buttonBackground = Drawable::createFromImageData(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
+        dropDownButton.setImages(buttonBackground.get());
+    }
+}
 
 void OrionaudioAudioProcessorEditor::appdirClicked()
 {
