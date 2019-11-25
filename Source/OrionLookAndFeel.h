@@ -31,10 +31,10 @@ public:
     
     enum TabButtonType
     {
-        envelope=0,
-        fx,
-        eq,
-        clip
+        eq=0,
+        clip,
+        envelope,
+        fx
     };
     
     OrionLookAndFeel();
