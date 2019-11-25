@@ -16,7 +16,10 @@
 //==============================================================================
 /*
  */
-class OrionEffectComp    : public Component,
+
+typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+
+class OrionEffectComp : public Component,
                            public Slider::Listener
 {
 public:
@@ -32,19 +35,18 @@ public:
 private:
     OrionaudioAudioProcessor& processor;
     
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> compRatioTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> compAttackTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> compReleaseTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> compGainTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> compThreshTree;
-    ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> compSwitchButtonAttachment;
+    std::unique_ptr<SliderAttachment> compRatioTree;
+    std::unique_ptr<SliderAttachment> compAttackTree;
+    std::unique_ptr<SliderAttachment> compReleaseTree;
+    std::unique_ptr<SliderAttachment> compGainTree;
+    std::unique_ptr<SliderAttachment> compThreshTree;
+    std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment> compSwitchButtonAttachment;
     
     Slider compRatioSlider;
     Slider compAttackSlider;
     Slider compReleaseSlider;
     Slider compGainSlider;
     Slider compThreshSlider;
-    
     
     ToggleButton compSwitchButton;
     

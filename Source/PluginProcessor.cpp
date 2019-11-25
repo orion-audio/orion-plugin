@@ -10,7 +10,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-
+#define NUM_VOICES 7
 
 //==============================================================================
 static String doubleToString(double val) { return String(val); }
@@ -26,7 +26,7 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), parameters(*this, nullptr, "PARAMETERS", createParameterLayout())
 #endif
 
 //    tree(*this,nullptr,"PARAMETERS",
@@ -48,97 +48,55 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
     midiOutput = MidiOutput::createNewDevice("Orion Audio");
     if (midiOutput != nullptr)
         midiOutput->startBackgroundThread();
-    
-    undoManager = new UndoManager();
-    valueTree = new AudioProcessorValueTreeState(*this, undoManager);
-    synth.setup(48000);
-    for(int i = 0;i < synth.getNumVoices(); i++)
-    {
 
-        valueTree->createAndAddParameter(String("compRatio" + String(i)), "compRatio", "", NormalisableRange<float>(1.0f, 30.0f, 1.0f), 1.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("compAttack" + String(i)), "compAttack", "", NormalisableRange<float>(0.1f, 80.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("compRelease" + String(i)), "compRelease", "", NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("compGain" + String(i)), "compGain", "", NormalisableRange<float>(0.0f, 40.0f, 0.1f), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("compThresh" + String(i)), "compThresh", "", NormalisableRange<float>(-60.0f, 0.0f, 0.1f), -60.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("compSwitch" + String(i)), "compSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("compSwitch" + String(i)), "compSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
-        
-        
-        valueTree->createAndAddParameter(String("reverbPredelay" + String(i)), "reverbPredelay", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("reverbSize" + String(i)), "reverbSize", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("reverbColor" + String(i)), "reverbColor", "", NormalisableRange<float>(-1.0f, 1.0f/*, 1*/), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("reverbDecay" + String(i)), "reverbDecay", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("reverbDry" + String(i)), "reverbDry", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("reverbSwitch" + String(i)), "reverbSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("reverbSwitch" + String(i)), "reverbSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
-        
-        
-        valueTree->createAndAddParameter(String("delayTime" + String(i)), "delayTime", "", NormalisableRange<float>(0.0f, 0.5f), 0.1f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("delayFeedback" + String(i)), "delayFeedback", "", NormalisableRange<float>(0.0f, 0.95f), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("delayColor" + String(i)), "delayColor", "", NormalisableRange<float>(-1.0f, 1.0f/*, 1*/), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("delayPan" + String(i)), "delayPan", "", NormalisableRange<float>(-50.0f, 50.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("delayDryWet" + String(i)), "delayDryWet", "", NormalisableRange<float>(0.0f, 1.0f), 0.3f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("delaySwitch" + String(i)), "delaySwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("delaySwitch" + String(i)), "delaySwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
-        
-        
-        valueTree->createAndAddParameter(String("envAttack" + String(i)), "envAttack", "", NormalisableRange<float>(0.1f, 1500.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("envHold" + String(i)), "envHold", "", NormalisableRange<float>(0.1f, 1500.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("envDecay" + String(i)), "envDecay", "", NormalisableRange<float>(0.1f, 2500.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("envRelease" + String(i)), "envRelease", "", NormalisableRange<float>(0.1f, 2500.0f, 0.1f), 1000.0f, doubleToString, stringToDouble);
-        
-        valueTree->createAndAddParameter(String("envAttackBend" + String(i)), "envAttackBend", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("envSustain" + String(i)), "envSustain", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 1.0f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("envDecayBend" + String(i)), "envDecayBend", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, doubleToString, stringToDouble);
-        valueTree->createAndAddParameter(String("envReleaseBend" + String(i)), "envReleaseBend", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, doubleToString, stringToDouble);
-        
-        
-        
-        
-        if (auto* voice = dynamic_cast<OrionSamplerVoice*> (synth.getVoice(i)))
-        {
-            valueTree->addParameterListener(String("delayTime" + String(i)) , voice);
-            valueTree->addParameterListener(String("delayFeedback" + String(i)), voice);
-            valueTree->addParameterListener(String("delayColor" + String(i)), voice);
-            valueTree->addParameterListener(String("delayPan" + String(i)), voice);
-            valueTree->addParameterListener(String("delayDryWet" + String(i)), voice);
-            valueTree->addParameterListener(String("delaySwitch" + String(i)), voice);
-            
-            valueTree->addParameterListener(String("compRatio" + String(i)) , voice);
-            valueTree->addParameterListener(String("compAttack" + String(i)), voice);
-            valueTree->addParameterListener(String("compRelease" + String(i)), voice);
-            valueTree->addParameterListener(String("compGain" + String(i)), voice);
-            valueTree->addParameterListener(String("compThresh" + String(i)), voice);
-            valueTree->addParameterListener(String("compSwitch" + String(i)), voice);
-            
-            valueTree->addParameterListener(String("reverbPredelay" + String(i)) , voice);
-            valueTree->addParameterListener(String("reverbSize" + String(i)), voice);
-            valueTree->addParameterListener(String("reverbColor" + String(i)), voice);
-            valueTree->addParameterListener(String("reverbDecay" + String(i)), voice);
-            valueTree->addParameterListener(String("reverbDry" + String(i)), voice);
-            valueTree->addParameterListener(String("reverbSwitch" + String(i)), voice);
-            
-            valueTree->addParameterListener(String("envAttack" + String(i)) , voice);
-            valueTree->addParameterListener(String("envDecay" + String(i)), voice);
-            valueTree->addParameterListener(String("envHold" + String(i)), voice);
-            valueTree->addParameterListener(String("envRelease" + String(i)), voice);
-            
-            valueTree->addParameterListener(String("envAttackBend" + String(i)) , voice);
-            valueTree->addParameterListener(String("envDecayBend" + String(i)), voice);
-            valueTree->addParameterListener(String("envSustain" + String(i)), voice);
-            valueTree->addParameterListener(String("envReleaseBend" + String(i)), voice);
-        
-        }
-    }
-    valueTree->state = ValueTree("OrionParameters");
-    
-    
-    
+    undoManager = new UndoManager();
+    synth.setup(48000);
+//    for(int i = 0;i < synth.getNumVoices(); i++)
+//    {
+//        if (auto* voice = dynamic_cast<OrionSamplerVoice*> (synth.getVoice(i)))
+//        {
+//            parameters->addParameterListener(String("delayTime" + String(i)) , voice);
+//            parameters->addParameterListener(String("delayFeedback" + String(i)), voice);
+//            parameters->addParameterListener(String("delayColor" + String(i)), voice);
+//            parameters->addParameterListener(String("delayPan" + String(i)), voice);
+//            parameters->addParameterListener(String("delayDryWet" + String(i)), voice);
+//            parameters->addParameterListener(String("delaySwitch" + String(i)), voice);
+//
+//            parameters->addParameterListener(String("compRatio" + String(i)) , voice);
+//            parameters->addParameterListener(String("compAttack" + String(i)), voice);
+//            parameters->addParameterListener(String("compRelease" + String(i)), voice);
+//            parameters->addParameterListener(String("compGain" + String(i)), voice);
+//            parameters->addParameterListener(String("compThresh" + String(i)), voice);
+//            parameters->addParameterListener(String("compSwitch" + String(i)), voice);
+//
+//            parameters->addParameterListener(String("reverbPredelay" + String(i)) , voice);
+//            parameters->addParameterListener(String("reverbSize" + String(i)), voice);
+//            parameters->addParameterListener(String("reverbColor" + String(i)), voice);
+//            parameters->addParameterListener(String("reverbDecay" + String(i)), voice);
+//            parameters->addParameterListener(String("reverbDry" + String(i)), voice);
+//            parameters->addParameterListener(String("reverbSwitch" + String(i)), voice);
+//
+//            parameters->addParameterListener(String("envAttack" + String(i)) , voice);
+//            parameters->addParameterListener(String("envDecay" + String(i)), voice);
+//            parameters->addParameterListener(String("envHold" + String(i)), voice);
+//            parameters->addParameterListener(String("envRelease" + String(i)), voice);
+//
+//            parameters->addParameterListener(String("envAttackBend" + String(i)) , voice);
+//            parameters->addParameterListener(String("envDecayBend" + String(i)), voice);
+//            parameters->addParameterListener(String("envSustain" + String(i)), voice);
+//            parameters->addParameterListener(String("envReleaseBend" + String(i)), voice);
+//
+//        }
+//    }
+//    valueTree->state = ValueTree("OrionParameters");
+
+
+
 }
 
 OrionaudioAudioProcessor::~OrionaudioAudioProcessor()
 {
-    
+
 }
 
 
@@ -212,7 +170,7 @@ const String OrionaudioAudioProcessor::getProgramName (int index)
 
 void OrionaudioAudioProcessor::changeProgramName (int index, const String& newName)
 {
-    
+
 }
 
 
@@ -270,8 +228,8 @@ void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
         outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
     else
         outputLevels.right = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
-    
-    
+
+
     //inputAnalyser.addAudioData (buffer, 0, getTotalNumInputChannels());
 
 }
@@ -294,7 +252,7 @@ void OrionaudioAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
     MemoryOutputStream stream(destData, false);
-    valueTree->state.writeToStream(stream);
+    parameters.state.writeToStream(stream);
 }
 
 void OrionaudioAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
@@ -302,15 +260,86 @@ void OrionaudioAudioProcessor::setStateInformation (const void* data, int sizeIn
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
     ValueTree tree = ValueTree::readFromData(data, sizeInBytes);
-    
+
     if(tree.isValid())
     {
         if(tree.hasType("OrionParameters"))
         {
-            valueTree->state = tree;
+            parameters.state = tree;
         }
     }
 }
+
+AudioProcessorValueTreeState::ParameterLayout OrionaudioAudioProcessor::createParameterLayout()
+{
+    AudioProcessorValueTreeState::ParameterLayout layout;
+    for(int i = 0; i < NUM_VOICES; i++)
+    {
+
+        // compressor
+        layout.add(std::make_unique<AudioParameterFloat>("compRatio" + String(i), "compRatio" + String(i), NormalisableRange<float>(1.0f, 30.0f, 1.0f), 1.f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("compAttack" + String(i), "compAttack" + String(i), NormalisableRange<float>(0.1f, 80.0f, 0.1f), 0.1f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("compRelease" + String(i), "compRelease", NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 0.1f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("compGain" + String(i), "compGain" + String(i), NormalisableRange<float>(0.0f, 40.0f, 0.1f), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("compThresh" + String(i), "compThresh" + String(i), NormalisableRange<float>(-60.0f, 0.0f, 0.1f), -60.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("compSwitch" + String(i), "compSwitch" + String(i), NormalisableRange<float>(0, 1, 1), 0, "", AudioProcessorParameter::Category::genericParameter));
+
+        // reverb
+        layout.add(std::make_unique<AudioParameterFloat>("reverbPredelay" + String(i), "reverbPredelay" + String(i), NormalisableRange<float>(0.0f, 1.0f), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("reverbSize" + String(i), "reverbSize" + String(i), NormalisableRange<float>(0.0f, 1.0f), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("reverbColor" + String(i), "reverbColor", NormalisableRange<float>(-1.0f, 1.0f/*, 1*/), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("reverbDecay" + String(i), "reverbDecay", NormalisableRange<float>(0.0f, 1.0f), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("reverbDry" + String(i), "reverbDry", NormalisableRange<float>(0.0f, 1.0f), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("reverbSwitch" + String(i), "reverbSwitch", NormalisableRange<float>(0, 1, 1), 0, "", AudioProcessorParameter::Category::genericParameter));
+
+
+        // delay
+        layout.add(std::make_unique<AudioParameterFloat>("delayTime" + String(i), "delayTime", NormalisableRange<float>(0.0f, 0.5f), 0.1f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("delayFeedback" + String(i), "delayFeedback", NormalisableRange<float>(0.0f, 0.95f), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("delayColor" + String(i), "delayColor", NormalisableRange<float>(-1.0f, 1.0f/*, 1*/), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("delayPan" + String(i), "delayPan" + String(i),NormalisableRange<float>(-50.0f, 50.0f, 1.0f), 0.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("delayDryWet" + String(i), "delayDryWet" + String(i), NormalisableRange<float>(0.0f, 1.0f), 0.3f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("delaySwitch" + String(i), "delaySwitch" + String(i), NormalisableRange<float>(0, 1, 1), 0, "", AudioProcessorParameter::Category::genericParameter));
+
+
+        // envelope
+        layout.add(std::make_unique<AudioParameterFloat>("envAttack" + String(i), "envAttack", NormalisableRange<float>(0.1f, 1500.0f, 0.1f), 0.1f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("envHold" + String(i), "envHold", NormalisableRange<float>(0.1f, 1500.0f, 0.1f), 0.1f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("envDecay" + String(i), "envDecay", NormalisableRange<float>(0.1f, 2500.0f, 0.1f), 0.1f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("envRelease" + String(i), "envRelease", NormalisableRange<float>(0.1f, 2500.0f, 0.1f), 1000.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("envAttackBend" + String(i), "envAttackBend", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("envSustain" + String(i), "envSustain", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 1.0f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("envDecayBend" + String(i), "envDecayBend", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, "", AudioProcessorParameter::Category::genericParameter));
+
+        layout.add(std::make_unique<AudioParameterFloat>("envReleaseBend" + String(i), "envReleaseBend", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, "", AudioProcessorParameter::Category::genericParameter));
+
+    }
+
+    return layout;
+
+}
+
 
 //==============================================================================
 // This creates new instances of the plugin..

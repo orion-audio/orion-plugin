@@ -15,6 +15,9 @@
 #include "OrionRotarySlider.h"
 
 //==============================================================================
+
+typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+
 class rotarySliderLookAndFeelTest: public LookAndFeel_V4
 {
 public:
@@ -52,11 +55,11 @@ private:
     
     LookAndFeel_V4 rotarySliderLAFV1;
 
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayTimeTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayFeedbackTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayColorTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayPanTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> delayDryWetTree;
+    std::unique_ptr<SliderAttachment> delayTimeTree;
+    std::unique_ptr<SliderAttachment> delayFeedbackTree;
+    std::unique_ptr<SliderAttachment> delayColorTree;
+    std::unique_ptr<SliderAttachment> delayPanTree;
+    std::unique_ptr<SliderAttachment> delayDryWetTree;
     
     ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> delaySwitchButtonAttachment;
     

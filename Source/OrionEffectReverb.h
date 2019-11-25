@@ -16,6 +16,10 @@
 //==============================================================================
 /*
  */
+
+typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+typedef AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
+
 class OrionEffectReverb    : public Component,
                             public Slider::Listener
 {
@@ -35,13 +39,13 @@ private:
     
     OrionaudioAudioProcessor& processor;
     
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> reverbPredelayTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> reverbSizeTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> reverbColorTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> reverbDecayTree;
-    ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> reverbDryTree;
+    std::unique_ptr<SliderAttachment> reverbPredelayTree;
+    std::unique_ptr<SliderAttachment> reverbSizeTree;
+    std::unique_ptr<SliderAttachment> reverbColorTree;
+    std::unique_ptr<SliderAttachment> reverbDecayTree;
+    std::unique_ptr<SliderAttachment> reverbDryTree;
     
-    ScopedPointer<AudioProcessorValueTreeState::ButtonAttachment> reverbSwitchButtonAttachment;
+    std::unique_ptr<ButtonAttachment> reverbSwitchButtonAttachment;
     
     //ScopedPointer<Slider> delayTimeSlider;
     
