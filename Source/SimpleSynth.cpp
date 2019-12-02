@@ -135,18 +135,6 @@ void SimpleSynth::loadSamples()
 
 void SimpleSynth::changeSamples(int index,const String &f,int midi)//index should imply which instrument it is, but in this case index is the sequence
 {
-    /*
-    String path = f.unquoted();
-    if (File::isAbsolutePath (path))
-    {
-        // probably a file
-        //file = new File (path);
-        std::cout<<"so you are a file\n";
-    }
-    else{
-        std::cout<<"no you are not\n";
-    }
-     */
 
     if(getNumSounds() != 0 and index < getNumSounds())
     {
@@ -157,6 +145,20 @@ void SimpleSynth::changeSamples(int index,const String &f,int midi)//index shoul
     file = new File(f);
     std::unique_ptr<AudioFormatReader> reader;
     reader.reset(audioFormatManager.createReaderFor(*file));
+    
+    if (reader.get() == nullptr)
+    {
+        auto alert = [&]
+        {
+            AlertWindow::showNativeDialogBox("Invalid file", "The selected file is not a valid file", false);
+        };
+        
+        MessageManager::callAsync(alert);
+        return;
+            
+    }
+    
+    
     BigInteger note;
     note.setBit(midi);
     OrionSamplerSound *sampler = new OrionSamplerSound(String(index), *reader, note, midi, 0.0f, 10.0f, 10.0f);
