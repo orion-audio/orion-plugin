@@ -3,7 +3,7 @@
 <JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" jucerVersion="5.4.5"
               pluginVST3Category="Fx,Stereo" pluginFormats="buildAU,buildStandalone,buildVST3"
               companyName="Orion" pluginAUMainType="'aufx'" pluginManufacturerCode="Orio"
-              pluginCode="orpg" pluginCharacteristicsValue="pluginIsSynth">
+              pluginCode="orpg" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
       <FILE id="pBWaAs" name="CircularMeter.cpp" compile="1" resource="0"
