@@ -318,7 +318,6 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
 void OrionaudioAudioProcessorEditor::resized()
 {
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
-    DBG(getUIScale());
     cornerComponent->setBounds(getWidth() - 50, getHeight() - 50, 50, 50);
     
 //    for (int i = 0; i < NUM_TABS; i++)

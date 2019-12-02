@@ -34,8 +34,6 @@ public:
     
 private:
     
-    Rectangle<int> paintArea;
-    
     OrionaudioAudioProcessor& processor;
     
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> compRatioTree;

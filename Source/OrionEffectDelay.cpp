@@ -116,11 +116,13 @@ processor(p)
     
     
     
-    addAndMakeVisible(delayDryWetLabel);
-    delayDryWetLabel.setText ("Wet Dry", dontSendNotification);
-    //delayDryWetLabel.attachToComponent (&delayDryWetSlider, false);
-    delayDryWetLabel.setBounds(WidthTmp*1.1/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp*2/3, HeightTmp/20);
+    delayDryLabel.setText ("Dry", dontSendNotification);
+    delayDryLabel.setJustificationType(Justification::left);
+    addAndMakeVisible(delayDryLabel);
 
+    delayWetLabel.setText ("Wet", dontSendNotification);
+    delayWetLabel.setJustificationType(Justification::right);
+    addAndMakeVisible(delayWetLabel);
     
     delaySwitchButton.setButtonText(translate("On/Off"));
     delaySwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
@@ -172,31 +174,8 @@ OrionEffectDelay::~OrionEffectDelay()
 void OrionEffectDelay::paint (Graphics& g)
 {
     /* Background color */
-    g.fillAll(Colours::red);
-    g.setColour(Colours::black);
-    g.fillRect(area);
+    g.fillAll(Colours::grey);
     
-    /* Define Local Bound */
-    float WidthTmp = (OrionGlobalWidth/10)*3;
-    float HeightTmp = OrionGlobalHeight/3;
-    
-    /* For test slider area */
-//    g.setColour(Colours::aqua);
-    
-//    Rectangle<float> dialTime (0, HeightTmp/4, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> dialFeedback (WidthTmp/3, HeightTmp/4, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> dialColor (WidthTmp*2/3, HeightTmp/4, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> dialPan (0, HeightTmp/4 + HeightTmp/3, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> sliderDryWet (WidthTmp/3, HeightTmp/4 + HeightTmp/3, WidthTmp*2/3, HeightTmp/3);
-//
-//    g.drawRect(dialTime);
-//    g.drawRect(dialFeedback);
-//    g.drawRect(dialColor);
-//    g.drawRect(dialPan);
-//    g.drawRect(sliderDryWet);
-    
-    
-        
 }
 
 void OrionEffectDelay::resized()
@@ -208,16 +187,42 @@ void OrionEffectDelay::resized()
     int h = getHeight();
     
     area.removeFromTop(getHeight() / 3);
-    area.setSize(area.getWidth(), area.getHeight() / 2);
-    area.translate(0, -area.getHeight() * .1);
-    area = area.removeFromLeft(w / 3);
-//    area.removeFromBottom(area.getHeight() / 2);
+    area.setSize(area.getWidth() / 3, area.getHeight() / 2);
     
     knobArea = area;
     labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
     delayTimeSlider.setBounds(knobArea);
     delayTimeLabel.setBounds(labelArea);
     
+    area.translate(w / 3, 0);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayFeedbackSlider.setBounds(knobArea);
+    delayFeedbackLabel.setBounds(labelArea);
+
+    area.translate(w / 3, 0);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayColorSlider.setBounds(knobArea);
+    delayColorLabel.setBounds(labelArea);
+    
+    area.setX(0);
+    area.translate(0, getHeight() / 3);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayPanSlider.setBounds(knobArea);
+    delayPanLabel.setBounds(labelArea);
+    
+    area.translate(getWidth() / 3, 0);
+    area.setWidth(getWidth() * .67);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayDryWetSlider.setBounds(knobArea);
+    labelArea.setWidth(getWidth() / 3);
+    delayDryLabel.setBounds(labelArea);
+    labelArea.translate((getWidth() / 3), 0);
+    delayWetLabel.setBounds(labelArea);
+
 }
 void OrionEffectDelay::sliderValueChanged(Slider* slider)
 {

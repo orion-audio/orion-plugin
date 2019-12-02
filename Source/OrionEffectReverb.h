@@ -58,6 +58,7 @@ private:
     Label reverbColorLabel;
     Label reverbDecayLabel;
     Label reverbDryLabel;
+    Label reverbWetLabel;
     
     
     //    ScopedPointer<Slider> delayTimeSlider;

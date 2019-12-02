@@ -74,8 +74,9 @@ private:
     Label delayFeedbackLabel;
     Label delayColorLabel;
     Label delayPanLabel;
-    Label delayDryWetLabel;
-    
+    Label delayDryLabel;
+    Label delayWetLabel;
+
     
     rotarySliderLookAndFeelTest rotarySliderLookAndFeelTest;
     

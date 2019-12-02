@@ -119,8 +119,6 @@ OrionEffectComp::~OrionEffectComp()
 void OrionEffectComp::paint (Graphics& g)
 {
     g.fillAll(Colours::grey);/* 颜色 */
-    g.setColour(Colours::black);
-    g.fillRect(paintArea);
 }
 
 void OrionEffectComp::resized()
@@ -129,11 +127,10 @@ void OrionEffectComp::resized()
     Rectangle<int> knobArea;
     Rectangle<int> labelArea;
     
-    area.removeFromLeft(getWidth() / 2);
     area.removeFromTop(getHeight() / 3);
-    area.setSize(area.getWidth() / 2, area.getHeight() / 2);
-    area.translate(0, -area.getHeight() * .1);
-    paintArea = area;
+    area = area.removeFromRight(getWidth() / 3);
+    area.setHeight(getHeight() / 3);
+    area.translate(-getWidth() / 3, 0);
     knobArea = area;
     labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
     compRatioSlider.setBounds(knobArea);
