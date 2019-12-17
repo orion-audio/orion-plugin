@@ -219,6 +219,7 @@ void OrionEffectDelay::resized()
     labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
     delayDryWetSlider.setBounds(knobArea);
     labelArea.setWidth(getWidth() / 3);
+    labelArea.translate(0, -labelArea.getHeight());
     delayDryLabel.setBounds(labelArea);
     labelArea.translate((getWidth() / 3), 0);
     delayWetLabel.setBounds(labelArea);

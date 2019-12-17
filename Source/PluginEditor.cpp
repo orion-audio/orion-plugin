@@ -318,13 +318,8 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
 void OrionaudioAudioProcessorEditor::resized()
 {
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
-    cornerComponent->setBounds(getWidth() - 50, getHeight() - 50, 50, 50);
+    cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
-//    for (int i = 0; i < NUM_TABS; i++)
-//    {
-//        tabComponent[i]->setBounds(0, (getHeight()/3)*2, getWidth(), getHeight()/3);
-//    }
-
     tabComponents->setBounds(0, getHeight() - getHeight() / 3, getWidth(), getHeight() / 3);
 
     kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);

@@ -257,6 +257,7 @@ void OrionEffectReverb::resized()
     labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
     reverbDrySlider.setBounds(knobArea);
     labelArea.setWidth(getWidth() / 3);
+    labelArea.translate(0, -labelArea.getHeight());
     reverbDryLabel.setBounds(labelArea);
     labelArea.translate((getWidth() / 3), 0);
     reverbWetLabel.setBounds(labelArea);
