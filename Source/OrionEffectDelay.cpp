@@ -28,7 +28,7 @@ processor(p)
     float WidthTmp = (OrionGlobalWidth/10)*3;
     float HeightTmp = OrionGlobalHeight*9/30;
     
-    setBounds((OrionGlobalWidth/10)*7, 0, WidthTmp, HeightTmp);/* Global: X, Y, W， H */
+//    setBounds((OrionGlobalWidth/10)*7, 0, WidthTmp, HeightTmp);/* Global: X, Y, W， H */
 
     //=====================================================================
     delayTimeSlider.setSliderStyle(Slider::SliderStyle::Rotary);
@@ -36,18 +36,13 @@ processor(p)
     delayTimeSlider.setRange(0.0f, 0.5f);
     delayTimeSlider.setValue(0.1f);
     delayTimeSlider.setTextValueSuffix (" ms");
-
     delayTimeSlider.setBounds(WidthTmp*0.1/3, HeightTmp/4, WidthTmp*0.9/3, HeightTmp*0.9/3);/* local: X, Y, W， H */
     addAndMakeVisible(delayTimeSlider);
     delayTimeSlider.setVisible(true);
     
     addAndMakeVisible(delayTimeLabel);
     delayTimeLabel.setText ("Time", dontSendNotification);
-    //delayTimeLabel.attachToComponent (&delayTimeSlider, false);
     delayTimeLabel.setBounds(WidthTmp*0.2/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
-
-    
-    
     
     //=====================================================================
     delayFeedbackSlider.setSliderStyle(Slider::SliderStyle::Rotary);
@@ -64,7 +59,6 @@ processor(p)
     
     addAndMakeVisible(delayFeedbackLabel);
     delayFeedbackLabel.setText ("Feedback", dontSendNotification);
-    //delayFeedbackLabel.attachToComponent (&delayFeedbackSlider, false);
     delayFeedbackLabel.setBounds(WidthTmp*1.12/3, (HeightTmp/4) + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
     
     
@@ -106,16 +100,11 @@ processor(p)
     addAndMakeVisible(delayPanSlider);
     delayPanSlider.setVisible(true);
     
-
-    
     addAndMakeVisible(delayPanLabel);
     delayPanLabel.setText ("Pan", dontSendNotification);
     //delayPanLabel.attachToComponent (&delayPanSlider, false);
     delayPanLabel.setBounds(WidthTmp*0.23/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp/3, HeightTmp/20);
-    
-    
-    
-    
+      
     //=====================================================================
     delayDryWetSlider.setSliderStyle(Slider::SliderStyle::LinearHorizontal);
     delayDryWetSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 0, 0);
@@ -127,12 +116,13 @@ processor(p)
     
     
     
-    addAndMakeVisible(delayDryWetLabel);
-    delayDryWetLabel.setText ("Wet                                 Dry", dontSendNotification);
-    //delayDryWetLabel.attachToComponent (&delayDryWetSlider, false);
-    delayDryWetLabel.setBounds(WidthTmp*1.1/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp*2/3, HeightTmp/20);
+    delayDryLabel.setText ("Dry", dontSendNotification);
+    delayDryLabel.setJustificationType(Justification::left);
+    addAndMakeVisible(delayDryLabel);
 
-    
+    delayWetLabel.setText ("Wet", dontSendNotification);
+    delayWetLabel.setJustificationType(Justification::right);
+    addAndMakeVisible(delayWetLabel);
     
     delaySwitchButton.setButtonText(translate("On/Off"));
     delaySwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
@@ -147,10 +137,10 @@ processor(p)
     
     /* Individual look and feel */
     rotarySliderLAFV1.setColour(Slider::thumbColourId, juce::Colours::green);
-    delayTimeSlider.setLookAndFeel(&rotarySliderLAFV1);
+//    delayTimeSlider.setLookAndFeel(&rotarySliderLAFV1);
     
     /* Customize Look and Feel class */
-    delayPanSlider.setLookAndFeel(&rotarySliderLookAndFeelTest);
+//    delayPanSlider.setLookAndFeel(&rotarySliderLookAndFeelTest);
     
     
     //=====================================================================
@@ -189,50 +179,53 @@ void OrionEffectDelay::paint (Graphics& g)
     /* Background color */
     g.fillAll(Colours::grey);
     
-    /* Define Local Bound */
-    float WidthTmp = (OrionGlobalWidth/10)*3;
-    float HeightTmp = OrionGlobalHeight/3;
-    
-    /* For test slider area */
-//    g.setColour(Colours::aqua);
-    
-//    Rectangle<float> dialTime (0, HeightTmp/4, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> dialFeedback (WidthTmp/3, HeightTmp/4, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> dialColor (WidthTmp*2/3, HeightTmp/4, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> dialPan (0, HeightTmp/4 + HeightTmp/3, WidthTmp/3, HeightTmp/3);
-//    Rectangle<float> sliderDryWet (WidthTmp/3, HeightTmp/4 + HeightTmp/3, WidthTmp*2/3, HeightTmp/3);
-//
-//    g.drawRect(dialTime);
-//    g.drawRect(dialFeedback);
-//    g.drawRect(dialColor);
-//    g.drawRect(dialPan);
-//    g.drawRect(sliderDryWet);
-    
-    
-    
-    /* Customize the sliders*/
-    OrionRotarySlider* cusRotarySliderlook = new OrionRotarySlider();
-    if(auto* newl = dynamic_cast<juce::LookAndFeel*> (cusRotarySliderlook))
-    {
-        delayColorSlider.setLookAndFeel(newl);
-        delayFeedbackSlider.setLookAndFeel(newl);
-        delayTimeSlider.setLookAndFeel(newl);
-        delayPanSlider.setLookAndFeel(newl);
-    }
-
-    
 }
 
 void OrionEffectDelay::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
+    area = getLocalBounds();
+    Rectangle<int> knobArea;
+    Rectangle<int> labelArea;
+    int w = getWidth();
+    int h = getHeight();
     
-    float WidthTmp = (OrionGlobalWidth/10)*3;
-    float HeightTmp = OrionGlobalHeight/3;
+    area.removeFromTop(getHeight() / 3);
+    area.setSize(area.getWidth() / 3, area.getHeight() / 2);
     
-    //int border =
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayTimeSlider.setBounds(knobArea);
+    delayTimeLabel.setBounds(labelArea);
     
+    area.translate(w / 3, 0);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayFeedbackSlider.setBounds(knobArea);
+    delayFeedbackLabel.setBounds(labelArea);
+
+    area.translate(w / 3, 0);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayColorSlider.setBounds(knobArea);
+    delayColorLabel.setBounds(labelArea);
+    
+    area.setX(0);
+    area.translate(0, getHeight() / 3);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayPanSlider.setBounds(knobArea);
+    delayPanLabel.setBounds(labelArea);
+    
+    area.translate(getWidth() / 3, 0);
+    area.setWidth(getWidth() * .67);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    delayDryWetSlider.setBounds(knobArea);
+    labelArea.setWidth(getWidth() / 3);
+    labelArea.translate(0, -labelArea.getHeight());
+    delayDryLabel.setBounds(labelArea);
+    labelArea.translate((getWidth() / 3), 0);
+    delayWetLabel.setBounds(labelArea);
 
 }
 void OrionEffectDelay::sliderValueChanged(Slider* slider)

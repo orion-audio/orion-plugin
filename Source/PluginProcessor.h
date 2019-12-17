@@ -13,6 +13,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "./SimpleSynth.h"
 #include "./Analyser.h"
+#include "LookAndFeelHolder.h"
+#include "OrionLookAndFeel.h"
 //==============================================================================
 /**
 */
@@ -106,8 +108,11 @@ public:
     AudioProcessorValueTreeState parameters;
 
 private:
+    // midi output object to write to, enables recording
     std::unique_ptr<MidiOutput> midiOutput;
 
+    // creates and sets look and feel globally
+    LookAndFeelHolder<OrionLookAndFeel> lafHolder;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessor)
     AudioBuffer<float> mDelayBuffer;

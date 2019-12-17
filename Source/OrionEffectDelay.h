@@ -49,7 +49,7 @@ public:
    //void componentMovedOrResized (Component& component, bool /*wasMoved*/, bool /*wasResized*/) override;
 
 private:
-    
+    Rectangle<int> area;
   
     OrionaudioAudioProcessor& processor;
     
@@ -77,8 +77,9 @@ private:
     Label delayFeedbackLabel;
     Label delayColorLabel;
     Label delayPanLabel;
-    Label delayDryWetLabel;
-    
+    Label delayDryLabel;
+    Label delayWetLabel;
+
     
     rotarySliderLookAndFeelTest rotarySliderLookAndFeelTest;
     

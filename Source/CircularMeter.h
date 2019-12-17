@@ -24,6 +24,8 @@ public:
         filledColourId,
         clipColourId
     };
+    
+    
     CircularMeter();
     ~CircularMeter();
 

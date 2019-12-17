@@ -13,42 +13,33 @@
 #include "OrionGlobalVars.h"
 
 //==============================================================================
-OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): processor(p)
+OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): processor(p), TabbedComponent(TabbedButtonBar::Orientation::TabsAtTop)
 {
-    tabbedComponent.reset(new TabbedComponent(TabbedButtonBar::TabsAtTop));
-    TabSerial       = serial;
+         
+    TabSerial = serial;
     
-    effectConfiguration = new OrionEffectsConfiguration(p,serial);
-    eqConfiguration     = new OrionEQConfiguration(p,serial);
-    envConfiguration    = new OrionEnvConfiguration(p,serial);
-    clipConfiguration   = new OrionClipConfiguration(p);
-  
-    //std::cout<<"tabs "<<TabSerial<<"\n";//!!!!!!!!!!
-   
-    //effectConfiguration->effectSerial=TabSerial;
+    effectConfiguration.reset(new OrionEffectsConfiguration(p,serial));
+    eqConfiguration.reset(new OrionEQConfiguration(p,serial));
+    envConfiguration.reset(new OrionEnvConfiguration(p,serial));
+    clipConfiguration.reset(new OrionClipConfiguration(p));
     
-    tabbedComponent->addTab(translate("EQ"), Colours::lightgrey, eqConfiguration, true);
-    tabbedComponent->addTab(translate("CLIP"), Colours::lightgrey, clipConfiguration, true);
-    tabbedComponent->addTab(translate("ENV"), Colours::lightgrey, envConfiguration, true);
-    tabbedComponent->addTab(translate("FX"), Colours::lightgrey, effectConfiguration, true);
+    addTab(translate("EQ"), Colours::lightgrey, eqConfiguration.get(), false);
+    addTab(translate("CLIP"), Colours::lightgrey, clipConfiguration.get(), false);
+    addTab(translate("ENV"), Colours::lightgrey, envConfiguration.get(), false);
+    addTab(translate("FX"), Colours::lightgrey, effectConfiguration.get(), false);
     
-    tabbedComponent->setTabBarDepth(25);
+    setTabBarDepth(25);
     
-    tabbedComponent->setCurrentTabIndex(OrionGlobalTabIndex);
+    setCurrentTabIndex(OrionGlobalTabIndex);
     
-    OrionGlobalTabIndex = tabbedComponent->getCurrentTabIndex();
+    OrionGlobalTabIndex = getCurrentTabIndex();
     
-    tabbedComponent->setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
-    
-
-    for (int i=0;i < tabbedComponent->getNumTabs(); i++)
+    for (int i=0;i < getNumTabs(); i++)
     {
-        tabbedComponent->getTabbedButtonBar().getTabButton(i)->setBounds(OrionGlobalWidth/4*i, 0, 30, 25);
+        auto* tabButton = getTabbedButtonBar().getTabButton(i);
+        tabButton->getProperties().set("tabButtonType", i);
+        tabButton->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     }
-    
-
-    addAndMakeVisible(tabbedComponent.get());
-    
   
 }
 
@@ -57,7 +48,7 @@ OrionTabComponent::~OrionTabComponent()
     
 }
 
-OrionTabButton::ButtonType OrionTabComponent::gettype(String type)
+OrionTabButton::ButtonType OrionTabComponent::getType(String type)
 {
     //String text = but.getButtonText();
     if(type =="ENV") return OrionTabButton::ButtonType::envelope;
@@ -69,46 +60,20 @@ OrionTabButton::ButtonType OrionTabComponent::gettype(String type)
 
 void OrionTabComponent::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
 
-       You should replace everything in this method with your own
-       drawing code..
-    */
-    
-
-    for (int i=0; i < tabbedComponent->getNumTabs(); i++)
-    {
-        auto* temp = tabbedComponent->getTabbedButtonBar().getTabButton(i);
-        temp->setBounds(OrionGlobalWidth/4*i, 0, 100, 25);
-       
-        auto* but = tabbedComponent->getTabbedButtonBar().getTabButton(i);
-        
-        OrionTabButton* custablook = new OrionTabButton(gettype(but->getButtonText()), tabbedComponent->getTabbedButtonBar().getTabButton(i)->isFrontTab());
-        
-        but->setLookAndFeel(custablook);
-        
-    
-
-    }
-  
-    addAndMakeVisible(tabbedComponent.get());
-    
     g.fillAll(Colours::black);
-    
+
 }
 
 void OrionTabComponent::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
     
-    tabIndex = tabbedComponent->getCurrentTabIndex();
-    tabbedComponent->setCurrentTabIndex(tabIndex);
-    for (int i=0;i < tabbedComponent->getNumTabs(); i++)
+    TabbedComponent::resized();
+    
+    getTabbedButtonBar().setBounds(0, 0, getWidth(), getHeight() * .1);
+    
+    for (int i = 0; i < getNumTabs(); i++)
     {
-        tabbedComponent->getTabbedButtonBar().getTabButton(i)->setBounds(OrionGlobalWidth/4*i, 0, 30, 25);
+        getTabbedButtonBar().getTabButton(i)->setBounds(i * getWidth() / 4, 0, 30, 25);
     }
- 
-    
 }

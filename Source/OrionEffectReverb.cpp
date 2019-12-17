@@ -169,11 +169,15 @@ processor(p)
     //    addAndMakeVisible(delayDryWetSlider);
     //    delayDryWetSlider->setVisible(true);
     
+    reverbDryLabel.setText ("Dry", dontSendNotification);
+    reverbDryLabel.setJustificationType(Justification::left);
     addAndMakeVisible(reverbDryLabel);
-    reverbDryLabel.setText ("Wet                                 Dry", dontSendNotification);
-    //reverbDryLabel.attachToComponent (&reverbDrySlider, false);
-    reverbDryLabel.setBounds(WidthTmp*1.1/3, (HeightTmp/4) + HeightTmp/3 + (HeightTmp/3.5), WidthTmp*2/3, HeightTmp/20);
     
+    reverbWetLabel.setText ("Wet", dontSendNotification);
+    reverbWetLabel.setJustificationType(Justification::right);
+    addAndMakeVisible(reverbWetLabel);
+
+
     reverbSwitchButton.setButtonText(translate("On/Off"));
     reverbSwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
     addAndMakeVisible(reverbSwitchButton);
@@ -212,36 +216,53 @@ OrionEffectReverb::~OrionEffectReverb()
 
 void OrionEffectReverb::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-     draws some placeholder text to get you started.*/
-    //    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
-    //
-    //    g.setColour (Colours::grey);
-    //    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-    //
-    //    g.setColour (Colours::white);
-    //    g.setFont (14.0f);
-    //    g.drawText ("OrionEffectDelay", getLocalBounds(),
-    //                Justification::centred, true);   // draw some placeholder text
     g.fillAll(Colours::grey);/* 颜色 */
-    
-    /* Customize the sliders*/
-    OrionRotarySlider* cusRotarySliderlook = new OrionRotarySlider();
-    if(auto* newl = dynamic_cast<juce::LookAndFeel*> (cusRotarySliderlook))
-    {
-        reverbColorSlider.setLookAndFeel(newl);
-        reverbSizeSlider.setLookAndFeel(newl);
-        reverbPredelaySlider.setLookAndFeel(newl);
-        reverbDecaySlider.setLookAndFeel(newl);
-    }
 }
 
 void OrionEffectReverb::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-    //setBounds(10, 10, getWidth()/3, getHeight()/3);/* Global: X, Y, W， H */
+    Rectangle<int> area = getLocalBounds();
+    Rectangle<int> knobArea;
+    Rectangle<int> labelArea;
+
+    area.removeFromTop(getHeight() / 3);
+    area.setHeight(getHeight() / 3);
+    area = area.removeFromLeft(getWidth() / 3);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    reverbPredelaySlider.setBounds(knobArea);
+    reverbPredelayLabel.setBounds(labelArea);
     
+    area.translate(getWidth() / 3, 0);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    reverbSizeSlider.setBounds(knobArea);
+    reverbSizeLabel.setBounds(labelArea);
+    
+    area.translate(getWidth() / 3, 0);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    reverbColorSlider.setBounds(knobArea);
+    reverbColorLabel.setBounds(labelArea);
+
+    area.translate(0, getHeight() / 3);
+    area.setX(0);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    reverbDecaySlider.setBounds(knobArea);
+    reverbDecayLabel.setBounds(labelArea);
+    
+    area.translate(getWidth() / 3, 0);
+    area.setWidth(getWidth() * .67);
+    knobArea = area;
+    labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
+    reverbDrySlider.setBounds(knobArea);
+    labelArea.setWidth(getWidth() / 3);
+    labelArea.translate(0, -labelArea.getHeight());
+    reverbDryLabel.setBounds(labelArea);
+    labelArea.translate((getWidth() / 3), 0);
+    reverbWetLabel.setBounds(labelArea);
+
 }
 void OrionEffectReverb::sliderValueChanged(Slider* slider)
 {

@@ -24,6 +24,8 @@ public:
         const float sizeRatio = .1;
                 
         void resized() override{
+            resizeToFitNewDirectory();
+
         }
         
         void paint(Graphics &g) override

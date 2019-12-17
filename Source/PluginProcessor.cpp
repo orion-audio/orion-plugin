@@ -51,6 +51,7 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 
     undoManager = new UndoManager();
     synth.setup(48000);
+<<<<<<< HEAD
 //    for(int i = 0;i < synth.getNumVoices(); i++)
 //    {
 //        if (auto* voice = dynamic_cast<OrionSamplerVoice*> (synth.getVoice(i)))
@@ -92,6 +93,91 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 
 
 
+=======
+    for(int i = 0;i < synth.getNumVoices(); i++)
+    {
+   
+        
+        
+        valueTree->createAndAddParameter(String("compRatio" + String(i)), "compRatio", "", NormalisableRange<float>(1.0f, 30.0f, 1.0f), 1.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("compAttack" + String(i)), "compAttack", "", NormalisableRange<float>(0.1f, 80.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("compRelease" + String(i)), "compRelease", "", NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("compGain" + String(i)), "compGain", "", NormalisableRange<float>(0.0f, 40.0f, 0.1f), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("compThresh" + String(i)), "compThresh", "", NormalisableRange<float>(-60.0f, 0.0f, 0.1f), -60.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("compSwitch" + String(i)), "compSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("compSwitch" + String(i)), "compSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
+        
+        
+        valueTree->createAndAddParameter(String("reverbPredelay" + String(i)), "reverbPredelay", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("reverbSize" + String(i)), "reverbSize", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("reverbColor" + String(i)), "reverbColor", "", NormalisableRange<float>(-1.0f, 1.0f/*, 1*/), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("reverbDecay" + String(i)), "reverbDecay", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("reverbDry" + String(i)), "reverbDry", "", NormalisableRange<float>(0.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("reverbSwitch" + String(i)), "reverbSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("reverbSwitch" + String(i)), "reverbSwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
+        
+        
+        valueTree->createAndAddParameter(String("delayTime" + String(i)), "delayTime", "", NormalisableRange<float>(0.0f, 0.5f), 0.1f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("delayFeedback" + String(i)), "delayFeedback", "", NormalisableRange<float>(0.0f, 0.95f), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("delayColor" + String(i)), "delayColor", "", NormalisableRange<float>(-1.0f, 1.0f/*, 1*/), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("delayPan" + String(i)), "delayPan", "", NormalisableRange<float>(-50.0f, 50.0f, 1.0f), 0.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("delayDryWet" + String(i)), "delayDryWet", "", NormalisableRange<float>(0.0f, 1.0f), 0.3f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("delaySwitch" + String(i)), "delaySwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("delaySwitch" + String(i)), "delaySwitch", "", NormalisableRange<float>(0, 1, 1), 0, doubleToString, stringToDouble);
+        
+        
+        valueTree->createAndAddParameter(String("envAttack" + String(i)), "envAttack", "", NormalisableRange<float>(0.1f, 1500.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("envHold" + String(i)), "envHold", "", NormalisableRange<float>(0.1f, 1500.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("envDecay" + String(i)), "envDecay", "", NormalisableRange<float>(0.1f, 2500.0f, 0.1f), 0.1f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("envRelease" + String(i)), "envRelease", "", NormalisableRange<float>(0.1f, 2500.0f, 0.1f), 1000.0f, doubleToString, stringToDouble);
+        
+        valueTree->createAndAddParameter(String("envAttackBend" + String(i)), "envAttackBend", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("envSustain" + String(i)), "envSustain", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 1.0f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("envDecayBend" + String(i)), "envDecayBend", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, doubleToString, stringToDouble);
+        valueTree->createAndAddParameter(String("envReleaseBend" + String(i)), "envReleaseBend", "", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, doubleToString, stringToDouble);
+        
+        
+        
+        
+        if (auto* voice = dynamic_cast<OrionSamplerVoice*> (synth.getVoice(i)))
+        {
+            valueTree->addParameterListener(String("delayTime" + String(i)) , voice);
+            valueTree->addParameterListener(String("delayFeedback" + String(i)), voice);
+            valueTree->addParameterListener(String("delayColor" + String(i)), voice);
+            valueTree->addParameterListener(String("delayPan" + String(i)), voice);
+            valueTree->addParameterListener(String("delayDryWet" + String(i)), voice);
+            valueTree->addParameterListener(String("delaySwitch" + String(i)), voice);
+            
+            valueTree->addParameterListener(String("compRatio" + String(i)) , voice);
+            valueTree->addParameterListener(String("compAttack" + String(i)), voice);
+            valueTree->addParameterListener(String("compRelease" + String(i)), voice);
+            valueTree->addParameterListener(String("compGain" + String(i)), voice);
+            valueTree->addParameterListener(String("compThresh" + String(i)), voice);
+            valueTree->addParameterListener(String("compSwitch" + String(i)), voice);
+            
+            valueTree->addParameterListener(String("reverbPredelay" + String(i)) , voice);
+            valueTree->addParameterListener(String("reverbSize" + String(i)), voice);
+            valueTree->addParameterListener(String("reverbColor" + String(i)), voice);
+            valueTree->addParameterListener(String("reverbDecay" + String(i)), voice);
+            valueTree->addParameterListener(String("reverbDry" + String(i)), voice);
+            valueTree->addParameterListener(String("reverbSwitch" + String(i)), voice);
+            
+            valueTree->addParameterListener(String("envAttack" + String(i)) , voice);
+            valueTree->addParameterListener(String("envDecay" + String(i)), voice);
+            valueTree->addParameterListener(String("envHold" + String(i)), voice);
+            valueTree->addParameterListener(String("envRelease" + String(i)), voice);
+            
+            valueTree->addParameterListener(String("envAttackBend" + String(i)) , voice);
+            valueTree->addParameterListener(String("envDecayBend" + String(i)), voice);
+            valueTree->addParameterListener(String("envSustain" + String(i)), voice);
+            valueTree->addParameterListener(String("envReleaseBend" + String(i)), voice);
+        
+        }
+    }
+    valueTree->state = ValueTree("OrionParameters");
+    
+    
+>>>>>>> resize-update
 }
 
 OrionaudioAudioProcessor::~OrionaudioAudioProcessor()
