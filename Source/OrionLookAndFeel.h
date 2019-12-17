@@ -43,6 +43,8 @@ public:
     
     void drawTabButton (TabBarButton& button, Graphics& g, bool isMouseOver, bool isMouseDown) override;
     
+    virtual Font getLabelFont (Label &) override;
+    
 private:
     std::array<std::unique_ptr<ImagePair>, 4> tabButtonImages;
     

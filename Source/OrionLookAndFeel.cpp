@@ -76,3 +76,9 @@ void OrionLookAndFeel::drawTabButton (TabBarButton& button, Graphics& g, bool is
 
 };
 
+Font OrionLookAndFeel::getLabelFont (Label &l)
+{
+    Font f;
+    f.setHeight(l.getHeight() * .75);
+    return f;
+}
