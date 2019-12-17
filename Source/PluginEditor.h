@@ -70,7 +70,6 @@ private:
 std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
 ComponentBoundsConstrainer constrainer;
 
-
 std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
 std::unique_ptr<WaveWiggle> waveWiggle;
 
@@ -86,8 +85,6 @@ OrionaudioAudioProcessor& processor;
 FileBrowserComponent filebrowser;
 
 //    FileTreeComponent tree;
-
-
 
 File resourcefolder,skinfolder;
 Image background;
@@ -137,7 +134,7 @@ OrionButton hhcButton;    //this used to be hihat
 OrionButton hhoButton;    //cymbal
 OrionButton crashButton;    //snap
 
-OrionButton dropDownButton;
+std::unique_ptr<ImageButton> dropDownButton;
 
 int indices[7];
 // std::vector<OrionButton>& buttons;
@@ -155,6 +152,6 @@ int changed {0};
 AudioFormatManager formatManager;
 double startTime;
 
-bool dropDown = false;
+bool dropDown = true;
 JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };
