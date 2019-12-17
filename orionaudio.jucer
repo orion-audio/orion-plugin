@@ -6,6 +6,12 @@
               pluginCode="orpg" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
+      <FILE id="mGCqTV" name="OrionLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/OrionLookAndFeel.cpp"/>
+      <FILE id="QE9rU7" name="OrionLookAndFeel.h" compile="0" resource="0"
+            file="Source/OrionLookAndFeel.h"/>
+      <FILE id="lFpHwM" name="OrionResizableCornerComponent.h" compile="0"
+            resource="0" file="Source/OrionResizableCornerComponent.h"/>
       <FILE id="pBWaAs" name="CircularMeter.cpp" compile="1" resource="0"
             file="Source/CircularMeter.cpp"/>
       <FILE id="SjLzye" name="CircularMeter.h" compile="0" resource="0" file="Source/CircularMeter.h"/>
