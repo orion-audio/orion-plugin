@@ -30,35 +30,27 @@ filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHom
 //tree(DirectoryContentsList(nullptr,TimeSliceThread("thread")))
 mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001)
 {
+    
+    menuBar.reset(new OrionMenuBar);
+    addAndMakeVisible(menuBar.get());
+    
+    primaryPane.reset(new PrimaryPaneComponent);
+    addAndMakeVisible(primaryPane.get());
+    
+    sidePanel.reset(new SidePanelComponent());
+    addAndMakeVisible(sidePanel.get());
+    
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
     for (int i=0; i<7; i++)
     {
         indices[i] = i;
     }
-    // buttons[0]=kickButton;
-    //std::vector<OrionButton>& buttons{kickButton, snareButton,clapButton, percButton, HiHatButton, cymbalButton, snapButton};
-    /*
-     resourcefolder = File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources");
-     
-     skinfolder   = resourcefolder.getChildFile("skin").getChildFile("pictures");
-     background   = ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize);
-     kickFileOff  = new File(skinfolder.getChildFile("kick_off.png"));
-     kickFileOn   = new File(skinfolder.getChildFile("kick_on.png"));
-     snareFileOff = new File(skinfolder.getChildFile("snare_off.png"));
-     snareFileOn  = new File(skinfolder.getChildFile("snare_on.png"));
-     clapFileOff  = new File(skinfolder.getChildFile("clap_off.png"));
-     clapFileOn   = new File(skinfolder.getChildFile("clap_on.png"));
-     percFileOff  = new File(skinfolder.getChildFile("perc_off.png"));
-     percFileOn   = new File(skinfolder.getChildFile("perc_on.png"));
-     hhcFileOff   = new File(skinfolder.getChildFile("hhc_off.png"));
-     hhcFileOn    = new File(skinfolder.getChildFile("hhc_on.png"));
-     hhoFileOff   = new File(skinfolder.getChildFile("hho_off.png"));
-     hhoFileOn    = new File(skinfolder.getChildFile("hho_on.png"));
-     crashFileOff = new File(skinfolder.getChildFile("crash_off.png"));
-     crashFileOn  = new File(skinfolder.getChildFile("crash_on.png"));
-     appFileOn    = new File(skinfolder.getChildFile("appdir.png"));
-     */
-    background = ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize);
+    backgroundImage.reset(new ImageComponent("backgroundImage"));
+    backgroundImage->setImage(ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize), RectanglePlacement::fillDestination);
+    addAndMakeVisible(backgroundImage.get());
+    
+    
+    
     std::unique_ptr<Drawable> buttonOff;
     std::unique_ptr<Drawable> buttonOn;
     
@@ -171,7 +163,12 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     dropDownButton->onClick = [this] /*capture this event 执行后面{}的指令*/ {
         dropDownButtonClicked();
     };
+    
     dropDownButton->setClickingTogglesState(true);
+    dropDownButton->onStateChange = [&] {
+        updateDropDownState();
+    };
+    
     addAndMakeVisible(dropDownButton.get());
     
     buttonOn = Drawable::createFromImageData(BinaryData::appdir_png, BinaryData::appdir_pngSize);
@@ -258,6 +255,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     cornerComponent.reset(new OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>(this, this, &constrainer));
     addAndMakeVisible(cornerComponent.get());
     
+    
     setSize (OrionGlobalWidth, OrionGlobalHeight);
     
 }
@@ -285,92 +283,8 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     //*********************************************************************************************************************************************
     //*********************************************************************************************************************************************
     
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-    RectanglePlacement orionBackgroundRectanglePlacement(64);
-    
-    if(dropDown) {
-        g.drawImageWithin(background, 0, 0,getWidth(),getHeight()/1.50,orionBackgroundRectanglePlacement,false);
-    }else{g.drawImageWithin(background, 0, 0,getWidth(),getHeight(),orionBackgroundRectanglePlacement,false);}
-    
-    
-    
-    
-    /*
-     OrionBrowser* custablook = new OrionBrowser();
-     
-     if(auto* newl = dynamic_cast<juce::LookAndFeel*> (custablook))
-     {
-     filebrowser.setLookAndFeel(newl);
-     }
-     */
-    //auto* preview = dynamic_cast<Component*> (filebrowser.getPreviewComponent());
-    
-    //display->setBounds (0, 75, 195, 228);
-    //addAndMakeVisible(display);
-    
-    File subdir;
-    if(AppDir.isDown()==true)
-    {
-        appdirClicked();
-    }
-    else if(DeskDir.isDown()==true)
-    {
-        deskdirClicked();
-    }
-    else if(DownDir.isDown()==true)
-    {
-        downdirClicked();
-    }
-    else if(MusicDir.isDown()==true)
-    {
-        musicdirClicked();
-    }
-    else if(DocDir.isDown()==true)
-    {
-        docdirClicked();
-    }
-    else if(HomDir.isDown()==true)
-    {
-        homedirClicked();
-    }
-    if(UpBut.isDown()==true)
-    {
-        upbutClicked();
-    }
-    
-    //std::cout<<"which dir "<<whichdir<<"\n";
-    if(changed == 1)
-    {
-        switch(whichdir)
-        {
-            case 1:
-                filebrowser.setRoot(File::getSpecialLocation(File::SpecialLocationType::globalApplicationsDirectory));
-                break;
-            case 2:
-                filebrowser.setRoot(File::getSpecialLocation(File::SpecialLocationType::userDesktopDirectory));
-                break;
-            case 3:
-                filebrowser.setRoot(File::getSpecialLocation(File::SpecialLocationType::userHomeDirectory).getChildFile("Downloads"));
-                break;
-            case 4:
-                filebrowser.setRoot(File::getSpecialLocation(File::SpecialLocationType::userMusicDirectory));
-                break;
-            case 5:
-                filebrowser.setRoot(File::getSpecialLocation(File::SpecialLocationType::userDocumentsDirectory));
-                break;
-            case 6:
-                filebrowser.setRoot(File::getSpecialLocation(File::SpecialLocationType::userHomeDirectory));
-                break;
-        }
-        changed = 0;
-    }
-    
-    //    auto* display = dynamic_cast<Component*> (filebrowser.getDisplayComponent());
-    //    display->setBounds(0, 323, 195, 278);
-    //    addAndMakeVisible(display);
-    //std::cout<<"is dragging? "<<filebrowser.isDragAndDropActive()<<"\n";
-    
+        
 }
 
 void OrionaudioAudioProcessorEditor::resized()
@@ -378,38 +292,60 @@ void OrionaudioAudioProcessorEditor::resized()
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
     cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
-    if (true)
+    auto area = getLocalBounds();
+    float h;
+    if (dropDownVisible)
     {
-        tabComponents->setBounds(0, getHeight() - getHeight() / 3, getWidth(), getHeight() / 3);
-        tabComponents->setVisible(true);
-        
+        h = getHeight() * .67;
+        area = area.removeFromBottom(getHeight() / 3);
+        tabComponents->setBounds(area);
+    }
+    else
+    {
+        h = getHeight();
     }
     
-    else
-        tabComponents->setVisible(false);
+    // MENU BAR
+    area = getLocalBounds();
+    area = area.removeFromTop(h * .1);
+    area.removeFromLeft(getWidth() / 6);
+    menuBar->setBounds(area);
     
-    kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);
-    snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);
-    clapButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 225, 100, 112);
-    percButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 225, 100, 112);
+    // PRIMARY PANE
+    area.translate(0, menuBar->getHeight());
+    area.setHeight(h);
+    primaryPane->setBounds(area);
     
-    snapButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 100, 100, 112);
-    hhoButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 100, 100, 112);
-    hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);
-    crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);
+    // SIDE PANEL
+    area = getLocalBounds();
+    area = area.removeFromLeft(getWidth() / 6);
+    area.setHeight(h);
+    sidePanel->setBounds(area);
     
+//    backgroundImage->setBounds(0, 0, getWidth(), getHeight() * (2.f / 3.f));
+    
+//    kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);
+//    snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);
+//    clapButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 225, 100, 112);
+//    percButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 225, 100, 112);
+//
+//    snapButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 100, 100, 112);
+//    hhoButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 100, 100, 112);
+//    hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);
+//    crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);
+//
     setBoundsScaled(dropDownButton.get(), 174.52, 391.5, 50, 50);
-    
-    fileBrowser->setBounds(0, getHeight() * .11, getWidth() * .17, getHeight() * .56);
-    
-    setBoundsScaled(waveWiggle.get(), {373,388, 469, 64});
-    
-    setBoundsScaled(meterInput.get(), 919, /*JUCE_LIVE_CONSTANT(*/ 23 /*)*/, 135, 17);
-    setBoundsScaled(meterLeft.get(), 1072, 383, 17, 90);
-    setBoundsScaled(meterRight.get(), 1092, 383, 17, 90);
-    
-    auto* list = dynamic_cast<Component*> (&mainlist);
-    list->setBounds(0, 75, 195, 228);
+//
+//    fileBrowser->setBounds(0, getHeight() * .11, getWidth() * .17, getHeight() * .56);
+//
+//    setBoundsScaled(waveWiggle.get(), {373,388, 469, 64});
+//
+//    setBoundsScaled(meterInput.get(), 919, /*JUCE_LIVE_CONSTANT(*/ 23 /*)*/, 135, 17);
+//    setBoundsScaled(meterLeft.get(), 1072, 383, 17, 90);
+//    setBoundsScaled(meterRight.get(), 1092, 383, 17, 90);
+//
+//    auto* list = dynamic_cast<Component*> (&mainlist);
+//    list->setBounds(0, 75, 195, 228);
     
     //    AppDir.setBounds(0, 75, 195, 228/10);
     //    DeskDir.setBounds(0, 75+228/10, 195, 228/10);
@@ -614,3 +550,10 @@ void OrionaudioAudioProcessorEditor::setDefaultSize()
 {
     setSize(orion::defaultWidth, orion::defaultHeight);
 }
+
+void OrionaudioAudioProcessorEditor::updateDropDownState() { 
+    dropDownVisible = dropDownButton->getToggleState();
+    tabComponents->setVisible(dropDownVisible);
+    resized();
+}
+

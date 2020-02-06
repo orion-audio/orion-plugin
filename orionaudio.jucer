@@ -6,6 +6,19 @@
               pluginCode="orpg" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{41BA36B8-C3CB-825C-2E8C-D4ED7E80AEFB}" name="Source">
+      <FILE id="VBol3o" name="DragAndDropButton.h" compile="0" resource="0"
+            file="Source/DragAndDropButton.h"/>
+      <FILE id="nacSpN" name="SidePanelComponent.cpp" compile="1" resource="0"
+            file="Source/SidePanelComponent.cpp"/>
+      <FILE id="swHoLo" name="SidePanelComponent.h" compile="0" resource="0"
+            file="Source/SidePanelComponent.h"/>
+      <FILE id="PNAxng" name="PrimaryPaneComponent.cpp" compile="1" resource="0"
+            file="Source/PrimaryPaneComponent.cpp"/>
+      <FILE id="fHILT7" name="PrimaryPaneComponent.h" compile="0" resource="0"
+            file="Source/PrimaryPaneComponent.h"/>
+      <FILE id="EOdNvP" name="OrionMenuBar.cpp" compile="1" resource="0"
+            file="Source/OrionMenuBar.cpp"/>
+      <FILE id="QYIhdM" name="OrionMenuBar.h" compile="0" resource="0" file="Source/OrionMenuBar.h"/>
       <FILE id="mGCqTV" name="OrionLookAndFeel.cpp" compile="1" resource="0"
             file="Source/OrionLookAndFeel.cpp"/>
       <FILE id="QE9rU7" name="OrionLookAndFeel.h" compile="0" resource="0"
@@ -237,7 +250,7 @@
     <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
   <LIVE_SETTINGS>
-    <OSX buildEnabled="1"/>
+    <OSX buildEnabled="0"/>
   </LIVE_SETTINGS>
   <JUCEOPTIONS JUCE_VST3_CAN_REPLACE_VST2="0" JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
 </JUCERPROJECT>

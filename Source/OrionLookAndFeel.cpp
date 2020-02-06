@@ -82,3 +82,20 @@ Font OrionLookAndFeel::getLabelFont (Label &l)
     f.setHeight(l.getHeight() * .75);
     return f;
 }
+
+void OrionLookAndFeel::drawComboBox(juce::Graphics &g, int width, int height, bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, juce::ComboBox &combo) {
+    
+    g.setColour(Colours::black);
+    g.fillRoundedRectangle(combo.getLocalBounds().toFloat(), 2.f);
+   
+    // DRAW ARROW
+    Path arrow;
+    Rectangle<float> arrowBounds(combo.getRight() - combo.getHeight() * 1.25, 0, combo.getHeight() / 2, combo.getHeight() / 4);
+    arrowBounds.translate(0, arrowBounds.getHeight() * 1.5);
+    g.setColour(Colours::white);
+    arrow.startNewSubPath(arrowBounds.getX(), arrowBounds.getY());
+    arrow.lineTo(arrowBounds.getCentreX(), arrowBounds.getBottom());
+    arrow.lineTo(arrowBounds.getRight(), arrowBounds.getY());
+    g.strokePath(arrow, PathStrokeType(1.f));
+}
+

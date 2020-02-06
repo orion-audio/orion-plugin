@@ -44,7 +44,7 @@ public:
     void drawTabButton (TabBarButton& button, Graphics& g, bool isMouseOver, bool isMouseDown) override;
     
     virtual Font getLabelFont (Label &) override;
-    
+    virtual void drawComboBox(Graphics &, int width, int height, bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, ComboBox &) override;
 private:
     std::array<std::unique_ptr<ImagePair>, 4> tabButtonImages;
     

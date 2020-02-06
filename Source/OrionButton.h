@@ -11,7 +11,7 @@
 #pragma once
 #include "PluginEditor.h"
 
-class OrionButton    : public DrawableButton,
+class OrionButton : public DrawableButton,
                        public FileDragAndDropTarget
 {
     private:

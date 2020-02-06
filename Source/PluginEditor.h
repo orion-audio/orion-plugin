@@ -17,6 +17,9 @@
 #include "OrionResizableCornerComponent.h"
 #include "ResizableContainer.h"
 #include "TabComponentHolder.h"
+#include "OrionMenuBar.h"
+#include "PrimaryPaneComponent.h"
+#include "SidePanelComponent.h"
 
 //==============================================================================
 /**
@@ -27,9 +30,9 @@ typedef AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
 class OrionaudioAudioProcessorEditor : public AudioProcessorEditor, public ResizableContainer
 {
 public:
-
-enum MidiNotes : int
-{
+    
+    enum MidiNotes : int
+    {
         kick = 36,
         snare = 38,
         clap = 39,
@@ -38,10 +41,10 @@ enum MidiNotes : int
         hhc = 42,
         hho = 43,
         crash = 50
-};
-
-enum Tabs : int
-{
+    };
+    
+    enum Tabs : int
+    {
         kickTab = 0,
         snareTab,
         clapTab,
@@ -50,108 +53,112 @@ enum Tabs : int
         hhcTab,
         hhoTab,
         crashTab
-};
-
-
-OrionaudioAudioProcessorEditor (OrionaudioAudioProcessor&);
-~OrionaudioAudioProcessorEditor();
-
-//==============================================================================
-void paint (Graphics&) override;
-void resized() override;
-void tabComponentChanged(int serial);
-
-std::unique_ptr<AudioFormatReaderSource> playSource;
-//     OrionFileBrowser filebrowser;
-
-void setDefaultSize();
+    };
+    
+    
+    OrionaudioAudioProcessorEditor (OrionaudioAudioProcessor&);
+    ~OrionaudioAudioProcessorEditor();
+    
+    //==============================================================================
+    void paint (Graphics&) override;
+    void resized() override;
+    void tabComponentChanged(int serial);
+    
+    void updateDropDownState();
+    std::unique_ptr<AudioFormatReaderSource> playSource;
+    
+    void setDefaultSize();
 private:
-
-std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
-ComponentBoundsConstrainer constrainer;
-
-std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
-std::unique_ptr<WaveWiggle> waveWiggle;
-
-std::unique_ptr<CircularMeter> meterLeft;
-std::unique_ptr<CircularMeter> meterRight;
-
-std::unique_ptr<CircularMeter> meterInput;
-std::unique_ptr<TabComponentHolder> tabComponents;
-
-OrionaudioAudioProcessor& processor;
-//ScopedPointer<OrionTabComponent> tabComponent;
-//    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
-FileBrowserComponent filebrowser;
-
-//    FileTreeComponent tree;
-
-File resourcefolder,skinfolder;
-Image background;
-File* clipbackground;
-File* envbackground;
-File* eqbackground;
-
-void addMessageToList (const MidiMessage& message);
-
-void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
-
-void kickButtonClicked();
-void snareButtonClicked();
-void clapButtonClicked();
-void percButtonClicked();
-void HiHatButtonClicked();
-void cymbalButtonClicked();
-void snapButtonClicked();
-
-void dropDownButtonClicked();
-
-void appdirClicked();
-void deskdirClicked();
-void downdirClicked();
-void musicdirClicked();
-void docdirClicked();
-void homedirClicked();
-void upbutClicked();
-
-void lookupindex(int index,int ref);
-void draganddropped(int index);
-TextButton instrumentTriggers[6];
-
-//ComboBox directory;
-//PopupMenu dir;
-Orionlist maindir;
-ListBox mainlist;
-
-//DrawableButton kickButton;
-OrionButton kickButton;
-OrionButton snareButton;
-OrionButton clapButton;
-OrionButton percButton;
-
-OrionButton snapButton;
-OrionButton hhcButton;    //this used to be hihat
-OrionButton hhoButton;    //cymbal
-OrionButton crashButton;    //snap
-
-std::unique_ptr<ImageButton> dropDownButton;
-
-int indices[7];
-// std::vector<OrionButton>& buttons;
-
-
-DrawableButton AppDir;
-DrawableButton DeskDir;
-DrawableButton DownDir;
-DrawableButton MusicDir;
-DrawableButton DocDir;
-DrawableButton HomDir;
-DrawableButton UpBut;
-int whichdir {0};
-int changed {0};
-AudioFormatManager formatManager;
-double startTime;
-
-bool dropDown = true;
-JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
+    
+    std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
+    ComponentBoundsConstrainer constrainer;
+    
+    std::unique_ptr<OrionMenuBar> menuBar; 
+    std::unique_ptr<PrimaryPaneComponent> primaryPane; 
+    std::unique_ptr<SidePanelComponent> sidePanel;
+    
+    std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
+    std::unique_ptr<WaveWiggle> waveWiggle;
+    
+    std::unique_ptr<CircularMeter> meterLeft;
+    std::unique_ptr<CircularMeter> meterRight;
+    
+    std::unique_ptr<CircularMeter> meterInput;
+    std::unique_ptr<TabComponentHolder> tabComponents;
+    
+    OrionaudioAudioProcessor& processor;
+    //ScopedPointer<OrionTabComponent> tabComponent;
+    //    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
+    FileBrowserComponent filebrowser;
+    
+    //    FileTreeComponent tree;
+    
+    File resourcefolder,skinfolder;
+    std::unique_ptr<ImageComponent> backgroundImage;
+    File* clipbackground;
+    File* envbackground;
+    File* eqbackground;
+    
+    void addMessageToList (const MidiMessage& message);
+    
+    void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
+    
+    void kickButtonClicked();
+    void snareButtonClicked();
+    void clapButtonClicked();
+    void percButtonClicked();
+    void HiHatButtonClicked();
+    void cymbalButtonClicked();
+    void snapButtonClicked();
+    
+    void dropDownButtonClicked();
+    
+    void appdirClicked();
+    void deskdirClicked();
+    void downdirClicked();
+    void musicdirClicked();
+    void docdirClicked();
+    void homedirClicked();
+    void upbutClicked();
+    
+    void lookupindex(int index,int ref);
+    void draganddropped(int index);
+    TextButton instrumentTriggers[6];
+    
+    //ComboBox directory;
+    //PopupMenu dir;
+    Orionlist maindir;
+    ListBox mainlist;
+    
+    //DrawableButton kickButton;
+    OrionButton kickButton;
+    OrionButton snareButton;
+    OrionButton clapButton;
+    OrionButton percButton;
+    
+    OrionButton snapButton;
+    OrionButton hhcButton;    //this used to be hihat
+    OrionButton hhoButton;    //cymbal
+    OrionButton crashButton;    //snap
+    
+    std::unique_ptr<ImageButton> dropDownButton;
+    
+    int indices[7];
+    // std::vector<OrionButton>& buttons;
+    
+    
+    DrawableButton AppDir;
+    DrawableButton DeskDir;
+    DrawableButton DownDir;
+    DrawableButton MusicDir;
+    DrawableButton DocDir;
+    DrawableButton HomDir;
+    DrawableButton UpBut;
+    int whichdir {0};
+    int changed {0};
+    AudioFormatManager formatManager;
+    double startTime;
+    
+    bool dropDownVisible = false;
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };

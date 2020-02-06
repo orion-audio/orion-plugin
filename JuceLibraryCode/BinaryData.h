@@ -147,7 +147,7 @@ namespace BinaryData
     const int            knob_2_pngSize = 991;
 
     extern const char*   logo_png;
-    const int            logo_pngSize = 85005;
+    const int            logo_pngSize = 61073;
 
     extern const char*   m_png;
     const int            m_pngSize = 11100;
