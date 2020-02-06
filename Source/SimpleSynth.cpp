@@ -123,6 +123,8 @@ void SimpleSynth::loadSamples()
         File file(audiofolder.getChildFile(dir).getChildFile(filename));
         std::unique_ptr<AudioFormatReader> reader;
         reader.reset(audioFormatManager.createReaderFor(file));
+        if (reader == nullptr)
+            return;
         BigInteger note;
         note.setBit(MidiNote);
         OrionSamplerSound *sampler = new OrionSamplerSound(String(i), *reader.get(), note, MidiNote, 0.0f, 10.0f, 10.0f);
