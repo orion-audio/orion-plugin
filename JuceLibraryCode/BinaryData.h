@@ -47,6 +47,9 @@ namespace BinaryData
     extern const char*   back_arrow_png;
     const int            back_arrow_pngSize = 15605;
 
+    extern const char*   background_gradient_png;
+    const int            background_gradient_pngSize = 12898;
+
     extern const char*   check_png;
     const int            check_pngSize = 460;
 
@@ -234,7 +237,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 75;
+    const int namedResourceListSize = 76;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

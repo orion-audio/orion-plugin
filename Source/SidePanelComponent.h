@@ -16,7 +16,7 @@
 //==============================================================================
 /*
 */
-class SidePanelComponent    : public Component
+class SidePanelComponent : public Component
 {
 public:
     SidePanelComponent();

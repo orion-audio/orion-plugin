@@ -64,7 +64,7 @@ public:
     void resized() override;
     void tabComponentChanged(int serial);
     
-    void updateDropDownState();
+    void updateDropDownState(bool newState);
     std::unique_ptr<AudioFormatReaderSource> playSource;
     
     void setDefaultSize();

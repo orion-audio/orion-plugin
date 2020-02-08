@@ -34,7 +34,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     menuBar.reset(new OrionMenuBar);
     addAndMakeVisible(menuBar.get());
     
-    primaryPane.reset(new PrimaryPaneComponent);
+    primaryPane.reset(new PrimaryPaneComponent(this));
     addAndMakeVisible(primaryPane.get());
     
     sidePanel.reset(new SidePanelComponent());
@@ -164,12 +164,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
         dropDownButtonClicked();
     };
     
-    dropDownButton->setClickingTogglesState(true);
-    dropDownButton->onStateChange = [&] {
-        updateDropDownState();
-    };
-    
-    addAndMakeVisible(dropDownButton.get());
     
     buttonOn = Drawable::createFromImageData(BinaryData::appdir_png, BinaryData::appdir_pngSize);
     
@@ -293,33 +287,31 @@ void OrionaudioAudioProcessorEditor::resized()
     cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
     auto area = getLocalBounds();
-    float h;
-    if (dropDownVisible)
-    {
-        h = getHeight() * .67;
-        area = area.removeFromBottom(getHeight() / 3);
-        tabComponents->setBounds(area);
-    }
-    else
-    {
-        h = getHeight();
-    }
     
+    if (dropDownVisible)
+        tabComponents->setBounds(area.removeFromBottom(getHeight() / 3));
+    
+        
     // MENU BAR
-    area = getLocalBounds();
-    area = area.removeFromTop(h * .1);
-    area.removeFromLeft(getWidth() / 6);
-    menuBar->setBounds(area);
+    auto menuBarArea = area;
+    menuBarArea = menuBarArea.removeFromTop(getHeight() * .1);
+    menuBarArea.removeFromLeft(getWidth() / 6);
+    menuBar->setBounds(menuBarArea);
     
     // PRIMARY PANE
-    area.translate(0, menuBar->getHeight());
-    area.setHeight(h);
-    primaryPane->setBounds(area);
+    auto primaryPaneArea = area;
+    primaryPaneArea.setY(menuBar->getBottom());
+    if (dropDownVisible)
+        primaryPaneArea.setBottom(tabComponents->getY());
+    else
+        primaryPaneArea.setBottom(getHeight());
+    primaryPaneArea.removeFromLeft(getWidth() / 6);
+    primaryPane->setBounds(primaryPaneArea);
     
     // SIDE PANEL
     area = getLocalBounds();
     area = area.removeFromLeft(getWidth() / 6);
-    area.setHeight(h);
+//    area.setHeight(h);
     sidePanel->setBounds(area);
     
 //    backgroundImage->setBounds(0, 0, getWidth(), getHeight() * (2.f / 3.f));
@@ -551,8 +543,10 @@ void OrionaudioAudioProcessorEditor::setDefaultSize()
     setSize(orion::defaultWidth, orion::defaultHeight);
 }
 
-void OrionaudioAudioProcessorEditor::updateDropDownState() { 
-    dropDownVisible = dropDownButton->getToggleState();
+void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
+{
+    DBG((int)newState);
+    dropDownVisible = newState;
     tabComponents->setVisible(dropDownVisible);
     resized();
 }

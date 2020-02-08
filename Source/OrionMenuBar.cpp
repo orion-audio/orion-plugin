@@ -15,6 +15,7 @@
 OrionMenuBar::OrionMenuBar()
 {
     kitsCombo.reset(new ComboBox());
+    kitsCombo->setText("Isaac's Kit");
     addAndMakeVisible(kitsCombo.get());
 }
 
@@ -36,7 +37,7 @@ void OrionMenuBar::resized()
     area.removeFromTop(getHeight() / 4);
     area.removeFromBottom(getHeight() / 4);
     area.removeFromLeft(getHeight() / 4);
-    area.setWidth(getWidth() * .15);
+    area.setWidth(getWidth() * .2);
     
     kitsCombo->setBounds(area);
     
