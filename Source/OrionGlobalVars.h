@@ -28,4 +28,29 @@ namespace orion
         HHO,
         Clap
     };
+    
+    enum MidiNotes : int
+    {
+        kick = 36,
+        snare = 38,
+        clap = 39,
+        snap = 46,
+        perc = 41,
+        hhc = 42,
+        hho = 43,
+        crash = 50
+    };
+    
+    enum Tabs : int
+    {
+        kickTab = 0,
+        snareTab,
+        clapTab,
+        percTab,
+        snapTab,
+        hhcTab,
+        hhoTab,
+        crashTab
+    };
+
 }

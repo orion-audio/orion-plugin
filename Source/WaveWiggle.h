@@ -82,13 +82,11 @@ public:
 
     void paint (Graphics& g) override
     {
-//        g.fillAll(Colours::black);
         g.setColour(Colour(0xff3AE6D1));
         Path p;
         p.startNewSubPath(0, getHeight() / 2);
         
         int x = 0;
-        //int w = getWidth() * 0.045;
         int w = getWidth() * 0.020;
         
         for (int i = 0; i < 23; i++){

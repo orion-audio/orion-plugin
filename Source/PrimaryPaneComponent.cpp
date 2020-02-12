@@ -11,7 +11,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PrimaryPaneComponent.h"
 #include "PluginEditor.h"
-
+#include "OrionGlobalVars.h"
 //==============================================================================
 PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessorEditor* e)
 {
@@ -20,6 +20,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessorEditor* e)
     for (int i = 0; i < drumButtons.size(); i++)
     {
         drumButtons[i].reset(new DragAndDropButton());
+        drumButtons[i]->onClick = [&] { waveWiggle->startAnimation(); };
         addAndMakeVisible(drumButtons[i].get());
     }
     
@@ -31,39 +32,48 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessorEditor* e)
     downImage = ImageCache::getFromMemory(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::kick_off_png, BinaryData::kick_off_pngSize);
     drumButtons[0]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[0]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::kick, orion::Tabs::kickTab, drumButtons[0]->isDown()); };
     
     downImage = ImageCache::getFromMemory(BinaryData::snare_on_png, BinaryData::snare_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::snare_off_png, BinaryData::snare_off_pngSize);
     drumButtons[1]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[1]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::snare, orion::Tabs::snareTab, drumButtons[1]->isDown()); };
 
     downImage = ImageCache::getFromMemory(BinaryData::clap_on_png, BinaryData::clap_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::clap_off_png, BinaryData::clap_off_pngSize);
     drumButtons[2]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[2]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::clap, orion::Tabs::clapTab, drumButtons[2]->isDown()); };
 
     downImage = ImageCache::getFromMemory(BinaryData::perc_on_png, BinaryData::perc_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::perc_off_png, BinaryData::perc_off_pngSize);
     drumButtons[3]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[3]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::perc, orion::Tabs::percTab, drumButtons[3]->isDown()); };
 
     
     downImage = ImageCache::getFromMemory(BinaryData::snap_on_png, BinaryData::snap_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::snap_off_png, BinaryData::snap_off_pngSize);
     drumButtons[4]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[4]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::snap, orion::Tabs::snareTab, drumButtons[4]->isDown()); };
 
     
     downImage = ImageCache::getFromMemory(BinaryData::hho_on_png, BinaryData::hho_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::hho_off_png, BinaryData::hho_off_pngSize);
     drumButtons[5]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[5]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::hho, orion::Tabs::hhoTab, drumButtons[5]->isDown()); };
 
     
     downImage = ImageCache::getFromMemory(BinaryData::hhc_on_png, BinaryData::hhc_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::hhc_off_png, BinaryData::hhc_off_pngSize);
     drumButtons[6]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[6]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::hhc, orion::Tabs::hhcTab, drumButtons[6]->isDown()); };
 
     
     downImage = ImageCache::getFromMemory(BinaryData::crash_on_png, BinaryData::crash_on_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::crash_off_png, BinaryData::crash_off_pngSize);
     drumButtons[7]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    drumButtons[7]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::crash, orion::Tabs::crashTab, drumButtons[7]->isDown()); };
 
+    
     downImage = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
 
@@ -84,6 +94,10 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessorEditor* e)
     muteButton.reset(new ImageButton());
     muteButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
     addAndMakeVisible(muteButton.get());
+    
+    // WAVE WIGGLE
+    waveWiggle.reset(new WaveWiggle());
+    addAndMakeVisible(waveWiggle.get());
     
 }
 
@@ -127,6 +141,10 @@ void PrimaryPaneComponent::resized()
     area = Rectangle<int>(0, 0, getParentHeight() * .1, getParentHeight() * .1);
     area.setPosition(0, getHeight() - area.getHeight());
     dropDownButton->setBounds(area);
+    
+    area = Rectangle<int>(0, drumButtons[4]->getBottom(), getWidth(), getParentHeight() * .1);
+    area = area.withSizeKeepingCentre(area.getWidth() * .85, area.getHeight());
+    waveWiggle->setBounds(area);
     
     repaint();
 }

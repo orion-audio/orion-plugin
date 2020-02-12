@@ -31,31 +31,6 @@ class OrionaudioAudioProcessorEditor : public AudioProcessorEditor, public Resiz
 {
 public:
     
-    enum MidiNotes : int
-    {
-        kick = 36,
-        snare = 38,
-        clap = 39,
-        snap = 46,
-        perc = 41,
-        hhc = 42,
-        hho = 43,
-        crash = 50
-    };
-    
-    enum Tabs : int
-    {
-        kickTab = 0,
-        snareTab,
-        clapTab,
-        percTab,
-        snapTab,
-        hhcTab,
-        hhoTab,
-        crashTab
-    };
-    
-    
     OrionaudioAudioProcessorEditor (OrionaudioAudioProcessor&);
     ~OrionaudioAudioProcessorEditor();
     
@@ -68,6 +43,9 @@ public:
     std::unique_ptr<AudioFormatReaderSource> playSource;
     
     void setDefaultSize();
+    
+    void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
+
 private:
     
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
@@ -101,16 +79,6 @@ private:
     
     void addMessageToList (const MidiMessage& message);
     
-    void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
-    
-    void kickButtonClicked();
-    void snareButtonClicked();
-    void clapButtonClicked();
-    void percButtonClicked();
-    void HiHatButtonClicked();
-    void cymbalButtonClicked();
-    void snapButtonClicked();
-    
     void dropDownButtonClicked();
     
     void appdirClicked();
@@ -121,26 +89,13 @@ private:
     void homedirClicked();
     void upbutClicked();
     
-    void lookupindex(int index,int ref);
-    void draganddropped(int index);
     TextButton instrumentTriggers[6];
     
     //ComboBox directory;
     //PopupMenu dir;
     Orionlist maindir;
     ListBox mainlist;
-    
-    //DrawableButton kickButton;
-    OrionButton kickButton;
-    OrionButton snareButton;
-    OrionButton clapButton;
-    OrionButton percButton;
-    
-    OrionButton snapButton;
-    OrionButton hhcButton;    //this used to be hihat
-    OrionButton hhoButton;    //cymbal
-    OrionButton crashButton;    //snap
-    
+        
     std::unique_ptr<ImageButton> dropDownButton;
     
     int indices[7];

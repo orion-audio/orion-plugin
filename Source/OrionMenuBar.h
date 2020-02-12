@@ -34,7 +34,8 @@ private:
     // BUTTONS
     std::unique_ptr<DrawableButton> settingsButton;
     std::unique_ptr<DrawableButton> helpButton;
-    
+    std::unique_ptr<ImageButton> arrangeButton;
+     
     ColourGradient backgroundGradient;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionMenuBar)

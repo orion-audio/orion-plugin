@@ -10,15 +10,6 @@ using namespace juce;
 
 OrionaudioAudioProcessorEditor::OrionaudioAudioProcessorEditor (OrionaudioAudioProcessor& p)
 : AudioProcessorEditor (&p), processor (p),
-kickButton(p,"KICK",DrawableButton::ButtonStyle::ImageFitted),
-snareButton(p,"SNARE",DrawableButton::ButtonStyle::ImageFitted ),
-clapButton(p,"CLAP",DrawableButton::ButtonStyle::ImageFitted ),
-percButton(p,"PERC",DrawableButton::ButtonStyle::ImageFitted ),
-hhcButton(p,"HH-C",DrawableButton::ButtonStyle::ImageFitted ),
-hhoButton(p,"HH-O",DrawableButton::ButtonStyle::ImageFitted ),
-snapButton(p,"CRASH",DrawableButton::ButtonStyle::ImageFitted),
-crashButton(p,"CRASH",DrawableButton::ButtonStyle::ImageFitted),
-//        dropDownButton(p,"DropDown",DrawableButton::ButtonStyle::ImageFitted),
 AppDir("Applications",DrawableButton::ButtonStyle::ImageFitted),
 DeskDir("Desktop",DrawableButton::ButtonStyle::ImageFitted),
 DownDir("Downloads",DrawableButton::ButtonStyle::ImageFitted),
@@ -53,106 +44,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     std::unique_ptr<Drawable> buttonOff;
     std::unique_ptr<Drawable> buttonOn;
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::kick_off_png, BinaryData::kick_off_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::kick_on_png, BinaryData::kick_on_pngSize);
-    
-    kickButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    kickButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::kick, Tabs::kickTab, kickButton.isDown());
-    };
-    
-    kickButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    kickButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&kickButton);
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::snare_off_png, BinaryData::snare_off_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::snare_on_png, BinaryData::snare_on_pngSize);
-    
-    
-    snareButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    snareButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::snare, Tabs::snareTab, snareButton.isDown());
-    };
-    snareButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    snareButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&snareButton);
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::clap_off_png, BinaryData::clap_off_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::clap_on_png, BinaryData::clap_on_pngSize);
-    
-    
-    clapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    clapButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::clap, Tabs::clapTab, clapButton.isDown());
-    };
-    clapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    clapButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&clapButton);
-    
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::perc_off_png, BinaryData::perc_off_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::perc_on_png, BinaryData::perc_on_pngSize);
-    
-    
-    percButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    percButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::perc, Tabs::percTab, percButton.isDown());
-    };
-    percButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    percButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&percButton);
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::snap_0ff_png, BinaryData::snap_0ff_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::snap_on_png, BinaryData::snap_on_pngSize);
-    
-    
-    snapButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    snapButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::perc, Tabs::percTab, snapButton.isDown());
-    };
-    snapButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    snapButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&snapButton);
-    
-    
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::hhc_off_png, BinaryData::hhc_off_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::hhc_on_png, BinaryData::hhc_on_pngSize);
-    
-    hhcButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    hhcButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::hhc, Tabs::hhcTab, hhcButton.isDown());
-    };
-    hhcButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    hhcButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&hhcButton);
-    
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::hho_off_png, BinaryData::hho_off_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::hho_on_png, BinaryData::hho_on_pngSize);
-    
-    
-    hhoButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    hhoButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::hho, Tabs::hhoTab, hhoButton.isDown());
-    };
-    hhoButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    hhoButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&hhoButton);
-    
-    buttonOff = Drawable::createFromImageData(BinaryData::crash_off_png, BinaryData::crash_off_pngSize);
-    buttonOn = Drawable::createFromImageData(BinaryData::crash_on_png, BinaryData::crash_on_pngSize);
-    
-    
-    crashButton.setImages(buttonOff.get(), buttonOn.get(), buttonOn.get());
-    crashButton.onStateChange = [this] {
-        drumButtonClicked(MidiNotes::snap, Tabs::snapTab, crashButton.isDown());
-    };
-    crashButton.setColour(TextButton::buttonColourId, Colours::darkgrey);
-    crashButton.setEnabled(true);//防止用户多次按
-    addAndMakeVisible(&crashButton);
-    
+        
     buttonOff = Drawable::createFromImageData(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
     
@@ -455,88 +347,6 @@ void OrionaudioAudioProcessorEditor::upbutClicked()
     filebrowser.goUp();
     
 };
-
-void OrionaudioAudioProcessorEditor::lookupindex(int index,int ref)
-{
-    switch(index)
-    {
-        case 0:
-            if(kickButton.index>ref)
-            {
-                kickButton.index = kickButton.index - 1;
-                indices[0] = kickButton.index;
-            }
-            break;
-        case 1:
-            if(snareButton.index>ref)
-            {
-                snareButton.index = snareButton.index -1;
-                indices[1] = snareButton.index;
-            }
-            break;
-        case 2:
-            if(clapButton.index>ref)
-            {
-                clapButton.index = clapButton.index -1;
-                indices[2] = clapButton.index;
-            }
-            break;
-        case 3:
-            if(percButton.index>ref)
-            {
-                percButton.index = percButton.index -1;
-                indices[3] = percButton.index;
-            }
-            break;
-            
-        case 4:
-            if(snapButton.index>ref)
-            {
-                snapButton.index = snapButton.index -1;
-                indices[6] = snapButton.index;
-            }
-        case 5:
-            if(hhcButton.index>ref)
-            {
-                hhcButton.index = hhcButton.index -1;
-                indices[4] = hhcButton.index;
-            }
-            break;
-        case 6:
-            if(hhoButton.index>ref)
-            {
-                hhoButton.index = hhoButton.index -1;
-                indices[5] = hhoButton.index;
-            }
-            break;
-        case 7:
-            if(crashButton.index>ref)
-            {
-                crashButton.index = crashButton.index -1;
-                indices[6] = crashButton.index;
-            }
-            break;
-            
-    }
-}
-
-void OrionaudioAudioProcessorEditor::draganddropped(int index)
-{
-    //keep track of which instrument is on which voice, determined by files dropped on button
-    //int indices[7] = {kickButton.index, 1,2,3,4,5,6};
-    //std::vector<OrionButton&> buttons = {&kickButton, &snareButton,&clapButton, &percButton, &HiHatButton, &cymbalButton, &snapButton};
-    //std::vector<Ptr> buttons = {*kickButton, *snareButton,*clapButton, *percButton, *HiHatButton, *cymbalButton, *snapButton};
-    for (int i=0; i<7; i++)
-    {
-        if (i!=index)//this is intact, need to move to the front
-        {
-            lookupindex(i,indices[index]);
-            //buttons[i].index = buttons[i].index - 1;
-            //std::cout<<"indices" <<indices[0]<<" "<<indices[1]<<" "<<indices[2]<<" "<<indices[3]<<" "<<indices[4]<<" "<<indices[5]<<" "<<indices[6]<<"\n";
-        }
-    }
-}
-
 
 void OrionaudioAudioProcessorEditor::setDefaultSize()
 {
