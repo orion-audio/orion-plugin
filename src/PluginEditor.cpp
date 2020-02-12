@@ -18,7 +18,6 @@ DocDir("Documents",DrawableButton::ButtonStyle::ImageFitted),
 HomDir("Home",DrawableButton::ButtonStyle::ImageFitted),
 UpBut("Up",DrawableButton::ImageOnButtonBackground),
 filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHomeDirectory),nullptr,nullptr),
-//tree(DirectoryContentsList(nullptr,TimeSliceThread("thread")))
 mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001)
 {
     
@@ -47,16 +46,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
         
     buttonOff = Drawable::createFromImageData(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
     buttonOn = Drawable::createFromImageData(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
-    
-    dropDownButton.reset(new ImageButton());
-    Image imageOff = ImageCache::getFromMemory(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
-    Image imageOn = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
-    dropDownButton->setImages(false, true, true, imageOff, 1.f, Colours::transparentBlack, imageOn, 1.f, Colours::transparentBlack, imageOn, 1.f, Colours::transparentBlack);
-    dropDownButton->onClick = [this] /*capture this event 执行后面{}的指令*/ {
-        dropDownButtonClicked();
-    };
-    
-    
     buttonOn = Drawable::createFromImageData(BinaryData::appdir_png, BinaryData::appdir_pngSize);
     
     AppDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
@@ -218,7 +207,7 @@ void OrionaudioAudioProcessorEditor::resized()
 //    hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);
 //    crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);
 //
-    setBoundsScaled(dropDownButton.get(), 174.52, 391.5, 50, 50);
+//    setBoundsScaled(dropDownButton.get(), 174.52, 391.5, 50, 50);
 //
 //    fileBrowser->setBounds(0, getHeight() * .11, getWidth() * .17, getHeight() * .56);
 //
