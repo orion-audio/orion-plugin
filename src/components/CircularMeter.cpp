@@ -65,7 +65,9 @@ void CircularMeter::paint (Graphics& g)
             g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
             area.translate(0, -area.getHeight());
         }
-    }else if(!isVertical){
+    }
+    
+    else if(!isVertical){
         area = area.removeFromLeft(getWidth() / numCircles);///
         
         g.setColour(findColour(ColourIds::backgroundColourId));

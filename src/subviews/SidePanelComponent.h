@@ -12,6 +12,9 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "DraggableFileBrowserComponent.h"
+#include "PluginProcessor.h"
+
+class OrionaudioAudioProcessorEditor;
 
 //==============================================================================
 /*
@@ -19,13 +22,16 @@
 class SidePanelComponent : public Component
 {
 public:
-    SidePanelComponent();
+    SidePanelComponent(OrionaudioAudioProcessor*, OrionaudioAudioProcessorEditor*);
     ~SidePanelComponent();
 
     void paint (Graphics&) override;
     void resized() override;
 
 private:
+    OrionaudioAudioProcessor* processor;
+    OrionaudioAudioProcessorEditor* editor;
+
     std::unique_ptr<ImageComponent> logoImage;
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     

@@ -38,6 +38,8 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
     undoManager = new UndoManager();
     synth.setup(48000);
 
+//    Synthesiser* s = static_cast<Synthesiser>(&synth);
+    sequencer.reset(new Sequencer(static_cast<Synthesiser*>(&synth)));
 }
 
 OrionaudioAudioProcessor::~OrionaudioAudioProcessor()

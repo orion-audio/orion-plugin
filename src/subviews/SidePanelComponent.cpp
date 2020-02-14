@@ -12,8 +12,11 @@
 #include "SidePanelComponent.h"
 
 //==============================================================================
-SidePanelComponent::SidePanelComponent()
+SidePanelComponent::SidePanelComponent(OrionaudioAudioProcessor* p, OrionaudioAudioProcessorEditor* e)
 {
+    processor = p;
+    editor = e;
+
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
     

@@ -12,9 +12,11 @@
 #include "PrimaryPaneComponent.h"
 #include "PluginEditor.h"
 #include "OrionGlobalVars.h"
+#include "PluginEditor.h"
 //==============================================================================
-PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessorEditor* e)
+PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, OrionaudioAudioProcessorEditor* e)
 {
+    processor = p;
     editor = e;
     
     for (int i = 0; i < drumButtons.size(); i++)

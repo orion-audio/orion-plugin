@@ -39,7 +39,7 @@ public:
         virtual void sequenceChanged()=0;
     };
     
-    Sequencer(std::vector<Layout> layout);
+    Sequencer(Synthesiser* sampler);
     
     int getTotalLength() { return totalLength; }
     
@@ -72,7 +72,7 @@ private:
     
     std::unique_ptr<NoteSequence> sequence;
     AudioPlayHead* playhead;
-    Synthesiser sampler;
+    Synthesiser* sampler;
     AudioFormatManager formatManager;
     float lastSampleRate = 48000;
     int totalLength = 16;

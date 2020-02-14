@@ -20,6 +20,7 @@
 #include "OrionMenuBar.h"
 #include "PrimaryPaneComponent.h"
 #include "SidePanelComponent.h"
+#include "ArrangementWindowComponent.h"
 
 //==============================================================================
 /**
@@ -46,14 +47,18 @@ public:
     
     void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
 
+    void toggleArrangmentWindow(bool windowVisible);
 private:
     
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
     ComponentBoundsConstrainer constrainer;
     
+    // SUB VIEWS
     std::unique_ptr<OrionMenuBar> menuBar; 
     std::unique_ptr<PrimaryPaneComponent> primaryPane; 
     std::unique_ptr<SidePanelComponent> sidePanel;
+    std::unique_ptr<ArrangementWindowComponent> arrangementWindow;
+    
     
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     std::unique_ptr<WaveWiggle> waveWiggle;
@@ -115,5 +120,7 @@ private:
     double startTime;
     
     bool dropDownVisible = false;
+    bool arrangementWindowVisible = false;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };

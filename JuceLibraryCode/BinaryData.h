@@ -206,11 +206,8 @@ namespace BinaryData
     extern const char*   settings_png;
     const int            settings_pngSize = 3452;
 
-    extern const char*   snap_0ff_png;
-    const int            snap_0ff_pngSize = 7976;
-
     extern const char*   snap_off_png;
-    const int            snap_off_pngSize = 9339;
+    const int            snap_off_pngSize = 7976;
 
     extern const char*   snap_on_png;
     const int            snap_on_pngSize = 18302;
@@ -237,7 +234,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 76;
+    const int namedResourceListSize = 75;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

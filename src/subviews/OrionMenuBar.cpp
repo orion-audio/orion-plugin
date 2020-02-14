@@ -10,10 +10,14 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OrionMenuBar.h"
+#include "PluginEditor.h"
 
 //==============================================================================
-OrionMenuBar::OrionMenuBar()
+OrionMenuBar::OrionMenuBar(OrionaudioAudioProcessor* p, OrionaudioAudioProcessorEditor* e)
 {
+    processor = p;
+    editor = e;
+    
     kitsCombo.reset(new ComboBox());
     kitsCombo->setText("Isaac's Kit");
     addAndMakeVisible(kitsCombo.get());
@@ -21,23 +25,42 @@ OrionMenuBar::OrionMenuBar()
     arrangeButton.reset(new ImageButton());
     Image upImage = ImageCache::getFromMemory(BinaryData::a_png, BinaryData::a_pngSize);
     arrangeButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    arrangeButton->setClickingTogglesState(true);
+    arrangeButton->onStateChange = [&] { editor->toggleArrangmentWindow(arrangeButton->getToggleState()); };
     addAndMakeVisible(arrangeButton.get());
+    
+    inputMeter.reset(new CircularMeter());
+    addAndMakeVisible(inputMeter.get());
+    
+    inputMeterLabel.reset(new Label("Mic", "Mic"));
+    addAndMakeVisible(inputMeterLabel.get());
     
 }
 
 OrionMenuBar::~OrionMenuBar()
 {
+    
 }
 
 void OrionMenuBar::paint (Graphics& g)
 {
     g.setGradientFill(backgroundGradient);
     g.fillAll();
+    
+    g.setColour(Colours::black);
+    Rectangle<float> area;
+    area.setX(inputMeterLabel->getX());
+    area.setY(inputMeterLabel->getY());
+    area.setRight(inputMeter->getRight());
+    area.setHeight(inputMeterLabel->getHeight());
+    
+    g.fillRoundedRectangle(area, 2.f);
+    
 }
 
 void OrionMenuBar::resized()
 {
-    int spacing = getWidth() * JUCE_LIVE_CONSTANT(.1);
+    int spacing = getWidth() * (.1);
     backgroundGradient = ColourGradient::vertical(Colour(0xFF4C4C4E), 0, Colour(0xFF222020), getHeight() / 2.f);
     
     auto area = getLocalBounds();
@@ -52,5 +75,11 @@ void OrionMenuBar::resized()
 
     arrangeButton->setBounds(area.withWidth(area.getHeight()));
     
-
+    area.translate(spacing, 0);
+    
+    area.setWidth(area.getWidth() * .3);
+    inputMeterLabel->setBounds(area);
+    area = area.withSizeKeepingCentre(area.getWidth() * 3, area.getHeight() * .5);
+    area.setX(inputMeterLabel->getRight());
+    inputMeter->setBounds(area);
 }

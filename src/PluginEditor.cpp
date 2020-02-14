@@ -21,14 +21,18 @@ filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHom
 mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001)
 {
     
-    menuBar.reset(new OrionMenuBar);
+    menuBar.reset(new OrionMenuBar(&p, this));
     addAndMakeVisible(menuBar.get());
     
-    primaryPane.reset(new PrimaryPaneComponent(this));
+    primaryPane.reset(new PrimaryPaneComponent(&p, this));
     addAndMakeVisible(primaryPane.get());
     
-    sidePanel.reset(new SidePanelComponent());
+    sidePanel.reset(new SidePanelComponent(&p, this));
     addAndMakeVisible(sidePanel.get());
+    
+    arrangementWindow.reset(new ArrangementWindowComponent(&p, this));
+    addAndMakeVisible(arrangementWindow.get());
+    
     
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
     for (int i=0; i<7; i++)
@@ -187,7 +191,11 @@ void OrionaudioAudioProcessorEditor::resized()
     else
         primaryPaneArea.setBottom(getHeight());
     primaryPaneArea.removeFromLeft(getWidth() / 6);
-    primaryPane->setBounds(primaryPaneArea);
+    if (arrangementWindowVisible)
+        arrangementWindow->setBounds(primaryPaneArea);
+    else
+        primaryPane->setBounds(primaryPaneArea);
+
     
     // SIDE PANEL
     area = getLocalBounds();
@@ -350,3 +358,10 @@ void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
     resized();
 }
 
+void OrionaudioAudioProcessorEditor::toggleArrangmentWindow(bool windowVisible)
+{
+    arrangementWindowVisible = windowVisible;
+    arrangementWindow->setVisible(windowVisible);
+    primaryPane->setVisible(!windowVisible);
+    resized();
+}

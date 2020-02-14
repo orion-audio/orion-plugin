@@ -10,28 +10,18 @@
 
 #include "Sequencer.h"
 
-Sequencer::Sequencer(std::vector<Layout> layouts)
+Sequencer::Sequencer(Synthesiser* s)
 {
     formatManager.registerBasicFormats();
 
     sequence.reset(new NoteSequence());
-    
-    unsigned long numVoices = layouts.size();
-    
-    sampler.clearVoices();
-    for (int i = 0; i < numVoices; i++)
-    {
-        sampler.addVoice(new SamplerVoice());
-        createSynthesizerSound(layouts[i]);
-        sampler.addSound(samplerSounds[i]);
-    }
     
 }
 
 void Sequencer::prepareToPlay(double sampleRate)
 {
     lastSampleRate = sampleRate;
-    sampler.setCurrentPlaybackSampleRate(sampleRate);
+    sampler->setCurrentPlaybackSampleRate(sampleRate);
 }
 
 void Sequencer::processBlock(AudioPlayHead* p, AudioBuffer<float> &buffer, MidiBuffer &midiBuffer)
@@ -45,7 +35,7 @@ void Sequencer::processBlock(AudioPlayHead* p, AudioBuffer<float> &buffer, MidiB
 
     addToBufferIfNeeded(0, numSamples, midiBuffer);
     
-    sampler.renderNextBlock(buffer, midiBuffer, 0, buffer.getNumSamples());
+    sampler->renderNextBlock(buffer, midiBuffer, 0, buffer.getNumSamples());
 }
             
 void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &midiBuffer)

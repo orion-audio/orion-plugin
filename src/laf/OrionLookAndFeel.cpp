@@ -9,6 +9,7 @@
 */
 
 #include "OrionLookAndFeel.h"
+#include "AutoLabel.h"
 
 OrionLookAndFeel::OrionLookAndFeel()
 {
@@ -78,6 +79,9 @@ void OrionLookAndFeel::drawTabButton (TabBarButton& button, Graphics& g, bool is
 
 Font OrionLookAndFeel::getLabelFont (Label &l)
 {
+    if (l.getProperties().contains(AutoLabel::propertyName))
+        return Font();
+    
     Font f;
     f.setHeight(l.getHeight() * .75);
     return f;

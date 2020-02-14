@@ -15,6 +15,7 @@
 #include "./Analyser.h"
 #include "LookAndFeelHolder.h"
 #include "OrionLookAndFeel.h"
+#include "Sequencer.h"
 //==============================================================================
 /**
 */
@@ -83,10 +84,9 @@ public:
     
     
     
-    MidiOutput* getMidiOutput()
-    {
-        return midiOutput.get();
-    }
+    MidiOutput* getMidiOutput() { return midiOutput.get(); }
+    
+    Sequencer* getSequencer() { return sequencer.get(); }
     
     AudioTransportSource transport;
     
@@ -113,6 +113,8 @@ private:
 
     // creates and sets look and feel globally
     LookAndFeelHolder<OrionLookAndFeel> lafHolder;
+    
+    std::unique_ptr<Sequencer> sequencer;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessor)
     AudioBuffer<float> mDelayBuffer;

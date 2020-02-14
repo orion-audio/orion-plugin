@@ -14,6 +14,7 @@
 #include "WaveWiggle.h"
 #include <array>
 #include "DragAndDropButton.h"
+#include "PluginProcessor.h"
 
 class OrionaudioAudioProcessorEditor;
 
@@ -23,13 +24,16 @@ class OrionaudioAudioProcessorEditor;
 class PrimaryPaneComponent : public Component
 {
 public:
-    PrimaryPaneComponent(OrionaudioAudioProcessorEditor* editor);
+    PrimaryPaneComponent(OrionaudioAudioProcessor*, OrionaudioAudioProcessorEditor*);
     ~PrimaryPaneComponent();
 
     void paint (Graphics&) override;
     void resized() override;
 
 private:
+    OrionaudioAudioProcessor* processor;
+    OrionaudioAudioProcessorEditor* editor;
+
     // BUTTONS
     std::array<std::unique_ptr<DragAndDropButton>, 8> drumButtons;
     std::unique_ptr<WaveWiggle> waveWiggle;
@@ -40,6 +44,5 @@ private:
     std::unique_ptr<ImageButton> muteButton;
     
     ColourGradient backgroundGradient;
-    OrionaudioAudioProcessorEditor* editor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PrimaryPaneComponent)
 };
