@@ -96,7 +96,7 @@ void OrionEQConfiguration::paint(Graphics& g)
     //********for the filter plots*************
     for (int i=0; i < 5; ++i) {
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
         {
         auto band = voice->eq.bands[i];
         //g.setColour (band.active ? band.colour : band.colour.withAlpha (0.3f));
@@ -167,7 +167,7 @@ void OrionEQConfiguration::mouseMove (const MouseEvent& e)
     {
         for (int i=0; i < 5; ++i)
         {
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
             {
                 auto pos = plotFrame.getX() + getPositionForFrequency (float (voice->eq.bands[i].frequency)) * plotFrame.getWidth();
                 
@@ -207,7 +207,7 @@ void OrionEQConfiguration::mouseDown (const MouseEvent& e)
     
     for (int i=0; i < 5; ++i)
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
         {
             if (std::abs (plotFrame.getX() + getPositionForFrequency (int (voice->eq.bands[i].frequency)) * plotFrame.getWidth()
                           - e.position.getX()) < clickRadius)
@@ -248,7 +248,7 @@ void OrionEQConfiguration::mouseDrag (const MouseEvent& e)
     {
         //std::cout<<"are you positive\n";
         auto pos = (e.position.getX() - plotFrame.getX()) / plotFrame.getWidth();
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
         {
             voice->eq.bands[draggingBand].frequency = getFrequencyForPosition (pos);
             if (draggingGain)
@@ -270,7 +270,7 @@ void OrionEQConfiguration::mouseWheelMove (const MouseEvent& e, const MouseWheel
     {
         for (int i=0; i < 5; ++i)
         {
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
             {
                 
                 auto pos = plotFrame.getX() + getPositionForFrequency (float (voice->eq.bands[i].frequency)) * plotFrame.getWidth();
@@ -339,7 +339,7 @@ void OrionEQConfiguration::mouseDoubleClick (const MouseEvent& e)
     {
         for (int i=0; i < 5; ++i)
         {
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
             {
                 
                 if (std::abs (plotFrame.getX() + getPositionForFrequency (float (voice->eq.bands[i].frequency)) * plotFrame.getWidth()
@@ -371,7 +371,7 @@ void OrionEQConfiguration::updateFrequencyResponses ()
     for (int i=0; i < 5; ++i)
     {
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
         {
             voice->eq.bands[i].frequencyResponse.clear();
             
@@ -382,7 +382,7 @@ void OrionEQConfiguration::updateFrequencyResponses ()
     }
     
     frequencyResponse.clear();
-    if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.synth.getVoice(EQserial)))
+    if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
     {
         voice->createFrequencyPlot (frequencyResponse, voice->getMagnitudes(), plotFrame, pixelsPerDouble);
         //std::cout<<"overall magnitudes "<<voice->getMagnitudes()[30]<<"\n";

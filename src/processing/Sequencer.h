@@ -67,6 +67,9 @@ public:
     
     void createSynthesizerSound(Layout l);
     
+    bool getActive() { return isActive; }
+    void setActive(bool active) { isActive = active; }
+    
 private:
     std::vector<Listener*> listeners;
     
@@ -76,6 +79,8 @@ private:
     AudioFormatManager formatManager;
     float lastSampleRate = 48000;
     int totalLength = 16;
+    
+    bool isActive = true;
     
     std::vector<SynthesiserSound::Ptr> samplerSounds;
 };

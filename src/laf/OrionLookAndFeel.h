@@ -11,6 +11,7 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 #include <array>
+#include "SequencerComponent.h"
 
 struct ImagePair
 {
@@ -24,7 +25,7 @@ struct ImagePair
     Image offImage;
 };
 
-class OrionLookAndFeel : public LookAndFeel_V4
+class OrionLookAndFeel : public LookAndFeel_V4, public SequencerComponent::LookAndFeelMethods
 {
 public:
 //    static String tabButtonProperty {"tabButtonType"};
@@ -45,6 +46,9 @@ public:
     
     virtual Font getLabelFont (Label &) override;
     virtual void drawComboBox(Graphics &, int width, int height, bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, ComboBox &) override;
+    
+    virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive) override;
+    
 private:
     std::array<std::unique_ptr<ImagePair>, 4> tabButtonImages;
     

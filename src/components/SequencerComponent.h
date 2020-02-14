@@ -20,6 +20,18 @@ class SequencerComponent : public Component, public Timer, public Button::Listen
 {
 public:
     
+    struct LookAndFeelMethods
+    {
+    public:
+        virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive)
+        {
+            if (isActive)
+                g.drawRect(bounds);
+            else
+                g.fillRect(bounds);
+        }
+    };
+    
     enum ColourIds : int
     {
         backgroundColourId = 1,

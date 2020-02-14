@@ -265,7 +265,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     if(isDown)
     {
         waveWiggle->startAnimation();
-        processor.synth.noteOn(1, midiNote, 120);
+        processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
         
@@ -276,7 +276,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     
     else
     {
-        processor.synth.noteOff(1, midiNote, 0, false /*没有淡出*/);
+        processor.getSampler()->noteOff(1, midiNote, 0, false /*没有淡出*/);
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOff(1, midiNote, 0.f));
     }

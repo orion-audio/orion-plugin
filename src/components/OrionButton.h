@@ -89,7 +89,7 @@ class OrionButton : public DrawableButton,
         
         //std::cout<<"what file "<<files[0]<<"\n";
       
-        processor.synth.changeSamples(index,files[0],midi);
+        processor.getSampler()->changeSamples(index,files[0],midi);
        
       
         index = 6;

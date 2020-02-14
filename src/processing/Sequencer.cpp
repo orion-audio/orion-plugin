@@ -12,6 +12,8 @@
 
 Sequencer::Sequencer(Synthesiser* s)
 {
+    sampler = s;
+    
     formatManager.registerBasicFormats();
 
     sequence.reset(new NoteSequence());
@@ -26,6 +28,9 @@ void Sequencer::prepareToPlay(double sampleRate)
 
 void Sequencer::processBlock(AudioPlayHead* p, AudioBuffer<float> &buffer, MidiBuffer &midiBuffer)
 {
+    if (!isActive)
+        return;
+    
     playhead = p;
     
     int numSamples = buffer.getNumSamples();

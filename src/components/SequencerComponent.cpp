@@ -56,11 +56,14 @@ void SequencerComponent::paint (Graphics& g)
 
 void SequencerComponent::paintGrid(Graphics& g)
 {
+    SequencerComponent::LookAndFeelMethods* laf = dynamic_cast<SequencerComponent::LookAndFeelMethods*>(&getLookAndFeel());
+    if (laf == nullptr)
+        jassertfalse; // your look and feel must include the sequencer methods
+    
     NoteSequence* sequence = sequencer.getNoteSequence();
     int totalLength = sequencer.getTotalLength();
     float xDist = (float)getWidth() / (totalLength + 1);
     float yDist = (float)getHeight() / NUM_VOICES;
-    
     Rectangle<float> area(xDist, 0, xDist, yDist);
     
     for (int rows = 0; rows < NUM_VOICES; rows++)
@@ -68,12 +71,12 @@ void SequencerComponent::paintGrid(Graphics& g)
         
         for (int cols = 0; cols < totalLength; cols++)
         {
+            bool active = false;
             g.setColour(findColour(ColourIds::beatColourOffId));
             if (sequence->isNotePresent(NoteSequence::noteValues[rows], cols))
-            {
-               g.fillRoundedRectangle(area.withSizeKeepingCentre(xDist * .9, yDist * .9), area.getWidth() / 3);
-            }
-            qtils::drawRoundedRectInside(g, area.withSizeKeepingCentre(xDist * .9, yDist * .9), area.getWidth() / 3, 1.f);
+                active = true;
+            laf->drawNoteBox(g, *this, area.withSizeKeepingCentre(xDist * .9, yDist * .9), active);
+
             area.translate(xDist, 0);
         }
         

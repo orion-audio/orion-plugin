@@ -35,11 +35,11 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
     if (midiOutput != nullptr)
         midiOutput->startBackgroundThread();
 
-    undoManager = new UndoManager();
-    synth.setup(48000);
+    sampler.reset(new SimpleSynth());
+    sampler->setup(48000);
 
-//    Synthesiser* s = static_cast<Synthesiser>(&synth);
-    sequencer.reset(new Sequencer(static_cast<Synthesiser*>(&synth)));
+    sequencer.reset(new Sequencer(static_cast<Synthesiser*>(sampler.get())));
+    sequencer->setActive(true);
 }
 
 OrionaudioAudioProcessor::~OrionaudioAudioProcessor()
@@ -133,7 +133,9 @@ void OrionaudioAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     const int delayBufferSize = 2 * (sampleRate + samplesPerBlock);//2 seconds of delay buffer
     mDelayBuffer.setSize(numInputChannels, delayBufferSize);
     mSampleRate = sampleRate;
-    synth.setCurrentPlaybackSampleRate(sampleRate);
+    sampler->setCurrentPlaybackSampleRate(sampleRate);
+    
+    sequencer->prepareToPlay(sampleRate);
 }
 
 void OrionaudioAudioProcessor::releaseResources()
@@ -170,14 +172,16 @@ void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
 {
     inputLevel = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
     buffer.clear();
-    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    sampler->renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples()) ;
     if (buffer.getNumChannels() > 1)
         outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
     else
         outputLevels.right = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
 
-
+    AudioPlayHead* playhead = getPlayHead();
+    
+    sequencer->processBlock(playhead, buffer, midiMessages);
     //inputAnalyser.addAudioData (buffer, 0, getTotalNumInputChannels());
 
 }

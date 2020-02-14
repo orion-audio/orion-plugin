@@ -103,3 +103,16 @@ void OrionLookAndFeel::drawComboBox(juce::Graphics &g, int width, int height, bo
     g.strokePath(arrow, PathStrokeType(1.f));
 }
 
+void OrionLookAndFeel::drawNoteBox(juce::Graphics &g, SequencerComponent &s, Rectangle<float> bounds, bool isActive) { 
+    float radius = std::min(bounds.getWidth(), bounds.getHeight());
+    auto newBounds = bounds;
+    newBounds = newBounds.withSizeKeepingCentre(radius, radius);
+    g.setColour(Colours::white);
+    if (isActive)
+        g.fillEllipse(newBounds);
+    else
+        g.drawEllipse(newBounds, 1.f);
+    
+}
+
+

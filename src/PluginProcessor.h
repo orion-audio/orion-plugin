@@ -94,10 +94,9 @@ public:
     //AudioProcessorValueTreeState tree;
     
     AudioProcessorValueTreeState& getValueTree() { return parameters; }
-    SimpleSynth& getSampler() {return synth;}
+    SimpleSynth* getSampler() {return sampler.get();}
     
-    SimpleSynth synth;
-    ScopedPointer<UndoManager> undoManager;
+    std::unique_ptr<SimpleSynth> sampler;
     
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
