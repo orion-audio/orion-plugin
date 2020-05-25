@@ -46,10 +46,12 @@ public:
     
     void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
 
+    ComponentBoundsConstrainer constrainer;
+    
 private:
     
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
-    ComponentBoundsConstrainer constrainer;
+    //ComponentBoundsConstrainer constrainer;
     
     std::unique_ptr<OrionMenuBar> menuBar; 
     std::unique_ptr<PrimaryPaneComponent> primaryPane; 

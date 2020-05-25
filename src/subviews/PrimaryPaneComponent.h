@@ -42,4 +42,6 @@ private:
     ColourGradient backgroundGradient;
     OrionaudioAudioProcessorEditor* editor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PrimaryPaneComponent)
+    
+    bool dropDownWindowActivated = false;
 };

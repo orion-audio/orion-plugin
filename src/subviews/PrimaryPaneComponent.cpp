@@ -81,7 +81,25 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessorEditor* e)
     dropDownButton.reset(new ImageButton());
     dropDownButton->setClickingTogglesState(true);
     dropDownButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
-    dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
+    //dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
+    
+    dropDownButton->onStateChange = [&] {
+        editor->updateDropDownState(dropDownButton->getToggleState());
+        
+    };
+    
+    
+    dropDownButton->onClick = [&] {
+        dropDownWindowActivated = !dropDownWindowActivated;
+        if(dropDownWindowActivated){
+            editor->setSize(editor->getWidth(), editor->getHeight()*3.3/2.3);
+            editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
+        }else{
+            editor->setSize(editor->getWidth(), editor->getHeight()*2.3/3.3);
+            editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
+        };
+    };
+    
     addAndMakeVisible(dropDownButton.get());
 
     // SOLO & MUTE BUTTONS
@@ -116,6 +134,7 @@ void PrimaryPaneComponent::resized()
 {
     backgroundGradient = ColourGradient::horizontal(Colour(0xFF0C0C0D), 0, Colours::black, getWidth() / 2);
     
+    /* Solo and Mute Buttons */
     Rectangle<int> area(getParentHeight() * .025, getParentHeight() * .025, getParentHeight() * .05, getParentHeight() * .05);
     soloButton->setBounds(area);
     area.translate(area.getWidth(), 0);
@@ -138,13 +157,19 @@ void PrimaryPaneComponent::resized()
         area.translate(0, area.getHeight());
     }
     
+    /* Wave Wiggle */
+    area = Rectangle<int>(drumButtons[4]->getWidth(), drumButtons[4]->getBottom() + drumButtons[4]->getHeight()/2, 3.5 * drumButtons[4]->getWidth(), getParentHeight() * .1);
+    area = area.withSizeKeepingCentre(area.getWidth() * .85, area.getHeight());
+    waveWiggle->setBounds(area);
+    
+//    area = Rectangle<int>(0, drumButtons[4]->getBottom(), getWidth(), getParentHeight() * .1);
+//    area = area.withSizeKeepingCentre(area.getWidth() * .85, area.getHeight());
+//    waveWiggle->setBounds(area);
+    
+    /* Drop Down Button */
     area = Rectangle<int>(0, 0, getParentHeight() * .1, getParentHeight() * .1);
     area.setPosition(0, getHeight() - area.getHeight());
     dropDownButton->setBounds(area);
-    
-    area = Rectangle<int>(0, drumButtons[4]->getBottom(), getWidth(), getParentHeight() * .1);
-    area = area.withSizeKeepingCentre(area.getWidth() * .85, area.getHeight());
-    waveWiggle->setBounds(area);
     
     repaint();
 }

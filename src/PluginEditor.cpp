@@ -130,7 +130,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     cornerComponent.reset(new OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>(this, this, &constrainer));
     addAndMakeVisible(cornerComponent.get());
     
-    
     setSize (OrionGlobalWidth, OrionGlobalHeight);
     
 }
@@ -262,7 +261,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
         
         tabComponents->setCurrentTab(tabIndex);
-        
+
         
     }
     
@@ -334,7 +333,6 @@ void OrionaudioAudioProcessorEditor::homedirClicked()
 void OrionaudioAudioProcessorEditor::upbutClicked()
 {
     filebrowser.goUp();
-    
 };
 
 void OrionaudioAudioProcessorEditor::setDefaultSize()

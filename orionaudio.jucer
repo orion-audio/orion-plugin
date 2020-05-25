@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" jucerVersion="5.4.5"
+<JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" jucerVersion="5.4.7"
               pluginVST3Category="Fx,Stereo" pluginFormats="buildAU,buildStandalone,buildVST3"
               companyName="Orion" pluginAUMainType="'aumu'" pluginManufacturerCode="Orio"
               pluginCode="orpg" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
@@ -205,7 +205,6 @@
         <FILE id="d0kLXh" name="s.png" compile="0" resource="1" file="assets/graphics/s.png"/>
         <FILE id="jOD5pZ" name="selected.png" compile="0" resource="1" file="assets/graphics/selected.png"/>
         <FILE id="DLrONF" name="settings.png" compile="0" resource="1" file="assets/graphics/settings.png"/>
-        <FILE id="ayh3T9" name="snap_0ff.png" compile="0" resource="1" file="assets/graphics/snap_0ff.png"/>
         <FILE id="ZPfvsD" name="snap_off.png" compile="0" resource="1" file="assets/graphics/snap_off.png"/>
         <FILE id="Agjm4L" name="snap_on.png" compile="0" resource="1" file="assets/graphics/snap_on.png"/>
         <FILE id="jj0PRN" name="snap_selected.png" compile="0" resource="1"
