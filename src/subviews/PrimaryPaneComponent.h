@@ -43,5 +43,5 @@ private:
     OrionaudioAudioProcessorEditor* editor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PrimaryPaneComponent)
     
-    bool dropDownWindowActivated = false;
+    //bool dropDownWindowActivated = false;
 };

@@ -158,6 +158,7 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     //*********************************************************************************************************************************************
     
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+    
         
 }
 
@@ -173,26 +174,38 @@ void OrionaudioAudioProcessorEditor::resized()
     
         
     // MENU BAR
-    auto menuBarArea = area;
-    menuBarArea = menuBarArea.removeFromTop(getHeight() * .1);
-    menuBarArea.removeFromLeft(getWidth() / 6);
+    float menuBarHeight = 0;
+    
+    if(dropDownVisible){
+        menuBarHeight = getHeight() * 1/15;
+    }else{
+        menuBarHeight = getHeight() * 1/10;
+    };
+    
+    auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, menuBarHeight);
     menuBar->setBounds(menuBarArea);
     
-    // PRIMARY PANE
-    auto primaryPaneArea = area;
-    primaryPaneArea.setY(menuBar->getBottom());
-    if (dropDownVisible)
-        primaryPaneArea.setBottom(tabComponents->getY());
-    else
-        primaryPaneArea.setBottom(getHeight());
-    primaryPaneArea.removeFromLeft(getWidth() / 6);
-    primaryPane->setBounds(primaryPaneArea);
     
     // SIDE PANEL
-    area = getLocalBounds();
-    area = area.removeFromLeft(getWidth() / 6);
-//    area.setHeight(h);
-    sidePanel->setBounds(area);
+    auto sidePaneArea = Rectangle<int>(0, 0, getWidth()/6, 10 * menuBarHeight);
+    sidePanel->setBounds(sidePaneArea);
+    
+    // PRIMARY PANE
+    auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), menuBar->getBottom(), getWidth() - sidePanel->getWidth(), 9 * menuBarHeight);
+    primaryPane->setBounds(primaryPaneArea);
+    
+    
+    //primaryPaneArea.setY(menuBar->getBottom());
+    //primaryPaneArea.setHeight(menuBarArea.getHeight() * 9);
+//    if (dropDownVisible)
+//        primaryPaneArea.removeFromTop(getHeight() * 0.6 / 9);
+//        //primaryPaneArea.setBottom(tabComponents->getY());
+//    else
+//        //primaryPaneArea.setBottom(getHeight());
+//        primaryPaneArea.removeFromTop(getHeight() * 0.6 / 6);
+
+    //primaryPaneArea.removeFromLeft(getWidth() / 6);
+    
     
 //    backgroundImage->setBounds(0, 0, getWidth(), getHeight() * (2.f / 3.f));
     
@@ -346,5 +359,10 @@ void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
     dropDownVisible = newState;
     tabComponents->setVisible(dropDownVisible);
     resized();
+}
+
+bool OrionaudioAudioProcessorEditor::getDropdownVisible()
+{
+    return dropDownVisible;
 }
 

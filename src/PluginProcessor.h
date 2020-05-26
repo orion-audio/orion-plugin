@@ -106,6 +106,8 @@ public:
     //unsigned int OrionGlobalTabIndex = 0;/*  储存 Tab 的变量 */
 
     AudioProcessorValueTreeState parameters;
+    
+    
 
 private:
     // midi output object to write to, enables recording

@@ -29,13 +29,17 @@ SidePanelComponent::~SidePanelComponent()
 
 void SidePanelComponent::paint (Graphics& g)
 {
-    g.fillAll(Colours::red);
+    g.setColour(Colours::red);//- Test -!!!!!
+    Rectangle<int> area(getParentMonitorArea());//- Test -!!!!!
+    g.drawRect (area, .01);//- Test -!!!!!
+    g.fillAll();
+    //g.fillAll(Colours::red);
 }
 
 void SidePanelComponent::resized()
 {
     auto area = getLocalBounds();
-    auto logoArea = area.removeFromTop(getParentHeight() * .1);
+    auto logoArea = area.removeFromTop(getHeight() * .1);
     logoImage->setBounds(logoArea);
     fileBrowser->setBounds(area);
 }

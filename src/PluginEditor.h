@@ -43,11 +43,12 @@ public:
     std::unique_ptr<AudioFormatReaderSource> playSource;
     
     void setDefaultSize();
-    
+    bool getDropdownVisible();
     void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
 
     ComponentBoundsConstrainer constrainer;
     
+
 private:
     
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
@@ -90,7 +91,7 @@ private:
     void docdirClicked();
     void homedirClicked();
     void upbutClicked();
-    
+
     TextButton instrumentTriggers[6];
     
     //ComboBox directory;

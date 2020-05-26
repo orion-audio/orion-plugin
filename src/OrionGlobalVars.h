@@ -17,6 +17,7 @@ int const OrionGlobalHeight = 540;
 
 static int OrionGlobalTabIndex = 3;
 
+
 namespace orion
     {
     const int defaultWidth = 900;

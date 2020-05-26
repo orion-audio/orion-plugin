@@ -32,7 +32,12 @@ OrionMenuBar::~OrionMenuBar()
 void OrionMenuBar::paint (Graphics& g)
 {
     g.setGradientFill(backgroundGradient);
+    g.setColour(Colours::aqua);//- Test -!!!!!
+    Rectangle<int> area(getParentMonitorArea());//- Test -!!!!!
+    g.drawRect (area, .01);//- Test -!!!!!
     g.fillAll();
+    
+    
 }
 
 void OrionMenuBar::resized()
