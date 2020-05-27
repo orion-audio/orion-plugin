@@ -155,7 +155,7 @@ void Sequencer::createSynthesizerSound(Sequencer::Layout layout)
     std::unique_ptr<AudioFormatReader> reader;
     BigInteger range;
     range.setBit(layout.midiNote);
-    reader.reset(formatManager.createReaderFor (new MemoryInputStream(layout.data, layout.size, false)));
+    reader.reset(formatManager.createReaderFor (std::make_unique<MemoryInputStream>(layout.data, layout.size, false)));
     samplerSounds.push_back(new SamplerSound(layout.name, *reader.get(), range, layout.midiNote, 0, 10, 10.0));
 }
 
