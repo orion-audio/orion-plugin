@@ -38,7 +38,7 @@ void SidePanelComponent::paint (Graphics& g)
 void SidePanelComponent::resized()
 {
     auto area = getLocalBounds();
-    auto logoArea = area.removeFromTop(getParentHeight() * .1);
+    auto logoArea = area.removeFromTop(getHeight() / 18);
     logoImage->setBounds(logoArea);
     fileBrowser->setBounds(area);
 }

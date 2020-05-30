@@ -130,12 +130,18 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     constrainer.setFixedAspectRatio((float)OrionGlobalWidth/OrionGlobalHeight);
     constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
+    constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
     
+
     cornerComponent.reset(new OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>(this, this, &constrainer));
     addAndMakeVisible(cornerComponent.get());
     
     
     setSize (OrionGlobalWidth, OrionGlobalHeight);
+    setSize(getWidth(), (getHeight()/18) * 25);
+    constrainer.setFixedAspectRatio((float)getWidth()/getHeight());
+    setSize(getWidth(), (getHeight()/25) * 18);
+    constrainer.setFixedAspectRatio((float)getWidth()/getHeight());
     
 }
 
@@ -168,74 +174,105 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
 
 void OrionaudioAudioProcessorEditor::resized()
 {
-    setUIScale(float(getWidth() / float(orion::defaultWidth)));
-    cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
-    auto area = getLocalBounds();
     
-    if (dropDownVisible)
-        tabComponents->setBounds(area.removeFromBottom(getHeight() / 3));
+    //int width = getWidth();
+    //int height = getHeight();
     
-        
-    // MENU BAR
-    auto menuBarArea = area;
-    menuBarArea = menuBarArea.removeFromTop(getHeight() * .1);
-    menuBarArea.removeFromLeft(getWidth() / 6);
-    menuBar->setBounds(menuBarArea);
     
-    // PRIMARY PANE
-    auto primaryPaneArea = area;
-    primaryPaneArea.setY(menuBar->getBottom());
-    if (dropDownVisible)
-        primaryPaneArea.setBottom(tabComponents->getY());
-    else
-        primaryPaneArea.setBottom(getHeight());
-    primaryPaneArea.removeFromLeft(getWidth() / 6);
-    if (arrangementWindowVisible)
-        arrangementWindow->setBounds(primaryPaneArea);
-    else
-        primaryPane->setBounds(primaryPaneArea);
+    //auto area = getLocalBounds();
+    cout << "............................................."<< endl;
+    cout << "Height: "<< getHeight() << endl;
 
     
-    // SIDE PANEL
-    area = getLocalBounds();
-    area = area.removeFromLeft(getWidth() / 6);
-//    area.setHeight(h);
-    sidePanel->setBounds(area);
+//    // MENU BAR
+//    auto menuBarArea = area;
+//    menuBarArea = menuBarArea.removeFromTop(getHeight() * .1);
+//    menuBarArea.removeFromLeft(getWidth() / 6);
+//    menuBar->setBounds(menuBarArea);
+//    
+//    // PRIMARY PANE
+//    auto primaryPaneArea = area;
+//    primaryPaneArea.setY(menuBar->getBottom());
+//    if (dropDownVisible)
+//        primaryPaneArea.setBottom(tabComponents->getY());
+//    else
+//        primaryPaneArea.setBottom(getHeight());
+//    primaryPaneArea.removeFromLeft(getWidth() / 6);
+//    if (arrangementWindowVisible)
+//        arrangementWindow->setBounds(primaryPaneArea);
+//    else
+//        primaryPane->setBounds(primaryPaneArea);
+//
+//    
+//    // SIDE PANEL
+//    area = getLocalBounds();
+//    area = area.removeFromLeft(getWidth() / 6);
+////    area.setHeight(h);
+//    sidePanel->setBounds(area);
     
-//    backgroundImage->setBounds(0, 0, getWidth(), getHeight() * (2.f / 3.f));
     
-//    kickButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 225, 100, 112);
-//    snareButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 225, 100, 112);
-//    clapButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 225, 100, 112);
-//    percButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 225, 100, 112);
-//
-//    snapButton.setBounds(OrionGlobalWidth/2 - 200, OrionGlobalHeight/2 - 100, 100, 112);
-//    hhoButton.setBounds(OrionGlobalWidth/2 - 50, OrionGlobalHeight/2 - 100, 100, 112);
-//    hhcButton.setBounds(OrionGlobalWidth/2 + 100, OrionGlobalHeight/2 - 100, 100, 112);
-//    crashButton.setBounds(OrionGlobalWidth/2 + 250, OrionGlobalHeight/2 - 100, 100, 112);
-//
-//    setBoundsScaled(dropDownButton.get(), 174.52, 391.5, 50, 50);
-//
-//    fileBrowser->setBounds(0, getHeight() * .11, getWidth() * .17, getHeight() * .56);
-//
-//    setBoundsScaled(waveWiggle.get(), {373,388, 469, 64});
-//
-//    setBoundsScaled(meterInput.get(), 919, /*JUCE_LIVE_CONSTANT(*/ 23 /*)*/, 135, 17);
-//    setBoundsScaled(meterLeft.get(), 1072, 383, 17, 90);
-//    setBoundsScaled(meterRight.get(), 1092, 383, 17, 90);
-//
-//    auto* list = dynamic_cast<Component*> (&mainlist);
-//    list->setBounds(0, 75, 195, 228);
     
-    //    AppDir.setBounds(0, 75, 195, 228/10);
-    //    DeskDir.setBounds(0, 75+228/10, 195, 228/10);
-    //    DownDir.setBounds(0, 75+228/10*2, 195, 228/10);
-    //    MusicDir.setBounds(0, 75+228/10*3, 195, 228/10);
-    //    DocDir.setBounds(0, 75+228/10*4, 195, 228/10);
-    //    HomDir.setBounds(0, 75+228/10*5, 195, 228/10);
-    //    UpBut.setBounds(195,323,20,228/10);
+    // MENU BAR
+    double unite = 0.0;
     
+    if(dropDownVisible){
+        unite = getHeight() /25;
+    }else{
+        unite = getHeight() /18;
+    };
+    
+    cout << "unite: "<< unite << endl;
+
+ 
+    auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, unite);
+    menuBar->setBounds(menuBarArea);
+    
+    
+    if (!dropDownVisible)// without dropdown
+    {
+        // SIDE PANEL
+        auto sidePaneArea = Rectangle<int>(0, 0, getWidth()/6, getHeight());
+        sidePanel->setBounds(sidePaneArea);
+        
+        // PRIMARY PANE
+        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), unite, getWidth() - sidePanel->getWidth(), getHeight() - unite);
+        primaryPane->setBounds(primaryPaneArea);
+        
+        // ARRANGEMENT WINDOW
+        arrangementWindow->setBounds(primaryPaneArea);
+        arrangementWindow->setVisible(arrangementWindowVisible);
+        
+        
+    }
+    else// with dropdown
+    {
+        // DROPDOWN WINDOW
+        auto dropdownWindowArea = Rectangle<int>(0, getHeight() - 7 * unite, getWidth(), 7 * unite);
+        tabComponents->setBounds(dropdownWindowArea);
+        
+        // SIDE PANEL
+        auto sidePaneArea = Rectangle<int>(0, 0, getWidth()/6, getHeight()-tabComponents->getHeight());
+        sidePanel->setBounds(sidePaneArea);
+        
+        // PRIMARY PANE
+        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), unite, getWidth() - sidePanel->getWidth(), sidePanel->getHeight() - unite);
+        primaryPane->setBounds(primaryPaneArea);
+        
+        // ARRANGEMENT WINDOW
+        arrangementWindow->setBounds(primaryPaneArea);
+        arrangementWindow->setVisible(arrangementWindowVisible);
+        
+        
+    }
+    
+    
+    
+    setUIScale(float(getWidth() / float(orion::defaultWidth)));
+
+    cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
+    
+
     
     //************************************DO NOT PUT ANY SET BOUNDS METHODS OR ANYTHING OTHER THAN DRAWING METHODS********************************
     //*********************************************************************************************************************************************
@@ -364,4 +401,9 @@ void OrionaudioAudioProcessorEditor::toggleArrangmentWindow(bool windowVisible)
     arrangementWindow->setVisible(windowVisible);
     primaryPane->setVisible(!windowVisible);
     resized();
+}
+
+bool OrionaudioAudioProcessorEditor::getDropdownVisible()
+{
+    return dropDownVisible;
 }

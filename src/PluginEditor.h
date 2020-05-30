@@ -48,10 +48,13 @@ public:
     void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
 
     void toggleArrangmentWindow(bool windowVisible);
+    
+    bool getDropdownVisible();
+    
+    ComponentBoundsConstrainer constrainer;
 private:
     
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
-    ComponentBoundsConstrainer constrainer;
     
     // SUB VIEWS
     std::unique_ptr<OrionMenuBar> menuBar; 
