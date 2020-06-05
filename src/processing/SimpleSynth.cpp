@@ -69,7 +69,8 @@ void SimpleSynth::loadSamples()
         }
     }
     int MidiNote;
-    audiofolder = File("/Library/Application\ Support/Orion/Orion\ Plugin/Samples");
+    DBG(PATH_TO_SAMPLES);
+    audiofolder = File(String(PATH_TO_SAMPLES));
     String dir;
     String filename;
     for(int i = 0; i < MAX_VOICES; i++)
@@ -138,7 +139,7 @@ void SimpleSynth::loadSamples()
 void SimpleSynth::changeSamples(int index,const String &f,int midi)//index should imply which instrument it is, but in this case index is the sequence
 {
 
-    if(getNumSounds() != 0 and index < getNumSounds())
+    if(getNumSounds() != 0 && index < getNumSounds())
     {
         //std::cout<<"who did you lose "<<getNumSounds()<<" "<<index<<"\n";
         removeSound(index);

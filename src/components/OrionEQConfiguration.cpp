@@ -252,7 +252,7 @@ void OrionEQConfiguration::mouseDrag (const MouseEvent& e)
         {
             voice->eq.bands[draggingBand].frequency = getFrequencyForPosition (pos);
             if (draggingGain)
-                if(getGainForPosition (e.position.getY(), plotFrame.getY(), plotFrame.getBottom()) > -24 and getGainForPosition (e.position.getY(), plotFrame.getY(), plotFrame.getBottom()) < 24)
+                if(getGainForPosition (e.position.getY(), plotFrame.getY(), plotFrame.getBottom()) > -24 && getGainForPosition (e.position.getY(), plotFrame.getY(), plotFrame.getBottom()) < 24)
                    {
                        voice->eq.bands[draggingBand].gain = getGainForPosition (e.position.getY(), plotFrame.getY(), plotFrame.getBottom());
                    }

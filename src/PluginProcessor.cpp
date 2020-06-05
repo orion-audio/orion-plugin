@@ -31,7 +31,6 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 
 
 {
-    midiOutput = MidiOutput::createNewDevice("Orion Audio");
     if (midiOutput != nullptr)
         midiOutput->startBackgroundThread();
 

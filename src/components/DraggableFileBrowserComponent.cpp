@@ -27,7 +27,7 @@ DraggableFileBrowserComponent::DraggableFileBrowserComponent() : scannerThread("
     
     addAndMakeVisible(windowComponent);
     currentDirectory.addChangeListener(this);
-    scanDirectory(File("~/Documents"));
+    scanDirectory(File::getSpecialLocation(File::SpecialLocationType::userDocumentsDirectory));
     addAndMakeVisible(viewPort);
     viewPort.setViewedComponent(&windowComponent, false);
     viewPort.setScrollBarsShown(true, false);
