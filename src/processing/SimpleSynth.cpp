@@ -69,8 +69,13 @@ void SimpleSynth::loadSamples()
         }
     }
     int MidiNote;
-    DBG(PATH_TO_SAMPLES);
-    audiofolder = File(String(PATH_TO_SAMPLES));
+    String pathToSamples;
+    if ((SystemStats::getOperatingSystemType() & SystemStats::MacOSX) != 0)
+        pathToSamples = "~/Library/Application Support/Orion/Samples";
+    else
+        pathToSamples = "C:/Program Files/Orion/Samples";
+    DBG(pathToSamples);
+    audiofolder = File(pathToSamples);
     String dir;
     String filename;
     for(int i = 0; i < MAX_VOICES; i++)

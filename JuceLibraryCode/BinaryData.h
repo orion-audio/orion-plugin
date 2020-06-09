@@ -233,8 +233,11 @@ namespace BinaryData
     extern const char*   wrench_button_png;
     const int            wrench_button_pngSize = 2101;
 
+    extern const char*   Mute_Selected_svg;
+    const int            Mute_Selected_svgSize = 1753;
+
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 75;
+    const int namedResourceListSize = 76;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

@@ -239,12 +239,13 @@
               file="assets/graphics/wrench_button.png"/>
       </GROUP>
     </GROUP>
+    <FILE id="izc1Xj" name="Mute Selected.svg" compile="0" resource="1"
+          file="Orion Plugin Assets/Main Window/Mute Selected.svg"/>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" defines="PATH_TO_SAMPLES = &quot;../assets/samples&quot;"
-                       headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;"/>
         <CONFIGURATION isDebug="0" name="Release" defines="PATH_TO_SAMPLES = &quot;/Library/Application\ Support/Orion/Orion\ Plugin/Samples&quot;"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
