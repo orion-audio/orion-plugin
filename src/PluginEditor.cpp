@@ -181,8 +181,8 @@ void OrionaudioAudioProcessorEditor::resized()
     
     
     //auto area = getLocalBounds();
-    cout << "............................................."<< endl;
-    cout << "Height: "<< getHeight() << endl;
+    //cout << "............................................."<< endl;
+    //cout << "Height: "<< getHeight() << endl;
 
     
 //    // MENU BAR
@@ -222,7 +222,7 @@ void OrionaudioAudioProcessorEditor::resized()
         unite = getHeight() /18;
     };
     
-    cout << "unite: "<< unite << endl;
+    //cout << "unite: "<< unite << endl;
 
  
     auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, unite);
@@ -301,6 +301,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     if(isDown)
     {
+        std::cout<<"Down"<<std::endl;
         waveWiggle->startAnimation();
         processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
@@ -310,7 +311,6 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         
         
     }
-    
     else
     {
         processor.getSampler()->noteOff(1, midiNote, 0, false /*没有淡出*/);

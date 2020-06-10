@@ -43,6 +43,9 @@ private:
     std::unique_ptr<ImageButton> soloButton;
     std::unique_ptr<ImageButton> muteButton;
     
+    
+    std::unique_ptr<ImageButton> backgroundButton;// 以后删除
+    
     ColourGradient backgroundGradient;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PrimaryPaneComponent)
 };
