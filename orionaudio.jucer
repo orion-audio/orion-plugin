@@ -71,10 +71,6 @@
               file="src/components/OrionRotarySlider.h"/>
         <FILE id="T1DMMw" name="OrionTabButton.h" compile="0" resource="0"
               file="src/components/OrionTabButton.h"/>
-        <FILE id="RTYdbu" name="OrionTabComponent.cpp" compile="1" resource="0"
-              file="src/components/OrionTabComponent.cpp"/>
-        <FILE id="csNh2M" name="OrionTabComponent.h" compile="0" resource="0"
-              file="src/components/OrionTabComponent.h"/>
         <FILE id="lMuKXJ" name="ResizableContainer.h" compile="0" resource="0"
               file="src/components/ResizableContainer.h"/>
         <FILE id="GqnPjP" name="SequencerComponent.cpp" compile="1" resource="0"
@@ -130,6 +126,10 @@
               file="src/subviews/SidePanelComponent.cpp"/>
         <FILE id="Ekmnvy" name="SidePanelComponent.h" compile="0" resource="0"
               file="src/subviews/SidePanelComponent.h"/>
+        <FILE id="RTYdbu" name="OrionTabComponent.cpp" compile="1" resource="0"
+              file="src/components/OrionTabComponent.cpp"/>
+        <FILE id="csNh2M" name="OrionTabComponent.h" compile="0" resource="0"
+              file="src/components/OrionTabComponent.h"/>
       </GROUP>
       <GROUP id="{F60B614E-5A25-D666-60DF-B13BA57AD93A}" name="util">
         <FILE id="ef7064" name="qtils.cpp" compile="1" resource="0" file="src/util/qtils.cpp"/>

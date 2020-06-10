@@ -28,8 +28,9 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
     addTab(translate("ENV"), Colours::lightgrey, envConfiguration.get(), false);
     addTab(translate("FX"), Colours::lightgrey, effectConfiguration.get(), false);
     
-    setTabBarDepth(25);
-    
+    setTabBarDepth(30);
+    setOutline(1);
+    //outlineColourId = 0x1005800;
     setCurrentTabIndex(OrionGlobalTabIndex);
     
     OrionGlobalTabIndex = getCurrentTabIndex();
@@ -62,6 +63,7 @@ void OrionTabComponent::paint (Graphics& g)
 {
 
     g.fillAll(Colours::black);
+    //g.fillAll(Colours::maroon);//-------Delete!!!
 
 }
 
@@ -69,11 +71,13 @@ void OrionTabComponent::resized()
 {
     
     TabbedComponent::resized();
+    setTabBarDepth(getHeight() * .12);
+    getTabbedButtonBar().setBounds(0, 0, getWidth(), getHeight() * .12);
     
-    getTabbedButtonBar().setBounds(0, 0, getWidth(), getHeight() * .1);
+    double uniteW = getWidth()/30;
     
     for (int i = 0; i < getNumTabs(); i++)
     {
-        getTabbedButtonBar().getTabButton(i)->setBounds(i * getWidth() / 4, 0, 30, 25);
+        getTabbedButtonBar().getTabButton(i)->setBounds( 6 * uniteW + i * 4 * uniteW, 0, 2 * uniteW, getHeight() * .12);
     }
 }

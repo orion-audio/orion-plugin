@@ -24,8 +24,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
 
 void OrionEffectsConfiguration::paint(Graphics& g)
 {
-    g.fillAll(Colours::darkgoldenrod);
-    
+    g.fillAll();
+    //g.fillAll(Colours::darkgoldenrod);
 }
 
 void OrionEffectsConfiguration::resized()
