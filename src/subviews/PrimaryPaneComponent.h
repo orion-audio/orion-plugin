@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "WaveWiggle.h"
+#include "CircularMeter.h"
 #include <array>
 #include "DragAndDropButton.h"
 #include "PluginProcessor.h"
@@ -43,6 +44,8 @@ private:
     std::unique_ptr<ImageButton> soloButton;
     std::unique_ptr<ImageButton> muteButton;
     
+    std::unique_ptr<CircularMeter> meterLeft;
+    std::unique_ptr<CircularMeter> meterRight;
     
     std::unique_ptr<ImageButton> backgroundButton;// 以后删除
     

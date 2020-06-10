@@ -93,7 +93,7 @@ void CircularMeter::paint (Graphics& g)
         }
         g.setColour(findColour(ColourIds::filledColourId));
         area = getLocalBounds();
-        area = area.removeFromLeft(getWidth() / numCircles);///
+        area = area.removeFromLeft(getWidth() / numCircles);
         h = area.getHeight() * .6;
         w = h;
         for (int i = 0; i < numFilled; i++){

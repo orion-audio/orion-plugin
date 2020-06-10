@@ -30,6 +30,7 @@ OrionMenuBar::OrionMenuBar(OrionaudioAudioProcessor* p, OrionaudioAudioProcessor
     addAndMakeVisible(arrangeButton.get());
     
     inputMeter.reset(new CircularMeter());
+    inputMeter->updaterFunction = [this] { return processor->getInputLevel();};
     addAndMakeVisible(inputMeter.get());
     
     inputMeterLabel.reset(new Label("Mic", "Mic"));

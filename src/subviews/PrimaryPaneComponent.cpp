@@ -20,10 +20,10 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     editor = e;
     
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
-    //Image backgroundImage = ImageCache::getFromMemory(BinaryData::PrimaryPaneBackground_png, BinaryData::PrimaryPaneBackground_pngSize);
-    //backgroundButton.reset(new ImageButton());
-    //backgroundButton->setImages(false, true, true, backgroundImage, 1.f, Colours::transparentBlack, backgroundImage, 1.f, Colours::transparentBlack, backgroundImage, 1.f, Colours::transparentBlack);
-    //addAndMakeVisible(backgroundButton.get());
+//    Image backgroundImage = ImageCache::getFromMemory(BinaryData::PrimaryPaneBackground_png, BinaryData::PrimaryPaneBackground_pngSize);
+//    backgroundButton.reset(new ImageButton());
+//    backgroundButton->setImages(false, true, true, backgroundImage, 1.f, Colours::transparentBlack, backgroundImage, 1.f, Colours::transparentBlack, backgroundImage, 1.f, Colours::transparentBlack);
+//    addAndMakeVisible(backgroundButton.get());
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     
     
@@ -34,11 +34,6 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
   
         addAndMakeVisible(drumButtons[i].get());
     }
-    
-    
-    
-    
-    
     
     
     // DRUM VOICE BUTTONS
@@ -90,6 +85,14 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     drumButtons[7]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::crash, orion::Tabs::crashTab, drumButtons[7]->isDown()); };
 
     
+    //METERS
+    meterLeft.reset(new CircularMeter());
+    meterLeft->updaterFunction = [this] { return processor->getOutputLevel(0); };
+    addAndMakeVisible(meterLeft.get());
+    
+    meterRight.reset(new CircularMeter());
+    meterRight->updaterFunction = [this] { return processor->getOutputLevel(1); };
+    addAndMakeVisible(meterRight.get());
     
 
     // DROPDOWN BUTTON
@@ -155,8 +158,8 @@ void PrimaryPaneComponent::resized()
     //backgroundGradient = ColourGradient::horizontal(Colour(0xFF0C0C0D), 0, Colours::black, getWidth() / 2);
     
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
-    //Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());//--------Delete!!!!
-    //backgroundButton->setBounds(backgroundArea);//--------Delete!!!!
+//    Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());//--------Delete!!!!
+//    backgroundButton->setBounds(backgroundArea);//--------Delete!!!!
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     
     double uniteW = getWidth()/25;
@@ -187,14 +190,18 @@ void PrimaryPaneComponent::resized()
     }
 
     // Wave Wiggle
-    area = Rectangle<int>(8.25 * uniteW, 9.75 * uniteW, 11.5 * uniteW, 5 * uniteW);
+    area = Rectangle<int>(8.25 * uniteW, 10 * uniteW, 11.5 * uniteW, 5 * uniteW);
     waveWiggle->setBounds(area);
     
+    // Meters
+    area = Rectangle<int>(22 * uniteW, 11 * uniteW, .5 * uniteW, 3 * uniteW);
+    meterLeft->setBounds(area);
+    area = Rectangle<int>(22.5 * uniteW, 11 * uniteW, .5 * uniteW, 3 * uniteW);
+    meterRight->setBounds(area);
     
     // Drop Down Button
     area = Rectangle<int>(1 * uniteW, 15.25 * uniteW, uniteW, uniteW);
     dropDownButton->setBounds(area);
 
-    
     repaint();
 }

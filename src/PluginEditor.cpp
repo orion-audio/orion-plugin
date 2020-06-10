@@ -301,7 +301,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     if(isDown)
     {
-        std::cout<<"Down"<<std::endl;
+        //std::cout<<"Down"<<std::endl;
         waveWiggle->startAnimation();
         processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
