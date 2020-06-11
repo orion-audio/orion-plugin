@@ -35,11 +35,11 @@ namespace BinaryData
     extern const char*   arrow_back_png;
     const int            arrow_back_pngSize = 15605;
 
-    extern const char*   arrow_down_png;
-    const int            arrow_down_pngSize = 12569;
-
     extern const char*   arrow_up_png;
     const int            arrow_up_pngSize = 96621;
+
+    extern const char*   arrow_down_png;
+    const int            arrow_down_pngSize = 12569;
 
     extern const char*   arrow_foward_png;
     const int            arrow_foward_pngSize = 12935;
@@ -56,12 +56,6 @@ namespace BinaryData
     extern const char*   clap_selected_png;
     const int            clap_selected_pngSize = 5649;
 
-    extern const char*   clip_off_png;
-    const int            clip_off_pngSize = 1628;
-
-    extern const char*   clip_on_png;
-    const int            clip_on_pngSize = 5610;
-
     extern const char*   clip_selected_png;
     const int            clip_selected_pngSize = 3913;
 
@@ -71,23 +65,35 @@ namespace BinaryData
     extern const char*   delayBackground_png;
     const int            delayBackground_pngSize = 160663;
 
-    extern const char*   env_off_png;
-    const int            env_off_pngSize = 1625;
+    extern const char*   ClipButtonOff_png;
+    const int            ClipButtonOff_pngSize = 13174;
 
-    extern const char*   env_on_png;
-    const int            env_on_pngSize = 5553;
+    extern const char*   ClipButtonOn_png;
+    const int            ClipButtonOn_pngSize = 20604;
+
+    extern const char*   ENVButtonOff_png;
+    const int            ENVButtonOff_pngSize = 12747;
+
+    extern const char*   ENVButtonOn_png;
+    const int            ENVButtonOn_pngSize = 19714;
+
+    extern const char*   EQButtonOff_png;
+    const int            EQButtonOff_pngSize = 12974;
+
+    extern const char*   EQButtonOn_png;
+    const int            EQButtonOn_pngSize = 19777;
+
+    extern const char*   FXButtonOff_png;
+    const int            FXButtonOff_pngSize = 12407;
+
+    extern const char*   FXButtonOn_png;
+    const int            FXButtonOn_pngSize = 19425;
 
     extern const char*   env_selected_png;
     const int            env_selected_pngSize = 3887;
 
     extern const char*   EQ_Background_png;
     const int            EQ_Background_pngSize = 43708;
-
-    extern const char*   eq_off_png;
-    const int            eq_off_pngSize = 1553;
-
-    extern const char*   eq_on_png;
-    const int            eq_on_pngSize = 5538;
 
     extern const char*   eq_selected_png;
     const int            eq_selected_pngSize = 4946;
@@ -97,12 +103,6 @@ namespace BinaryData
 
     extern const char*   file_png;
     const int            file_pngSize = 881;
-
-    extern const char*   fx_off_png;
-    const int            fx_off_pngSize = 1542;
-
-    extern const char*   fx_on_png;
-    const int            fx_on_pngSize = 5358;
 
     extern const char*   fx_selected_png;
     const int            fx_selected_pngSize = 4824;

@@ -151,8 +151,8 @@
         <FILE id="EnjRE4" name="appdir.png" compile="0" resource="1" file="assets/graphics/appdir.png"/>
         <FILE id="N9UOdn" name="arrow.png" compile="0" resource="1" file="assets/graphics/arrow.png"/>
         <FILE id="gM50mo" name="arrow_back.png" compile="0" resource="1" file="assets/graphics/arrow_back.png"/>
+        <FILE id="Zo8mTY" name="arrow_up.png" compile="0" resource="1" file="assets/graphics/arrow_up.png"/>
         <FILE id="Iz0oo0" name="arrow_down.png" compile="0" resource="1" file="assets/graphics/arrow_down.png"/>
-        <FILE id="Y9r4a5" name="arrow_up.png" compile="0" resource="1" file="../../../Desktop/arrow_up.png"/>
         <FILE id="TJyq9M" name="arrow_foward.png" compile="0" resource="1"
               file="assets/graphics/arrow_foward.png"/>
         <FILE id="KRh4EX" name="back_arrow.png" compile="0" resource="1" file="assets/graphics/back_arrow.png"/>
@@ -161,27 +161,30 @@
         <FILE id="wRWICf" name="check.png" compile="0" resource="1" file="assets/graphics/check.png"/>
         <FILE id="C6n7Gm" name="clap_selected.png" compile="0" resource="1"
               file="assets/graphics/clap_selected.png"/>
-        <FILE id="r38Wom" name="clip_off.png" compile="0" resource="1" file="assets/graphics/clip_off.png"/>
-        <FILE id="f3ywKv" name="clip_on.png" compile="0" resource="1" file="assets/graphics/clip_on.png"/>
         <FILE id="NQ2rDK" name="clip_selected.png" compile="0" resource="1"
               file="assets/graphics/clip_selected.png"/>
         <FILE id="tLovBe" name="compressorBackground.png" compile="0" resource="1"
               file="assets/graphics/compressorBackground.png"/>
         <FILE id="rxivpj" name="delayBackground.png" compile="0" resource="1"
               file="assets/graphics/delayBackground.png"/>
-        <FILE id="K2ga2s" name="env_off.png" compile="0" resource="1" file="assets/graphics/env_off.png"/>
-        <FILE id="Li2LYk" name="env_on.png" compile="0" resource="1" file="assets/graphics/env_on.png"/>
+        <FILE id="Hh5dxj" name="ClipButtonOff.png" compile="0" resource="1"
+              file="assets/graphics/ClipButtonOff.png"/>
+        <FILE id="k8WoGV" name="ClipButtonOn.png" compile="0" resource="1"
+              file="assets/graphics/ClipButtonOn.png"/>
+        <FILE id="n64tdw" name="ENVButtonOff.png" compile="0" resource="1"
+              file="assets/graphics/ENVButtonOff.png"/>
+        <FILE id="mCaB7t" name="ENVButtonOn.png" compile="0" resource="1" file="assets/graphics/ENVButtonOn.png"/>
+        <FILE id="UuxhvY" name="EQButtonOff.png" compile="0" resource="1" file="assets/graphics/EQButtonOff.png"/>
+        <FILE id="X9L1bx" name="EQButtonOn.png" compile="0" resource="1" file="assets/graphics/EQButtonOn.png"/>
+        <FILE id="ktPy5K" name="FXButtonOff.png" compile="0" resource="1" file="assets/graphics/FXButtonOff.png"/>
+        <FILE id="sfPLmO" name="FXButtonOn.png" compile="0" resource="1" file="assets/graphics/FXButtonOn.png"/>
         <FILE id="HIrJvK" name="env_selected.png" compile="0" resource="1"
               file="assets/graphics/env_selected.png"/>
         <FILE id="eLKAyZ" name="EQ_Background.png" compile="0" resource="1"
               file="assets/graphics/EQ_Background.png"/>
-        <FILE id="fISfGg" name="eq_off.png" compile="0" resource="1" file="assets/graphics/eq_off.png"/>
-        <FILE id="VeRuhw" name="eq_on.png" compile="0" resource="1" file="assets/graphics/eq_on.png"/>
         <FILE id="Vj6uaJ" name="eq_selected.png" compile="0" resource="1" file="assets/graphics/eq_selected.png"/>
         <FILE id="zLIz7o" name="expand.png" compile="0" resource="1" file="assets/graphics/expand.png"/>
         <FILE id="JjKh9U" name="file.png" compile="0" resource="1" file="assets/graphics/file.png"/>
-        <FILE id="iJxlqm" name="fx_off.png" compile="0" resource="1" file="assets/graphics/fx_off.png"/>
-        <FILE id="HHn9yg" name="fx_on.png" compile="0" resource="1" file="assets/graphics/fx_on.png"/>
         <FILE id="tojRKH" name="fx_selected.png" compile="0" resource="1" file="assets/graphics/fx_selected.png"/>
         <FILE id="wyNKIo" name="PrimaryPaneBackground.png" compile="0" resource="1"
               file="assets/graphics/PrimaryPaneBackground.png"/>

@@ -3,7 +3,6 @@
 using namespace std;
 EnvelopeGenerator::EnvelopeGenerator(void)
 {
-    
     sampleRate = 48000;
     attackTime = 0;
     decayTime = 0;
@@ -14,7 +13,6 @@ EnvelopeGenerator::EnvelopeGenerator(void)
     currentTime = 0.0;
     
     shutdownTime = 10.0;
-    
     
     envelopeState = off;
     isControllingDCA = true;

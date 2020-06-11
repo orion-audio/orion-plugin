@@ -10,7 +10,7 @@
 
 #include "SimpleSynth.h"
 
-#define MAX_VOICES 7
+#define MAX_VOICES 8
 
 
 void SimpleSynth::setup(double sr) {
@@ -114,7 +114,7 @@ void SimpleSynth::loadSamples()
             case CRASH:
                 MidiNote = 46;
                 dir = "Crash";
-                filename = "HHPSNP1.WAV";
+                filename = "Crash_01.WAV";
                 break;
             default:
                 break;

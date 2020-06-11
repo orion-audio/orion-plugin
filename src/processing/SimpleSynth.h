@@ -23,7 +23,7 @@ public:
     void noteOn(int midiChannel,
                 int midiNoteNumber,
                 float velocity) override;
-    typedef enum Sounds{KICK=0, SNARE, CLAP, PERC, SNAP,HHC,HHO, CRASH} Sounds_t;
+    typedef enum Sounds{KICK=0, SNARE, CLAP, PERC, SNAP, HHC, HHO, CRASH} Sounds_t;
     double sampleRate;
     void changeSamples(int index,const String &f,int midi);
 

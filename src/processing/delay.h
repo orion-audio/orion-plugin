@@ -168,9 +168,5 @@ public:
     
     //dry or wet - y(t)= a x(t) + b x(t-m) ; a+b=1; dry: a=1
    
-
-    
-    
-  
     
 };

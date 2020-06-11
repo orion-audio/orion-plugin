@@ -14,21 +14,21 @@
 OrionLookAndFeel::OrionLookAndFeel()
 {
     
-    Image on = ImageCache::getFromMemory(BinaryData::env_on_png, BinaryData::env_on_pngSize);
-    Image off = ImageCache::getFromMemory(BinaryData::env_off_png, BinaryData::env_off_pngSize);
+    Image on = ImageCache::getFromMemory(BinaryData::ENVButtonOn_png, BinaryData::ENVButtonOn_pngSize);
+    Image off = ImageCache::getFromMemory(BinaryData::ENVButtonOff_png, BinaryData::ENVButtonOff_pngSize);
     tabButtonImages[TabButtonType::envelope].reset(new ImagePair(on, off));
 
-    on = ImageCache::getFromMemory(BinaryData::fx_on_png, BinaryData::fx_on_pngSize);
-    off = ImageCache::getFromMemory(BinaryData::fx_off_png, BinaryData::fx_off_pngSize);
+    on = ImageCache::getFromMemory(BinaryData::FXButtonOn_png, BinaryData::FXButtonOn_pngSize);
+    off = ImageCache::getFromMemory(BinaryData::FXButtonOff_png, BinaryData::FXButtonOff_pngSize);
     tabButtonImages[TabButtonType::fx].reset(new ImagePair(on, off));
 
-    on = ImageCache::getFromMemory(BinaryData::eq_on_png, BinaryData::eq_on_pngSize);
-    off = ImageCache::getFromMemory(BinaryData::eq_off_png, BinaryData::env_off_pngSize);
+    on = ImageCache::getFromMemory(BinaryData::EQButtonOn_png, BinaryData::EQButtonOn_pngSize);
+    off = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
     tabButtonImages[TabButtonType::eq].reset(new ImagePair(on, off));
     
 
-    on = ImageCache::getFromMemory(BinaryData::clip_on_png, BinaryData::clip_on_pngSize);
-    off = ImageCache::getFromMemory(BinaryData::clip_off_png, BinaryData::clip_off_pngSize);
+    on = ImageCache::getFromMemory(BinaryData::ClipButtonOn_png, BinaryData::ClipButtonOn_pngSize);
+    off = ImageCache::getFromMemory(BinaryData::ClipButtonOff_png, BinaryData::ClipButtonOff_pngSize);
     tabButtonImages[TabButtonType::clip].reset(new ImagePair(on, off));
 
 }

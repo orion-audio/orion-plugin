@@ -87,11 +87,11 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     
     //METERS
     meterLeft.reset(new CircularMeter());
-    meterLeft->updaterFunction = [this] { return processor->getOutputLevel(0); };
+    meterLeft->updaterFunction = [this] { return processor->getOutputLevel(0);};
     addAndMakeVisible(meterLeft.get());
     
     meterRight.reset(new CircularMeter());
-    meterRight->updaterFunction = [this] { return processor->getOutputLevel(1); };
+    meterRight->updaterFunction = [this] { return processor->getOutputLevel(1);};
     addAndMakeVisible(meterRight.get());
     
 

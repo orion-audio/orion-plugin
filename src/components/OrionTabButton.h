@@ -13,14 +13,14 @@ class OrionTabButton    : public LookAndFeel_V2
 {
 private:
     
-    Image envtab_sel = ImageCache::getFromMemory(BinaryData::env_on_png, BinaryData::env_on_pngSize);
-    Image envtab_off = ImageCache::getFromMemory(BinaryData::env_off_png, BinaryData::env_off_pngSize);
-    Image fxtab_sel = ImageCache::getFromMemory(BinaryData::fx_on_png, BinaryData::fx_on_pngSize);
-    Image fxtab_off = ImageCache::getFromMemory(BinaryData::fx_off_png, BinaryData::fx_off_pngSize);
-    Image eqtab_sel = ImageCache::getFromMemory(BinaryData::eq_on_png, BinaryData::eq_on_pngSize);
-    Image eqtab_off = ImageCache::getFromMemory(BinaryData::eq_off_png, BinaryData::env_off_pngSize);
-    Image cliptab_sel = ImageCache::getFromMemory(BinaryData::clip_on_png, BinaryData::clip_on_pngSize);
-    Image cliptab_off = ImageCache::getFromMemory(BinaryData::clip_off_png, BinaryData::clip_off_pngSize);
+    Image envtab_sel = ImageCache::getFromMemory(BinaryData::ENVButtonOn_png, BinaryData::ENVButtonOn_pngSize);
+    Image envtab_off = ImageCache::getFromMemory(BinaryData::ENVButtonOff_png, BinaryData::ENVButtonOff_pngSize);
+    Image fxtab_sel = ImageCache::getFromMemory(BinaryData::FXButtonOn_png, BinaryData::FXButtonOn_pngSize);
+    Image fxtab_off = ImageCache::getFromMemory(BinaryData::FXButtonOff_png, BinaryData::FXButtonOff_pngSize);
+    Image eqtab_sel = ImageCache::getFromMemory(BinaryData::EQButtonOn_png, BinaryData::EQButtonOn_pngSize);
+    Image eqtab_off = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
+    Image cliptab_sel = ImageCache::getFromMemory(BinaryData::ClipButtonOn_png, BinaryData::ClipButtonOn_pngSize);
+    Image cliptab_off = ImageCache::getFromMemory(BinaryData::ClipButtonOff_png, BinaryData::ClipButtonOff_pngSize);
     Image* theone;
     
 public:

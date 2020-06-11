@@ -17,7 +17,7 @@
 class TabComponentHolder : public Component
 {
 public:
-    const int numTabs = 7;
+    const int numTabs = 8;
     
     TabComponentHolder(OrionaudioAudioProcessor &p)
     {
@@ -56,5 +56,5 @@ public:
     
 private:
     int currentTab = 0;
-    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponents;
+    std::array<std::unique_ptr<OrionTabComponent>, 8> tabComponents;
 };

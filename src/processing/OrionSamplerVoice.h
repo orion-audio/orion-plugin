@@ -123,7 +123,6 @@ public:
         reverb_highfreq = 50;
         reverb_lowfreq = 20000;
         
-        
         reverb_lowpass.setCoefficients(lowcoef.makeLowPass(sampleRate, reverb_lowfreq));
         reverb_highpass.setCoefficients(highcoef.makeHighPass(sampleRate, reverb_highfreq));
         
