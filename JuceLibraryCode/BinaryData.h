@@ -56,9 +56,6 @@ namespace BinaryData
     extern const char*   clap_selected_png;
     const int            clap_selected_pngSize = 5649;
 
-    extern const char*   clip_selected_png;
-    const int            clip_selected_pngSize = 3913;
-
     extern const char*   compressorBackground_png;
     const int            compressorBackground_pngSize = 334848;
 
@@ -89,23 +86,14 @@ namespace BinaryData
     extern const char*   FXButtonOn_png;
     const int            FXButtonOn_pngSize = 19425;
 
-    extern const char*   env_selected_png;
-    const int            env_selected_pngSize = 3887;
-
     extern const char*   EQ_Background_png;
     const int            EQ_Background_pngSize = 43708;
-
-    extern const char*   eq_selected_png;
-    const int            eq_selected_pngSize = 4946;
 
     extern const char*   expand_png;
     const int            expand_pngSize = 2109;
 
     extern const char*   file_png;
     const int            file_pngSize = 881;
-
-    extern const char*   fx_selected_png;
-    const int            fx_selected_pngSize = 4824;
 
     extern const char*   PrimaryPaneBackground_png;
     const int            PrimaryPaneBackground_pngSize = 63366;
@@ -219,7 +207,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 70;
+    const int namedResourceListSize = 66;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

@@ -161,8 +161,6 @@
         <FILE id="wRWICf" name="check.png" compile="0" resource="1" file="assets/graphics/check.png"/>
         <FILE id="C6n7Gm" name="clap_selected.png" compile="0" resource="1"
               file="assets/graphics/clap_selected.png"/>
-        <FILE id="NQ2rDK" name="clip_selected.png" compile="0" resource="1"
-              file="assets/graphics/clip_selected.png"/>
         <FILE id="tLovBe" name="compressorBackground.png" compile="0" resource="1"
               file="assets/graphics/compressorBackground.png"/>
         <FILE id="rxivpj" name="delayBackground.png" compile="0" resource="1"
@@ -178,14 +176,10 @@
         <FILE id="X9L1bx" name="EQButtonOn.png" compile="0" resource="1" file="assets/graphics/EQButtonOn.png"/>
         <FILE id="ktPy5K" name="FXButtonOff.png" compile="0" resource="1" file="assets/graphics/FXButtonOff.png"/>
         <FILE id="sfPLmO" name="FXButtonOn.png" compile="0" resource="1" file="assets/graphics/FXButtonOn.png"/>
-        <FILE id="HIrJvK" name="env_selected.png" compile="0" resource="1"
-              file="assets/graphics/env_selected.png"/>
         <FILE id="eLKAyZ" name="EQ_Background.png" compile="0" resource="1"
               file="assets/graphics/EQ_Background.png"/>
-        <FILE id="Vj6uaJ" name="eq_selected.png" compile="0" resource="1" file="assets/graphics/eq_selected.png"/>
         <FILE id="zLIz7o" name="expand.png" compile="0" resource="1" file="assets/graphics/expand.png"/>
         <FILE id="JjKh9U" name="file.png" compile="0" resource="1" file="assets/graphics/file.png"/>
-        <FILE id="tojRKH" name="fx_selected.png" compile="0" resource="1" file="assets/graphics/fx_selected.png"/>
         <FILE id="wyNKIo" name="PrimaryPaneBackground.png" compile="0" resource="1"
               file="assets/graphics/PrimaryPaneBackground.png"/>
         <FILE id="Pr6Akp" name="headphone_button.png" compile="0" resource="1"
