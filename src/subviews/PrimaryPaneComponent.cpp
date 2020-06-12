@@ -30,7 +30,9 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     for (int i = 0; i < drumButtons.size(); i++)
     {
         drumButtons[i].reset(new DragAndDropButton());
-        drumButtons[i]->onClick = [&] { waveWiggle->startAnimation(); };
+//        drumButtons[i]->onClick = [&] {
+//            waveWiggle->startAnimation();
+//        };
   
         addAndMakeVisible(drumButtons[i].get());
     }
@@ -162,7 +164,7 @@ void PrimaryPaneComponent::resized()
 //    backgroundButton->setBounds(backgroundArea);//--------Delete!!!!
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     
-    double uniteW = getWidth()/25;
+    float uniteW = getWidth()/25;
 
     //std::cout<<"uniteW: "<< uniteW << std::endl;
 

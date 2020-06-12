@@ -43,6 +43,8 @@ struct ControlPoint
     void reset()
     {
         y = startingY;
+        //std::cout<<"y: "<<y<<std::endl;
+        //std::cout<<"startingY: "<<startingY<<std::endl;
     }
 };
 
@@ -76,6 +78,8 @@ public:
             height *= 1.2;
             
         }
+        
+        std::cout<<"resize"<<std::endl;
         
        
     }
@@ -115,6 +119,12 @@ public:
     
     void startAnimation()
     {
+        std::cout<<"activate"<<std::endl;
+        float height = getHeight() * .1;
+        float middle = getHeight() / 2;
+        std::cout<<"height: "<< height <<std::endl;
+        std::cout<<"middle: "<< middle <<std::endl;
+        
         for (int i = 0; i < 24; i++){
             controlPoints[i].reset();
         }
@@ -123,6 +133,8 @@ public:
     
     void timerCallback() override
     {
+        //std::cout<<"called"<<std::endl;
+        
         bool shouldStop = true;
         for (int i = 0; i < 24; i++){
             controlPoints[i].update();

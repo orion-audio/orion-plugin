@@ -65,14 +65,12 @@ private:
     double sampleRate;
     bool sidechain_on {true}; 
     int sidechain_from, sidechain_to;
-    bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
     bool initialized {false};
-
-    
-   // dsp::Gain<float> overallgain;
-
-   
+    // dsp::Gain<float> overallgain;
     std::vector<double> magnitudes;
+    /* Effect Switches */
+    bool delayswitch {true}, compressorswitch {false}, reverbswitch {false};
+    
 public:
     EQ eq;
     
@@ -159,7 +157,6 @@ public:
             TRANS ("Low Shelf"),
             TRANS ("High Shelf"),
             TRANS ("Peak")
-        
         };
 
     };
@@ -173,8 +170,6 @@ public:
 
     void updatePlots ()
     {
-        
-   
         //auto gain = overallgain.getGainLinear();
         std::fill (magnitudes.begin(), magnitudes.end(), 1.0f);
         
@@ -344,30 +339,33 @@ public:
                     compressor.update_reference(l);
                 }
                 
-                //Apply EQ
+                //MARK:- Apply EQ
                 l = eq.bysamples(l);
                 r = l;
               
+                //MARK:- Apply Reverb
                 if(reverbswitch == true){
-                //Apply Reverb
                 reverb.processStereo(&l, &r, 1);
                 l = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(l));
                 r = l;
                 }
+                
+                //MARK:- Apply Compressor
                 if(compressorswitch == true){
-                //Apply Compressor
                 compVal = compressor.bysamples(l);
                 l *= compVal;
                 r *= compVal;
                 }
                 
-                //Envelope
+                //MARK:- Apply Envelope
                 envVal = env.doEnvelope();
-               // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
+                // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
                 l *= envVal;
                 r *= envVal;
                 
-                if(delayswitch == true){
+                //MARK:- Apply Delay
+                if(delayswitch == true)
+                {
                     //Apply Delay
                     l = delay.bysamples(l);
                     r = l;
@@ -377,13 +375,12 @@ public:
                     l = pan.processLeftChannel(l);
                     r = pan.processRightChannel(r);
                 }
+                
+                
                 if (outR != nullptr)
                 {
                     *outL++ += l;
                     *outR++ += r;
-            
-                    
-                    
                 }
                 else
                 {

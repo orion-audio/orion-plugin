@@ -11,7 +11,7 @@
 #include "OrionFileBrowser.h"
 #include "OrionFileTreeComponent.h"
 #include "DraggableFileBrowserComponent.h"
-#include "WaveWiggle.h"
+//#include "WaveWiggle.h"
 #include "CircularMeter.h"
 #include <array>
 #include "OrionResizableCornerComponent.h"
@@ -64,7 +64,6 @@ private:
     
     
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
-    std::unique_ptr<WaveWiggle> waveWiggle;
     
     std::unique_ptr<CircularMeter> meterLeft;
     std::unique_ptr<CircularMeter> meterRight;

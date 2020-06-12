@@ -36,7 +36,7 @@ public:
     
     private:
     OrionaudioAudioProcessor& processor;
-   
+    std::unique_ptr<DrawableImage> backgroundButton;// 以后删除
     //ScopedPointer<Slider> attackSlider;
 
 };

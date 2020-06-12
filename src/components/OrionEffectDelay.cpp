@@ -150,7 +150,6 @@ processor(p)
     delayColorTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayColor"+String(effectDelaySerial), delayColorSlider));
     delayPanTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayPan"+String(effectDelaySerial), delayPanSlider));
     delayDryWetTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "delayDryWet"+String(effectDelaySerial), delayDryWetSlider));
-    
     delaySwitchButtonAttachment.reset(new AudioProcessorValueTreeState::ButtonAttachment (processor.getValueTree(), "delaySwitch"+String(effectDelaySerial), delaySwitchButton));
     
     
@@ -177,7 +176,7 @@ OrionEffectDelay::~OrionEffectDelay()
 void OrionEffectDelay::paint (Graphics& g)
 {
     /* Background color */
-    g.fillAll(Colours::grey);
+    //g.fillAll(Colours::grey);
     
 }
 

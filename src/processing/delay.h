@@ -133,7 +133,6 @@ public:
     {
         //dpr = delayReadPosition_;
         //dpw = delayWritePosition_;
-       
         float out = 0.0;
         if(on==1)
         {

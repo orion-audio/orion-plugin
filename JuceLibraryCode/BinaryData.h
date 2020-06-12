@@ -8,98 +8,17 @@
 
 namespace BinaryData
 {
-    extern const char*   _00compressorBackground_png;
-    const int            _00compressorBackground_pngSize = 213101;
-
-    extern const char*   _00delayBackground_png;
-    const int            _00delayBackground_pngSize = 112030;
-
-    extern const char*   _00orionEnvBackground_png;
-    const int            _00orionEnvBackground_pngSize = 244219;
-
-    extern const char*   _00reverbBackground_png;
-    const int            _00reverbBackground_pngSize = 92001;
-
     extern const char*   a_png;
     const int            a_pngSize = 3863;
 
     extern const char*   a_button_png;
     const int            a_button_pngSize = 2024;
 
-    extern const char*   appdir_png;
-    const int            appdir_pngSize = 11409;
-
-    extern const char*   arrow_png;
-    const int            arrow_pngSize = 12569;
-
-    extern const char*   arrow_back_png;
-    const int            arrow_back_pngSize = 15605;
-
     extern const char*   arrow_up_png;
     const int            arrow_up_pngSize = 96621;
 
     extern const char*   arrow_down_png;
     const int            arrow_down_pngSize = 12569;
-
-    extern const char*   arrow_foward_png;
-    const int            arrow_foward_pngSize = 12935;
-
-    extern const char*   back_arrow_png;
-    const int            back_arrow_pngSize = 15605;
-
-    extern const char*   background_gradient_png;
-    const int            background_gradient_pngSize = 12898;
-
-    extern const char*   check_png;
-    const int            check_pngSize = 460;
-
-    extern const char*   clap_selected_png;
-    const int            clap_selected_pngSize = 5649;
-
-    extern const char*   compressorBackground_png;
-    const int            compressorBackground_pngSize = 334848;
-
-    extern const char*   delayBackground_png;
-    const int            delayBackground_pngSize = 160663;
-
-    extern const char*   ClipButtonOff_png;
-    const int            ClipButtonOff_pngSize = 13174;
-
-    extern const char*   ClipButtonOn_png;
-    const int            ClipButtonOn_pngSize = 20604;
-
-    extern const char*   ENVButtonOff_png;
-    const int            ENVButtonOff_pngSize = 12747;
-
-    extern const char*   ENVButtonOn_png;
-    const int            ENVButtonOn_pngSize = 19714;
-
-    extern const char*   EQButtonOff_png;
-    const int            EQButtonOff_pngSize = 12974;
-
-    extern const char*   EQButtonOn_png;
-    const int            EQButtonOn_pngSize = 19777;
-
-    extern const char*   FXButtonOff_png;
-    const int            FXButtonOff_pngSize = 12407;
-
-    extern const char*   FXButtonOn_png;
-    const int            FXButtonOn_pngSize = 19425;
-
-    extern const char*   EQ_Background_png;
-    const int            EQ_Background_pngSize = 43708;
-
-    extern const char*   expand_png;
-    const int            expand_pngSize = 2109;
-
-    extern const char*   file_png;
-    const int            file_pngSize = 881;
-
-    extern const char*   PrimaryPaneBackground_png;
-    const int            PrimaryPaneBackground_pngSize = 63366;
-
-    extern const char*   headphone_button_png;
-    const int            headphone_button_pngSize = 2092;
 
     extern const char*   KickOff_png;
     const int            KickOff_pngSize = 14761;
@@ -148,6 +67,90 @@ namespace BinaryData
 
     extern const char*   SnareOff_png;
     const int            SnareOff_pngSize = 15456;
+
+    extern const char*   ClipButtonOff_png;
+    const int            ClipButtonOff_pngSize = 13174;
+
+    extern const char*   ClipButtonOn_png;
+    const int            ClipButtonOn_pngSize = 20604;
+
+    extern const char*   ENVButtonOff_png;
+    const int            ENVButtonOff_pngSize = 12747;
+
+    extern const char*   ENVButtonOn_png;
+    const int            ENVButtonOn_pngSize = 19714;
+
+    extern const char*   EQButtonOff_png;
+    const int            EQButtonOff_pngSize = 12974;
+
+    extern const char*   EQButtonOn_png;
+    const int            EQButtonOn_pngSize = 19777;
+
+    extern const char*   FXButtonOff_png;
+    const int            FXButtonOff_pngSize = 12407;
+
+    extern const char*   FXButtonOn_png;
+    const int            FXButtonOn_pngSize = 19425;
+
+    extern const char*   FXBackground_png;
+    const int            FXBackground_pngSize = 434914;
+
+    extern const char*   _00compressorBackground_png;
+    const int            _00compressorBackground_pngSize = 213101;
+
+    extern const char*   _00delayBackground_png;
+    const int            _00delayBackground_pngSize = 112030;
+
+    extern const char*   _00orionEnvBackground_png;
+    const int            _00orionEnvBackground_pngSize = 244219;
+
+    extern const char*   _00reverbBackground_png;
+    const int            _00reverbBackground_pngSize = 92001;
+
+    extern const char*   appdir_png;
+    const int            appdir_pngSize = 11409;
+
+    extern const char*   arrow_png;
+    const int            arrow_pngSize = 12569;
+
+    extern const char*   arrow_back_png;
+    const int            arrow_back_pngSize = 15605;
+
+    extern const char*   arrow_foward_png;
+    const int            arrow_foward_pngSize = 12935;
+
+    extern const char*   back_arrow_png;
+    const int            back_arrow_pngSize = 15605;
+
+    extern const char*   background_gradient_png;
+    const int            background_gradient_pngSize = 12898;
+
+    extern const char*   check_png;
+    const int            check_pngSize = 460;
+
+    extern const char*   clap_selected_png;
+    const int            clap_selected_pngSize = 5649;
+
+    extern const char*   compressorBackground_png;
+    const int            compressorBackground_pngSize = 334848;
+
+    extern const char*   delayBackground_png;
+    const int            delayBackground_pngSize = 160663;
+
+    extern const char*   EQ_Background_png;
+    const int            EQ_Background_pngSize = 43708;
+
+    extern const char*   expand_png;
+    const int            expand_pngSize = 2109;
+
+    extern const char*   file_png;
+    const int            file_pngSize = 881;
+
+    extern const char*   PrimaryPaneBackground_png;
+    const int            PrimaryPaneBackground_pngSize = 63366;
+
+    extern const char*   headphone_button_png;
+    const int            headphone_button_pngSize = 2092;
 
     extern const char*   knob_1_png;
     const int            knob_1_pngSize = 1865;
@@ -207,7 +210,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 66;
+    const int namedResourceListSize = 67;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

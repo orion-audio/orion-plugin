@@ -11,6 +11,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OrionEffectReverb.h"
 #include "OrionGlobalVars.h"
+
+
 using namespace std;
 //==============================================================================
 
@@ -19,6 +21,8 @@ OrionEffectReverb::OrionEffectReverb(OrionaudioAudioProcessor& p, int serial):
 processor(p)
 {
     effectReverbSerial = serial;
+    
+
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     //setBounds(10, 10, 80, 80);/* Global: X, Y, W， H */
@@ -182,8 +186,8 @@ processor(p)
     reverbSwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
     addAndMakeVisible(reverbSwitchButton);
     
-    
-    
+    //reverbSwitchButton.onStateChange = [&] { processor.sampler.voices[0]};
+
     //sends value of the sliders to the tree state in the processor
    
     reverbPredelayTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "reverbPredelay"+String(effectReverbSerial), reverbPredelaySlider));
@@ -216,7 +220,7 @@ OrionEffectReverb::~OrionEffectReverb()
 
 void OrionEffectReverb::paint (Graphics& g)
 {
-    g.fillAll(Colours::grey);/* 颜色 */
+    //g.fillAll(Colours::grey);/* 颜色 */
 }
 
 void OrionEffectReverb::resized()

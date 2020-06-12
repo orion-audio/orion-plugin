@@ -34,6 +34,7 @@ int effectReverbSerial;
 private:
 
 OrionaudioAudioProcessor& processor;
+    
 
 std::unique_ptr<SliderAttachment> reverbPredelayTree;
 std::unique_ptr<SliderAttachment> reverbSizeTree;

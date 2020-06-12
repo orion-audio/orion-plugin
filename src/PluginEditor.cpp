@@ -107,9 +107,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
     
-    waveWiggle.reset(new WaveWiggle());
-    addAndMakeVisible(waveWiggle.get());
-    
     meterInput.reset(new CircularMeter());
     meterInput->updaterFunction = [this] {
         return processor.getInputLevel();
@@ -301,8 +298,9 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     if(isDown)
     {
-        //std::cout<<"Down"<<std::endl;
-        waveWiggle->startAnimation();
+        std::cout<<"Down"<<std::endl;
+        primaryPane->waveWiggle->startAnimation();
+   
         processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));

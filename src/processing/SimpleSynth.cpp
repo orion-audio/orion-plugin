@@ -17,7 +17,8 @@ void SimpleSynth::setup(double sr) {
     sampleRate = sr;
     // add voices to our sampler
 
-    for (int i = 0; i < MAX_VOICES; i++) {
+    for (int i = 0; i < MAX_VOICES; i++)
+    {
         auto* voice = new OrionSamplerVoice(sampleRate,i);
         //auto* voice = new SamplerVoice();
         switch(i)

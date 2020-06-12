@@ -10,7 +10,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#define NUM_VOICES 7
+#define NUM_VOICES 8
 
 //==============================================================================
 static String doubleToString(double val) { return String(val); }

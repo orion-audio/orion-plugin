@@ -122,7 +122,7 @@ OrionEffectComp::~OrionEffectComp()
 
 void OrionEffectComp::paint (Graphics& g)
 {
-    g.fillAll(Colours::grey);/* 颜色 */
+    //g.fillAll(Colours::grey);/* 颜色 */
 }
 
 void OrionEffectComp::resized()
