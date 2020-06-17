@@ -119,10 +119,11 @@ private:
     AudioBuffer<float> mDelayBuffer;
     AudioBuffer<float> tempbuffer;
     int mWritePosition { 0 };
-    int mSampleRate { 441000 };
+    int mSampleRate { 44100 };
+    
+    float inputLevel;
     
     OutputLevels outputLevels;
-    float inputLevel;
     
     Analyser<float> inputAnalyser;
     Analyser<float> outputAnalyser;

@@ -32,6 +32,4 @@ private:
     AudioFormatManager audioFormatManager;
     File* file;
     bool isChokeGroupActive;
-
-
 };

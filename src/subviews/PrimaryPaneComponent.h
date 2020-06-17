@@ -22,7 +22,8 @@ class OrionaudioAudioProcessorEditor;
 //==============================================================================
 /*
 */
-class PrimaryPaneComponent : public Component
+class PrimaryPaneComponent : public Component,
+                              public Slider::Listener
 {
 public:
     PrimaryPaneComponent(OrionaudioAudioProcessor*, OrionaudioAudioProcessorEditor*);
@@ -32,6 +33,8 @@ public:
     void resized() override;
 
     std::unique_ptr<WaveWiggle> waveWiggle;
+    
+    void sliderValueChanged (Slider* slider)override;
 private:
     OrionaudioAudioProcessor* processor;
     OrionaudioAudioProcessorEditor* editor;
@@ -47,7 +50,9 @@ private:
     std::unique_ptr<CircularMeter> meterLeft;
     std::unique_ptr<CircularMeter> meterRight;
     
-    std::unique_ptr<ImageButton> backgroundButton;// 以后删除
+    std::unique_ptr<Slider> MasterVolumeSlider;
+    
+    std::unique_ptr<DrawableImage> backgroundImageView;// 以后删除
     
     ColourGradient backgroundGradient;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PrimaryPaneComponent)

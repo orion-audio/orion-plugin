@@ -36,7 +36,7 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
         midiOutput->startBackgroundThread();
 
     sampler.reset(new SimpleSynth());
-    sampler->setup(48000);
+    sampler->setup(44100);
 
     sequencer.reset(new Sequencer(static_cast<Synthesiser*>(sampler.get())));
     sequencer->setActive(true);
@@ -134,7 +134,7 @@ void OrionaudioAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     mDelayBuffer.setSize(numInputChannels, delayBufferSize);
     mSampleRate = sampleRate;
     sampler->setCurrentPlaybackSampleRate(sampleRate);
-    
+
     sequencer->prepareToPlay(sampleRate);
 }
 
@@ -172,8 +172,12 @@ void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
 {
     inputLevel = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
     buffer.clear();
-    sampler->renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
-    outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples()) ;
+    
+    
+    
+    //sampler->renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+
+    outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
     if (buffer.getNumChannels() > 1)
         outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
     else
@@ -287,6 +291,7 @@ AudioProcessorValueTreeState::ParameterLayout OrionaudioAudioProcessor::createPa
         layout.add(std::make_unique<AudioParameterFloat>("envReleaseBend" + String(i), "envReleaseBend", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, "", AudioProcessorParameter::Category::genericParameter));
 
     }
+    
 
     return layout;
 

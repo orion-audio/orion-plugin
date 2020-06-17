@@ -71,6 +71,7 @@ void SimpleSynth::loadSamples()
     }
     int MidiNote;
     audiofolder = File("/Library/Application\ Support/Orion/Orion\ Plugin/Samples");
+    
     String dir;
     String filename;
     for(int i = 0; i < MAX_VOICES; i++)
@@ -157,8 +158,7 @@ void SimpleSynth::changeSamples(int index,const String &f,int midi)//index shoul
         };
         
         MessageManager::callAsync(alert);
-        return;
-            
+        return;    
     }
     
     
@@ -212,3 +212,11 @@ void SimpleSynth::noteOn(int midiChannel,
         }
     }
 }
+
+
+
+//void SimpleSynth::renderNextBlock (AudioBuffer<float>& outputAudio, const MidiBuffer& inputMidi,
+//                                   int startSample, int numSamples)
+//{
+//
+//}

@@ -18,7 +18,7 @@ DraggableFileBrowserComponent::DraggableFileBrowserComponent() : scannerThread("
     
     backButton.reset(new ImageButton());
     backButton->setAlwaysOnTop(true);
-    Image backImage = ImageCache::getFromMemory(BinaryData::back_arrow_png, BinaryData::back_arrow_pngSize);
+    Image backImage = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
     backButton->setImages(false, true, true, backImage, 1.f, Colours::transparentBlack, backImage, 1.f, Colours::transparentBlack, backImage, 1.f, Colours::transparentBlack);
     backButton->onClick = [this] {
         scanDirectory(currentDirectory.getDirectory().getParentDirectory());

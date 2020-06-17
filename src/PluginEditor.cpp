@@ -222,7 +222,7 @@ void OrionaudioAudioProcessorEditor::resized()
     //cout << "unite: "<< unite << endl;
 
  
-    auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, unite);
+    auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, 1.5 * unite);
     menuBar->setBounds(menuBarArea);
     
     
@@ -233,7 +233,7 @@ void OrionaudioAudioProcessorEditor::resized()
         sidePanel->setBounds(sidePaneArea);
         
         // PRIMARY PANE
-        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), unite, getWidth() - sidePanel->getWidth(), getHeight() - unite);
+        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 1.5 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 1.5 * unite);
         primaryPane->setBounds(primaryPaneArea);
         
         // ARRANGEMENT WINDOW
@@ -253,7 +253,7 @@ void OrionaudioAudioProcessorEditor::resized()
         sidePanel->setBounds(sidePaneArea);
         
         // PRIMARY PANE
-        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), unite, getWidth() - sidePanel->getWidth(), sidePanel->getHeight() - unite);
+        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 1.5 * unite, getWidth() - sidePanel->getWidth(), sidePanel->getHeight() - 1.5 * unite);
         primaryPane->setBounds(primaryPaneArea);
         
         // ARRANGEMENT WINDOW
@@ -298,7 +298,8 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     if(isDown)
     {
-        std::cout<<"Down"<<std::endl;
+        //std::cout<<"Down"<<std::endl;
+        primaryPane->waveWiggle->setVisible(true);
         primaryPane->waveWiggle->startAnimation();
    
         processor.getSampler()->noteOn(1, midiNote, 120);

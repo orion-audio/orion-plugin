@@ -13,17 +13,22 @@
 #include "PluginEditor.h"
 #include "OrionGlobalVars.h"
 #include "PluginEditor.h"
+#include "OrionSamplerVoice.h"
+
+#define __COEFFICIENTSMAIN__
+#include "GlobalCoefficients.h"
+
+
 //==============================================================================
 PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, OrionaudioAudioProcessorEditor* e)
 {
     processor = p;
     editor = e;
-    
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
-//    Image backgroundImage = ImageCache::getFromMemory(BinaryData::PrimaryPaneBackground_png, BinaryData::PrimaryPaneBackground_pngSize);
-//    backgroundButton.reset(new ImageButton());
-//    backgroundButton->setImages(false, true, true, backgroundImage, 1.f, Colours::transparentBlack, backgroundImage, 1.f, Colours::transparentBlack, backgroundImage, 1.f, Colours::transparentBlack);
-//    addAndMakeVisible(backgroundButton.get());
+    Image backgroundImage = ImageCache::getFromMemory(BinaryData::PrimaryPane_Footer_png, BinaryData::PrimaryPane_Footer_pngSize);
+    backgroundImageView.reset(new DrawableImage());
+    backgroundImageView->setImage(backgroundImage);
+    addAndMakeVisible(backgroundImageView.get());
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     
     
@@ -121,12 +126,12 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     addAndMakeVisible(dropDownButton.get());
 
     // SOLO & MUTE BUTTONS
-    upImage = ImageCache::getFromMemory(BinaryData::s_png, BinaryData::s_pngSize);
+    upImage = ImageCache::getFromMemory(BinaryData::SoloOff_png, BinaryData::SoloOff_pngSize);
     soloButton.reset(new ImageButton());
     soloButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
     addAndMakeVisible(soloButton.get());
     
-    upImage = ImageCache::getFromMemory(BinaryData::m_png, BinaryData::m_pngSize);
+    upImage = ImageCache::getFromMemory(BinaryData::MuteOff_png, BinaryData::MuteOff_pngSize);
     muteButton.reset(new ImageButton());
     muteButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
     addAndMakeVisible(muteButton.get());
@@ -134,8 +139,20 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     // WAVE WIGGLE
     waveWiggle.reset(new WaveWiggle());
     addAndMakeVisible(waveWiggle.get());
+    waveWiggle->setVisible(false);
     
     
+    // MASTER VOLUME SLIDER
+    MasterVolumeSlider.reset(new Slider());
+    MasterVolumeSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
+    MasterVolumeSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text Box
+    MasterVolumeSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
+    MasterVolumeSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    MasterVolumeSlider->setRange(0.0f, 1.0f);
+    MasterVolumeSlider->setValue(0.75f);
+    MasterVolumeSlider->addListener(this);
+    addAndMakeVisible(MasterVolumeSlider.get());
+
     
 }
 
@@ -160,50 +177,66 @@ void PrimaryPaneComponent::resized()
     //backgroundGradient = ColourGradient::horizontal(Colour(0xFF0C0C0D), 0, Colours::black, getWidth() / 2);
     
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
-//    Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());//--------Delete!!!!
-//    backgroundButton->setBounds(backgroundArea);//--------Delete!!!!
+    Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());//--------Delete!!!!
+    //backgroundImageView->setBounds(backgroundArea);//--------Delete!!!!
+    
+    backgroundImageView->setTransformToFit(backgroundArea.toFloat(), RectanglePlacement::stretchToFit);
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     
-    float uniteW = getWidth()/25;
+    float uniteW = getWidth()/50;
 
     //std::cout<<"uniteW: "<< uniteW << std::endl;
 
     // Solo and Mute Buttons
-    Rectangle<int> area(1.25 * uniteW, 1.25 * uniteW, uniteW, uniteW);
+    Rectangle<int> area(1.5 * uniteW, 1.25 * uniteW, 2 * uniteW, 2 * uniteW);
     soloButton->setBounds(area);
-    area.translate(1.25 * area.getWidth(), 0);
+    area.translate(2.5 * uniteW, 0);
     muteButton->setBounds(area);
     
-    // Pads
-    area.setSize(getWidth() / 4, getHeight() * .25);
+    // Instrumet Pads
     int drumCount = 0;
-    double localWidth = 3.5 * uniteW;
-    double localHeight = 3.5 * uniteW;
+    double localWidth = 7 * uniteW;
+    double localHeight = 7 * uniteW;
     area.setSize(localWidth, localHeight);
     
     for (int i = 0; i < 2; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            area.setPosition(3.25 * uniteW + j * localWidth * 1.5, 3.75 * uniteW + i * localHeight * 1);
+            area.setPosition(5 * uniteW + j * localWidth * 1.6, 6.5 * uniteW + i * localHeight * 1);
             drumButtons[drumCount]->setBounds(area);
             drumCount++;
         }
     }
 
     // Wave Wiggle
-    area = Rectangle<int>(8.25 * uniteW, 10 * uniteW, 11.5 * uniteW, 5 * uniteW);
+    area = Rectangle<int>(16.4 * uniteW, 19.6 * uniteW, 21 * uniteW, 8 * uniteW);
     waveWiggle->setBounds(area);
     
     // Meters
-    area = Rectangle<int>(22 * uniteW, 11 * uniteW, .5 * uniteW, 3 * uniteW);
+    area = Rectangle<int>(44 * uniteW, 20 * uniteW, uniteW, 6.5 * uniteW);
     meterLeft->setBounds(area);
-    area = Rectangle<int>(22.5 * uniteW, 11 * uniteW, .5 * uniteW, 3 * uniteW);
+    
+    area = Rectangle<int>(45 * uniteW, 20 * uniteW, uniteW, 6.5 * uniteW);
     meterRight->setBounds(area);
     
     // Drop Down Button
-    area = Rectangle<int>(1 * uniteW, 15.25 * uniteW, uniteW, uniteW);
+    area = Rectangle<int>(2 * uniteW, 29.6 * uniteW, 2 * uniteW, 2 * uniteW);
     dropDownButton->setBounds(area);
+    
+    // Master Volume Slider
+    area = Rectangle<int>(39.4 * uniteW, 30.2 * uniteW, 7 * uniteW, uniteW);
+    MasterVolumeSlider->setBounds(area);
 
     repaint();
+}
+
+
+void PrimaryPaneComponent::sliderValueChanged (Slider* slider)
+{
+    if(slider == MasterVolumeSlider.get())
+    {
+        //std::cout<<MasterVolumeSlider->getValue()<<std::endl;
+        masterVolumeCoefficient = MasterVolumeSlider->getValue();
+    }
 }

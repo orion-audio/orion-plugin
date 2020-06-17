@@ -11,15 +11,15 @@
 #pragma once
 
 //--- Height/Width = 3/5 --- //
-int const OrionGlobalWidth = 830;
-int const OrionGlobalHeight = 498;
+int const OrionGlobalWidth = 1080;
+int const OrionGlobalHeight = 648;
 
 static int OrionGlobalTabIndex = 3;
 
 namespace orion
-    {
-    const int defaultWidth = 830;
-    const int defaultHeight = 498;
+{
+    const int defaultWidth = 1080;
+    const int defaultHeight = 648;
     
     enum DrumPart : int
     {
@@ -55,3 +55,6 @@ namespace orion
     };
 
 }
+
+
+//float masterVolumeCoefficient = 0.75f;

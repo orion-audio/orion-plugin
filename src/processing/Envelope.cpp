@@ -3,7 +3,7 @@
 using namespace std;
 EnvelopeGenerator::EnvelopeGenerator(void)
 {
-    sampleRate = 48000;
+    sampleRate = 44100;
     attackTime = 0;
     decayTime = 0;
     releaseTime = 1000;

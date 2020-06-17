@@ -14,59 +14,74 @@ namespace BinaryData
     extern const char*   a_button_png;
     const int            a_button_pngSize = 2024;
 
-    extern const char*   arrow_up_png;
-    const int            arrow_up_pngSize = 96621;
+    extern const char*   PrimaryPane_Footer_png;
+    const int            PrimaryPane_Footer_pngSize = 430910;
+
+    extern const char*   SoloOff_png;
+    const int            SoloOff_pngSize = 13630;
+
+    extern const char*   SoloOnpng_png;
+    const int            SoloOnpng_pngSize = 21969;
+
+    extern const char*   MuteOff_png;
+    const int            MuteOff_pngSize = 12539;
+
+    extern const char*   MuteOn_png;
+    const int            MuteOn_pngSize = 20519;
 
     extern const char*   arrow_down_png;
-    const int            arrow_down_pngSize = 12569;
+    const int            arrow_down_pngSize = 28501;
 
-    extern const char*   KickOff_png;
-    const int            KickOff_pngSize = 14761;
-
-    extern const char*   KickOn_png;
-    const int            KickOn_pngSize = 24027;
-
-    extern const char*   ClapOn_png;
-    const int            ClapOn_pngSize = 22634;
+    extern const char*   arrow_up_png;
+    const int            arrow_up_pngSize = 37153;
 
     extern const char*   ClapOff_png;
-    const int            ClapOff_pngSize = 13416;
+    const int            ClapOff_pngSize = 69485;
 
-    extern const char*   PercOn_png;
-    const int            PercOn_pngSize = 22850;
-
-    extern const char*   PercOff_png;
-    const int            PercOff_pngSize = 13165;
-
-    extern const char*   CrashOn_png;
-    const int            CrashOn_pngSize = 25924;
+    extern const char*   ClapOn_png;
+    const int            ClapOn_pngSize = 83965;
 
     extern const char*   CrashOff_png;
-    const int            CrashOff_pngSize = 16333;
+    const int            CrashOff_pngSize = 84810;
 
-    extern const char*   HHCOn_png;
-    const int            HHCOn_pngSize = 21427;
+    extern const char*   CrashOn_png;
+    const int            CrashOn_pngSize = 90993;
 
     extern const char*   HHCOff_png;
-    const int            HHCOff_pngSize = 11387;
+    const int            HHCOff_pngSize = 54465;
 
-    extern const char*   SnapOn_png;
-    const int            SnapOn_pngSize = 23302;
-
-    extern const char*   SnapOff_png;
-    const int            SnapOff_pngSize = 13966;
-
-    extern const char*   HHOOn_png;
-    const int            HHOOn_pngSize = 21494;
+    extern const char*   HHCOn_png;
+    const int            HHCOn_pngSize = 78144;
 
     extern const char*   HHOOff_png;
-    const int            HHOOff_pngSize = 12127;
+    const int            HHOOff_pngSize = 56305;
 
-    extern const char*   SnareOn_png;
-    const int            SnareOn_pngSize = 24101;
+    extern const char*   HHOOn_png;
+    const int            HHOOn_pngSize = 79249;
+
+    extern const char*   KickOff_png;
+    const int            KickOff_pngSize = 65677;
+
+    extern const char*   KickOn_png;
+    const int            KickOn_pngSize = 84552;
+
+    extern const char*   PercOff_png;
+    const int            PercOff_pngSize = 65795;
+
+    extern const char*   PercOn_png;
+    const int            PercOn_pngSize = 82246;
+
+    extern const char*   SnapOff_png;
+    const int            SnapOff_pngSize = 75683;
+
+    extern const char*   SnapOn_png;
+    const int            SnapOn_pngSize = 87575;
 
     extern const char*   SnareOff_png;
-    const int            SnareOff_pngSize = 15456;
+    const int            SnareOff_pngSize = 79621;
+
+    extern const char*   SnareOn_png;
+    const int            SnareOn_pngSize = 89675;
 
     extern const char*   ClipButtonOff_png;
     const int            ClipButtonOff_pngSize = 13174;
@@ -109,18 +124,6 @@ namespace BinaryData
 
     extern const char*   appdir_png;
     const int            appdir_pngSize = 11409;
-
-    extern const char*   arrow_png;
-    const int            arrow_pngSize = 12569;
-
-    extern const char*   arrow_back_png;
-    const int            arrow_back_pngSize = 15605;
-
-    extern const char*   arrow_foward_png;
-    const int            arrow_foward_pngSize = 12935;
-
-    extern const char*   back_arrow_png;
-    const int            back_arrow_pngSize = 15605;
 
     extern const char*   background_gradient_png;
     const int            background_gradient_pngSize = 12898;
@@ -210,7 +213,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 67;
+    const int namedResourceListSize = 68;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

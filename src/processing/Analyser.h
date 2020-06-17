@@ -134,7 +134,7 @@ private:
     AudioBuffer<float> averager            { 5, fft.getSize() / 2 };
     int averagerPtr = 1;
 
-    AbstractFifo abstractFifo              { 48000 };
+    AbstractFifo abstractFifo              { 44100 };
     AudioBuffer<Type> audioFifo;
 
     bool newDataAvailable = false;

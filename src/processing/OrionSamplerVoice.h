@@ -29,7 +29,7 @@
 #include "Envelope.h"
 #include "compressor.h"
 #include "EQ.h"
-
+#include "GlobalCoefficients.h"
 
 class OrionSamplerVoice : public SamplerVoice
 , public AudioProcessorValueTreeState::Listener
@@ -40,6 +40,8 @@ private:
     Delay delay;
     EnvelopeGenerator env;
     Compressor compressor;
+    
+    //float* masterVolume = &masterVolumeCoefficient;
 
     //Sidechain sidechain;
     Reverb reverb;
@@ -69,8 +71,9 @@ private:
     // dsp::Gain<float> overallgain;
     std::vector<double> magnitudes;
     /* Effect Switches */
-    bool delayswitch {true}, compressorswitch {false}, reverbswitch {false};
+    bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
     
+
 public:
     EQ eq;
     
@@ -101,7 +104,6 @@ public:
         }
         
     };
-    
 
     std::vector<double> frequencies;
     
@@ -376,6 +378,9 @@ public:
                     r = pan.processRightChannel(r);
                 }
                 
+
+                l = l * masterVolumeCoefficient;
+                r = r * masterVolumeCoefficient;
                 
                 if (outR != nullptr)
                 {
@@ -387,9 +392,10 @@ public:
                     *outL++ += (l + r) * 0.5f;
                 }
                 
+                
+                
                 sourceSamplePosition += pitchRatio;
                
-                
                 if (sourceSamplePosition > safelength)
                 {
                    
@@ -404,6 +410,7 @@ public:
     void parameterChanged(const String &parameterID, float newValue) override
     {
         /* ON-OFF SWITCHES */
+        //DBG("parameterChanged");
         if (parameterID == String("delaySwitch" + String(index))){delayswitch = newValue;}
         if (parameterID == String("compressorSwitch" + String(index))){compressorswitch = newValue;}
         if (parameterID == String("reverbSwitch" + String(index))){reverbswitch = newValue;}

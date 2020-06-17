@@ -119,11 +119,11 @@ public:
     
     void startAnimation()
     {
-        std::cout<<"activate"<<std::endl;
-        float height = getHeight() * .1;
-        float middle = getHeight() / 2;
-        std::cout<<"height: "<< height <<std::endl;
-        std::cout<<"middle: "<< middle <<std::endl;
+        //std::cout<<"activate"<<std::endl;
+        //float height = getHeight() * .1;
+        //float middle = getHeight() / 2;
+        //std::cout<<"height: "<< height <<std::endl;
+        //std::cout<<"middle: "<< middle <<std::endl;
         
         for (int i = 0; i < 24; i++){
             controlPoints[i].reset();
@@ -145,7 +145,10 @@ public:
         repaint();
         
         if (shouldStop)
+        {
+            setVisible(false);
             stopTimer();
+        }
     }
 
 private:

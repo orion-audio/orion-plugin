@@ -77,7 +77,7 @@ private:
     AudioPlayHead* playhead;
     Synthesiser* sampler;
     AudioFormatManager formatManager;
-    float lastSampleRate = 48000;
+    float lastSampleRate = 44100;
     int totalLength = 16;
     
     bool isActive = true;
