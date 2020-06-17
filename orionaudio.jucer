@@ -45,6 +45,10 @@
               file="src/components/OrionTabButton.h"/>
         <FILE id="lMuKXJ" name="ResizableContainer.h" compile="0" resource="0"
               file="src/components/ResizableContainer.h"/>
+        <FILE id="JQfR69" name="SequencerButton.cpp" compile="1" resource="0"
+              file="src/components/SequencerButton.cpp"/>
+        <FILE id="QjcMhA" name="SequencerButton.h" compile="0" resource="0"
+              file="src/components/SequencerButton.h"/>
         <FILE id="GqnPjP" name="SequencerComponent.cpp" compile="1" resource="0"
               file="src/components/SequencerComponent.cpp"/>
         <FILE id="wmHqrd" name="SequencerComponent.h" compile="0" resource="0"

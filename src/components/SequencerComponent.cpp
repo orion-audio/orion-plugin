@@ -75,7 +75,7 @@ void SequencerComponent::paintGrid(Graphics& g)
             g.setColour(findColour(ColourIds::beatColourOffId));
             if (sequence->isNotePresent(NoteSequence::noteValues[rows], cols))
                 active = true;
-            if (notesToBePlayed)
+//            if (notesToBePlayed)
             laf->drawNoteBox(g, *this, area.withSizeKeepingCentre(xDist * .9, yDist * .9), active, false);
 
             area.translate(xDist, 0);

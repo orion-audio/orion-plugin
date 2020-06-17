@@ -31,10 +31,10 @@ public:
         return s;
     }
     
-    equals(Note n) {
-        if (startTime == n.startTime && pitch = n.pitch)
-            return true
-        return false
+    bool equals(Note n) {
+        if (startTime == n.startTime && pitch == n.pitch)
+            return true;
+        return false;
     }
 
 
