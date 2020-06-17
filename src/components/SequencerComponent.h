@@ -20,10 +20,11 @@ class SequencerComponent : public Component, public Timer, public Button::Listen
 {
 public:
     
+    
     struct LookAndFeelMethods
     {
     public:
-        virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive)
+        virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive, bool isPlaying)
         {
             if (isActive)
                 g.drawRect(bounds);
@@ -66,18 +67,21 @@ public:
     
     virtual void sequenceChanged() override { repaint(); }
     
+    void notePlayed(int part, int beat) override;
+
+    void addListener(Sequencer::Listener* listener) { listeners.push_back(listener); }
 private:
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
-    
+    std::vector<Note> notesToBePlayed;
     int selectedRow = 0;
-    
+    int lastBeat = -1;
     bool shouldFlip = false;
     
     StringArray voiceNames;
     
     float gridPhase = 0;
     float gridDirection = 1;
-    
+    std::vector<Sequencer::Listener*> listeners;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SequencerComponent)
 };

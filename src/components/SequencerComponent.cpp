@@ -75,7 +75,8 @@ void SequencerComponent::paintGrid(Graphics& g)
             g.setColour(findColour(ColourIds::beatColourOffId));
             if (sequence->isNotePresent(NoteSequence::noteValues[rows], cols))
                 active = true;
-            laf->drawNoteBox(g, *this, area.withSizeKeepingCentre(xDist * .9, yDist * .9), active);
+            if (notesToBePlayed)
+            laf->drawNoteBox(g, *this, area.withSizeKeepingCentre(xDist * .9, yDist * .9), active, false);
 
             area.translate(xDist, 0);
         }
@@ -200,7 +201,13 @@ void SequencerComponent::colourChanged()
 
 void SequencerComponent::timerCallback()
 {
-//    repaint();
+    std::queue<Note>* noteQueue = &sequencer.lastNotesPlayed;
+    for (int i = 0; i < noteQueue->size(); i++) {
+        notesToBePlayed.push_back(noteQueue->front());
+        noteQueue->pop();
+    }
+    lastBeat = notesToBePlayed.front().startTime;
+    repaint();
 }
 
 void SequencerComponent::buttonClicked(Button* b)
@@ -215,3 +222,8 @@ void SequencerComponent::buttonStateChanged(Button* b)
     else
         isSelected = false;
 }
+
+void SequencerComponent::notePlayed(int part, int beat) {
+    
+}
+    

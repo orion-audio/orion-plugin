@@ -47,7 +47,7 @@ public:
     virtual Font getLabelFont (Label &) override;
     virtual void drawComboBox(Graphics &, int width, int height, bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, ComboBox &) override;
     
-    virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive) override;
+    virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive, bool isPlaying) override;
     
 private:
     std::array<std::unique_ptr<ImagePair>, 4> tabButtonImages;
