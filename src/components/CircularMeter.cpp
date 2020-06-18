@@ -30,16 +30,24 @@ void CircularMeter::paint (Graphics& g)
     
     g.setColour(Colours::black);
     auto area = getLocalBounds();
+    int w;
+    int h;
     
     if(isVertical){
         area = area.removeFromTop(getHeight() / numCircles);
-        g.setColour(findColour(ColourIds::backgroundColourId));
-        int w = area.getWidth() * .6;
-        int h = w;
-        for (int i = 0; i < numCircles; i++){
-            g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
-            area.translate(0, area.getHeight());
+        
+        
+        if(backgroundColorShow)
+        {
+            g.setColour(findColour(ColourIds::backgroundColourId));
+            w = area.getWidth() * .6;
+            h = w;
+            for (int i = 0; i < numCircles; i++){
+                g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
+                area.translate(0, area.getHeight());
+            }
         }
+        
         
         float level = 0;
         int numFilled = 0;
@@ -48,7 +56,7 @@ void CircularMeter::paint (Graphics& g)
             level = updaterFunction();
             //DBG(level);//print level
             for (int i = 0; i < numCircles; i++){
-                if (level > i * (1.f / numCircles))
+                if (level > i * (0.75f/* original 1.0f */ / numCircles))
                 {
                     numFilled++;
                 }
@@ -62,22 +70,27 @@ void CircularMeter::paint (Graphics& g)
         for (int i = 0; i < numFilled; i++){
             if (i == numCircles - 1)
                 g.setColour(findColour(ColourIds::clipColourId));
+            g.setOpacity(1.0f/(float(numFilled) - float(i)));
             g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
             area.translate(0, -area.getHeight());
         }
     }
-    
-    else if(!isVertical){
+    else
+    {
         area = area.removeFromLeft(getWidth() / numCircles);///
         
-        g.setColour(findColour(ColourIds::backgroundColourId));
-        int h = area.getHeight() * .6;
-        int w = h;
-        for (int i = 0; i < numCircles; i++){
-            g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
-            
-            area.translate(area.getWidth(), 0);
+        if(backgroundColorShow)
+        {
+            g.setColour(findColour(ColourIds::backgroundColourId));
+            h = area.getHeight() * .6;
+            w = h;
+            for (int i = 0; i < numCircles; i++){
+                g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
+                
+                area.translate(area.getWidth(), 0);
+            }
         }
+        
         
         float level = 0;
         int numFilled = 0;
@@ -85,7 +98,7 @@ void CircularMeter::paint (Graphics& g)
         {
             level = updaterFunction();
             for (int i = 0; i < numCircles; i++){
-                if (level > i * (1.f / numCircles))
+                if (level > i * (0.75f/* original 1.0f */ / numCircles))
                 {
                     numFilled++;
                 }
@@ -99,6 +112,7 @@ void CircularMeter::paint (Graphics& g)
         for (int i = 0; i < numFilled; i++){
             if (i == numCircles - 1)
                 g.setColour(findColour(ColourIds::clipColourId));
+            g.setOpacity(1.0f/(float(numFilled) - float(i)));
             g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
             area.translate(area.getWidth(), 0);
         }

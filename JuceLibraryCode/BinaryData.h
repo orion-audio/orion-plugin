@@ -17,11 +17,14 @@ namespace BinaryData
     extern const char*   PrimaryPane_Footer_png;
     const int            PrimaryPane_Footer_pngSize = 430910;
 
+    extern const char*   PrimaryBackground_svg;
+    const int            PrimaryBackground_svgSize = 4906;
+
     extern const char*   SoloOff_png;
     const int            SoloOff_pngSize = 13630;
 
-    extern const char*   SoloOnpng_png;
-    const int            SoloOnpng_pngSize = 21969;
+    extern const char*   SoloOn_png;
+    const int            SoloOn_pngSize = 21969;
 
     extern const char*   MuteOff_png;
     const int            MuteOff_pngSize = 12539;
@@ -213,7 +216,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 68;
+    const int namedResourceListSize = 69;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

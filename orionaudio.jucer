@@ -151,9 +151,11 @@
         <GROUP id="{72F10338-F3B8-5B05-6B5F-1DACD9B97E53}" name="primaryPane">
           <FILE id="ahrTZR" name="PrimaryPane_Footer.png" compile="0" resource="1"
                 file="assets/graphics/primaryPane/PrimaryPane_Footer.png"/>
+          <FILE id="XDcPxI" name="PrimaryBackground.svg" compile="0" resource="1"
+                file="assets/graphics/primaryPane/PrimaryBackground.svg"/>
           <GROUP id="{90B3EBFC-0C8A-3367-A73C-9CF0AC76F6CD}" name="soloButton">
             <FILE id="sOXwBg" name="SoloOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/soloButton/SoloOff.png"/>
-            <FILE id="O5qjiH" name="SoloOnpng.png" compile="0" resource="1" file="assets/graphics/primaryPane/soloButton/SoloOnpng.png"/>
+            <FILE id="O5qjiH" name="SoloOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/soloButton/SoloOn.png"/>
           </GROUP>
           <GROUP id="{06D7087B-8944-8BEA-DC70-76D7A0694A82}" name="muteButton">
             <FILE id="Td74lX" name="MuteOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/muteButton/MuteOff.png"/>

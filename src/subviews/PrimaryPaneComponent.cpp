@@ -15,8 +15,12 @@
 #include "PluginEditor.h"
 #include "OrionSamplerVoice.h"
 
-#define __COEFFICIENTSMAIN__
+#include <iostream>
+#include <string>
 #include "GlobalCoefficients.h"
+
+
+
 
 
 //==============================================================================
@@ -24,6 +28,10 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
 {
     processor = p;
     editor = e;
+    
+
+    
+    
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     Image backgroundImage = ImageCache::getFromMemory(BinaryData::PrimaryPane_Footer_png, BinaryData::PrimaryPane_Footer_pngSize);
     backgroundImageView.reset(new DrawableImage());
@@ -32,12 +40,33 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     
     
+    Image downImage;
+    Image upImage;
+    
+    // SOLO & MUTE BUTTONS
+    downImage = ImageCache::getFromMemory(BinaryData::SoloOn_png, BinaryData::SoloOn_pngSize);
+    upImage = ImageCache::getFromMemory(BinaryData::SoloOff_png, BinaryData::SoloOff_pngSize);
+    soloButton.reset(new ImageButton());
+    soloButton->setImages(false, true, true, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack);
+    soloButton->onStateChange = [&] { instrumentSoloButtonClicked(soloButton->isDown());};
+    addAndMakeVisible(soloButton.get());
+    
+    downImage = ImageCache::getFromMemory(BinaryData::MuteOn_png, BinaryData::MuteOn_pngSize);
+    upImage = ImageCache::getFromMemory(BinaryData::MuteOff_png, BinaryData::MuteOff_pngSize);
+    muteButton.reset(new ImageButton());
+    muteButton->setImages(false, true, true, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack);
+    muteButton->onStateChange = [&] { instrumentMuteButtonClicked(muteButton->isDown());};
+    addAndMakeVisible(muteButton.get());
+    
     for (int i = 0; i < drumButtons.size(); i++)
     {
         drumButtons[i].reset(new DragAndDropButton());
-//        drumButtons[i]->onClick = [&] {
-//            waveWiggle->startAnimation();
-//        };
+        
+        /*
+        drumButtons[i]->onClick = [&] {
+            waveWiggle->startAnimation();
+        };
+        */
   
         addAndMakeVisible(drumButtons[i].get());
     }
@@ -45,8 +74,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     
     // DRUM VOICE BUTTONS
     
-    Image downImage;
-    Image upImage;
+    
     downImage = ImageCache::getFromMemory(BinaryData::KickOn_png, BinaryData::KickOn_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::KickOff_png, BinaryData::KickOff_pngSize);
     drumButtons[0]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
@@ -71,7 +99,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     downImage = ImageCache::getFromMemory(BinaryData::SnapOn_png, BinaryData::SnapOn_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::SnapOff_png, BinaryData::SnapOff_pngSize);
     drumButtons[4]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
-    drumButtons[4]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::snap, orion::Tabs::snareTab, drumButtons[4]->isDown()); };
+    drumButtons[4]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::snap, orion::Tabs::snapTab, drumButtons[4]->isDown()); };
 
     
     downImage = ImageCache::getFromMemory(BinaryData::HHOOn_png, BinaryData::HHOOn_pngSize);
@@ -95,10 +123,16 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     //METERS
     meterLeft.reset(new CircularMeter());
     meterLeft->updaterFunction = [this] { return processor->getOutputLevel(0);};
+    meterLeft->numCircles = 8;
+    meterLeft->backgroundColorHide();
+    meterLeft->setColour(meterRight->ColourIds::filledColourId, Colours::lightgrey);
     addAndMakeVisible(meterLeft.get());
     
     meterRight.reset(new CircularMeter());
     meterRight->updaterFunction = [this] { return processor->getOutputLevel(1);};
+    meterRight->numCircles = 8;
+    meterRight->backgroundColorHide();
+    meterRight->setColour(meterRight->ColourIds::filledColourId, Colours::lightgrey);
     addAndMakeVisible(meterRight.get());
     
 
@@ -112,34 +146,51 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     dropDownButton->onClick = [&] {
         //printf("Click!");
         if(!editor->getDropdownVisible()){
-            int unite = editor->getHeight()/18;
-            editor->setSize(unite * 30, unite * 25);
+            int unite = editor->getHeight()/36;
+            editor->setSize(unite * 60, unite * 50);
             editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
         }else{
-            int unite = editor->getHeight()/25;
+            int unite = editor->getHeight()/50;
             
-            editor->setSize(unite * 30, unite * 18);
+            editor->setSize(unite * 60, unite * 36);
             editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
         };
         editor->updateDropDownState(dropDownButton->getToggleState());
     };
     addAndMakeVisible(dropDownButton.get());
 
-    // SOLO & MUTE BUTTONS
-    upImage = ImageCache::getFromMemory(BinaryData::SoloOff_png, BinaryData::SoloOff_pngSize);
-    soloButton.reset(new ImageButton());
-    soloButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
-    addAndMakeVisible(soloButton.get());
     
-    upImage = ImageCache::getFromMemory(BinaryData::MuteOff_png, BinaryData::MuteOff_pngSize);
-    muteButton.reset(new ImageButton());
-    muteButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
-    addAndMakeVisible(muteButton.get());
     
     // WAVE WIGGLE
     waveWiggle.reset(new WaveWiggle());
     addAndMakeVisible(waveWiggle.get());
     waveWiggle->setVisible(false);
+    
+    // INSTRUMETS VOLUME SLIDER
+    instrumentsVolumeSlider.reset(new Slider());
+    instrumentsVolumeSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
+    instrumentsVolumeSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text Box
+    instrumentsVolumeSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
+    instrumentsVolumeSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    instrumentsVolumeSlider->setRange(0.0f, 1.0f);
+    instrumentsVolumeSlider->setValue(0.75f);
+    instrumentsVolumeSlider->addListener(this);
+    addAndMakeVisible(instrumentsVolumeSlider.get());
+    // INSTRUMETS VOLUME SLIDER LABEL
+    instrumentsVolumeSliderLabel.reset(new Label("0.75db", "0.75db"));
+    addAndMakeVisible(instrumentsVolumeSliderLabel.get());
+    instrumentsVolumeSliderLabel->setAlpha(0.5);
+    
+    // INSTRUMETS PAN SLIDER
+    instrumentsPanSlider.reset(new Slider());
+    instrumentsPanSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
+    instrumentsPanSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text Box
+    instrumentsPanSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
+    instrumentsPanSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    instrumentsPanSlider->setRange(-1.0f, 1.0f);
+    instrumentsPanSlider->setValue(0.0f);
+    instrumentsPanSlider->addListener(this);
+    addAndMakeVisible(instrumentsPanSlider.get());
     
     
     // MASTER VOLUME SLIDER
@@ -152,6 +203,11 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     MasterVolumeSlider->setValue(0.75f);
     MasterVolumeSlider->addListener(this);
     addAndMakeVisible(MasterVolumeSlider.get());
+    // INSTRUMETS VOLUME SLIDER LABEL
+    MasterVolumeSliderLabel.reset(new Label("0.75db", "0.75db"));
+    addAndMakeVisible(MasterVolumeSliderLabel.get());
+    //MasterVolumeSliderLabel->setColour(Slider::backgroundColourId, juce::Colours::darkgrey);
+    MasterVolumeSliderLabel->setAlpha(0.5);
 
     
 }
@@ -183,50 +239,67 @@ void PrimaryPaneComponent::resized()
     backgroundImageView->setTransformToFit(backgroundArea.toFloat(), RectanglePlacement::stretchToFit);
     //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
     
-    float uniteW = getWidth()/50;
+    float uniteW = getWidth()/100;
 
     //std::cout<<"uniteW: "<< uniteW << std::endl;
 
     // Solo and Mute Buttons
-    Rectangle<int> area(1.5 * uniteW, 1.25 * uniteW, 2 * uniteW, 2 * uniteW);
+    Rectangle<int> area(3 * uniteW, 2.5 * uniteW, 4 * uniteW, 4 * uniteW);
     soloButton->setBounds(area);
-    area.translate(2.5 * uniteW, 0);
+    area.translate(5 * uniteW, 0);
     muteButton->setBounds(area);
     
     // Instrumet Pads
     int drumCount = 0;
-    double localWidth = 7 * uniteW;
-    double localHeight = 7 * uniteW;
+    double localWidth = 14 * uniteW;
+    double localHeight = 14 * uniteW;
     area.setSize(localWidth, localHeight);
     
     for (int i = 0; i < 2; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            area.setPosition(5 * uniteW + j * localWidth * 1.6, 6.5 * uniteW + i * localHeight * 1);
+            area.setPosition(10 * uniteW + j * localWidth * 1.6, 13 * uniteW + i * localHeight * 1);
             drumButtons[drumCount]->setBounds(area);
             drumCount++;
         }
     }
 
     // Wave Wiggle
-    area = Rectangle<int>(16.4 * uniteW, 19.6 * uniteW, 21 * uniteW, 8 * uniteW);
+    area = Rectangle<int>(32.8 * uniteW, 39 * uniteW, 42 * uniteW, 16 * uniteW);
     waveWiggle->setBounds(area);
     
+    //waveWiggle->setCentrePosition(getWidth()/2,39 * uniteW);
+    
     // Meters
-    area = Rectangle<int>(44 * uniteW, 20 * uniteW, uniteW, 6.5 * uniteW);
+    area = Rectangle<int>(88 * uniteW, 40 * uniteW, 2 * uniteW, 13 * uniteW);
     meterLeft->setBounds(area);
     
-    area = Rectangle<int>(45 * uniteW, 20 * uniteW, uniteW, 6.5 * uniteW);
+    area = Rectangle<int>(90 * uniteW, 40 * uniteW, 2 * uniteW, 13 * uniteW);
     meterRight->setBounds(area);
     
     // Drop Down Button
-    area = Rectangle<int>(2 * uniteW, 29.6 * uniteW, 2 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(4 * uniteW, getHeight() - 7 * uniteW, 4 * uniteW, 4 * uniteW);
     dropDownButton->setBounds(area);
     
+    // Instruments Volume Slider
+    area = Rectangle<int>(16 * uniteW, 3.6 * uniteW, 14 * uniteW, 2 * uniteW);
+    instrumentsVolumeSlider->setBounds(area);
+    // Instruments Volume Slider Label
+    area = Rectangle<int>(20.5 * uniteW, 6 * uniteW, 14 * uniteW, 2 * uniteW);
+    instrumentsVolumeSliderLabel->setBounds(area);
+    
+    
+    // Instruments Pan Slider
+    area = Rectangle<int>(2 * uniteW, 50 * uniteW, 14 * uniteW, 2 * uniteW);
+    instrumentsPanSlider->setBounds(area);
+    
     // Master Volume Slider
-    area = Rectangle<int>(39.4 * uniteW, 30.2 * uniteW, 7 * uniteW, uniteW);
+    area = Rectangle<int>(getWidth() - 21.25 * uniteW, getHeight() - 5.6 * uniteW, 14 * uniteW, 2 * uniteW);
     MasterVolumeSlider->setBounds(area);
+    // Master Volume Slider Label
+    area = Rectangle<int>(getWidth() - 16.5 * uniteW, getHeight() - 3.5 * uniteW, 14 * uniteW, 2 * uniteW);
+    MasterVolumeSliderLabel->setBounds(area);
 
     repaint();
 }
@@ -236,7 +309,164 @@ void PrimaryPaneComponent::sliderValueChanged (Slider* slider)
 {
     if(slider == MasterVolumeSlider.get())
     {
-        //std::cout<<MasterVolumeSlider->getValue()<<std::endl;
         masterVolumeCoefficient = MasterVolumeSlider->getValue();
+        
+        double a = masterVolumeCoefficient;
+        float b = (int)(a * 100 + .5);
+        float c =  (float)b / 100;
+        String d = String(c);
+        if(d == "0")
+        {
+            d = "0.00";
+        }
+        else if(d == "1")
+        {
+            d = "1.00";
+        }
+        d.append("db",2);
+        MasterVolumeSliderLabel->setText(d,dontSendNotification);
+    }
+    else if(slider == instrumentsVolumeSlider.get())
+    {
+        instrumentsVolumeCoefficient[instrumetSerial] = instrumentsVolumeSlider->getValue();
+        
+        double a = instrumentsVolumeCoefficient[instrumetSerial];
+        float b = (int)(a * 100 + .5);
+        float c =  (float)b / 100;
+        String d = String(c);
+        if(d == "0")
+        {
+            d = "0.00";
+        }
+        else if(d == "1")
+        {
+            d = "1.00";
+        }
+        d.append("db",2);
+        instrumentsVolumeSliderLabel->setText(d,dontSendNotification);
+    }
+    else if(slider == instrumentsPanSlider.get())
+    {
+        instrumentsPanCoefficient[instrumetSerial] = instrumentsPanSlider->getValue();
+    }
+}
+
+
+
+
+void PrimaryPaneComponent::instrumentSoloButtonClicked(bool isDown)
+{
+    if(isDown)
+    {
+        instrumentsSoloStates[instrumetSerial] = !instrumentsSoloStates[instrumetSerial];
+        
+      
+        if(instrumentsSoloStates[instrumetSerial])
+        {
+            instrumentsMuteStates[instrumetSerial] = false;
+            soloButton->setImages(false, true, true, soloButtonDown, 1.f, Colours::transparentBlack, soloButtonDown, 1.f, Colours::transparentBlack, soloButtonDown, 1.f, Colours::transparentBlack);
+            muteButton->setImages(false, true, true, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack);
+            
+            /* Set Solo & Mute Button state Arrays */
+            for (int i = 0; i < instrumentAmount; i++)
+            {
+                if(instrumentsSoloStates[i])
+                {
+                    instrumentsMuteStates[i] = false;
+                }
+                else
+                {
+                    instrumentsMuteStates[i] = true;
+                }
+            }
+        }
+        else
+        {
+            soloButton->setImages(false, true, true, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack);
+            
+            /* Incase Every Solo Button Back to Normal */
+            int count = 0;
+            for (int i = 0; i < instrumentAmount; i++)
+            {
+                if(instrumentsMuteStates[i])
+                {
+                    count += 1;
+                }
+            }
+            
+            DBG(count);
+            if(count == instrumentAmount - 1)
+            {
+                DBG("Hey");
+                for (int j = 0; j < instrumentAmount; j++)
+                {
+                    instrumentsMuteStates[j] = false;
+                    instrumentsSoloStates[j] = false;
+                }
+                soloButton->setImages(false, true, true, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack);
+                muteButton->setImages(false, true, true, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack);
+            }
+            else
+            {
+                for (int j = 0; j < instrumentAmount; j++)
+                {
+                    if(instrumentsSoloStates[j])
+                    {
+                        instrumentsMuteStates[j] = false;
+                    }
+                    else
+                    {
+                        instrumentsMuteStates[j] = true;
+                    }
+                }
+            }
+        }
+        
+        
+        
+        /* Incase Previous Mute State */
+        if(instrumentsMuteStates[instrumetSerial])
+        {
+            muteButton->setImages(false, true, true, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack);
+        }
+        else
+        {
+            muteButton->setImages(false, true, true, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack);
+        }
+        
+    }
+}
+
+
+void PrimaryPaneComponent::instrumentMuteButtonClicked(bool isDown)
+{
+    if(isDown)
+    {
+        instrumentsMuteStates[instrumetSerial] = !instrumentsMuteStates[instrumetSerial];
+        
+        /* Set Solo & Mute Button Images */
+        if(instrumentsMuteStates[instrumetSerial])
+        {
+            instrumentsSoloStates[instrumetSerial] = false;
+            muteButton->setImages(false, true, true, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack);
+            
+            soloButton->setImages(false, true, true, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack);
+        }
+        else
+        {
+            muteButton->setImages(false, true, true, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack);
+//            for (int i = 0; i < instrumentAmount; i++)
+//            {
+//                if(instrumentsSoloStates[i])
+//                {
+//                    instrumentsSoloStates[i] = false;
+//                    for (int j = 0; j < instrumentAmount; j++)
+//                    {
+//                        instrumentsMuteStates[i] = false;
+//                    }
+//                }
+//            }
+        }
+
     }
 }

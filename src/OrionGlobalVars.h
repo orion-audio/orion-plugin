@@ -11,8 +11,8 @@
 #pragma once
 
 //--- Height/Width = 3/5 --- //
-int const OrionGlobalWidth = 1080;
-int const OrionGlobalHeight = 648;
+int const OrionGlobalWidth = 1080;//1080//800
+int const OrionGlobalHeight = 648;//648//480
 
 static int OrionGlobalTabIndex = 3;
 
@@ -37,21 +37,21 @@ namespace orion
         clap = 39,
         perc = 41,
         snap = 42,
-        hhc = 43,
         hho = 44,
+        hhc = 43,
         crash = 46
     };
     
     enum Tabs : int
     {
-        kickTab = 0,
-        snareTab,
-        clapTab,
-        percTab,
-        snapTab,
-        hhcTab,
-        hhoTab,
-        crashTab
+        kickTab  = 0,
+        snareTab = 1,
+        clapTab  = 2,
+        percTab  = 3,
+        snapTab  = 4,
+        hhoTab   = 5,
+        hhcTab   = 6,
+        crashTab = 7
     };
 
 }

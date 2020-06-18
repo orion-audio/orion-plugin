@@ -12,6 +12,8 @@
 #include "PluginEditor.h"
 #define NUM_VOICES 8
 
+#define __COEFFICIENTSMAIN__
+#include "GlobalCoefficients.h"
 //==============================================================================
 static String doubleToString(double val) { return String(val); }
 static double stringToDouble(String s){return std::stod(s.toStdString());}
@@ -175,13 +177,19 @@ void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     
     
     
-    //sampler->renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    /*
+    sampler->renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
     outputLevels.left = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
     if (buffer.getNumChannels() > 1)
         outputLevels.right = buffer.getRMSLevel(1, 0, buffer.getNumSamples());
     else
         outputLevels.right = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
+     */
+    
+    outputLevels.left = globalOutputMeterL;
+    outputLevels.right = globalOutputMeterR;
+    
 
     AudioPlayHead* playhead = getPlayHead();
     

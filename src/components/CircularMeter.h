@@ -38,6 +38,13 @@ public:
     
     std::function<float()> updaterFunction;
     
+
+    void backgroundColorHide()
+    {
+        backgroundColorShow = false;
+    }
+    
 private:
+    bool backgroundColorShow = true;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CircularMeter)
 };

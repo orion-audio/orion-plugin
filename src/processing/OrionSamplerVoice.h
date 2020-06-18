@@ -31,6 +31,8 @@
 #include "EQ.h"
 #include "GlobalCoefficients.h"
 
+
+
 class OrionSamplerVoice : public SamplerVoice
 , public AudioProcessorValueTreeState::Listener
 {
@@ -312,11 +314,9 @@ public:
             while (--numSamples >= 0)
             {
              
-               
                 float envVal,compVal,sideVal, l, r;
                 if (sourceSamplePosition <= playingSound->length)
                 {
-
                     auto pos = (int)sourceSamplePosition;
                     auto alpha = (float)(sourceSamplePosition - pos);
                     auto invAlpha = 1.0f - alpha;
@@ -327,8 +327,6 @@ public:
                     // just using a very simple linear interpolation here..
                     l = (inL[pos] * invAlpha + inL[pos + 1] * alpha);
                     r = (inR != nullptr) ? (inR[pos] * invAlpha + inR[pos + 1] * alpha): l;
-                
-                
                 }
                 else
                 {
@@ -378,10 +376,27 @@ public:
                     r = pan.processRightChannel(r);
                 }
                 
+                //MARK:- Apply Instruments Pan
+                pan.setPosition(instrumentsPanCoefficient[instrumetSerial]);
+                l = pan.processLeftChannel(l);
+                r = pan.processRightChannel(r);
+                
+                //MARK:- Apply Instruments Volume
+                l = l * instrumentsVolumeCoefficient[instrumetSerial];
+                r = r * instrumentsVolumeCoefficient[instrumetSerial];
 
+                //MARK:- Apply Master Volume
                 l = l * masterVolumeCoefficient;
                 r = r * masterVolumeCoefficient;
                 
+                //MARK:- Apply Solo & Mute
+                if(!instrumentsSoloStates[instrumetSerial] && instrumentsMuteStates[instrumetSerial])
+                {
+                    l = l * 0.0f;
+                    r = r * 0.0f;
+                }
+                
+
                 if (outR != nullptr)
                 {
                     *outL++ += l;
@@ -392,13 +407,19 @@ public:
                     *outL++ += (l + r) * 0.5f;
                 }
                 
+
+                //MARK:- Master Meters
+                globalOutputMeterL = outputBuffer.getRMSLevel(0, 0, outputBuffer.getNumSamples());
+                if (outputBuffer.getNumChannels() > 1)
+                    globalOutputMeterR = outputBuffer.getRMSLevel(1, 0, outputBuffer.getNumSamples());
+                else
+                    globalOutputMeterR = outputBuffer.getRMSLevel(0, 0, outputBuffer.getNumSamples());
                 
-                
+
                 sourceSamplePosition += pitchRatio;
                
                 if (sourceSamplePosition > safelength)
                 {
-                   
                     clearCurrentNote();
                     break;
                 }

@@ -63,7 +63,6 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
         // check first beat
         if (posInSamples + samplesPerBlock >= loopEnd && posInSamples <= loopEnd && notes[i].startTime == 0)
         {
-            DBG("beat 1");
             long long offset = loopEnd - posInSamples;
             midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), offset);
         }

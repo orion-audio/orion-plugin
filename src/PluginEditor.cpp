@@ -1,6 +1,10 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "OrionGlobalVars.h"
+#include "GlobalCoefficients.h"
+
+#include <iostream>
+#include <array>
 
 #define NUM_TABS 4
 
@@ -129,7 +133,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
     constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
     
-
     cornerComponent.reset(new OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>(this, this, &constrainer));
     addAndMakeVisible(cornerComponent.get());
     
@@ -214,15 +217,15 @@ void OrionaudioAudioProcessorEditor::resized()
     double unite = 0.0;
     
     if(dropDownVisible){
-        unite = getHeight() /25;
+        unite = getHeight() /50;
     }else{
-        unite = getHeight() /18;
+        unite = getHeight() /36;
     };
     
     //cout << "unite: "<< unite << endl;
 
  
-    auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, 1.5 * unite);
+    auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, 3 * unite);
     menuBar->setBounds(menuBarArea);
     
     
@@ -233,7 +236,7 @@ void OrionaudioAudioProcessorEditor::resized()
         sidePanel->setBounds(sidePaneArea);
         
         // PRIMARY PANE
-        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 1.5 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 1.5 * unite);
+        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 3 * unite);
         primaryPane->setBounds(primaryPaneArea);
         
         // ARRANGEMENT WINDOW
@@ -245,7 +248,7 @@ void OrionaudioAudioProcessorEditor::resized()
     else// with dropdown
     {
         // DROPDOWN WINDOW
-        auto dropdownWindowArea = Rectangle<int>(0, getHeight() - 7 * unite, getWidth(), 7 * unite);
+        auto dropdownWindowArea = Rectangle<int>(0, getHeight() - 14 * unite, getWidth(), 14 * unite);
         tabComponents->setBounds(dropdownWindowArea);
         
         // SIDE PANEL
@@ -253,7 +256,7 @@ void OrionaudioAudioProcessorEditor::resized()
         sidePanel->setBounds(sidePaneArea);
         
         // PRIMARY PANE
-        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 1.5 * unite, getWidth() - sidePanel->getWidth(), sidePanel->getHeight() - 1.5 * unite);
+        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), sidePanel->getHeight() - 3 * unite);
         primaryPane->setBounds(primaryPaneArea);
         
         // ARRANGEMENT WINDOW
@@ -299,8 +302,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     if(isDown)
     {
         //std::cout<<"Down"<<std::endl;
-        primaryPane->waveWiggle->setVisible(true);
-        primaryPane->waveWiggle->startAnimation();
+        
    
         processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
@@ -308,11 +310,43 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         
         tabComponents->setCurrentTab(tabIndex);
         
+        instrumetSerial = tabIndex;
         
+        primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
+        primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetSerial]);
+        
+        
+        
+        
+        /* Set Solo Button Image */
+        if(instrumentsSoloStates[instrumetSerial])
+        {
+            primaryPane->setInstrumetsSoloButtonImage(true);
+        }
+        else
+        {
+           primaryPane->setInstrumetsSoloButtonImage(false);
+        }
+        
+        /* Set Mute Button Image */
+        if(instrumentsMuteStates[instrumetSerial])
+        {
+            primaryPane->setInstrumetsMuteButtonImage(true);
+        }
+        else
+        {
+           primaryPane->setInstrumetsMuteButtonImage(false);
+            primaryPane->waveWiggle->setVisible(true);
+            primaryPane->waveWiggle->startAnimation();
+        }
+        
+            
     }
     else
     {
-        processor.getSampler()->noteOff(1, midiNote, 0, false /*没有淡出*/);
+        processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
+        globalOutputMeterL = 0;
+        globalOutputMeterR = 0;
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOff(1, midiNote, 0.f));
     }
