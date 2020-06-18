@@ -335,7 +335,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         }
         else
         {
-           primaryPane->setInstrumetsMuteButtonImage(false);
+            primaryPane->setInstrumetsMuteButtonImage(false);
             primaryPane->waveWiggle->setVisible(true);
             primaryPane->waveWiggle->startAnimation();
         }

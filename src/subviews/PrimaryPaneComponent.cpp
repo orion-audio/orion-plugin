@@ -291,7 +291,7 @@ void PrimaryPaneComponent::resized()
     
     
     // Instruments Pan Slider
-    area = Rectangle<int>(2 * uniteW, 50 * uniteW, 14 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(2 * uniteW, getHeight() - 16 * uniteW, 14 * uniteW, 2 * uniteW);
     instrumentsPanSlider->setBounds(area);
     
     // Master Volume Slider
@@ -455,17 +455,6 @@ void PrimaryPaneComponent::instrumentMuteButtonClicked(bool isDown)
         else
         {
             muteButton->setImages(false, true, true, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack);
-//            for (int i = 0; i < instrumentAmount; i++)
-//            {
-//                if(instrumentsSoloStates[i])
-//                {
-//                    instrumentsSoloStates[i] = false;
-//                    for (int j = 0; j < instrumentAmount; j++)
-//                    {
-//                        instrumentsMuteStates[i] = false;
-//                    }
-//                }
-//            }
         }
 
     }
