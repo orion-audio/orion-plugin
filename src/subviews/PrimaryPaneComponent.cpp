@@ -274,11 +274,11 @@ void PrimaryPaneComponent::resized()
     //waveWiggle->setCentrePosition(getWidth()/2,39 * uniteW);
     
     // Meters
-    area = Rectangle<int>(getWidth() - 12 * uniteW, getHeight() - 24.5 * uniteW, 2 * uniteW, 13 * uniteW);
+    area = Rectangle<int>(getWidth() - 12 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
     meterLeft->setBounds(area);
     //meterLeft->repaint();
     
-    area = Rectangle<int>(getWidth() - 10 * uniteW, getHeight() - 24.5 * uniteW, 2 * uniteW, 13 * uniteW);
+    area = Rectangle<int>(getWidth() - 10 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
     meterRight->setBounds(area);
     //meterRight->repaint();
     

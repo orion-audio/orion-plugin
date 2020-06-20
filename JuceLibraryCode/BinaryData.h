@@ -9,7 +9,7 @@
 namespace BinaryData
 {
     extern const char*   sidePanelBackground_png;
-    const int            sidePanelBackground_pngSize = 102235;
+    const int            sidePanelBackground_pngSize = 102098;
 
     extern const char*   a_png;
     const int            a_pngSize = 3863;
@@ -18,7 +18,7 @@ namespace BinaryData
     const int            a_button_pngSize = 2024;
 
     extern const char*   PrimaryPane_Footer_png;
-    const int            PrimaryPane_Footer_pngSize = 430910;
+    const int            PrimaryPane_Footer_pngSize = 1739808;
 
     extern const char*   PrimaryBackground_svg;
     const int            PrimaryBackground_svgSize = 4906;
@@ -42,49 +42,49 @@ namespace BinaryData
     const int            arrow_up_pngSize = 37153;
 
     extern const char*   ClapOff_png;
-    const int            ClapOff_pngSize = 67034;
+    const int            ClapOff_pngSize = 69139;
 
     extern const char*   ClapOn_png;
     const int            ClapOn_pngSize = 83965;
 
     extern const char*   CrashOff_png;
-    const int            CrashOff_pngSize = 80260;
+    const int            CrashOff_pngSize = 82224;
 
     extern const char*   CrashOn_png;
     const int            CrashOn_pngSize = 90993;
 
     extern const char*   HHCOff_png;
-    const int            HHCOff_pngSize = 53767;
+    const int            HHCOff_pngSize = 57908;
 
     extern const char*   HHCOn_png;
     const int            HHCOn_pngSize = 78144;
 
     extern const char*   HHOOff_png;
-    const int            HHOOff_pngSize = 55892;
+    const int            HHOOff_pngSize = 60375;
 
     extern const char*   HHOOn_png;
     const int            HHOOn_pngSize = 79249;
 
     extern const char*   KickOff_png;
-    const int            KickOff_pngSize = 53642;
+    const int            KickOff_pngSize = 68535;
 
     extern const char*   KickOn_png;
     const int            KickOn_pngSize = 84552;
 
     extern const char*   PercOff_png;
-    const int            PercOff_pngSize = 63839;
+    const int            PercOff_pngSize = 66209;
 
     extern const char*   PercOn_png;
     const int            PercOn_pngSize = 82246;
 
     extern const char*   SnapOff_png;
-    const int            SnapOff_pngSize = 73282;
+    const int            SnapOff_pngSize = 75066;
 
     extern const char*   SnapOn_png;
     const int            SnapOn_pngSize = 87575;
 
     extern const char*   SnareOff_png;
-    const int            SnareOff_pngSize = 76208;
+    const int            SnareOff_pngSize = 78706;
 
     extern const char*   SnareOn_png;
     const int            SnareOn_pngSize = 89675;
