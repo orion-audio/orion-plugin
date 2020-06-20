@@ -22,6 +22,8 @@ public:
     {
     public:
         const float sizeRatio = .1;
+        
+        int rowAmount = 3;
                 
         void resized() override{
             resizeToFitNewDirectory();
@@ -30,8 +32,8 @@ public:
         
         void paint(Graphics &g) override
         {
-            g.fillAll();
-            g.drawRect(getLocalBounds(), 1.f);
+            //g.fillAll();
+            //g.drawRect(getLocalBounds(), 1.f);
         }
         
         void setNewDirectory(DirectoryContentsList &newDir)
@@ -63,20 +65,20 @@ public:
                 windowHeight = getHeight();
             
             setSize(getWidth(), windowHeight);
-            Rectangle<int> area(0, 0, getWidth() / 4, getWidth() / 4);
-            area.translate(0, w / 2);
+            Rectangle<int> area(0, 0, getWidth() / rowAmount, getWidth() / rowAmount);
+            area.translate(0, w / rowAmount);
             
             while(fileCounter <= numFiles)
             {
-                if (fileCounter + 4 > fileComponents.size())
+                if (fileCounter + rowAmount > fileComponents.size())
                     numCols = 1 + numFiles - fileCounter;
                 else
-                    numCols = 4;
+                    numCols = rowAmount;
                 
                 for (int cols = 0; cols < numCols; cols++)
                 {
-                    fileComponents[fileCounter]->setBounds(area.withSizeKeepingCentre(w * .8, w * .8));
-                    area.translate(getWidth() / 4, 0);
+                    fileComponents[fileCounter]->setBounds(area.withSizeKeepingCentre(w * 1, w * 1));//Icon Size Adjust
+                    area.translate(getWidth() / 3, 0);
                     fileCounter++;
                 }
                 

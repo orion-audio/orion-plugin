@@ -34,7 +34,7 @@ void CircularMeter::paint (Graphics& g)
     int h;
     
     if(isVertical){
-        area = area.removeFromTop(getHeight() / numCircles);
+        area = area.removeFromBottom(getHeight() / numCircles);
         
         
         if(backgroundColorShow)
@@ -44,7 +44,7 @@ void CircularMeter::paint (Graphics& g)
             h = w;
             for (int i = 0; i < numCircles; i++){
                 g.fillEllipse(area.withSizeKeepingCentre(w, h).toFloat());
-                area.translate(0, area.getHeight());
+                area.translate(0, -area.getHeight());
             }
         }
         
@@ -123,6 +123,9 @@ void CircularMeter::paint (Graphics& g)
 
 void CircularMeter::resized()
 {
+    
+//    Rectangle<int> backgroundArea(getX(), getY(), getWidth(), getHeight());
+//    setBounds(backgroundArea);
 
 }
 

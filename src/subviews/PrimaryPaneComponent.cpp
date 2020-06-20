@@ -32,12 +32,12 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
 
     
     
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
+    // Background Image
     Image backgroundImage = ImageCache::getFromMemory(BinaryData::PrimaryPane_Footer_png, BinaryData::PrimaryPane_Footer_pngSize);
     backgroundImageView.reset(new DrawableImage());
     backgroundImageView->setImage(backgroundImage);
     addAndMakeVisible(backgroundImageView.get());
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
+    
     
     
     Image downImage;
@@ -124,14 +124,16 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     meterLeft.reset(new CircularMeter());
     meterLeft->updaterFunction = [this] { return processor->getOutputLevel(0);};
     meterLeft->numCircles = 8;
-    meterLeft->backgroundColorHide();
+    //meterLeft->backgroundColorHide();
+    meterLeft->setColour(meterRight->ColourIds::backgroundColourId, Colours::darkgrey);
     meterLeft->setColour(meterRight->ColourIds::filledColourId, Colours::lightgrey);
     addAndMakeVisible(meterLeft.get());
     
     meterRight.reset(new CircularMeter());
     meterRight->updaterFunction = [this] { return processor->getOutputLevel(1);};
     meterRight->numCircles = 8;
-    meterRight->backgroundColorHide();
+    //meterRight->backgroundColorHide();
+    meterRight->setColour(meterRight->ColourIds::backgroundColourId, Colours::darkgrey);
     meterRight->setColour(meterRight->ColourIds::filledColourId, Colours::lightgrey);
     addAndMakeVisible(meterRight.get());
     
@@ -232,7 +234,7 @@ void PrimaryPaneComponent::resized()
 {
     //backgroundGradient = ColourGradient::horizontal(Colour(0xFF0C0C0D), 0, Colours::black, getWidth() / 2);
     
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
+    //Background
     Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());//--------Delete!!!!
     //backgroundImageView->setBounds(backgroundArea);//--------Delete!!!!
     
@@ -244,9 +246,9 @@ void PrimaryPaneComponent::resized()
     //std::cout<<"uniteW: "<< uniteW << std::endl;
 
     // Solo and Mute Buttons
-    Rectangle<int> area(3 * uniteW, 2.5 * uniteW, 4 * uniteW, 4 * uniteW);
+    Rectangle<int> area(4 * uniteW, 2.5 * uniteW, 4 * uniteW, 4 * uniteW);
     soloButton->setBounds(area);
-    area.translate(5 * uniteW, 0);
+    area.translate(6 * uniteW, 0);
     muteButton->setBounds(area);
     
     // Instrumet Pads
@@ -272,14 +274,16 @@ void PrimaryPaneComponent::resized()
     //waveWiggle->setCentrePosition(getWidth()/2,39 * uniteW);
     
     // Meters
-    area = Rectangle<int>(88 * uniteW, 40 * uniteW, 2 * uniteW, 13 * uniteW);
+    area = Rectangle<int>(getWidth() - 12 * uniteW, getHeight() - 24.5 * uniteW, 2 * uniteW, 13 * uniteW);
     meterLeft->setBounds(area);
+    //meterLeft->repaint();
     
-    area = Rectangle<int>(90 * uniteW, 40 * uniteW, 2 * uniteW, 13 * uniteW);
+    area = Rectangle<int>(getWidth() - 10 * uniteW, getHeight() - 24.5 * uniteW, 2 * uniteW, 13 * uniteW);
     meterRight->setBounds(area);
+    //meterRight->repaint();
     
     // Drop Down Button
-    area = Rectangle<int>(4 * uniteW, getHeight() - 7 * uniteW, 4 * uniteW, 4 * uniteW);
+    area = Rectangle<int>(7.2 * uniteW, getHeight() - 7 * uniteW, 4 * uniteW, 4 * uniteW);
     dropDownButton->setBounds(area);
     
     // Instruments Volume Slider

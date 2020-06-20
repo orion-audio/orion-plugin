@@ -8,6 +8,9 @@
 
 namespace BinaryData
 {
+    extern const char*   sidePanelBackground_png;
+    const int            sidePanelBackground_pngSize = 102235;
+
     extern const char*   a_png;
     const int            a_pngSize = 3863;
 
@@ -39,49 +42,49 @@ namespace BinaryData
     const int            arrow_up_pngSize = 37153;
 
     extern const char*   ClapOff_png;
-    const int            ClapOff_pngSize = 69485;
+    const int            ClapOff_pngSize = 67034;
 
     extern const char*   ClapOn_png;
     const int            ClapOn_pngSize = 83965;
 
     extern const char*   CrashOff_png;
-    const int            CrashOff_pngSize = 84810;
+    const int            CrashOff_pngSize = 80260;
 
     extern const char*   CrashOn_png;
     const int            CrashOn_pngSize = 90993;
 
     extern const char*   HHCOff_png;
-    const int            HHCOff_pngSize = 54465;
+    const int            HHCOff_pngSize = 53767;
 
     extern const char*   HHCOn_png;
     const int            HHCOn_pngSize = 78144;
 
     extern const char*   HHOOff_png;
-    const int            HHOOff_pngSize = 56305;
+    const int            HHOOff_pngSize = 55892;
 
     extern const char*   HHOOn_png;
     const int            HHOOn_pngSize = 79249;
 
     extern const char*   KickOff_png;
-    const int            KickOff_pngSize = 65677;
+    const int            KickOff_pngSize = 53642;
 
     extern const char*   KickOn_png;
     const int            KickOn_pngSize = 84552;
 
     extern const char*   PercOff_png;
-    const int            PercOff_pngSize = 65795;
+    const int            PercOff_pngSize = 63839;
 
     extern const char*   PercOn_png;
     const int            PercOn_pngSize = 82246;
 
     extern const char*   SnapOff_png;
-    const int            SnapOff_pngSize = 75683;
+    const int            SnapOff_pngSize = 73282;
 
     extern const char*   SnapOn_png;
     const int            SnapOn_pngSize = 87575;
 
     extern const char*   SnareOff_png;
-    const int            SnareOff_pngSize = 79621;
+    const int            SnareOff_pngSize = 76208;
 
     extern const char*   SnareOn_png;
     const int            SnareOn_pngSize = 89675;
@@ -216,7 +219,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 69;
+    const int namedResourceListSize = 70;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];
