@@ -52,11 +52,18 @@ void SidePanelComponent::resized()
     Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());
     backgroundImageView->setTransformToFit(backgroundArea.toFloat(), RectanglePlacement::stretchToFit);
     
-    auto area = getLocalBounds();
-    auto logoArea = area.removeFromTop(getHeight() / 12);
+    
+    //auto area = getLocalBounds();
+    //auto logoArea = area.removeFromTop(getHeight() / 12);
+    
+    
+    float unite = 0.0;
+    unite = getHeight() /33;
+    
+    auto logoArea = Rectangle<int>(0, 0, getWidth(), 3 * unite);
     
     logoImage->setBounds(logoArea);
     
-    Rectangle<int> fileBrowerframeSize(0, getHeight() / 12, getWidth(), getHeight() * 9 / 12);
+    Rectangle<int> fileBrowerframeSize(0, 3 * unite, getWidth(), 28 * unite);
     fileBrowser->setBounds(fileBrowerframeSize);
 }

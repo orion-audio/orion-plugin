@@ -12,11 +12,14 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "OrionSamplerVoice.h"
 #include "OrionSamplerSound.h"
-//#include "PluginEditor.h"
+
+#include "DragAndDropButton.h"
+
 class SimpleSynth : public Synthesiser
 //,public AudioProcessorValueTreeState::Listener
 {
 public:
+
 
     void setup(double sr);
     void loadSamples();
@@ -27,7 +30,11 @@ public:
     double sampleRate;
     void changeSamples(int index,const String &f,int midi);
 
+    
+    std::array<std::unique_ptr<DragAndDropButton>, 8> drumButtons;
 private:
+    
+    
     File audiofolder;
     AudioFormatManager audioFormatManager;
     File* file;

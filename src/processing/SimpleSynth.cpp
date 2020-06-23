@@ -9,11 +9,13 @@
 */
 
 #include "SimpleSynth.h"
-
+#include "GlobalCoefficients.h"
 #define MAX_VOICES 8
 
 
-void SimpleSynth::setup(double sr) {
+
+void SimpleSynth::setup(double sr)
+{
     sampleRate = sr;
     // add voices to our sampler
 
@@ -62,6 +64,7 @@ void SimpleSynth::loadSamples()
 {
 
 
+    
     if(getNumSounds() != 0)
     {
         for(int i = 0; i < getNumSounds(); i++)
@@ -179,6 +182,7 @@ void SimpleSynth::noteOn(int midiChannel,
 {
     //const ScopedLock sl(lock);
     //std::cout<<"number of sounds"<<getNumSounds();
+    DBG("Hey");
     for(int j = 0; j < getNumSounds(); j++)
     {
         auto sound = getSound(j);
@@ -209,10 +213,20 @@ void SimpleSynth::noteOn(int midiChannel,
                     }
                 }
             }
+            
+            /* Set Solo Button Image */
+            if(instrumentsSoloStates[instrumetSerial])
+            {
+                //primaryPane->setInstrumetsSoloButtonImage(true);
+            }
+            else
+            {
+               //primaryPane->setInstrumetsSoloButtonImage(false);
+            }
+            
         }
     }
 }
-
 
 
 //void SimpleSynth::renderNextBlock (AudioBuffer<float>& outputAudio, const MidiBuffer& inputMidi,

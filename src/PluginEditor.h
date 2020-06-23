@@ -41,6 +41,7 @@ public:
     void tabComponentChanged(int serial);
     
     void updateDropDownState(bool newState);
+    
     std::unique_ptr<AudioFormatReaderSource> playSource;
     
     void setDefaultSize();
@@ -54,6 +55,8 @@ public:
     ComponentBoundsConstrainer constrainer;
 private:
     
+    OrionaudioAudioProcessor& processor;
+    
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
     
     // SUB VIEWS
@@ -62,18 +65,17 @@ private:
     std::unique_ptr<SidePanelComponent> sidePanel;
     std::unique_ptr<ArrangementWindowComponent> arrangementWindow;
     
-    
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     
-    std::unique_ptr<CircularMeter> meterLeft;
-    std::unique_ptr<CircularMeter> meterRight;
+    //std::unique_ptr<CircularMeter> meterLeft;
+    //std::unique_ptr<CircularMeter> meterRight;
     
     std::unique_ptr<CircularMeter> meterInput;
     std::unique_ptr<TabComponentHolder> tabComponents;
     
-    OrionaudioAudioProcessor& processor;
+    
     //ScopedPointer<OrionTabComponent> tabComponent;
-    //    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
+    //std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
     FileBrowserComponent filebrowser;
     
     //    FileTreeComponent tree;

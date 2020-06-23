@@ -36,7 +36,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     arrangementWindow.reset(new ArrangementWindowComponent(&p, this));
     addAndMakeVisible(arrangementWindow.get());
-    
+
     
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
     for (int i=0; i<7; i++)
@@ -117,17 +117,17 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     };
     addAndMakeVisible(meterInput.get());
     
-    meterLeft.reset(new CircularMeter());
-    meterLeft->updaterFunction = [this] {
-        return processor.getOutputLevel(0);
-    };
-    addAndMakeVisible(meterLeft.get());
-    
-    meterRight.reset(new CircularMeter());
-    meterRight->updaterFunction = [this] {
-        return processor.getOutputLevel(1);
-    };
-    addAndMakeVisible(meterRight.get());
+//    meterLeft.reset(new CircularMeter());
+//    meterLeft->updaterFunction = [this] {
+//        return processor.getOutputLevel(0);
+//    };
+//    addAndMakeVisible(meterLeft.get());
+//    
+//    meterRight.reset(new CircularMeter());
+//    meterRight->updaterFunction = [this] {
+//        return processor.getOutputLevel(1);
+//    };
+//    addAndMakeVisible(meterRight.get());
     
     constrainer.setFixedAspectRatio((float)OrionGlobalWidth/OrionGlobalHeight);
     constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
@@ -312,21 +312,19 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         
         instrumetSerial = tabIndex;
         
+        //--------------------------------
         primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
         primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetSerial]);
-        
-        
-        
-        
-        /* Set Solo Button Image */
-        if(instrumentsSoloStates[instrumetSerial])
-        {
-            primaryPane->setInstrumetsSoloButtonImage(true);
-        }
-        else
-        {
-           primaryPane->setInstrumetsSoloButtonImage(false);
-        }
+
+//        /* Set Solo Button Image */
+//        if(instrumentsSoloStates[instrumetSerial])
+//        {
+//            primaryPane->setInstrumetsSoloButtonImage(true);
+//        }
+//        else
+//        {
+//           primaryPane->setInstrumetsSoloButtonImage(false);
+//        }
         
         /* Set Mute Button Image */
         if(instrumentsMuteStates[instrumetSerial])
@@ -339,6 +337,8 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             primaryPane->waveWiggle->setVisible(true);
             primaryPane->waveWiggle->startAnimation();
         }
+        
+        //--------------------------------
         
             
     }
