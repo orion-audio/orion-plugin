@@ -70,7 +70,7 @@ void SimpleSynth::loadSamples()
         }
     }
     int MidiNote;
-    audiofolder = File("/Library/Application\ Support/Orion/Orion\ Plugin/Samples");
+    audiofolder = File("~/Library/Application\ Support/Orion/Orion\ Plugin/Samples");
     String dir;
     String filename;
     for(int i = 0; i < MAX_VOICES; i++)

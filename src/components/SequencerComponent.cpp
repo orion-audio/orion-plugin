@@ -40,6 +40,14 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     lengthSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     lengthSlider->setColour(Slider::ColourIds::rotarySliderFillColourId, findColour(ColourIds::beatColourOffId));
     lengthSlider->setColour(Slider::ColourIds::backgroundColourId, Colours::white);
+    
+    for (int pitch = 0; pitch < NoteSequence::noteValues.size(); pitch++) {
+        for (int beat = 0; beat < 16; beat++) {
+            sequencerButtons[pitch][beat].reset(new SequencerButton(NoteSequence::noteValues[pitch], beat));
+            addAndMakeVisible(sequencerButtons[pitch][beat].get());
+            sequencerButtons[pitch][beat]->addListener(this);
+        }
+    }
 }
 
 SequencerComponent::~SequencerComponent()
@@ -49,7 +57,7 @@ SequencerComponent::~SequencerComponent()
 void SequencerComponent::paint (Graphics& g)
 {
     g.fillAll(findColour(ColourIds::backgroundColourId));
-    paintGrid(g);
+//    paintGrid(g);
     
 //    g.fillAll(Colours::black.withAlpha((.7f)));
 }
@@ -124,14 +132,18 @@ void SequencerComponent::paintGrid(Graphics& g)
 
 void SequencerComponent::resized()
 {
-    auto area = getLocalBounds();
-    if (shouldFlip)
-        area.removeFromBottom(getHeight() / 2);
-    else
-        area.removeFromTop(getHeight() / 2);
-    
-    area = area.withSizeKeepingCentre(area.getHeight(), area.getHeight());
-//    lengthSlider->setBounds(area);
+    int totalLength = sequencer.getTotalLength();
+    float xDist = (float)getWidth() / (totalLength + 1);
+    float yDist = (float)getHeight() / NUM_VOICES;
+    Rectangle<int> area(xDist, 0, xDist, yDist);
+    for (int i = 0; i < NUM_VOICES; i++) {
+        for (int j = 0; j < 16; j++) {
+            sequencerButtons[i][j]->setBounds(area.withSizeKeepingCentre(xDist * .75, yDist * .75));
+            area.translate(xDist, 0);
+        }
+        area.setX(xDist);
+        area.translate(0, yDist);
+    }
 }
 
 
@@ -203,16 +215,27 @@ void SequencerComponent::timerCallback()
 {
     std::queue<Note>* noteQueue = &sequencer.lastNotesPlayed;
     for (int i = 0; i < noteQueue->size(); i++) {
-        notesToBePlayed.push_back(noteQueue->front());
+        int pitch = NoteSequence::noteValues.indexOf(noteQueue->front().pitch);
+        int beat = noteQueue->front().startTime;
+        sequencerButtons[pitch][beat]->startAnimation();
         noteQueue->pop();
     }
-    lastBeat = notesToBePlayed.front().startTime;
-    repaint();
 }
 
 void SequencerComponent::buttonClicked(Button* b)
 {
-    
+    SequencerButton* button = dynamic_cast<SequencerButton*>(b);
+    if (button != nullptr) {
+        int pitch = button->getPitch();
+        int beat = button->getBeat();
+        NoteSequence* sequence = sequencer.getNoteSequence();
+        if (sequence->checkAndRemoveNote(pitch, beat))
+            DBG("removed");
+        else
+        {
+            sequence->addNote(Note(pitch, 100, beat, beat + 1));
+        }
+    }
 }
 
 void SequencerComponent::buttonStateChanged(Button* b)
@@ -226,4 +249,9 @@ void SequencerComponent::buttonStateChanged(Button* b)
 void SequencerComponent::notePlayed(int part, int beat) {
     
 }
+
+void SequencerComponent::handleButtonPress(int pitch, int beat, bool buttonState) { 
+
+}
+
     

@@ -12,12 +12,11 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Sequencer.h"
-
+#include "SequencerButton.h"
 //==============================================================================
 /*
 */
-class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener
-{
+class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener {
 public:
     
     
@@ -70,10 +69,16 @@ public:
     void notePlayed(int part, int beat) override;
 
     void addListener(Sequencer::Listener* listener) { listeners.push_back(listener); }
+    
+    void handleButtonPress(int pitch, int beat, bool buttonState);
+    
 private:
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
     std::vector<Note> notesToBePlayed;
+    
+    std::array<std::array<std::unique_ptr<SequencerButton>, 16>, 7> sequencerButtons;
+    
     int selectedRow = 0;
     int lastBeat = -1;
     bool shouldFlip = false;

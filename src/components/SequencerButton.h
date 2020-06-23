@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Note.h"
 
 const int ANIMATION_LENGTH = 20;
 //==============================================================================
@@ -26,17 +27,22 @@ public:
         fillColourOff
     };
     
-    SequencerButton();
+    SequencerButton(int p, int b);
     ~SequencerButton();
     
+    virtual void paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
+
     virtual void timerCallback() override;
-
-
     
-    virtual void paint (Graphics&) override;
     void startAnimation();
+    
+    int getPitch() { return pitch; }
+    int getBeat() { return beat; }
 
 private:
+    int pitch;
+    int beat;
+
     int frameCount = 0;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SequencerButton)
 };
