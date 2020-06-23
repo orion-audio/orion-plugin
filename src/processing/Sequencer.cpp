@@ -65,6 +65,7 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
         {
             long long offset = loopEnd - posInSamples;
             midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), offset);
+            lastNotesPlayed.push(notes[i]);
         }
         
         // check all other beats
@@ -73,6 +74,7 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
         {
             long long offset = beatInSamples - posInSamples;
             midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), offset);
+            lastNotesPlayed.push(notes[i]);
         }
     }
 }
@@ -157,5 +159,12 @@ void Sequencer::createSynthesizerSound(Sequencer::Layout layout)
     reader.reset(formatManager.createReaderFor (std::make_unique<MemoryInputStream>(layout.data, layout.size, false)));
     samplerSounds.push_back(new SamplerSound(layout.name, *reader.get(), range, layout.midiNote, 0, 10, 10.0));
 }
+
+void Sequencer::notifyListenersNotePlayed(int pitch, int note) { 
+    for (int i = 0; i < listeners.size(); i++){
+        MessageManager::callAsync ([&] {listeners[i]->notePlayed(pitch, note); });
+    }
+}
+
 
 

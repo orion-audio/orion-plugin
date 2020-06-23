@@ -12,18 +12,18 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Sequencer.h"
-
+#include "SequencerButton.h"
 //==============================================================================
 /*
 */
-class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener
-{
+class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener {
 public:
+    
     
     struct LookAndFeelMethods
     {
     public:
-        virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive)
+        virtual void drawNoteBox(Graphics &g, SequencerComponent& s, Rectangle<float> bounds, bool isActive, bool isPlaying)
         {
             if (isActive)
                 g.drawRect(bounds);
@@ -66,18 +66,27 @@ public:
     
     virtual void sequenceChanged() override { repaint(); }
     
+    void notePlayed(int part, int beat) override;
+
+    void addListener(Sequencer::Listener* listener) { listeners.push_back(listener); }
+    
+    void handleButtonPress(int pitch, int beat, bool buttonState);
+    
 private:
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
+    std::vector<Note> notesToBePlayed;
+    
+    std::array<std::array<std::unique_ptr<SequencerButton>, 16>, 7> sequencerButtons;
     
     int selectedRow = 0;
-    
+    int lastBeat = -1;
     bool shouldFlip = false;
     
     StringArray voiceNames;
     
     float gridPhase = 0;
     float gridDirection = 1;
-    
+    std::vector<Sequencer::Listener*> listeners;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SequencerComponent)
 };

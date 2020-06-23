@@ -1,4 +1,5 @@
 #include <string>
+#pragma once
 
 class Note
 {
@@ -29,6 +30,12 @@ public:
         s+="\tend_time: " + std::to_string(endTime) + "\n}\n";
 
         return s;
+    }
+    
+    bool equals(Note n) {
+        if (startTime == n.startTime && pitch == n.pitch)
+            return true;
+        return false;
     }
 
 

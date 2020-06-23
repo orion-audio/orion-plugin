@@ -205,7 +205,7 @@ void OrionLookAndFeel::drawComboBox(juce::Graphics &g, int width, int height, bo
     g.strokePath(arrow, PathStrokeType(1.f));
 }
 
-void OrionLookAndFeel::drawNoteBox(juce::Graphics &g, SequencerComponent &s, Rectangle<float> bounds, bool isActive) { 
+void OrionLookAndFeel::drawNoteBox(juce::Graphics &g, SequencerComponent &s, Rectangle<float> bounds, bool isActive, bool isPlaying) { 
     float radius = std::min(bounds.getWidth(), bounds.getHeight());
     auto newBounds = bounds;
     newBounds = newBounds.withSizeKeepingCentre(radius, radius);

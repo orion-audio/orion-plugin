@@ -47,6 +47,10 @@
               file="src/components/OrionTabButton.h"/>
         <FILE id="lMuKXJ" name="ResizableContainer.h" compile="0" resource="0"
               file="src/components/ResizableContainer.h"/>
+        <FILE id="JQfR69" name="SequencerButton.cpp" compile="1" resource="0"
+              file="src/components/SequencerButton.cpp"/>
+        <FILE id="QjcMhA" name="SequencerButton.h" compile="0" resource="0"
+              file="src/components/SequencerButton.h"/>
         <FILE id="GqnPjP" name="SequencerComponent.cpp" compile="1" resource="0"
               file="src/components/SequencerComponent.cpp"/>
         <FILE id="wmHqrd" name="SequencerComponent.h" compile="0" resource="0"
@@ -265,9 +269,8 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" defines="PATH_TO_SAMPLES = &quot;../assets/samples&quot;"
-                       headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;"/>
-        <CONFIGURATION isDebug="0" name="Release" defines="PATH_TO_SAMPLES = &quot;/Library/Application\ Support/Orion/Orion\ Plugin/Samples&quot;"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../Documents/music tech/JUCE/modules"/>

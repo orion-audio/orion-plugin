@@ -12,6 +12,7 @@
 #include "NoteSequence.h"
 #include "JuceHeader.h"
 #include <array>
+#include <queue>
 
 
 
@@ -37,6 +38,7 @@ public:
     {
     public:
         virtual void sequenceChanged()=0;
+        virtual void notePlayed(int part, int beat)=0;
     };
     
     Sequencer(Synthesiser* sampler);
@@ -69,8 +71,12 @@ public:
     
     bool getActive() { return isActive; }
     void setActive(bool active) { isActive = active; }
+   
+    std::queue<Note> lastNotesPlayed;
     
 private:
+    
+    void notifyListenersNotePlayed(int pitch, int note);
     std::vector<Listener*> listeners;
     
     std::unique_ptr<NoteSequence> sequence;
