@@ -138,28 +138,30 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     addAndMakeVisible(meterRight.get());
     
 
-    // DROPDOWN BUTTON
-    downImage = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
-    upImage = ImageCache::getFromMemory(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
-    dropDownButton.reset(new ImageButton());
-    dropDownButton->setClickingTogglesState(true);
-    dropDownButton->setImages(false, true, true, downImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
-    //dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
-    dropDownButton->onClick = [&] {
-        //printf("Click!");
-        if(!editor->getDropdownVisible()){
-            int unite = editor->getHeight()/36;
-            editor->setSize(unite * 60, unite * 50);
-            editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
-        }else{
-            int unite = editor->getHeight()/50;
-            
-            editor->setSize(unite * 60, unite * 36);
-            editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
-        };
-        editor->updateDropDownState(dropDownButton->getToggleState());
-    };
-    addAndMakeVisible(dropDownButton.get());
+//    // DROPDOWN BUTTON
+//    downImage = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
+//    upImage = ImageCache::getFromMemory(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
+//    dropDownButton.reset(new ImageButton());
+//    dropDownButton->setClickingTogglesState(true);
+//    dropDownButton->setImages(false, true, true, downImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+//    //dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
+//    dropDownButton->onClick = [&] {
+//        //printf("Click!");
+//
+//        //if(!editor->getDropdownVisible()){
+//            //int unite = editor->getHeight()/36;
+//            //editor->setSize(unite * 60, unite * 50);
+//            //editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
+//        //}else{
+//            //int unite = editor->getHeight()/50;
+//
+//            //editor->setSize(unite * 60, unite * 36);
+//            //editor->constrainer.setFixedAspectRatio((float)editor->getWidth()/editor->getHeight());
+//        //};
+//
+//        editor->updateDropDownState(dropDownButton->getToggleState());
+//    };
+//    addAndMakeVisible(dropDownButton.get());
 
     
     
@@ -197,7 +199,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     
     // MASTER VOLUME SLIDER
     MasterVolumeSlider.reset(new Slider());
-    MasterVolumeSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
+    MasterVolumeSlider->setSliderStyle(Slider::SliderStyle::LinearVertical);
     MasterVolumeSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text Box
     MasterVolumeSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
     MasterVolumeSlider->setColour(Slider::trackColourId, juce::Colours::grey);
@@ -246,9 +248,10 @@ void PrimaryPaneComponent::resized()
     //std::cout<<"uniteW: "<< uniteW << std::endl;
 
     // Solo and Mute Buttons
-    Rectangle<int> area(4 * uniteW, 2.5 * uniteW, 4 * uniteW, 4 * uniteW);
+    Rectangle<int> area(3 * uniteW, 2.5 * uniteW, 4 * uniteW, 4 * uniteW);
     soloButton->setBounds(area);
-    area.translate(6 * uniteW, 0);
+    
+    area.translate(5 * uniteW, 0);
     muteButton->setBounds(area);
     
     // Instrumet Pads
@@ -273,6 +276,7 @@ void PrimaryPaneComponent::resized()
     
     //waveWiggle->setCentrePosition(getWidth()/2,39 * uniteW);
     
+<<<<<<< HEAD
     // Meters
     area = Rectangle<int>(getWidth() - 12 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
     meterLeft->setBounds(area);
@@ -281,10 +285,13 @@ void PrimaryPaneComponent::resized()
     area = Rectangle<int>(getWidth() - 10 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
     meterRight->setBounds(area);
     //meterRight->repaint();
+=======
+    
+>>>>>>> origin/main_window_GUI_changing
     
     // Drop Down Button
-    area = Rectangle<int>(7.2 * uniteW, getHeight() - 7 * uniteW, 4 * uniteW, 4 * uniteW);
-    dropDownButton->setBounds(area);
+//    area = Rectangle<int>(7.2 * uniteW, getHeight() - 7 * uniteW, 4 * uniteW, 4 * uniteW);
+//    dropDownButton->setBounds(area);
     
     // Instruments Volume Slider
     area = Rectangle<int>(16 * uniteW, 3.6 * uniteW, 14 * uniteW, 2 * uniteW);
@@ -295,15 +302,28 @@ void PrimaryPaneComponent::resized()
     
     
     // Instruments Pan Slider
-    area = Rectangle<int>(2 * uniteW, getHeight() - 16 * uniteW, 14 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/2 - 13.5 * uniteW, 3.6 * uniteW, 14 * uniteW, 2 * uniteW);
     instrumentsPanSlider->setBounds(area);
     
+    
+   
+    
+    // Master Volume Meters
+    area = Rectangle<int>(getWidth() - 7 * uniteW, 1 * uniteW, 2 * uniteW, 13 * uniteW);
+    meterLeft->setBounds(area);
+    
+    area = Rectangle<int>(getWidth() - 5 * uniteW, 1 * uniteW, 2 * uniteW, 13 * uniteW);
+    meterRight->setBounds(area);
+    
     // Master Volume Slider
-    area = Rectangle<int>(getWidth() - 21.25 * uniteW, getHeight() - 5.6 * uniteW, 14 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth() - 3 * uniteW, 1 * uniteW, 2 * uniteW, 13.5 * uniteW);
     MasterVolumeSlider->setBounds(area);
-    // Master Volume Slider Label
-    area = Rectangle<int>(getWidth() - 16.5 * uniteW, getHeight() - 3.5 * uniteW, 14 * uniteW, 2 * uniteW);
+    
+    // Master Volume Label
+    area = Rectangle<int>(getWidth() - 7 * uniteW, 14.5 * uniteW, 8 * uniteW, 2 * uniteW);
     MasterVolumeSliderLabel->setBounds(area);
+    
+    
 
     repaint();
 }

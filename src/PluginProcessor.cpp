@@ -22,7 +22,7 @@ static double stringToDouble(String s){return std::stod(s.toStdString());}
 OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
+                      #if ! JucePlugin_IsMidiEffect
                       #if ! JucePlugin_IsSynth
                        .withInput  ("Input",  AudioChannelSet::stereo(), true)
                       #endif

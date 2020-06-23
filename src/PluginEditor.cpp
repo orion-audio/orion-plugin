@@ -34,9 +34,13 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     sidePanel.reset(new SidePanelComponent(&p, this));
     addAndMakeVisible(sidePanel.get());
     
+    tabComponents.reset(new TabComponentHolder(p));
+    addAndMakeVisible(tabComponents.get());
+    
+    
     arrangementWindow.reset(new ArrangementWindowComponent(&p, this));
     addAndMakeVisible(arrangementWindow.get());
-    
+
     
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
     for (int i=0; i<7; i++)
@@ -46,6 +50,44 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     backgroundImage.reset(new ImageComponent("backgroundImage"));
     backgroundImage->setImage(ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize), RectanglePlacement::fillDestination);
     addAndMakeVisible(backgroundImage.get());
+    
+    // DROPDOWN BUTTON
+    Image downImage = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
+    Image upImage = ImageCache::getFromMemory(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
+    dropDownButton.reset(new ImageButton());
+    dropDownButton->setClickingTogglesState(true);
+    dropDownButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
+    //dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
+    dropDownButton->onClick = [&] {
+        updateDropDownState(dropDownButton->getToggleState());
+    };
+    addAndMakeVisible(dropDownButton.get());
+    
+    
+    // BACK BUTTON
+    downImage = ImageCache::getFromMemory(BinaryData::arrow_left_png, BinaryData::arrow_left_pngSize);
+    upImage = ImageCache::getFromMemory(BinaryData::arrow_leftOn_png, BinaryData::arrow_leftOn_pngSize);
+    backButton.reset(new ImageButton());
+    backButton->setClickingTogglesState(true);
+    backButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
+    //dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
+    backButton->onClick = [&] {
+        updateDropDownState(backButton->getToggleState());
+    };
+    addAndMakeVisible(dropDownButton.get());
+    
+    
+    // RESIZE BUTTON
+    downImage = ImageCache::getFromMemory(BinaryData::ResizeOff_png, BinaryData::ResizeOff_pngSize);
+    upImage = ImageCache::getFromMemory(BinaryData::ResizeOn_png, BinaryData::ResizeOn_pngSize);
+    resizeButton.reset(new ImageButton());
+    resizeButton->setClickingTogglesState(true);
+    resizeButton->setImages(false, true, true, downImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
+    resizeButton->onClick = [&] {
+        updateResizeViewState(resizeButton->getToggleState());
+    };
+    addAndMakeVisible(resizeButton.get());
+    
     
     
     
@@ -105,8 +147,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     formatManager.registerBasicFormats();
     
-    tabComponents.reset(new TabComponentHolder(p));
-    addAndMakeVisible(tabComponents.get());
+    
     
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
@@ -117,24 +158,14 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     };
     addAndMakeVisible(meterInput.get());
     
-    meterLeft.reset(new CircularMeter());
-    meterLeft->updaterFunction = [this] {
-        return processor.getOutputLevel(0);
-    };
-    addAndMakeVisible(meterLeft.get());
-    
-    meterRight.reset(new CircularMeter());
-    meterRight->updaterFunction = [this] {
-        return processor.getOutputLevel(1);
-    };
-    addAndMakeVisible(meterRight.get());
+
     
     constrainer.setFixedAspectRatio((float)OrionGlobalWidth/OrionGlobalHeight);
     constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
     constrainer.setSizeLimits((float)OrionGlobalWidth / 2, (float)OrionGlobalHeight / 2, (float)OrionGlobalWidth * 2, (float)OrionGlobalHeight * 2);
     
     cornerComponent.reset(new OrionResizableCornerComponent<OrionaudioAudioProcessorEditor>(this, this, &constrainer));
-    addAndMakeVisible(cornerComponent.get());
+    //addAndMakeVisible(cornerComponent.get());
     
     
     setSize (OrionGlobalWidth, OrionGlobalHeight);
@@ -142,6 +173,19 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     constrainer.setFixedAspectRatio((float)getWidth()/getHeight());
     setSize(getWidth(), (getHeight()/25) * 18);
     constrainer.setFixedAspectRatio((float)getWidth()/getHeight());
+    
+    
+    //    meterLeft.reset(new CircularMeter());
+    //    meterLeft->updaterFunction = [this] {
+    //        return processor.getOutputLevel(0);
+    //    };
+    //    addAndMakeVisible(meterLeft.get());
+    //
+    //    meterRight.reset(new CircularMeter());
+    //    meterRight->updaterFunction = [this] {
+    //        return processor.getOutputLevel(1);
+    //    };
+    //    addAndMakeVisible(meterRight.get());
     
 }
 
@@ -208,68 +252,48 @@ void OrionaudioAudioProcessorEditor::resized()
 //    // SIDE PANEL
 //    area = getLocalBounds();
 //    area = area.removeFromLeft(getWidth() / 6);
-////    area.setHeight(h);
+//    area.setHeight(h);
 //    sidePanel->setBounds(area);
     
     
     
+    
+    float unite = 0.0;
+    unite = getHeight()/36;
+    
     // MENU BAR
-    double unite = 0.0;
+    auto area = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, 3 * unite);
+    menuBar->setBounds(area);
     
-    if(dropDownVisible){
-        unite = getHeight() /50;
-    }else{
-        unite = getHeight() /36;
-    };
+    // SIDE PANEL
+    area = Rectangle<int>(0, 0, getWidth()/6, getHeight());
+    sidePanel->setBounds(area);
     
-    //cout << "unite: "<< unite << endl;
-
- 
-    auto menuBarArea = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, 3 * unite);
-    menuBar->setBounds(menuBarArea);
+    // PRIMARY PANE
+    area = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 3 * unite);
+    primaryPane->setBounds(area);
     
+    // ARRANGEMENT WINDOW
+    arrangementWindow->setBounds(area);
+    arrangementWindow->setVisible(arrangementWindowVisible);
     
-    if (!dropDownVisible)// without dropdown
+    // DROPDOWN WINDOW
+    if (dropDownVisible)
     {
-        // SIDE PANEL
-        auto sidePaneArea = Rectangle<int>(0, 0, getWidth()/6, getHeight());
-        sidePanel->setBounds(sidePaneArea);
-        
-        // PRIMARY PANE
-        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 3 * unite);
-        primaryPane->setBounds(primaryPaneArea);
-        
-        // ARRANGEMENT WINDOW
-        arrangementWindow->setBounds(primaryPaneArea);
-        arrangementWindow->setVisible(arrangementWindowVisible);
-        
-        
+        area = Rectangle<int>(0, getHeight() - 14 * unite, getWidth(), 14 * unite);
+        tabComponents->setBounds(area);
     }
-    else// with dropdown
-    {
-        // DROPDOWN WINDOW
-        auto dropdownWindowArea = Rectangle<int>(0, getHeight() - 14 * unite, getWidth(), 14 * unite);
-        tabComponents->setBounds(dropdownWindowArea);
-        
-        // SIDE PANEL
-        auto sidePaneArea = Rectangle<int>(0, 0, getWidth()/6, getHeight()-tabComponents->getHeight());
-        sidePanel->setBounds(sidePaneArea);
-        
-        // PRIMARY PANE
-        auto primaryPaneArea = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), sidePanel->getHeight() - 3 * unite);
-        primaryPane->setBounds(primaryPaneArea);
-        
-        // ARRANGEMENT WINDOW
-        arrangementWindow->setBounds(primaryPaneArea);
-        arrangementWindow->setVisible(arrangementWindowVisible);
-        
-        
-    }
-    
-    
-    
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
+    
+    // DROPDOWN BUTTON
+    area = Rectangle<int>(0.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
+    dropDownButton->setBounds(area);
+    
+    // RESIZE BUTTON
+    area = Rectangle<int>(getWidth() - 2.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
+    resizeButton->setBounds(area);
 
+    // CORNER COMPONENT
     cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
 
@@ -312,21 +336,19 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         
         instrumetSerial = tabIndex;
         
+        //--------------------------------
         primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
         primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetSerial]);
-        
-        
-        
-        
-        /* Set Solo Button Image */
-        if(instrumentsSoloStates[instrumetSerial])
-        {
-            primaryPane->setInstrumetsSoloButtonImage(true);
-        }
-        else
-        {
-           primaryPane->setInstrumetsSoloButtonImage(false);
-        }
+
+//        /* Set Solo Button Image */
+//        if(instrumentsSoloStates[instrumetSerial])
+//        {
+//            primaryPane->setInstrumetsSoloButtonImage(true);
+//        }
+//        else
+//        {
+//           primaryPane->setInstrumetsSoloButtonImage(false);
+//        }
         
         /* Set Mute Button Image */
         if(instrumentsMuteStates[instrumetSerial])
@@ -339,6 +361,8 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             primaryPane->waveWiggle->setVisible(true);
             primaryPane->waveWiggle->startAnimation();
         }
+        
+        //--------------------------------
         
             
     }
@@ -424,6 +448,14 @@ void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
 {
     DBG((int)newState);
     dropDownVisible = newState;
+    tabComponents->setVisible(dropDownVisible);
+    resized();
+}
+
+void OrionaudioAudioProcessorEditor::updateResizeViewState(bool newState)
+{
+    DBG((int)newState);
+    resizeViewVisible = newState;
     tabComponents->setVisible(dropDownVisible);
     resized();
 }

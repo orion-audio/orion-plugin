@@ -8,8 +8,38 @@
 
 namespace BinaryData
 {
+    extern const char*   ResizeOff_png;
+    const int            ResizeOff_pngSize = 13915;
+
+    extern const char*   ResizeOn_png;
+    const int            ResizeOn_pngSize = 12547;
+
+    extern const char*   arrow_downOn_png;
+    const int            arrow_downOn_pngSize = 48305;
+
+    extern const char*   arrow_left_png;
+    const int            arrow_left_pngSize = 37200;
+
+    extern const char*   arrow_leftOn_png;
+    const int            arrow_leftOn_pngSize = 47156;
+
+    extern const char*   arrow_right_png;
+    const int            arrow_right_pngSize = 37155;
+
+    extern const char*   arrow_rightOn_png;
+    const int            arrow_rightOn_pngSize = 46886;
+
+    extern const char*   arrow_upOn_png;
+    const int            arrow_upOn_pngSize = 37153;
+
+    extern const char*   arrow_down_png;
+    const int            arrow_down_pngSize = 28501;
+
+    extern const char*   arrow_up_png;
+    const int            arrow_up_pngSize = 37153;
+
     extern const char*   sidePanelBackground_png;
-    const int            sidePanelBackground_pngSize = 102098;
+    const int            sidePanelBackground_pngSize = 93445;
 
     extern const char*   a_png;
     const int            a_pngSize = 3863;
@@ -18,7 +48,7 @@ namespace BinaryData
     const int            a_button_pngSize = 2024;
 
     extern const char*   PrimaryPane_Footer_png;
-    const int            PrimaryPane_Footer_pngSize = 1739808;
+    const int            PrimaryPane_Footer_pngSize = 388873;
 
     extern const char*   PrimaryBackground_svg;
     const int            PrimaryBackground_svgSize = 4906;
@@ -35,56 +65,50 @@ namespace BinaryData
     extern const char*   MuteOn_png;
     const int            MuteOn_pngSize = 20519;
 
-    extern const char*   arrow_down_png;
-    const int            arrow_down_pngSize = 28501;
-
-    extern const char*   arrow_up_png;
-    const int            arrow_up_pngSize = 37153;
-
     extern const char*   ClapOff_png;
-    const int            ClapOff_pngSize = 69139;
+    const int            ClapOff_pngSize = 69528;
 
     extern const char*   ClapOn_png;
     const int            ClapOn_pngSize = 83965;
 
     extern const char*   CrashOff_png;
-    const int            CrashOff_pngSize = 82224;
+    const int            CrashOff_pngSize = 82720;
 
     extern const char*   CrashOn_png;
     const int            CrashOn_pngSize = 90993;
 
     extern const char*   HHCOff_png;
-    const int            HHCOff_pngSize = 57908;
+    const int            HHCOff_pngSize = 58479;
 
     extern const char*   HHCOn_png;
     const int            HHCOn_pngSize = 78144;
 
     extern const char*   HHOOff_png;
-    const int            HHOOff_pngSize = 60375;
+    const int            HHOOff_pngSize = 60678;
 
     extern const char*   HHOOn_png;
     const int            HHOOn_pngSize = 79249;
 
     extern const char*   KickOff_png;
-    const int            KickOff_pngSize = 68535;
+    const int            KickOff_pngSize = 69076;
 
     extern const char*   KickOn_png;
     const int            KickOn_pngSize = 84552;
 
     extern const char*   PercOff_png;
-    const int            PercOff_pngSize = 66209;
+    const int            PercOff_pngSize = 66780;
 
     extern const char*   PercOn_png;
     const int            PercOn_pngSize = 82246;
 
     extern const char*   SnapOff_png;
-    const int            SnapOff_pngSize = 75066;
+    const int            SnapOff_pngSize = 75505;
 
     extern const char*   SnapOn_png;
     const int            SnapOn_pngSize = 87575;
 
     extern const char*   SnareOff_png;
-    const int            SnareOff_pngSize = 78706;
+    const int            SnareOff_pngSize = 79073;
 
     extern const char*   SnareOn_png;
     const int            SnareOn_pngSize = 89675;
@@ -219,7 +243,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 70;
+    const int namedResourceListSize = 78;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

@@ -41,6 +41,9 @@ public:
     void tabComponentChanged(int serial);
     
     void updateDropDownState(bool newState);
+    
+    void updateResizeViewState(bool newState);
+    
     std::unique_ptr<AudioFormatReaderSource> playSource;
     
     void setDefaultSize();
@@ -54,6 +57,8 @@ public:
     ComponentBoundsConstrainer constrainer;
 private:
     
+    OrionaudioAudioProcessor& processor;
+    
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
     
     // SUB VIEWS
@@ -61,22 +66,16 @@ private:
     std::unique_ptr<PrimaryPaneComponent> primaryPane; 
     std::unique_ptr<SidePanelComponent> sidePanel;
     std::unique_ptr<ArrangementWindowComponent> arrangementWindow;
-    
-    
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     
-    std::unique_ptr<CircularMeter> meterLeft;
-    std::unique_ptr<CircularMeter> meterRight;
-    
+    std::unique_ptr<ImageButton> backButton;
+    std::unique_ptr<ImageButton> dropDownButton;
+    std::unique_ptr<ImageButton> resizeButton;
+   
     std::unique_ptr<CircularMeter> meterInput;
     std::unique_ptr<TabComponentHolder> tabComponents;
     
-    OrionaudioAudioProcessor& processor;
-    //ScopedPointer<OrionTabComponent> tabComponent;
-    //    std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
     FileBrowserComponent filebrowser;
-    
-    //    FileTreeComponent tree;
     
     File resourcefolder,skinfolder;
     std::unique_ptr<ImageComponent> backgroundImage;
@@ -98,17 +97,11 @@ private:
     
     TextButton instrumentTriggers[6];
     
-    //ComboBox directory;
-    //PopupMenu dir;
     Orionlist maindir;
     ListBox mainlist;
         
-    std::unique_ptr<ImageButton> dropDownButton;
-    
     int indices[7];
-    // std::vector<OrionButton>& buttons;
-    
-    
+
     DrawableButton AppDir;
     DrawableButton DeskDir;
     DrawableButton DownDir;
@@ -122,7 +115,17 @@ private:
     double startTime;
     
     bool dropDownVisible = false;
+    bool resizeViewVisible = false;
     bool arrangementWindowVisible = false;
+    
+    //std::unique_ptr<CircularMeter> meterLeft;
+    //std::unique_ptr<CircularMeter> meterRight;
+    //ScopedPointer<OrionTabComponent> tabComponent;
+    //std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
+    //FileTreeComponent tree;
+    //ComboBox directory;
+    //PopupMenu dir;
+    // std::vector<OrionButton>& buttons;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };
