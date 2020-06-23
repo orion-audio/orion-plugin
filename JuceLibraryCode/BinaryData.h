@@ -8,8 +8,38 @@
 
 namespace BinaryData
 {
+    extern const char*   ResizeOff_png;
+    const int            ResizeOff_pngSize = 13915;
+
+    extern const char*   ResizeOn_png;
+    const int            ResizeOn_pngSize = 12547;
+
+    extern const char*   arrow_downOn_png;
+    const int            arrow_downOn_pngSize = 48305;
+
+    extern const char*   arrow_left_png;
+    const int            arrow_left_pngSize = 37200;
+
+    extern const char*   arrow_leftOn_png;
+    const int            arrow_leftOn_pngSize = 47156;
+
+    extern const char*   arrow_right_png;
+    const int            arrow_right_pngSize = 37155;
+
+    extern const char*   arrow_rightOn_png;
+    const int            arrow_rightOn_pngSize = 46886;
+
+    extern const char*   arrow_upOn_png;
+    const int            arrow_upOn_pngSize = 37153;
+
+    extern const char*   arrow_down_png;
+    const int            arrow_down_pngSize = 28501;
+
+    extern const char*   arrow_up_png;
+    const int            arrow_up_pngSize = 37153;
+
     extern const char*   sidePanelBackground_png;
-    const int            sidePanelBackground_pngSize = 93465;
+    const int            sidePanelBackground_pngSize = 93445;
 
     extern const char*   a_png;
     const int            a_pngSize = 3863;
@@ -18,7 +48,7 @@ namespace BinaryData
     const int            a_button_pngSize = 2024;
 
     extern const char*   PrimaryPane_Footer_png;
-    const int            PrimaryPane_Footer_pngSize = 416452;
+    const int            PrimaryPane_Footer_pngSize = 388873;
 
     extern const char*   PrimaryBackground_svg;
     const int            PrimaryBackground_svgSize = 4906;
@@ -34,12 +64,6 @@ namespace BinaryData
 
     extern const char*   MuteOn_png;
     const int            MuteOn_pngSize = 20519;
-
-    extern const char*   arrow_down_png;
-    const int            arrow_down_pngSize = 28501;
-
-    extern const char*   arrow_up_png;
-    const int            arrow_up_pngSize = 37153;
 
     extern const char*   ClapOff_png;
     const int            ClapOff_pngSize = 69528;
@@ -219,7 +243,7 @@ namespace BinaryData
     const int            wrench_button_pngSize = 2101;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 70;
+    const int namedResourceListSize = 78;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

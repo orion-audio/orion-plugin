@@ -13,10 +13,12 @@
 #include "OrionGlobalVars.h"
 
 //==============================================================================
-OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): processor(p), TabbedComponent(TabbedButtonBar::Orientation::TabsAtTop)
+OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): processor(p), TabbedComponent(TabbedButtonBar::Orientation::TabsAtBottom)
 {
          
     TabSerial = serial;
+    
+    //setOrientation(TabbedButtonBar::TabsAtBottom);
     
     effectConfiguration.reset(new OrionEffectsConfiguration(p,serial));
     eqConfiguration.reset(new OrionEQConfiguration(p,serial));
@@ -30,9 +32,7 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
     
     setTabBarDepth(30);
     setOutline(1);
-    //outlineColourId = 0x1005800;
     setCurrentTabIndex(OrionGlobalTabIndex);
-    
     OrionGlobalTabIndex = getCurrentTabIndex();
     
     for (int i=0;i < getNumTabs(); i++)
@@ -41,6 +41,7 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
         tabButton->getProperties().set("tabButtonType", i);
         tabButton->setLookAndFeel(&LookAndFeel::getDefaultLookAndFeel());
     }
+    
   
 }
 
@@ -63,7 +64,9 @@ void OrionTabComponent::paint (Graphics& g)
 {
 
     g.fillAll(Colours::black);
-    //g.fillAll(Colours::maroon);//-------Delete!!!
+    g.setColour (Colours::grey);
+    g.drawRect(0, 0, getWidth(), getHeight());
+
 
 }
 
@@ -71,13 +74,17 @@ void OrionTabComponent::resized()
 {
     
     TabbedComponent::resized();
-    setTabBarDepth(getHeight() * .12);
-    getTabbedButtonBar().setBounds(0, 0, getWidth(), getHeight() * .12);
+    
+    float TabBarDepth = getHeight() * .15;
+    setTabBarDepth(TabBarDepth);
+    getTabbedButtonBar().setBounds(0, getHeight() - TabBarDepth, getWidth(), TabBarDepth);
     
     double uniteW = getWidth()/30;
     
     for (int i = 0; i < getNumTabs(); i++)
     {
-        getTabbedButtonBar().getTabButton(i)->setBounds( 6 * uniteW + i * 4 * uniteW, 0, 2 * uniteW, getHeight() * .12);
+        getTabbedButtonBar().getTabButton(i)->setBounds( 6 * uniteW + i * 4 * uniteW, 0, 2 * uniteW, TabBarDepth);
     }
+    
+
 }

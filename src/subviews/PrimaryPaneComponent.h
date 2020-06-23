@@ -23,7 +23,7 @@ class OrionaudioAudioProcessorEditor;
 /*
 */
 class PrimaryPaneComponent : public Component,
-                              public Slider::Listener
+                             public Slider::Listener
 {
 public:
     PrimaryPaneComponent(OrionaudioAudioProcessor*, OrionaudioAudioProcessorEditor*);
@@ -91,8 +91,7 @@ private:
 
     // BUTTONS
     
-    
-    std::unique_ptr<ImageButton> dropDownButton;
+    //std::unique_ptr<ImageButton> dropDownButton;
     
     std::unique_ptr<ImageButton> soloButton;
     std::unique_ptr<ImageButton> muteButton;

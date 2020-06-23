@@ -144,6 +144,23 @@
     </GROUP>
     <GROUP id="{7A6553AB-6E6B-EA2D-75C7-9554276FF724}" name="assets">
       <GROUP id="{B8F62692-B69C-B69B-E117-F99A372E475A}" name="graphics">
+        <GROUP id="{EF230E58-F26B-EB18-D136-98D3BF714CE3}" name="resizeButton">
+          <FILE id="NZzWSk" name="ResizeOff.png" compile="0" resource="1" file="assets/graphics/ResizeButton/ResizeOff.png"/>
+          <FILE id="GwGPXj" name="ResizeOn.png" compile="0" resource="1" file="assets/graphics/ResizeButton/ResizeOn.png"/>
+        </GROUP>
+        <GROUP id="{834A6700-4659-B839-FD14-CFDAC2E37681}" name="arrows">
+          <FILE id="Vxn1pc" name="arrow_downOn.png" compile="0" resource="1"
+                file="assets/graphics/primaryPane/arrows/arrow_downOn.png"/>
+          <FILE id="keCXSL" name="arrow_left.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_left.png"/>
+          <FILE id="RBflzW" name="arrow_leftOn.png" compile="0" resource="1"
+                file="assets/graphics/primaryPane/arrows/arrow_leftOn.png"/>
+          <FILE id="jAsaAf" name="arrow_right.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_right.png"/>
+          <FILE id="HCUTpk" name="arrow_rightOn.png" compile="0" resource="1"
+                file="assets/graphics/primaryPane/arrows/arrow_rightOn.png"/>
+          <FILE id="e56Cb3" name="arrow_upOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_upOn.png"/>
+          <FILE id="WDyAxU" name="arrow_down.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_down.png"/>
+          <FILE id="QsXHPH" name="arrow_up.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_up.png"/>
+        </GROUP>
         <GROUP id="{A5B9F44F-D618-CD65-DCB3-FCD06889DA74}" name="sidePanel">
           <FILE id="liwKi0" name="sidePanelBackground.png" compile="0" resource="1"
                 file="assets/graphics/sidePanel/sidePanelBackground.png"/>
@@ -164,10 +181,6 @@
           <GROUP id="{06D7087B-8944-8BEA-DC70-76D7A0694A82}" name="muteButton">
             <FILE id="Td74lX" name="MuteOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/muteButton/MuteOff.png"/>
             <FILE id="Z1YH43" name="MuteOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/muteButton/MuteOn.png"/>
-          </GROUP>
-          <GROUP id="{834A6700-4659-B839-FD14-CFDAC2E37681}" name="arrows">
-            <FILE id="WDyAxU" name="arrow_down.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_down.png"/>
-            <FILE id="QsXHPH" name="arrow_up.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_up.png"/>
           </GROUP>
           <GROUP id="{ED1D9512-93F5-1E03-8C32-263090C7DF9B}" name="instruments">
             <FILE id="FaqvNa" name="ClapOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/ClapOff.png"/>

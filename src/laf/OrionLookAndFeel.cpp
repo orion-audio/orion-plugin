@@ -81,7 +81,7 @@ void OrionLookAndFeel::drawLinearSlider (Graphics& g, int x, int y, int width, i
 
         //std::cout<<(style)<<std::endl;
         
-        auto trackWidth = jmin (6.0f, slider.isHorizontal() ? height * 0.05f/* track height. init value: 0.25 */ : width * 0.25f);
+        auto trackWidth = jmin (6.0f, slider.isHorizontal() ? height * 0.05f/* Horizontal track height. init value: 0.25 */ : width * 0.05f/* Vertial track width. init value: 0.25 */);
 
         Point<float> startPoint (slider.isHorizontal() ? x : x + width * 0.5f,
                                  slider.isHorizontal() ? y + height * 0.5f : height + y);

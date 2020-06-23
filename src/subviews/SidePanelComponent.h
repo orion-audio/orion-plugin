@@ -35,6 +35,8 @@ private:
     std::unique_ptr<ImageComponent> logoImage;
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     
+    std::unique_ptr<ImageButton> dropDownButton;
+    
     std::unique_ptr<DrawableImage> backgroundImageView;// 以后删除
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SidePanelComponent)
 };
