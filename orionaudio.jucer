@@ -166,7 +166,7 @@
           <FILE id="QsXHPH" name="arrow_up.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_up.png"/>
         </GROUP>
         <GROUP id="{A5B9F44F-D618-CD65-DCB3-FCD06889DA74}" name="sidePanel">
-          <FILE id="liwKi0" name="sidePanelBackground.png" compile="0" resource="1"
+          <FILE id="TXGmor" name="sidePanelBackground.png" compile="0" resource="1"
                 file="assets/graphics/sidePanel/sidePanelBackground.png"/>
         </GROUP>
         <GROUP id="{B74DE6F3-E717-806A-956B-7975BA656720}" name="menuBar">
@@ -174,7 +174,7 @@
           <FILE id="NKBuef" name="a_button.png" compile="0" resource="1" file="assets/graphics/a_button.png"/>
         </GROUP>
         <GROUP id="{72F10338-F3B8-5B05-6B5F-1DACD9B97E53}" name="primaryPane">
-          <FILE id="ahrTZR" name="PrimaryPane_Footer.png" compile="0" resource="1"
+          <FILE id="Mm4LLu" name="PrimaryPane_Footer.png" compile="0" resource="1"
                 file="assets/graphics/primaryPane/PrimaryPane_Footer.png"/>
           <FILE id="XDcPxI" name="PrimaryBackground.svg" compile="0" resource="1"
                 file="assets/graphics/primaryPane/PrimaryBackground.svg"/>

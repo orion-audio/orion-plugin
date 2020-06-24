@@ -23,6 +23,8 @@ DraggableFileBrowserComponent::DraggableFileBrowserComponent() : scannerThread("
     backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
     backButton->onClick = [this] {
         scanDirectory(currentDirectory.getDirectory().getParentDirectory());
+
+        DBG("2");
     };
     addAndMakeVisible(backButton.get());
     
@@ -46,6 +48,7 @@ void DraggableFileBrowserComponent::scanDirectory(File directory)
 {
     scannerThread.startThread();
     currentDirectory.setDirectory(directory, true, true);
+    DBG("3");
 }
 
 void DraggableFileBrowserComponent::changeListenerCallback (ChangeBroadcaster* source)

@@ -64,17 +64,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(dropDownButton.get());
     
     
-    // BACK BUTTON
-    downImage = ImageCache::getFromMemory(BinaryData::arrow_left_png, BinaryData::arrow_left_pngSize);
-    upImage = ImageCache::getFromMemory(BinaryData::arrow_leftOn_png, BinaryData::arrow_leftOn_pngSize);
-    backButton.reset(new ImageButton());
-    backButton->setClickingTogglesState(true);
-    backButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
-    //dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
-    backButton->onClick = [&] {
-        updateDropDownState(backButton->getToggleState());
-    };
-    addAndMakeVisible(dropDownButton.get());
+   
     
     
     // RESIZE BUTTON
@@ -151,6 +141,28 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
+    
+    // BACK BUTTON
+    backButton.reset(new ImageButton());
+    backButton->setAlwaysOnTop(true);
+    Image backImageOff = ImageCache::getFromMemory(BinaryData::arrow_left_png, BinaryData::arrow_left_pngSize);
+    Image backImageOn = ImageCache::getFromMemory(BinaryData::arrow_leftOn_png, BinaryData::arrow_leftOn_pngSize);
+    backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
+    backButton->onClick = [&] {
+        //fileBrowser->backButton->onClick();
+//        //fileBrowser->scanDirectory(fileBrowser->currentDirectory.getDirectory().getParentDirectory());
+//        fileBrowser->scannerThread.stopThread(-1);
+//        fileBrowser->windowComponent.setBounds(getLocalBounds());
+//        fileBrowser->windowComponent.setNewDirectory(currentDirectory);
+//        for (int i = 0; i < fileBrowser->windowComponent.fileComponents.size(); i++){
+//            windowComponent.fileComponents[i]->addListener(this);
+//        }
+    };
+    addAndMakeVisible(backButton.get());
+    
+
+    
+
     
     meterInput.reset(new CircularMeter());
     meterInput->updaterFunction = [this] {
@@ -285,14 +297,23 @@ void OrionaudioAudioProcessorEditor::resized()
     }
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
     
-    // DROPDOWN BUTTON
+    // Back BUTTON
     area = Rectangle<int>(0.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
+    backButton->setBounds(area);
+    
+    // DROPDOWN BUTTON
+    area = Rectangle<int>(10 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
     dropDownButton->setBounds(area);
+    
     
     // RESIZE BUTTON
     area = Rectangle<int>(getWidth() - 2.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
     resizeButton->setBounds(area);
 
+    
+    
+    
+    
     // CORNER COMPONENT
     cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
@@ -358,7 +379,8 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         else
         {
             primaryPane->setInstrumetsMuteButtonImage(false);
-            primaryPane->waveWiggle->setVisible(true);
+            primaryPane->waveWiggle->waveColor = Colour(0xff3AE6D1);
+            //primaryPane->waveWiggle->setVisible(true);
             primaryPane->waveWiggle->startAnimation();
         }
         

@@ -114,8 +114,11 @@ public:
     virtual bool isInterestedInFileDrag (const StringArray &files) override;
     
     virtual void filesDropped (const StringArray &files, int x, int y) override;
+    
+    
 private:
     
+    DirectoryContentsList currentDirectory;
     std::unique_ptr<ImageButton> backButton;
     
     int currentHighlighted = -1;
@@ -126,7 +129,7 @@ private:
     Viewport viewPort;
     TimeSliceThread scannerThread;
     WildcardFileFilter filter;
-    DirectoryContentsList currentDirectory;
+    
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DraggableFileBrowserComponent)
 };

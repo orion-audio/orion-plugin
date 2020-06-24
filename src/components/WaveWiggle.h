@@ -57,6 +57,9 @@ public:
     }
     
 
+    Colour waveColor = Colour(0xff3AE6D1);
+    
+
     ~WaveWiggle()
     {
     }
@@ -86,7 +89,7 @@ public:
 
     void paint (Graphics& g) override
     {
-        g.setColour(Colour(0xff3AE6D1));
+        g.setColour(waveColor);
         Path p;
         p.startNewSubPath(0, getHeight() / 2);
         
@@ -146,7 +149,8 @@ public:
         
         if (shouldStop)
         {
-            setVisible(false);
+            waveColor = Colour(146, 148, 150);
+            //setVisible(false);
             stopTimer();
         }
     }

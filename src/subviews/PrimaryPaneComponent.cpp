@@ -79,6 +79,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     upImage = ImageCache::getFromMemory(BinaryData::KickOff_png, BinaryData::KickOff_pngSize);
     drumButtons[0]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
     drumButtons[0]->onStateChange = [&] { editor->drumButtonClicked(orion::MidiNotes::kick, orion::Tabs::kickTab, drumButtons[0]->isDown()); };
+
     
     downImage = ImageCache::getFromMemory(BinaryData::SnareOn_png, BinaryData::SnareOn_pngSize);
     upImage = ImageCache::getFromMemory(BinaryData::SnareOff_png, BinaryData::SnareOff_pngSize);
@@ -168,7 +169,8 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     // WAVE WIGGLE
     waveWiggle.reset(new WaveWiggle());
     addAndMakeVisible(waveWiggle.get());
-    waveWiggle->setVisible(false);
+    //waveWiggle->setVisible(false);
+    waveWiggle->waveColor = Colour(146, 148, 150);
     
     // INSTRUMETS VOLUME SLIDER
     instrumentsVolumeSlider.reset(new Slider());
@@ -256,7 +258,7 @@ void PrimaryPaneComponent::resized()
     
     // Instrumet Pads
     int drumCount = 0;
-    double localWidth = 14 * uniteW;
+    double localWidth = 13.5 * uniteW;
     double localHeight = 14 * uniteW;
     area.setSize(localWidth, localHeight);
     
@@ -276,7 +278,7 @@ void PrimaryPaneComponent::resized()
     
     //waveWiggle->setCentrePosition(getWidth()/2,39 * uniteW);
     
-<<<<<<< HEAD
+//<<<<<<< HEAD
     // Meters
     area = Rectangle<int>(getWidth() - 12 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
     meterLeft->setBounds(area);
@@ -285,14 +287,8 @@ void PrimaryPaneComponent::resized()
     area = Rectangle<int>(getWidth() - 10 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
     meterRight->setBounds(area);
     //meterRight->repaint();
-=======
-    
->>>>>>> origin/main_window_GUI_changing
-    
-    // Drop Down Button
-//    area = Rectangle<int>(7.2 * uniteW, getHeight() - 7 * uniteW, 4 * uniteW, 4 * uniteW);
-//    dropDownButton->setBounds(area);
-    
+//=======
+
     // Instruments Volume Slider
     area = Rectangle<int>(16 * uniteW, 3.6 * uniteW, 14 * uniteW, 2 * uniteW);
     instrumentsVolumeSlider->setBounds(area);
@@ -305,22 +301,20 @@ void PrimaryPaneComponent::resized()
     area = Rectangle<int>(getWidth()/2 - 13.5 * uniteW, 3.6 * uniteW, 14 * uniteW, 2 * uniteW);
     instrumentsPanSlider->setBounds(area);
     
-    
-   
-    
+
     // Master Volume Meters
-    area = Rectangle<int>(getWidth() - 7 * uniteW, 1 * uniteW, 2 * uniteW, 13 * uniteW);
+    area = Rectangle<int>(getWidth() - 8 * uniteW, 1 * uniteW, 1.75 * uniteW, 12 * uniteW);
     meterLeft->setBounds(area);
     
-    area = Rectangle<int>(getWidth() - 5 * uniteW, 1 * uniteW, 2 * uniteW, 13 * uniteW);
+    area = Rectangle<int>(getWidth() - 6.25 * uniteW, 1 * uniteW, 1.75 * uniteW, 12 * uniteW);
     meterRight->setBounds(area);
     
     // Master Volume Slider
-    area = Rectangle<int>(getWidth() - 3 * uniteW, 1 * uniteW, 2 * uniteW, 13.5 * uniteW);
+    area = Rectangle<int>(getWidth() - 3 * uniteW, 1 * uniteW, 2 * uniteW, 12.5 * uniteW);
     MasterVolumeSlider->setBounds(area);
     
     // Master Volume Label
-    area = Rectangle<int>(getWidth() - 7 * uniteW, 14.5 * uniteW, 8 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth() - 8.5 * uniteW, 13.75 * uniteW, 8 * uniteW, 2 * uniteW);
     MasterVolumeSliderLabel->setBounds(area);
     
     
