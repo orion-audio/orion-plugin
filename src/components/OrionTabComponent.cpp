@@ -19,16 +19,17 @@ OrionTabComponent::OrionTabComponent(OrionaudioAudioProcessor& p, int serial): p
     TabSerial = serial;
     
     //setOrientation(TabbedButtonBar::TabsAtBottom);
+    //TabbedButtonBar->setVisible(false);
     
     effectConfiguration.reset(new OrionEffectsConfiguration(p,serial));
     eqConfiguration.reset(new OrionEQConfiguration(p,serial));
     envConfiguration.reset(new OrionEnvConfiguration(p,serial));
     clipConfiguration.reset(new OrionClipConfiguration(p));
     
-    addTab(translate("EQ"), Colours::lightgrey, eqConfiguration.get(), false);
+    addTab(translate("EQ"),   Colours::lightgrey, eqConfiguration.get(), false);
     addTab(translate("CLIP"), Colours::lightgrey, clipConfiguration.get(), false);
-    addTab(translate("ENV"), Colours::lightgrey, envConfiguration.get(), false);
-    addTab(translate("FX"), Colours::lightgrey, effectConfiguration.get(), false);
+    addTab(translate("ENV"),  Colours::lightgrey, envConfiguration.get(), false);
+    addTab(translate("FX"),   Colours::lightgrey, effectConfiguration.get(), false);
     
     setTabBarDepth(30);
     setOutline(1);
@@ -65,7 +66,10 @@ void OrionTabComponent::paint (Graphics& g)
 
     g.fillAll(Colours::black);
     g.setColour (Colours::grey);
-    g.drawRect(0, 0, getWidth(), getHeight());
+    g.drawHorizontalLine(0, 0, getWidth());
+    
+    //g.setColour (Colours::cyan);
+    //g.drawRect(0, 0, getWidth(), getHeight());
 
 
 }
@@ -83,7 +87,7 @@ void OrionTabComponent::resized()
     
     for (int i = 0; i < getNumTabs(); i++)
     {
-        getTabbedButtonBar().getTabButton(i)->setBounds( 6 * uniteW + i * 4 * uniteW, 0, 2 * uniteW, TabBarDepth);
+        getTabbedButtonBar().getTabButton(i)->setBounds( 6 * uniteW + i * 5 * uniteW, 0, 2 * uniteW, TabBarDepth);
     }
     
 

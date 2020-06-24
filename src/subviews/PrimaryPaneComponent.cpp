@@ -169,8 +169,11 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     // WAVE WIGGLE
     waveWiggle.reset(new WaveWiggle());
     addAndMakeVisible(waveWiggle.get());
-    //waveWiggle->setVisible(false);
     waveWiggle->waveColor = Colour(146, 148, 150);
+    //waveWiggle->setVisible(false);
+    
+    
+    //--------- INSTRUMENT VOLUME ---------//
     
     // INSTRUMETS VOLUME SLIDER
     instrumentsVolumeSlider.reset(new Slider());
@@ -182,11 +185,31 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     instrumentsVolumeSlider->setValue(0.75f);
     instrumentsVolumeSlider->addListener(this);
     addAndMakeVisible(instrumentsVolumeSlider.get());
+    
+    // INSTRUMETS VOLUME LABEL
+    instrumentsVolumeLabel.reset(new Label("INST VOL", "INST VOL"));
+    addAndMakeVisible(instrumentsVolumeLabel.get());
+    instrumentsVolumeLabel->setAlpha(0.5);
+    
     // INSTRUMETS VOLUME SLIDER LABEL
     instrumentsVolumeSliderLabel.reset(new Label("0.75db", "0.75db"));
     addAndMakeVisible(instrumentsVolumeSliderLabel.get());
     instrumentsVolumeSliderLabel->setAlpha(0.5);
     
+    // INSTRUMETS VOLUME SUBTRACT LABEL
+    instrumentsVolumeSubtractLabel.reset(new Label("-", "-"));
+    addAndMakeVisible(instrumentsVolumeSubtractLabel.get());
+    instrumentsVolumeSubtractLabel->setAlpha(0.5);
+    
+    // INSTRUMETS VOLUME PLUS LABEL
+    instrumentsVolumePlusLabel.reset(new Label("+", "+"));
+    addAndMakeVisible(instrumentsVolumePlusLabel.get());
+    instrumentsVolumePlusLabel->setAlpha(0.5);
+    
+    
+    
+    
+    //--------- INSTRUMENT PAN ---------//
     // INSTRUMETS PAN SLIDER
     instrumentsPanSlider.reset(new Slider());
     instrumentsPanSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
@@ -198,6 +221,20 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     instrumentsPanSlider->addListener(this);
     addAndMakeVisible(instrumentsPanSlider.get());
     
+    // INSTRUMETS PAN LABEL
+    instrumentsPanLabel.reset(new Label("INST PAN", "INST PAN"));
+    addAndMakeVisible(instrumentsPanLabel.get());
+    instrumentsPanLabel->setAlpha(0.5);
+    
+    // INSTRUMETS PAN LCR LABEL
+    instrumentsPanLCRLabel.reset(new Label("L              C              R",
+                                           "L              C              R"));
+    
+    addAndMakeVisible(instrumentsPanLCRLabel.get());
+    instrumentsPanLCRLabel->setAlpha(0.5);
+    
+    
+    //--------- MASTER VOLUME ---------//
     
     // MASTER VOLUME SLIDER
     MasterVolumeSlider.reset(new Slider());
@@ -205,15 +242,27 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     MasterVolumeSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text Box
     MasterVolumeSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
     MasterVolumeSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    MasterVolumeSlider->setColour(Slider::thumbColourId, juce::Colours::lightpink);
     MasterVolumeSlider->setRange(0.0f, 1.0f);
     MasterVolumeSlider->setValue(0.75f);
     MasterVolumeSlider->addListener(this);
     addAndMakeVisible(MasterVolumeSlider.get());
-    // INSTRUMETS VOLUME SLIDER LABEL
+    
+    // MASTER VOLUME SLIDER LABEL
     MasterVolumeSliderLabel.reset(new Label("0.75db", "0.75db"));
     addAndMakeVisible(MasterVolumeSliderLabel.get());
-    //MasterVolumeSliderLabel->setColour(Slider::backgroundColourId, juce::Colours::darkgrey);
     MasterVolumeSliderLabel->setAlpha(0.5);
+    //MasterVolumeSliderLabel->setColour(Slider::backgroundColourId, juce::Colours::darkgrey);
+    
+    // MASTER VOLUME PLUS LABEL
+    MasterVolumePlusLabel.reset(new Label("+", "+"));
+    addAndMakeVisible(MasterVolumePlusLabel.get());
+    MasterVolumePlusLabel->setAlpha(0.5);
+    
+    // MASTER VOLUME SUBTRACT LABEL
+    MasterVolumeSubtractLabel.reset(new Label("-", "-"));
+    addAndMakeVisible(MasterVolumeSubtractLabel.get());
+    MasterVolumeSubtractLabel->setAlpha(0.5);
 
     
 }
@@ -234,29 +283,26 @@ void PrimaryPaneComponent::paint (Graphics& g)
     g.fillAll();
 }
 
+//MARK:- RESIZE
 void PrimaryPaneComponent::resized()
 {
-    //backgroundGradient = ColourGradient::horizontal(Colour(0xFF0C0C0D), 0, Colours::black, getWidth() / 2);
-    
-    //Background
-    Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());//--------Delete!!!!
-    //backgroundImageView->setBounds(backgroundArea);//--------Delete!!!!
-    
-    backgroundImageView->setTransformToFit(backgroundArea.toFloat(), RectanglePlacement::stretchToFit);
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
-    
     float uniteW = getWidth()/100;
+    
+    //--------- Background Image ---------//
+    Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());
+    backgroundImageView->setTransformToFit(backgroundArea.toFloat(), RectanglePlacement::stretchToFit);
+    //backgroundGradient = ColourGradient::horizontal(Colour(0xFF0C0C0D), 0, Colours::black, getWidth() / 2);
 
-    //std::cout<<"uniteW: "<< uniteW << std::endl;
-
-    // Solo and Mute Buttons
+    
+    //--------- Solo and Mute Buttons ---------//
     Rectangle<int> area(3 * uniteW, 2.5 * uniteW, 4 * uniteW, 4 * uniteW);
     soloButton->setBounds(area);
     
     area.translate(5 * uniteW, 0);
     muteButton->setBounds(area);
     
-    // Instrumet Pads
+
+    //--------- Instrument Pads ---------//
     int drumCount = 0;
     double localWidth = 13.5 * uniteW;
     double localHeight = 14 * uniteW;
@@ -272,53 +318,81 @@ void PrimaryPaneComponent::resized()
         }
     }
 
-    // Wave Wiggle
-    area = Rectangle<int>(32.8 * uniteW, 39 * uniteW, 42 * uniteW, 16 * uniteW);
+    //--------- Wave Wiggle ---------//
+    area = Rectangle<int>(getWidth()/2 - 18.5 * uniteW, getHeight()/2 + 5 * uniteW, 42 * uniteW, 16 * uniteW);
     waveWiggle->setBounds(area);
-    
     //waveWiggle->setCentrePosition(getWidth()/2,39 * uniteW);
-    
-//<<<<<<< HEAD
-    // Meters
-    area = Rectangle<int>(getWidth() - 12 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
-    meterLeft->setBounds(area);
-    //meterLeft->repaint();
-    
-    area = Rectangle<int>(getWidth() - 10 * uniteW, getHeight() - 26 * uniteW, 2 * uniteW, 13 * uniteW);
-    meterRight->setBounds(area);
-    //meterRight->repaint();
-//=======
 
+    
+    
+    //--------- Instrument Volume ---------//
+     
+    // Instruments Volume Label
+    area = Rectangle<int>(20 * uniteW, 1 * uniteW,  14 * uniteW, 2 * uniteW);
+    instrumentsVolumeLabel->setBounds(area);
+    
+    // Instruments Volume "-" Label
+    area = Rectangle<int>(15 * uniteW, 3.55 * uniteW,  2 * uniteW, 2 * uniteW);
+    instrumentsVolumeSubtractLabel->setBounds(area);
+    
     // Instruments Volume Slider
-    area = Rectangle<int>(16 * uniteW, 3.6 * uniteW, 14 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(16 * uniteW, 3.6 * uniteW,  14 * uniteW, 2 * uniteW);
     instrumentsVolumeSlider->setBounds(area);
+    
+    // Instruments Volume "+" Label
+    area = Rectangle<int>(29 * uniteW, 3.55 * uniteW,  2 * uniteW, 2 * uniteW);
+    instrumentsVolumePlusLabel->setBounds(area);
+    
     // Instruments Volume Slider Label
-    area = Rectangle<int>(20.5 * uniteW, 6 * uniteW, 14 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(20.5 * uniteW, 5.75 * uniteW,  16 * uniteW, 2 * uniteW);
     instrumentsVolumeSliderLabel->setBounds(area);
     
+    //--------- Instrument Pan ---------//
+    
+    // Instruments Pan Label
+    area = Rectangle<int>(getWidth()/2 - 10 * uniteW, 1 * uniteW,  14 * uniteW, 2 * uniteW);
+    instrumentsPanLabel->setBounds(area);
     
     // Instruments Pan Slider
     area = Rectangle<int>(getWidth()/2 - 13.5 * uniteW, 3.6 * uniteW, 14 * uniteW, 2 * uniteW);
     instrumentsPanSlider->setBounds(area);
     
+    // Instruments Pan "L C R" Label
+    area = Rectangle<int>(getWidth()/2 - 13.5 * uniteW, 5.75 * uniteW,  14 * uniteW, 2 * uniteW);
+    instrumentsPanLCRLabel->setBounds(area);
 
-    // Master Volume Meters
-    area = Rectangle<int>(getWidth() - 8 * uniteW, 1 * uniteW, 1.75 * uniteW, 12 * uniteW);
+    
+    
+    //--------- Master Volume ---------//
+    
+    // Master Volume Meter Left
+    area = Rectangle<int>(getWidth() - 8 * uniteW, 1 * uniteW, 1.75 * uniteW, 11 * uniteW);
     meterLeft->setBounds(area);
     
-    area = Rectangle<int>(getWidth() - 6.25 * uniteW, 1 * uniteW, 1.75 * uniteW, 12 * uniteW);
+    // Master Volume Meter Right
+    area = Rectangle<int>(getWidth() - 6.25 * uniteW, 1 * uniteW, 1.75 * uniteW, 11 * uniteW);
     meterRight->setBounds(area);
     
-    // Master Volume Slider
-    area = Rectangle<int>(getWidth() - 3 * uniteW, 1 * uniteW, 2 * uniteW, 12.5 * uniteW);
-    MasterVolumeSlider->setBounds(area);
-    
-    // Master Volume Label
-    area = Rectangle<int>(getWidth() - 8.5 * uniteW, 13.75 * uniteW, 8 * uniteW, 2 * uniteW);
+    // Master Volume Slider Label
+    area = Rectangle<int>(getWidth() - 9 * uniteW, 12.75 * uniteW, 8 * uniteW, 2 * uniteW);
     MasterVolumeSliderLabel->setBounds(area);
     
+    // Master Volume "+" Label
+    area = Rectangle<int>(getWidth() - 3 * uniteW, 0.75 * uniteW, 2 * uniteW, 2 * uniteW);
+    MasterVolumePlusLabel->setBounds(area);
     
-
+    // Master Volume Slider
+    area = Rectangle<int>(getWidth() - 3 * uniteW, 2 * uniteW, 2 * uniteW, 10 * uniteW);
+    MasterVolumeSlider->setBounds(area);
+    
+    // Master Volume "-" Label
+    area = Rectangle<int>(getWidth() - 2.88 * uniteW, 11.25 * uniteW, 2 * uniteW, 2 * uniteW);
+    MasterVolumeSubtractLabel->setBounds(area);
+    
+    
+    
+    
+    //----------------------------------
     repaint();
 }
 
@@ -341,7 +415,7 @@ void PrimaryPaneComponent::sliderValueChanged (Slider* slider)
         {
             d = "1.00";
         }
-        d.append("db",2);
+        d.append(" db",3);
         MasterVolumeSliderLabel->setText(d,dontSendNotification);
     }
     else if(slider == instrumentsVolumeSlider.get())
@@ -360,7 +434,7 @@ void PrimaryPaneComponent::sliderValueChanged (Slider* slider)
         {
             d = "1.00";
         }
-        d.append("db",2);
+        d.append(" db",3);
         instrumentsVolumeSliderLabel->setText(d,dontSendNotification);
     }
     else if(slider == instrumentsPanSlider.get())
@@ -415,7 +489,7 @@ void PrimaryPaneComponent::instrumentSoloButtonClicked(bool isDown)
             DBG(count);
             if(count == instrumentAmount - 1)
             {
-                DBG("Hey");
+                //DBG("Hey");
                 for (int j = 0; j < instrumentAmount; j++)
                 {
                     instrumentsMuteStates[j] = false;

@@ -61,6 +61,17 @@ private:
     
     std::unique_ptr<OrionResizableCornerComponent<OrionaudioAudioProcessorEditor> > cornerComponent;
     
+    
+    // Dropdown Tabs
+    
+    int dropdownTabSerial = 0;
+    std::array<std::unique_ptr<ImageButton>, 4> dropDownTabs;
+    std::unique_ptr<ImageButton> dropDownEQ;
+    std::unique_ptr<ImageButton> dropDownClip;
+    std::unique_ptr<ImageButton> dropDownENV;
+    std::unique_ptr<ImageButton> dropDownFX;
+    
+    
     // SUB VIEWS
     std::unique_ptr<OrionMenuBar> menuBar; 
     std::unique_ptr<PrimaryPaneComponent> primaryPane; 
@@ -69,11 +80,18 @@ private:
     std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     
     std::unique_ptr<ImageButton> backButton;
-    std::unique_ptr<ImageButton> dropDownButton;
     std::unique_ptr<ImageButton> resizeButton;
    
     std::unique_ptr<CircularMeter> meterInput;
     std::unique_ptr<TabComponentHolder> tabComponents;
+    
+    //std::unique_ptr<ImageButton> dropDownButton;
+    
+    
+    
+    
+    
+    
     
     FileBrowserComponent filebrowser;
     

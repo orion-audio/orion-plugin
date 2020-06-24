@@ -206,18 +206,18 @@
           </GROUP>
         </GROUP>
         <GROUP id="{2F0267F7-D2FA-BE0F-E1A8-CD4D41AE0105}" name="dropdown">
-          <GROUP id="{383C9C54-A218-8D83-4305-EA8E377F2C80}" name="tab">
-            <FILE id="Hh5dxj" name="ClipButtonOff.png" compile="0" resource="1"
-                  file="assets/graphics/ClipButtonOff.png"/>
-            <FILE id="k8WoGV" name="ClipButtonOn.png" compile="0" resource="1"
-                  file="assets/graphics/ClipButtonOn.png"/>
-            <FILE id="n64tdw" name="ENVButtonOff.png" compile="0" resource="1"
-                  file="assets/graphics/ENVButtonOff.png"/>
-            <FILE id="mCaB7t" name="ENVButtonOn.png" compile="0" resource="1" file="assets/graphics/ENVButtonOn.png"/>
-            <FILE id="UuxhvY" name="EQButtonOff.png" compile="0" resource="1" file="assets/graphics/EQButtonOff.png"/>
-            <FILE id="X9L1bx" name="EQButtonOn.png" compile="0" resource="1" file="assets/graphics/EQButtonOn.png"/>
-            <FILE id="ktPy5K" name="FXButtonOff.png" compile="0" resource="1" file="assets/graphics/FXButtonOff.png"/>
-            <FILE id="sfPLmO" name="FXButtonOn.png" compile="0" resource="1" file="assets/graphics/FXButtonOn.png"/>
+          <GROUP id="{383C9C54-A218-8D83-4305-EA8E377F2C80}" name="dropdownTab">
+            <FILE id="ZLnwm4" name="ClipButtonOff.png" compile="0" resource="1"
+                  file="assets/graphics/dropdown/dropdownTab/ClipButtonOff.png"/>
+            <FILE id="YqTnD8" name="ClipButtonOn.png" compile="0" resource="1"
+                  file="assets/graphics/dropdown/dropdownTab/ClipButtonOn.png"/>
+            <FILE id="D33m0Q" name="ENVButtonOff.png" compile="0" resource="1"
+                  file="assets/graphics/dropdown/dropdownTab/ENVButtonOff.png"/>
+            <FILE id="e21HPt" name="ENVButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/ENVButtonOn.png"/>
+            <FILE id="wkBDBR" name="EQButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOff.png"/>
+            <FILE id="tVU47a" name="EQButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOn.png"/>
+            <FILE id="NoQoNG" name="FXButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOff.png"/>
+            <FILE id="tXc9WR" name="FXButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOn.png"/>
           </GROUP>
           <GROUP id="{8065FEA0-D75A-588E-18EB-090F3D567EE7}" name="FX">
             <FILE id="cZzF0h" name="FXBackground.png" compile="0" resource="1"
@@ -276,6 +276,8 @@
         <FILE id="pnUOOz" name="volume.png" compile="0" resource="1" file="assets/graphics/volume.png"/>
         <FILE id="yTlhET" name="wrench_button.png" compile="0" resource="1"
               file="assets/graphics/wrench_button.png"/>
+        <FILE id="QiPyfv" name="InvisibleButtonBackground.png" compile="0"
+              resource="1" file="assets/graphics/InvisibleButtonBackground.png"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>

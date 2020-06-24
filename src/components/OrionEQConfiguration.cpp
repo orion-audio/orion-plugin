@@ -38,26 +38,30 @@ OrionEQConfiguration::OrionEQConfiguration(OrionaudioAudioProcessor& p,int seria
     frame.setTextLabelPosition (Justification::centred);
     addAndMakeVisible (frame);
     updateFrequencyResponses();
+    Image eqbackground = ImageCache::getFromMemory(BinaryData::EQ_Background_png, BinaryData::EQ_Background_pngSize);
     
     
 }
 
 void OrionEQConfiguration::paint(Graphics& g)
 {
-    const Colour inputColour = Colours::greenyellow;
-    const Colour outputColour = Colours::indianred;
-    Graphics::ScopedSaveState state (g);
-    //********for the vertical lines*************
+   
     
-    Image eqbackground = ImageCache::getFromMemory(BinaryData::EQ_Background_png, BinaryData::EQ_Background_pngSize);
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-    RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(eqbackground, 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
+    Graphics::ScopedSaveState state (g);
+    
+    //RectanglePlacement orionBackgroundRectanglePlacement(64);
+    
+    g.fillAll (Colours::black.withAlpha((.7f)));
+    
     
     g.setFont (12.0f);
-    g.setColour (Colours::silver);
-    g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
-    for (int i=0; i < 40; ++i) {
+    
+    //g.setColour (Colours::silver);
+    //g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
+    
+    //Vertical Lines
+    for (int i=0; i < 40; ++i)
+    {
         g.setColour (Colours::silver.withAlpha (0.3f));
         auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.025f;
         if (i > 0) g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
@@ -70,18 +74,21 @@ void OrionEQConfiguration::paint(Graphics& g)
         }
         
     }
-    //********for the horizontal lines*************
+    
+    //Horizontal Lines
     g.setColour (Colours::silver.withAlpha (0.3f));
     g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.25 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
     g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.75 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
-    
     g.setColour (Colours::silver);
+    
     //g.drawFittedText (String (maxDB) + " dB", plotFrame.getX() + 3, plotFrame.getY() + 2, 50, 14, Justification::left, 1);
     //g.drawFittedText (String (maxDB / 2) + " dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.25 * plotFrame.getHeight()), 50, 14, Justification::left, 1);
     //g.drawFittedText (" 0 dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.5  * plotFrame.getHeight()), 50, 14, Justification::left, 1);
-   // g.drawFittedText (String (- maxDB / 2) + " dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.75 * plotFrame.getHeight()), 50, 14, Justification::left, 1);
+    // g.drawFittedText (String (- maxDB / 2) + " dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.75 * plotFrame.getHeight()), 50, 14, Justification::left, 1);
     
     /* plot input and output audio data
+    const Colour inputColour = Colours::greenyellow;
+    const Colour outputColour = Colours::indianred;
     g.setFont (16.0f);
     processor.createAnalyserPlot (analyserPath, plotFrame, 20.0f, true);
     g.setColour (inputColour);
@@ -91,11 +98,14 @@ void OrionEQConfiguration::paint(Graphics& g)
     g.setColour (outputColour);
     g.drawFittedText ("Output", plotFrame.reduced (8, 28), Justification::topRight, 1);
     g.strokePath (analyserPath, PathStrokeType (1.0));
-   */
+    */
+    
     updateFrequencyResponses();
-    //********for the filter plots*************
-    for (int i=0; i < 5; ++i) {
-        
+    
+    
+    //******** Filter Plots *************
+    for (int i=0; i < 5; ++i)
+    {
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
         {
         auto band = voice->eq.bands[i];
@@ -118,10 +128,12 @@ void OrionEQConfiguration::paint(Graphics& g)
     
     g.setColour (Colours::darkcyan);
     g.strokePath (frequencyResponse, PathStrokeType (1.0));
+    
     //ADD SHADING
     g.setOpacity(0.5);
     PathFlatteningIterator i (frequencyResponse);
-    while (i.next()){
+    while (i.next())
+    {
         g.drawLine(i.x2, i.y2, i.x2, getHeight()/2, 4.0f);//画IR阴影
     }
 }

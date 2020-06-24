@@ -209,10 +209,6 @@ void OrionEnvConfiguration::paint (Graphics& g)
     }
     //paint vertical lines
     
-    Image eqbackground = ImageCache::getFromMemory(BinaryData::EQ_Background_png, BinaryData::EQ_Background_pngSize);
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-    RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(eqbackground, 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
     
     
     g.setFont (12.0f);

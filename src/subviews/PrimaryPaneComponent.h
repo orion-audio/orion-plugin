@@ -99,13 +99,20 @@ private:
     std::unique_ptr<CircularMeter> meterLeft;
     std::unique_ptr<CircularMeter> meterRight;
     
+    std::unique_ptr<Label>  instrumentsVolumeLabel;
     std::unique_ptr<Slider> instrumentsVolumeSlider;
-    std::unique_ptr<Label> instrumentsVolumeSliderLabel;
+    std::unique_ptr<Label>  instrumentsVolumeSliderLabel;
+    std::unique_ptr<Label>  instrumentsVolumePlusLabel;
+    std::unique_ptr<Label>  instrumentsVolumeSubtractLabel;
     
+    std::unique_ptr<Label>  instrumentsPanLabel;
     std::unique_ptr<Slider> instrumentsPanSlider;
+    std::unique_ptr<Label>  instrumentsPanLCRLabel;
     
     std::unique_ptr<Slider> MasterVolumeSlider;
-    std::unique_ptr<Label> MasterVolumeSliderLabel;
+    std::unique_ptr<Label>  MasterVolumeSliderLabel;
+    std::unique_ptr<Label>  MasterVolumePlusLabel;
+    std::unique_ptr<Label>  MasterVolumeSubtractLabel;
     
     std::unique_ptr<DrawableImage> backgroundImageView;// 以后删除
     

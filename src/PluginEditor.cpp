@@ -51,35 +51,85 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     backgroundImage->setImage(ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize), RectanglePlacement::fillDestination);
     addAndMakeVisible(backgroundImage.get());
     
-    // DROPDOWN BUTTON
-    Image downImage = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
-    Image upImage = ImageCache::getFromMemory(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
-    dropDownButton.reset(new ImageButton());
-    dropDownButton->setClickingTogglesState(true);
-    dropDownButton->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
-    //dropDownButton->onStateChange = [&] { editor->updateDropDownState(dropDownButton->getToggleState()); };
-    dropDownButton->onClick = [&] {
-        updateDropDownState(dropDownButton->getToggleState());
+    
+    //--------- DROPDOWN BUTTONS ---------//
+
+    // Dropdown EQ BUTTON
+    Image downImage = ImageCache::getFromMemory(BinaryData::EQButtonOn_png,  BinaryData::EQButtonOn_pngSize);
+    Image upImage   = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
+    dropDownEQ.reset(new ImageButton());
+    dropDownEQ->setClickingTogglesState(true);
+    dropDownEQ->onClick = [&]{
+        if(dropDownEQ->getToggleState()){
+           dropdownTabSerial = 0;
+        }
+        updateDropDownState(dropDownEQ->getToggleState());
     };
-    addAndMakeVisible(dropDownButton.get());
+    addAndMakeVisible(dropDownEQ.get());
+    dropDownEQ->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
+
+    // Dropdown Clip BUTTON
+    downImage = ImageCache::getFromMemory(BinaryData::ClipButtonOn_png,  BinaryData::ClipButtonOn_pngSize);
+    upImage   = ImageCache::getFromMemory(BinaryData::ClipButtonOff_png, BinaryData::ClipButtonOff_pngSize);
+    dropDownClip.reset(new ImageButton());
+    dropDownClip->setClickingTogglesState(true);
+    dropDownClip->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
+    dropDownClip->onClick = [&]{
+        if(dropDownClip->getToggleState()){
+           dropdownTabSerial = 1;
+        }
+        updateDropDownState(dropDownClip->getToggleState());
+    };
+    addAndMakeVisible(dropDownClip.get());
+
+    // Dropdown ENV BUTTON
+    downImage = ImageCache::getFromMemory(BinaryData::ENVButtonOn_png,  BinaryData::ENVButtonOn_pngSize);
+    upImage   = ImageCache::getFromMemory(BinaryData::ENVButtonOff_png, BinaryData::ENVButtonOff_pngSize);
+    dropDownENV.reset(new ImageButton());
+    dropDownENV->setClickingTogglesState(true);
+    dropDownENV->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
+    dropDownENV->onClick = [&]{
+        if(dropDownENV->getToggleState()){
+           dropdownTabSerial = 2;
+        }
+        updateDropDownState(dropDownENV->getToggleState());
+    };
+    addAndMakeVisible(dropDownENV.get());
+
+    // Dropdown FX BUTTON
+    downImage = ImageCache::getFromMemory(BinaryData::FXButtonOn_png,  BinaryData::FXButtonOn_pngSize);
+    upImage   = ImageCache::getFromMemory(BinaryData::FXButtonOff_png, BinaryData::FXButtonOff_pngSize);
+    dropDownFX.reset(new ImageButton());
+    dropDownFX->setClickingTogglesState(true);
+    dropDownFX->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
+    dropDownFX->onClick = [&]{
+        if(dropDownFX->getToggleState()){
+           dropdownTabSerial = 3;
+        }
+        updateDropDownState(dropDownFX->getToggleState());
+    };
+    addAndMakeVisible(dropDownFX.get());
     
     
-   
-    
+    //--------- RESIZE BUTTONS ---------//
     
     // RESIZE BUTTON
     downImage = ImageCache::getFromMemory(BinaryData::ResizeOff_png, BinaryData::ResizeOff_pngSize);
-    upImage = ImageCache::getFromMemory(BinaryData::ResizeOn_png, BinaryData::ResizeOn_pngSize);
+    upImage   = ImageCache::getFromMemory(BinaryData::ResizeOn_png, BinaryData::ResizeOn_pngSize);
     resizeButton.reset(new ImageButton());
     resizeButton->setClickingTogglesState(true);
     resizeButton->setImages(false, true, true, downImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack);
-    resizeButton->onClick = [&] {
+    resizeButton->onClick = [&]
+    {
         updateResizeViewState(resizeButton->getToggleState());
     };
     addAndMakeVisible(resizeButton.get());
     
     
     
+    
+    
+    //--------------------------------//
     
     std::unique_ptr<Drawable> buttonOff;
     std::unique_ptr<Drawable> buttonOn;
@@ -141,6 +191,9 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     fileBrowser.reset(new DraggableFileBrowserComponent());
     addAndMakeVisible(fileBrowser.get());
+    
+    
+    
     
     // BACK BUTTON
     backButton.reset(new ImageButton());
@@ -270,8 +323,8 @@ void OrionaudioAudioProcessorEditor::resized()
     
     
     
-    float unite = 0.0;
-    unite = getHeight()/36;
+    float unite = getHeight()/36;
+    float uniteW = getWidth()/30;
     
     // MENU BAR
     auto area = Rectangle<int>(getWidth()/6, 0, getWidth() * 5 / 6, 3 * unite);
@@ -297,16 +350,31 @@ void OrionaudioAudioProcessorEditor::resized()
     }
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
     
-    // Back BUTTON
-    area = Rectangle<int>(0.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
+    // BACK BUTTON
+    area = Rectangle<int>(4 * unite, getHeight() - 2.1 * unite, 2 * unite, 2 * unite);
     backButton->setBounds(area);
     
-    // DROPDOWN BUTTON
-    area = Rectangle<int>(10 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
-    dropDownButton->setBounds(area);
+    
+    //--------- DROPDOWN BUTTONS ---------//
+    // EQ
+    area = Rectangle<int>( 6 * uniteW + 0 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    dropDownEQ->setBounds(area);
+
+    // CLIP
+    area = Rectangle<int>( 6 * uniteW + 1 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    dropDownClip->setBounds(area);
+
+    // ENV
+    area = Rectangle<int>( 6 * uniteW + 2 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    dropDownENV->setBounds(area);
+
+    // FX
+    area = Rectangle<int>( 6 * uniteW + 3 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    dropDownFX->setBounds(area);
     
     
-    // RESIZE BUTTON
+    
+    //--------- RESIZE BUTTONS ---------//
     area = Rectangle<int>(getWidth() - 2.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
     resizeButton->setBounds(area);
 
@@ -353,9 +421,13 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
         
-        tabComponents->setCurrentTab(tabIndex);
         
+
         instrumetSerial = tabIndex;
+        
+        tabComponents->setCurrentTab(instrumetSerial);
+        tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);
+        
         
         //--------------------------------
         primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
@@ -468,9 +540,46 @@ void OrionaudioAudioProcessorEditor::setDefaultSize()
 
 void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
 {
-    DBG((int)newState);
-    dropDownVisible = newState;
-    tabComponents->setVisible(dropDownVisible);
+    //DBG((int)newState);
+    
+    if(newState)
+    {
+        if(dropdownTabSerial == 0)
+        {
+            dropDownClip->setToggleState(false,sendNotificationSync);
+            dropDownENV->setToggleState(false,sendNotificationSync);
+            dropDownFX->setToggleState(false,sendNotificationSync);
+            
+        }
+        else if(dropdownTabSerial == 1)
+        {
+            dropDownEQ->setToggleState(false,sendNotificationSync);
+            dropDownENV->setToggleState(false,sendNotificationSync);
+            dropDownFX->setToggleState(false,sendNotificationSync);
+        }
+        else if(dropdownTabSerial == 2)
+        {
+            dropDownClip->setToggleState(false,sendNotificationSync);
+            dropDownEQ->setToggleState(false,sendNotificationSync);
+            dropDownFX->setToggleState(false,sendNotificationSync);
+        }
+        else if(dropdownTabSerial == 3)
+        {
+            dropDownClip->setToggleState(false,sendNotificationSync);
+            dropDownENV->setToggleState(false,sendNotificationSync);
+            dropDownEQ->setToggleState(false,sendNotificationSync);
+        }
+        
+        tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);
+        dropDownVisible = newState;
+        tabComponents->setVisible(dropDownVisible);
+    }
+    else
+    {
+        dropDownVisible = newState;
+        tabComponents->setVisible(dropDownVisible);
+    }
+
     resized();
 }
 

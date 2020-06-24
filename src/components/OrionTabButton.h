@@ -12,7 +12,7 @@
 class OrionTabButton    : public LookAndFeel_V2
 {
 private:
-    
+    /*
     Image envtab_sel = ImageCache::getFromMemory(BinaryData::ENVButtonOn_png, BinaryData::ENVButtonOn_pngSize);
     Image envtab_off = ImageCache::getFromMemory(BinaryData::ENVButtonOff_png, BinaryData::ENVButtonOff_pngSize);
     Image fxtab_sel = ImageCache::getFromMemory(BinaryData::FXButtonOn_png, BinaryData::FXButtonOn_pngSize);
@@ -21,6 +21,16 @@ private:
     Image eqtab_off = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
     Image cliptab_sel = ImageCache::getFromMemory(BinaryData::ClipButtonOn_png, BinaryData::ClipButtonOn_pngSize);
     Image cliptab_off = ImageCache::getFromMemory(BinaryData::ClipButtonOff_png, BinaryData::ClipButtonOff_pngSize);
+     */
+    
+    Image envtab_sel = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image envtab_off = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image fxtab_sel = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image fxtab_off = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image eqtab_sel = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image eqtab_off = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image cliptab_sel = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image cliptab_off = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
     Image* theone;
     
 public:
@@ -32,6 +42,7 @@ public:
         clip
     };
     int state = 0;
+    
     OrionTabButton(ButtonType button, bool isdown)
     {
 

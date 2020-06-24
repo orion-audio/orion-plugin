@@ -13,22 +13,23 @@
 
 OrionLookAndFeel::OrionLookAndFeel()
 {
-    
-    Image on = ImageCache::getFromMemory(BinaryData::ENVButtonOn_png, BinaryData::ENVButtonOn_pngSize);
-    Image off = ImageCache::getFromMemory(BinaryData::ENVButtonOff_png, BinaryData::ENVButtonOff_pngSize);
+    //Image on = ImageCache::getFromMemory(BinaryData::ENVButtonOn_png, BinaryData::ENVButtonOn_pngSize);
+    //Image off = ImageCache::getFromMemory(BinaryData::ENVButtonOff_png, BinaryData::ENVButtonOff_pngSize);
+    Image on = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
+    Image off = ImageCache::getFromMemory(BinaryData::InvisibleButtonBackground_png, BinaryData::InvisibleButtonBackground_pngSize);
     tabButtonImages[TabButtonType::envelope].reset(new ImagePair(on, off));
 
-    on = ImageCache::getFromMemory(BinaryData::FXButtonOn_png, BinaryData::FXButtonOn_pngSize);
-    off = ImageCache::getFromMemory(BinaryData::FXButtonOff_png, BinaryData::FXButtonOff_pngSize);
+    //on = ImageCache::getFromMemory(BinaryData::FXButtonOn_png, BinaryData::FXButtonOn_pngSize);
+    //off = ImageCache::getFromMemory(BinaryData::FXButtonOff_png, BinaryData::FXButtonOff_pngSize);
     tabButtonImages[TabButtonType::fx].reset(new ImagePair(on, off));
 
-    on = ImageCache::getFromMemory(BinaryData::EQButtonOn_png, BinaryData::EQButtonOn_pngSize);
-    off = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
+    //on = ImageCache::getFromMemory(BinaryData::EQButtonOn_png, BinaryData::EQButtonOn_pngSize);
+    //off = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
     tabButtonImages[TabButtonType::eq].reset(new ImagePair(on, off));
     
 
-    on = ImageCache::getFromMemory(BinaryData::ClipButtonOn_png, BinaryData::ClipButtonOn_pngSize);
-    off = ImageCache::getFromMemory(BinaryData::ClipButtonOff_png, BinaryData::ClipButtonOff_pngSize);
+    //on = ImageCache::getFromMemory(BinaryData::ClipButtonOn_png, BinaryData::ClipButtonOn_pngSize);
+    //off = ImageCache::getFromMemory(BinaryData::ClipButtonOff_png, BinaryData::ClipButtonOff_pngSize);
     tabButtonImages[TabButtonType::clip].reset(new ImagePair(on, off));
 
 }

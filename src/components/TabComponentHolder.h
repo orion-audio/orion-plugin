@@ -33,12 +33,20 @@ public:
     void setCurrentTab(int which)
     {
         currentTab = which;
-        for (int i = 0; i < numTabs; i++){
+        for (int i = 0; i < numTabs; i++)
+        {
+            
             if (i == currentTab)
+            {
                 tabComponents[i]->setVisible(true);
+            }
             else
+            {
                 tabComponents[i]->setVisible(false);
+            }
         }
+        
+        DBG(currentTab);
     }
     
     int getCurrentTab()
@@ -53,8 +61,8 @@ public:
             tabComponents[i]->setBounds(getLocalBounds());
         }
     }
-    
+    std::array<std::unique_ptr<OrionTabComponent>, 8> tabComponents;
 private:
     int currentTab = 0;
-    std::array<std::unique_ptr<OrionTabComponent>, 8> tabComponents;
+    
 };

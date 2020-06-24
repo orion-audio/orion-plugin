@@ -182,7 +182,7 @@ void SimpleSynth::noteOn(int midiChannel,
 {
     //const ScopedLock sl(lock);
     //std::cout<<"number of sounds"<<getNumSounds();
-    DBG("Hey");
+    //DBG("Hey");
     for(int j = 0; j < getNumSounds(); j++)
     {
         auto sound = getSound(j);
