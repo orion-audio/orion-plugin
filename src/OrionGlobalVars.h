@@ -34,12 +34,12 @@ namespace orion
     {
         kick = 36,
         snare = 38,
-        clap = 39,
+        clap = 40,
         perc = 41,
-        snap = 42,
-        hho = 44,
-        hhc = 43,
-        crash = 46
+        snap = 39,
+        hho = 46,
+        hhc = 42,
+        crash = 48
     };
     
     enum Tabs : int

@@ -10,8 +10,47 @@
 
 #include "SimpleSynth.h"
 #include "GlobalCoefficients.h"
+#include "MirrorViews.h"
 #define MAX_VOICES 8
 
+
+int PitchToInstrumentSerial(int pitch)
+{
+    int instrumentSerial = 0;
+  
+    switch (pitch)
+    {
+        case 36:
+            instrumentSerial = 0;
+            break;
+        case 38:
+            instrumentSerial = 1;
+            break;
+        case 40:
+            instrumentSerial = 2;
+            break;
+        case 41:
+            instrumentSerial = 3;
+            break;
+        case 39:
+            instrumentSerial = 4;
+            break;
+        case 46:
+            instrumentSerial = 5;
+            break;
+        case 42:
+            instrumentSerial = 6;
+            break;
+        case 48:
+            instrumentSerial = 7;
+            break;
+        default:
+            std::cout << "Invalid Pitch" << std::endl;
+    }
+         
+    return instrumentSerial;
+  
+}
 
 
 void SimpleSynth::setup(double sr)
@@ -26,28 +65,28 @@ void SimpleSynth::setup(double sr)
         switch(i)
         {
             case KICK:
-                voice->setMidiNote(36);
+                voice->setMidiNote(KickPitch);
                 break;
             case SNARE:
-                voice->setMidiNote(38);
+                voice->setMidiNote(SnarePitch);
                 break;
             case CLAP:
-                voice->setMidiNote(39);
+                voice->setMidiNote(ClapPitch);
                 break;
             case PERC:
-                voice->setMidiNote(41);
+                voice->setMidiNote(PercPitch);
                 break;
             case SNAP:
-                voice->setMidiNote(42);
+                voice->setMidiNote(SnapPitch);
                 break;
             case HHC:
-                voice->setMidiNote(43);
+                voice->setMidiNote(HHCPitch);
                 break;
             case HHO:
-                voice->setMidiNote(44);
+                voice->setMidiNote(HHOPitch);
                 break;
             case CRASH:
-                voice->setMidiNote(46);
+                voice->setMidiNote(CrashPitch);
                 break;
             default:
                 break;
@@ -82,42 +121,42 @@ void SimpleSynth::loadSamples()
         switch(i)
         {
             case KICK:
-                MidiNote = 36;
+                MidiNote = KickPitch;
                 dir = "Kicks";
                 filename = "trell_kick.wav";
                 break;
             case SNARE:
-                MidiNote = 38;
+                MidiNote = SnarePitch;
                 dir = "Snares";
                 filename = "Snare.wav";
                 break;
             case CLAP:
-                MidiNote = 39;
+                MidiNote = ClapPitch;
                 dir = "Claps";
                 filename = "Clap2.wav";
                 break;
             case PERC:
-                 MidiNote = 41;
+                 MidiNote = PercPitch;
                  dir = "Percs";
                  filename = "basic-perc.wav";
                 break;
             case SNAP:
-                 MidiNote = 42;
+                 MidiNote = SnapPitch;
                 dir = "Snaps";
                 filename = "HHPSNP1.wav";
                 break;
             case HHC:
-                 MidiNote = 43;
+                 MidiNote = HHCPitch;
                 dir = "HHC";
                 filename = "MetroHihat.wav";
                 break;
             case HHO:
-                 MidiNote = 44;
+                 MidiNote = HHOPitch;
                 dir = "HHO";
                 filename = "HiHatOp(10).WAV";
                 break;
             case CRASH:
-                MidiNote = 46;
+                MidiNote = CrashPitch;
                 dir = "Crash";
                 filename = "Crash_01.WAV";
                 break;
@@ -214,23 +253,34 @@ void SimpleSynth::noteOn(int midiChannel,
                 }
             }
             
-            /* Set Solo Button Image */
-            if(instrumentsSoloStates[instrumetSerial])
+            /* Set PrimaryPane Images */
+            if(!instrumentsMuteStates[instrumetSerial])
             {
-                //primaryPane->setInstrumetsSoloButtonImage(true);
+                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
+                PrimaryPaneMirror->waveWiggle->startAnimation();
+                instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
+                MessageManagerLock unlock;
+                PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
             }
-            else
-            {
-               //primaryPane->setInstrumetsSoloButtonImage(false);
-            }
+           
             
         }
     }
 }
 
+void SimpleSynth::noteOff(int midiChannel,
+                         int midiNoteNumber,
+                         float velocity,
+                         bool allowTailOff)
+{
+    /* Set PrimaryPane Images */
+    if(!instrumentsMuteStates[instrumetSerial])
+    {
+        instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
+        MessageManagerLock unlock;
+        PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(false);
+    }
 
-//void SimpleSynth::renderNextBlock (AudioBuffer<float>& outputAudio, const MidiBuffer& inputMidi,
-//                                   int startSample, int numSamples)
-//{
-//
-//}
+}
+
+

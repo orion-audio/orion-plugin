@@ -2,11 +2,13 @@
 #include "PluginEditor.h"
 #include "OrionGlobalVars.h"
 #include "GlobalCoefficients.h"
-
 #include <iostream>
 #include <array>
 
 #define NUM_TABS 4
+
+#define __MIRRORVIEWMAIN__
+#include "MirrorViews.h"
 
 using namespace std;
 using namespace juce;
@@ -30,6 +32,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     primaryPane.reset(new PrimaryPaneComponent(&p, this));
     addAndMakeVisible(primaryPane.get());
+    PrimaryPaneMirror = primaryPane.get();
     
     sidePanel.reset(new SidePanelComponent(&p, this));
     addAndMakeVisible(sidePanel.get());
@@ -37,9 +40,13 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     tabComponents.reset(new TabComponentHolder(p));
     addAndMakeVisible(tabComponents.get());
     
-    
     arrangementWindow.reset(new ArrangementWindowComponent(&p, this));
     addAndMakeVisible(arrangementWindow.get());
+    
+    
+    //processor->sampler->editor = this;
+    
+    
 
     
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
@@ -451,9 +458,9 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         else
         {
             primaryPane->setInstrumetsMuteButtonImage(false);
-            primaryPane->waveWiggle->waveColor = Colour(0xff3AE6D1);
+            //primaryPane->waveWiggle->waveColor = Colour(0xff3AE6D1);
+            //primaryPane->waveWiggle->startAnimation();
             //primaryPane->waveWiggle->setVisible(true);
-            primaryPane->waveWiggle->startAnimation();
         }
         
         //--------------------------------
@@ -462,6 +469,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     }
     else
     {
+        instrumetSerial = tabIndex;
         processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
         globalOutputMeterL = 0;
         globalOutputMeterR = 0;

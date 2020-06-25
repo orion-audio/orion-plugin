@@ -90,16 +90,17 @@ public:
     
     AudioTransportSource transport;
     
-    
     //AudioProcessorValueTreeState tree;
     
     AudioProcessorValueTreeState& getValueTree() { return parameters; }
-    SimpleSynth* getSampler() {return sampler.get();}
+    
     
     std::unique_ptr<SimpleSynth> sampler;
+    SimpleSynth* getSampler() {return sampler.get();}
     
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
+    
    
     //------------------------------------
     //unsigned int OrionGlobalTabIndex = 0;/*  储存 Tab 的变量 */
@@ -114,6 +115,8 @@ private:
     LookAndFeelHolder<OrionLookAndFeel> lafHolder;
     
     std::unique_ptr<Sequencer> sequencer;
+    
+    
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessor)
     AudioBuffer<float> mDelayBuffer;
