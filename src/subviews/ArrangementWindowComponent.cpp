@@ -19,7 +19,15 @@ ArrangementWindowComponent::ArrangementWindowComponent(OrionaudioAudioProcessor*
     editor = e;
     
     sequencerComponent.reset(new SequencerComponent(*processor->getSequencer()));
-    addAndMakeVisible(sequencerComponent.get());
+    sequencerViewport.setViewedComponent(sequencerComponent.get(), false);
+//    addAndMakeVisible(sequencerComponent.get());
+    sequencerViewport.setScrollBarsShown(false, true);
+    addAndMakeVisible(sequencerViewport);
+    
+    sequenceLengthSlider.reset(new Slider());
+    sequenceLengthSlider->setRange(1, 128, 1);
+    sequenceLengthSlider->addListener(this);
+    addAndMakeVisible(sequenceLengthSlider.get());
 }
 
 ArrangementWindowComponent::~ArrangementWindowComponent()
@@ -29,25 +37,25 @@ ArrangementWindowComponent::~ArrangementWindowComponent()
 
 void ArrangementWindowComponent::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
 
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("ArrangementWindowComponent", getLocalBounds(),
-                Justification::centred, true);   // draw some placeholder text
 }
 
 void ArrangementWindowComponent::resized()
 {
-    sequencerComponent->setBounds(getLocalBounds());
+    auto area = getLocalBounds();
+    area.removeFromLeft(getWidth() * .25);
+    area.removeFromBottom(getHeight() * .25);
+    sequencerViewport.setBounds(area);
+    sequencerComponent->setSizeWithOverflow(area.getHeight());
+
+    area = getLocalBounds().removeFromBottom(getHeight() * .25);
+    sequenceLengthSlider->setBounds(area);
+    
 }
+
+void ArrangementWindowComponent::sliderValueChanged(Slider *slider) {
+    if (slider == sequenceLengthSlider.get()) {
+        sequencerComponent->setSequenceLength(sequenceLengthSlider->getValue());
+    }
+}
+

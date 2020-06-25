@@ -72,16 +72,22 @@ public:
     
     void handleButtonPress(int pitch, int beat, bool buttonState);
     
+    void setSequenceLength(int newLength);
+    int getSequenceLength() { return sequenceLength; }
+    
+    void setSizeWithOverflow(int height);
 private:
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
     std::vector<Note> notesToBePlayed;
     
-    std::array<std::array<std::unique_ptr<SequencerButton>, 16>, 7> sequencerButtons;
+    std::array<std::vector<std::unique_ptr<SequencerButton>>, 7> sequencerButtons;
     
     int selectedRow = 0;
     int lastBeat = -1;
     bool shouldFlip = false;
+    
+    int sequenceLength = 16;
     
     StringArray voiceNames;
     
