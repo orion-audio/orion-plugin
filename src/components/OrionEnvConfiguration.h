@@ -24,6 +24,9 @@ public:
     int envSerial;
 private:
     OrionaudioAudioProcessor& processor;
+    
+    std::unique_ptr<DrawableImage> backgroundImageView;
+    
     Rectangle<int>          plotFrame;
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envAttackTree;
     ScopedPointer <AudioProcessorValueTreeState::SliderAttachment> envHoldTree;

@@ -44,8 +44,11 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(arrangementWindow.get());
     
     
+    footerPath.reset(new DrawablePath());
+    addAndMakeVisible(footerPath.get());
+    footerPath->replaceColour(Colours::black,Colours::darkgrey);
     //processor->sampler->editor = this;
-    
+    //setColour
     
 
     
@@ -70,7 +73,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
         if(dropDownEQ->getToggleState()){
            dropdownTabSerial = 0;
         }
-        updateDropDownState(dropDownEQ->getToggleState());
+        updateDropDownEQState(dropDownEQ->getToggleState());
     };
     addAndMakeVisible(dropDownEQ.get());
     dropDownEQ->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
@@ -85,7 +88,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
         if(dropDownClip->getToggleState()){
            dropdownTabSerial = 1;
         }
-        updateDropDownState(dropDownClip->getToggleState());
+        updateDropDownClipState(dropDownClip->getToggleState());
     };
     addAndMakeVisible(dropDownClip.get());
 
@@ -116,6 +119,10 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
         updateDropDownState(dropDownFX->getToggleState());
     };
     addAndMakeVisible(dropDownFX.get());
+    
+    
+    
+    
     
     
     //--------- RESIZE BUTTONS ---------//
@@ -203,13 +210,13 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     
     // BACK BUTTON
-    backButton.reset(new ImageButton());
-    backButton->setAlwaysOnTop(true);
-    Image backImageOff = ImageCache::getFromMemory(BinaryData::arrow_left_png, BinaryData::arrow_left_pngSize);
-    Image backImageOn = ImageCache::getFromMemory(BinaryData::arrow_leftOn_png, BinaryData::arrow_leftOn_pngSize);
-    backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
-    backButton->onClick = [&] {
-        //fileBrowser->backButton->onClick();
+//    backButton.reset(new ImageButton());
+//    backButton->setAlwaysOnTop(true);
+//    Image backImageOff = ImageCache::getFromMemory(BinaryData::arrow_left_png, BinaryData::arrow_left_pngSize);
+//    Image backImageOn = ImageCache::getFromMemory(BinaryData::arrow_leftOn_png, BinaryData::arrow_leftOn_pngSize);
+//    backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
+//    backButton->onClick = [&] {
+//        fileBrowser->backButton->onClick();
 //        //fileBrowser->scanDirectory(fileBrowser->currentDirectory.getDirectory().getParentDirectory());
 //        fileBrowser->scannerThread.stopThread(-1);
 //        fileBrowser->windowComponent.setBounds(getLocalBounds());
@@ -217,8 +224,8 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 //        for (int i = 0; i < fileBrowser->windowComponent.fileComponents.size(); i++){
 //            windowComponent.fileComponents[i]->addListener(this);
 //        }
-    };
-    addAndMakeVisible(backButton.get());
+//    };
+//    addAndMakeVisible(backButton.get());
     
 
     
@@ -284,8 +291,9 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     //*********************************************************************************************************************************************
     //*********************************************************************************************************************************************
     
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-        
+    //g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+    g.setColour (Colours::grey);
+    g.drawHorizontalLine(getHeight()*4/36, getHeight()*4/36, getWidth());
 }
 
 void OrionaudioAudioProcessorEditor::resized()
@@ -358,25 +366,25 @@ void OrionaudioAudioProcessorEditor::resized()
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
     
     // BACK BUTTON
-    area = Rectangle<int>(4 * unite, getHeight() - 2.1 * unite, 2 * unite, 2 * unite);
-    backButton->setBounds(area);
+//    area = Rectangle<int>(4 * unite, getHeight() - 2.1 * unite, 2 * unite, 2 * unite);
+//    backButton->setBounds(area);
     
     
     //--------- DROPDOWN BUTTONS ---------//
     // EQ
-    area = Rectangle<int>( 6 * uniteW + 0 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 0 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
     dropDownEQ->setBounds(area);
 
     // CLIP
-    area = Rectangle<int>( 6 * uniteW + 1 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 1 * 6 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
     dropDownClip->setBounds(area);
 
     // ENV
-    area = Rectangle<int>( 6 * uniteW + 2 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 2 * 6 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
     dropDownENV->setBounds(area);
 
     // FX
-    area = Rectangle<int>( 6 * uniteW + 3 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 3 * 6 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
     dropDownFX->setBounds(area);
     
     
@@ -386,6 +394,10 @@ void OrionaudioAudioProcessorEditor::resized()
     resizeButton->setBounds(area);
 
     
+    //--------- Footer Path ---------//
+    Path path;
+    path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 1.0f);
+    footerPath->setPath(path);
     
     
     
@@ -421,14 +433,12 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     if(isDown)
     {
-        //std::cout<<"Down"<<std::endl;
+        std::cout<<"Down"<<std::endl;
         
    
         processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
-        
-        
 
         instrumetSerial = tabIndex;
         
@@ -462,14 +472,11 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             //primaryPane->waveWiggle->startAnimation();
             //primaryPane->waveWiggle->setVisible(true);
         }
-        
         //--------------------------------
-        
-            
     }
     else
     {
-        instrumetSerial = tabIndex;
+        std::cout<<"Up"<<std::endl;
         processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
         globalOutputMeterL = 0;
         globalOutputMeterR = 0;
@@ -548,7 +555,10 @@ void OrionaudioAudioProcessorEditor::setDefaultSize()
 
 void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
 {
-    //DBG((int)newState);
+    DBG((int)newState);
+    
+    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
+    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
     
     if(newState)
     {
@@ -590,6 +600,67 @@ void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
 
     resized();
 }
+
+void OrionaudioAudioProcessorEditor::updateDropDownEQState(bool newState)
+{
+    DBG((int)newState);
+    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
+    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    if(newState)
+    {
+        dropDownClip->setToggleState(false,sendNotificationSync);
+        dropDownENV->setToggleState(false,sendNotificationSync);
+        dropDownFX->setToggleState(false,sendNotificationSync);
+        dropDownVisible = newState;
+        tabComponents->setVisible(dropDownVisible);
+        std::cout<<"open"<< instrumetSerial <<std::endl;
+    }
+    else
+    {
+        dropDownVisible = newState;
+        tabComponents->setVisible(dropDownVisible);
+        std::cout<<"close"<< instrumetSerial <<std::endl;
+    }
+
+    tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(0);
+    resized();
+}
+
+
+
+
+void OrionaudioAudioProcessorEditor::updateDropDownClipState(bool newState)
+{
+    DBG((int)newState);
+    
+    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
+    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    
+    if(newState)
+    {
+        dropDownEQ->setToggleState(false,sendNotificationSync);
+        dropDownENV->setToggleState(false,sendNotificationSync);
+        dropDownFX->setToggleState(false,sendNotificationSync);
+        dropDownVisible = newState;
+        tabComponents->setVisible(dropDownVisible);
+        std::cout<<"open"<< instrumetSerial <<std::endl;
+    }
+    else
+    {
+        dropDownVisible = newState;
+        tabComponents->setVisible(dropDownVisible);
+        std::cout<<"close"<< instrumetSerial <<std::endl;
+        
+    }
+    tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(1);
+
+    resized();
+}
+
+
+
+
+
 
 void OrionaudioAudioProcessorEditor::updateResizeViewState(bool newState)
 {

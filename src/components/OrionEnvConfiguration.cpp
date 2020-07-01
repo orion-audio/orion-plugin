@@ -17,6 +17,13 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
 {
     envSerial = serial;
     
+    // Background Image
+    Image backgroundImage = ImageCache::getFromMemory(BinaryData::ENVBackground_png, BinaryData::ENVBackground_pngSize);
+    backgroundImageView.reset(new DrawableImage());
+    backgroundImageView->setImage(backgroundImage);
+    addAndMakeVisible(backgroundImageView.get());
+    
+    
     int WidthTmp = OrionGlobalWidth;
     int HeightTmp = OrionGlobalHeight*9/30;
     
@@ -239,7 +246,11 @@ void OrionEnvConfiguration::paint (Graphics& g)
 
 void OrionEnvConfiguration::resized()
 {
-  plotFrame = getLocalBounds().reduced (270, 3);
+    //--------- Background Image ---------//
+    Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());
+    backgroundImageView->setTransformToFit(backgroundArea.toFloat(), RectanglePlacement::stretchToFit);
+    
+    //plotFrame = getLocalBounds().reduced (270, 3);
 }
 
 OrionEnvConfiguration::~OrionEnvConfiguration()

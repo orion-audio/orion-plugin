@@ -30,7 +30,6 @@ private:
     std::vector<double> frequencies;
     
   
-  
     public:
     std::vector<IIRFilter>    filters{5};
     int activity[5];
@@ -96,11 +95,11 @@ private:
     std::vector<Band> createDefaultBands()
     {
         std::vector<Band> defaults;
-        defaults.push_back (Band (TRANS ("Lowest"),    Colours::blue,   EQ::HighPass,    20.0f, 0.707f, serial));
+        defaults.push_back (Band (TRANS ("Lowest"),    Colours::blue,   EQ::HighPass,    25.0f, 0.707f, serial));
         defaults.push_back (Band (TRANS ("Low"),       Colours::brown,  EQ::LowShelf,   250.0f, 0.707f, serial));
         defaults.push_back (Band (TRANS ("Low Mids"),  Colours::green,  EQ::Peak,       500.0f, 0.707f, serial));
-        defaults.push_back (Band (TRANS ("High"),      Colours::orange, EQ::HighShelf, 5000.0f, 0.707f, serial));
-        defaults.push_back (Band (TRANS ("Highest"),   Colours::red,    EQ::LowPass,  12000.0f, 0.707f, serial));
+        defaults.push_back (Band (TRANS ("High"),      Colours::orange, EQ::Peak,       5000.0f, 0.707f, serial));
+        defaults.push_back (Band (TRANS ("Highest"),   Colours::red,    EQ::LowPass,    12000.0f, 0.707f, serial));
         return defaults;
     }
     

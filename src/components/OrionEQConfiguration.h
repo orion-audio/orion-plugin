@@ -48,4 +48,7 @@ private:
     int                     wheelQ = false;
     bool                    draggingGain = false;
     PopupMenu               contextMenu;
+    std::array<std::unique_ptr<Label>, 10> freqLabels;
+    String freqLabelStrings[10] = {"30", "50", "100", "200", "500", "1K", "2K", "5K", "10K", "20K"};
+    Colour freqLabelColor = Colour(0xff3AE6D1);
 };

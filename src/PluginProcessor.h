@@ -116,8 +116,6 @@ private:
     
     std::unique_ptr<Sequencer> sequencer;
     
-    
-    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessor)
     AudioBuffer<float> mDelayBuffer;
     AudioBuffer<float> tempbuffer;

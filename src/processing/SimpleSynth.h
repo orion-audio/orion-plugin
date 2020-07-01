@@ -36,6 +36,9 @@ public:
     typedef enum Sounds{KICK=0, SNARE, CLAP, PERC, SNAP, HHC, HHO, CRASH} Sounds_t;
     double sampleRate;
     void changeSamples(int index,const String &f,int midi);
+    
+    void noteOnPNGChange();
+    void noteOffPNGChange();
 
     std::array<std::unique_ptr<DragAndDropButton>, 8> drumButtons;
     

@@ -30,8 +30,6 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     editor = e;
     
 
-    
-    
     // Background Image
     Image backgroundImage = ImageCache::getFromMemory(BinaryData::PrimaryPane_Footer_png, BinaryData::PrimaryPane_Footer_pngSize);
     backgroundImageView.reset(new DrawableImage());

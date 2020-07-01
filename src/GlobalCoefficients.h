@@ -24,6 +24,7 @@ const int CrashPitch = 48;
 
 // SOLO & MUTE BUTTONS
 int   instrumetSerial = 0;
+int   instrumetOffSerial = 0;
 float masterVolumeCoefficient = 0.75f;
 bool  instrumentsSoloStates        [8] = {false, false, false, false, false, false, false, false};
 bool  instrumentsMuteStates        [8] = {false, false, false, false, false, false, false, false};
@@ -48,6 +49,7 @@ extern const int CrashPitch;
 
 
 extern int   instrumetSerial;
+extern int   instrumetOffSerial;
 extern float masterVolumeCoefficient;
 extern bool  instrumentsSoloStates[];
 extern bool  instrumentsMuteStates[];

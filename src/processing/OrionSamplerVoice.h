@@ -556,15 +556,30 @@ public:
     
     void createFrequencyPlot (Path& p, const std::vector<double>& mags, const Rectangle<int> bounds, float pixelsPerDouble)
     {
-        p.startNewSubPath (bounds.getX(), roundToInt (bounds.getCentreY() - pixelsPerDouble * std::log (mags [0]) / std::log (2)));
+        p.startNewSubPath (bounds.getX(), roundToInt (bounds.getCentreY()));
+        p.lineTo(bounds.getX(), roundToInt (bounds.getCentreY() - pixelsPerDouble * std::log (mags [0]) / std::log (2)));
+        //p.startNewSubPath (bounds.getX(), roundToInt (bounds.getCentreY() - pixelsPerDouble * std::log (mags [0]) / std::log (2)));
        
-            const double xFactor = static_cast<double> (bounds.getWidth()) / frequencies.size();
-            for (size_t i=1; i < frequencies.size(); ++i)
+        const double xFactor = static_cast<double> (bounds.getWidth()) / frequencies.size();
+        for (size_t i=1; i < frequencies.size(); ++i)
+        {
+            if(i == 0)
+            {
+                p.lineTo (bounds.getX(),
+                roundToInt (bounds.getCentreY() - pixelsPerDouble * std::log (mags [i]) / std::log (2)));
+            }
+            else if(i == frequencies.size() - 1)
+            {
+                p.lineTo (bounds.getWidth(),
+                roundToInt (bounds.getCentreY() - pixelsPerDouble * std::log (mags [i]) / std::log (2)));
+            }
+            else
             {
                 p.lineTo (roundToInt (bounds.getX() + i * xFactor),
-                          roundToInt (bounds.getCentreY() - pixelsPerDouble * std::log (mags [i]) / std::log (2)));
+                roundToInt (bounds.getCentreY() - pixelsPerDouble * std::log (mags [i]) / std::log (2)));
             }
+        }
+        p.lineTo(bounds.getWidth(), roundToInt (bounds.getCentreY()));
     }
 
-    
 };

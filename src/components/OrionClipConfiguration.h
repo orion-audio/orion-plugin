@@ -24,5 +24,6 @@ public:
 private:
     OrionaudioAudioProcessor& processor;
     File* clipbackground;
+    std::unique_ptr<DrawableImage> backgroundImageView;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionClipConfiguration)
 };

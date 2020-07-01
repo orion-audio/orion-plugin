@@ -45,7 +45,7 @@ int PitchToInstrumentSerial(int pitch)
             instrumentSerial = 7;
             break;
         default:
-            std::cout << "Invalid Pitch" << std::endl;
+            std::cout << "Invalid Pitch: "<< pitch << std::endl;
     }
          
     return instrumentSerial;
@@ -259,8 +259,8 @@ void SimpleSynth::noteOn(int midiChannel,
                 PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
                 PrimaryPaneMirror->waveWiggle->startAnimation();
                 instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
-                MessageManagerLock unlock;
-                PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
+                //noteOnPNGChange();
+                
             }
            
             
@@ -276,11 +276,22 @@ void SimpleSynth::noteOff(int midiChannel,
     /* Set PrimaryPane Images */
     if(!instrumentsMuteStates[instrumetSerial])
     {
-        instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
-        MessageManagerLock unlock;
-        PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(false);
+        instrumetOffSerial = PitchToInstrumentSerial(midiNoteNumber);
+        //noteOffPNGChange();
     }
 
 }
 
 
+void SimpleSynth::noteOnPNGChange()
+{
+    const MessageManagerLock mmLock;//????????????????
+    PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
+}
+
+
+void SimpleSynth::noteOffPNGChange()
+{
+    const MessageManagerLock mmLock;// ????????????????
+    PrimaryPaneMirror->drumButtonCoverImageViews[instrumetOffSerial]->setVisible(false);
+}

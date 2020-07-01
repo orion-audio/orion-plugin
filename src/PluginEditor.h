@@ -42,6 +42,11 @@ public:
     
     void updateDropDownState(bool newState);
     
+    void updateDropDownEQState(bool newState);
+    void updateDropDownClipState(bool newState);
+    void updateDropDownENVState(bool newState);
+    void updateDropDownFXState(bool newState);
+    
     void updateResizeViewState(bool newState);
     
     std::unique_ptr<AudioFormatReaderSource> playSource;
@@ -87,7 +92,7 @@ private:
     
     //std::unique_ptr<ImageButton> dropDownButton;
     
-    
+    std::unique_ptr<DrawablePath> footerPath;
     
     
     

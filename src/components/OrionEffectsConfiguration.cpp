@@ -16,12 +16,11 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     
     effectSerial = serial;
     
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
-//    Image backgroundImage = ImageCache::getFromMemory(BinaryData::FXBackground_png, BinaryData::FXBackground_pngSize);
-//    backgroundButton.reset(new DrawableImage());
-//    backgroundButton->setImage(backgroundImage);
-//    addAndMakeVisible(backgroundButton.get());
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
+    // Background Image
+    Image backgroundImage = ImageCache::getFromMemory(BinaryData::FXBackground_png, BinaryData::FXBackground_pngSize);
+    backgroundImageView.reset(new DrawableImage());
+    backgroundImageView->setImage(backgroundImage);
+    addAndMakeVisible(backgroundImageView.get());
         
     
     
@@ -40,23 +39,19 @@ void OrionEffectsConfiguration::paint(Graphics& g)
 void OrionEffectsConfiguration::resized()
 {
     
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
-//    Rectangle<float> backgroundArea(0, 0, getWidth(), getHeight());//--------Delete!!!!
-//    backgroundButton->setBoundingBox(backgroundArea);//--------Delete!!!!
-    //--------------------------------------------!!!!!!!!!! Delete--------------------------------------------//
+    //--------- Background Image ---------//
+    Rectangle<int> backgroundArea(0, 0, getWidth(), getHeight());
+    backgroundImageView->setTransformToFit(backgroundArea.toFloat(), RectanglePlacement::stretchToFit);
     
     Rectangle<int> area = getLocalBounds();
     area = area.removeFromLeft(getWidth() / 3);
-    
     compGui.setBounds(area);
-    
-   
-    
-    area.translate(getWidth() / 3, 0);
-    delayGui.setBounds(area);
     
     area.translate(getWidth() / 3, 0);
     reverbGui.setBounds(area);
+    
+    area.translate(getWidth() / 3, 0);
+    delayGui.setBounds(area);
 
     
 }

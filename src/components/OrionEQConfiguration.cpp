@@ -33,14 +33,20 @@ static int   clickRadius = 4;
 OrionEQConfiguration::OrionEQConfiguration(OrionaudioAudioProcessor& p,int serial) : processor(p)
 {
     EQserial = serial;
-    setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
     frame.setText (TRANS ("Output"));
     frame.setTextLabelPosition (Justification::centred);
     addAndMakeVisible (frame);
     updateFrequencyResponses();
     Image eqbackground = ImageCache::getFromMemory(BinaryData::EQ_Background_png, BinaryData::EQ_Background_pngSize);
     
-    
+    for (int i = 0; i < freqLabels.size(); i++)
+    {
+        freqLabels[i].reset(new Label());
+        freqLabels[i].reset(new Label(freqLabelStrings[i], freqLabelStrings[i]));
+        addAndMakeVisible(freqLabels[i].get());
+        freqLabels[i]->setColour(Label::textColourId, freqLabelColor);
+    }
+
 }
 
 void OrionEQConfiguration::paint(Graphics& g)
@@ -67,11 +73,13 @@ void OrionEQConfiguration::paint(Graphics& g)
         if (i > 0) g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
         
         g.setColour (Colours::silver);
-        auto freq = getFrequencyForPosition (i * 0.025f);
-        if(abs(round(freq) - freq) < 0.000000000000001){
-            g.drawFittedText ((freq < 1000) ? String (freq) + " Hz" : String (freq / 1000, 1) + " kHz",
-                              roundToInt (x + 3), getHeight()/20, 50, 15, Justification::left, 1);
-        }
+        
+        // Draw Freq Text
+        //auto freq = getFrequencyForPosition (i * 0.025f);
+        //if(abs(round(freq) - freq) < 0.000000000000001)
+        //{
+            //g.drawFittedText ((freq < 1000) ? String (freq) + " Hz" : String (freq / 1000, 1) + " kHz",roundToInt (x + 3), getHeight()/20, 50, 15, Justification::left, 1);
+        //}
         
     }
     
@@ -108,34 +116,42 @@ void OrionEQConfiguration::paint(Graphics& g)
     {
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
         {
-        auto band = voice->eq.bands[i];
-        //g.setColour (band.active ? band.colour : band.colour.withAlpha (0.3f));
+            auto band = voice->eq.bands[i];
+            //g.setColour (band.active ? band.colour : band.colour.withAlpha (0.3f));
             //std::cout<<"is frequency response empty "<<band.frequencyResponse.getLength()<<" "<<EQserial<<"\n";
-        //g.strokePath (band.frequencyResponse, PathStrokeType (2.0));
-        g.setColour (draggingBand == int (i) ? band.colour : band.colour.withAlpha (0.3f));
-        auto x = roundToInt (plotFrame.getX() + plotFrame.getWidth() * getPositionForFrequency (float (band.frequency)));
-        auto y = roundToInt (getPositionForGain (float (band.gain), plotFrame.getY(), plotFrame.getBottom()));
-       
-        //g.drawVerticalLine (x, plotFrame.getY(), y - 5);//画五条竖线，可以拖filter frequency
-        //g.drawVerticalLine (x, y + 5, plotFrame.getBottom());
-        //g.fillEllipse (x - 3, y - 3, 6, 6);//调圆点大小
+            //g.strokePath (band.frequencyResponse, PathStrokeType (2.0));
+            g.setColour (draggingBand == int (i) ? band.colour : band.colour.withAlpha (0.3f));
+            auto x = roundToInt (plotFrame.getX() + plotFrame.getWidth() * getPositionForFrequency (float (band.frequency)));
+            auto y = roundToInt (getPositionForGain (float (band.gain), plotFrame.getY(), plotFrame.getBottom()));
+        
+            /*
             g.drawLine(x, plotFrame.getY(), x, y - 5, 10.0f);//画五条竖线，可以拖filter frequency, 上半部分
             g.drawLine(x, y + 5, x, plotFrame.getBottom(), 10.0f);//画五条竖线，可以拖filter frequency, 下半部分
+             */
             
-            g.fillEllipse (x - 3, y - 3, 6, 6);//调圆点大小
+            g.setColour (freqLabelColor);
+            g.setOpacity(1);
+            g.fillEllipse (x - 3, y - 3, 6/* R-W */, 6/* R-H */);//调圆点大小
         }
     }
     
-    g.setColour (Colours::darkcyan);
+    //g.setColour (Colours::darkcyan);
+    g.setColour (freqLabelColor);
+    
+    /* Draw the Frequency Curve */
     g.strokePath (frequencyResponse, PathStrokeType (1.0));
     
-    //ADD SHADING
+    /* Set Opacity */
     g.setOpacity(0.5);
-    PathFlatteningIterator i (frequencyResponse);
-    while (i.next())
-    {
-        g.drawLine(i.x2, i.y2, i.x2, getHeight()/2, 4.0f);//画IR阴影
-    }
+    
+    /* ADD SHADING */
+    g.fillPath(frequencyResponse);
+    //    PathFlatteningIterator i (frequencyResponse);
+    //    while (i.next())
+    //    {
+    //        //g.drawLine(i.x2, i.y2, i.x2, getHeight()/2, 4.0f);//画IR阴影
+    //        g.drawLine(i.x1, i.y1, i.x1, getHeight()/2, i.x2 - i.x1);//画IR阴影
+    //    }
 }
 
 
@@ -145,6 +161,42 @@ void OrionEQConfiguration::resized()
   
     plotFrame = getLocalBounds();//.reduced (3, 3);
     updateFrequencyResponses();
+    float uniteW = getWidth()/100;
+    
+    Rectangle<int> area;
+    /* 30 */
+    area = Rectangle<int>( 2 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[0]->setBounds(area);
+    /* 50 */
+    area = Rectangle<int>(13 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[1]->setBounds(area);
+    /* 100 */
+    area = Rectangle<int>(24 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[2]->setBounds(area);
+    /* 200 */
+    area = Rectangle<int>(35 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[3]->setBounds(area);
+    /* 500 */
+    area = Rectangle<int>(48 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[4]->setBounds(area);
+    /* 1K */
+    area = Rectangle<int>(60 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[5]->setBounds(area);
+    /* 2K */
+    area = Rectangle<int>(72 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[6]->setBounds(area);
+    /* 5K */
+    area = Rectangle<int>(getWidth() - 24 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[7]->setBounds(area);
+    /* 10K */
+    area = Rectangle<int>(getWidth() - 13 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[8]->setBounds(area);
+    /* 20K */
+    area = Rectangle<int>(getWidth() - 3.1 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
+    freqLabels[9]->setBounds(area);
+    
+
+    
 }
 
 OrionEQConfiguration::~OrionEQConfiguration()
