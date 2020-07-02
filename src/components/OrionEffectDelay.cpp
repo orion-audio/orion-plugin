@@ -126,7 +126,7 @@ processor(p)
     
     delaySwitchButton.setButtonText(translate("On/Off"));
     delaySwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
-    addAndMakeVisible(delaySwitchButton);
+    //addAndMakeVisible(delaySwitchButton);
     
     
     //=====================================================================

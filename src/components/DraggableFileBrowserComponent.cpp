@@ -40,8 +40,7 @@ void DraggableFileBrowserComponent::resized()
 {
     windowComponent.setBounds(getLocalBounds());
     viewPort.setBounds(getLocalBounds());
-    backButton->setBounds(0, 0, getWidth() * .125, getWidth() * .125);
-
+    backButton->setBounds(getWidth() * 4/9, 0, getWidth() * .15, getWidth() * .15);
 }
 
 void DraggableFileBrowserComponent::scanDirectory(File directory)

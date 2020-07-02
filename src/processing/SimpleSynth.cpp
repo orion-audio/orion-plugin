@@ -79,11 +79,11 @@ void SimpleSynth::setup(double sr)
             case SNAP:
                 voice->setMidiNote(SnapPitch);
                 break;
-            case HHC:
-                voice->setMidiNote(HHCPitch);
-                break;
             case HHO:
                 voice->setMidiNote(HHOPitch);
+                break;
+            case HHC:
+                voice->setMidiNote(HHCPitch);
                 break;
             case CRASH:
                 voice->setMidiNote(CrashPitch);
@@ -142,19 +142,19 @@ void SimpleSynth::loadSamples()
                 break;
             case SNAP:
                  MidiNote = SnapPitch;
-                dir = "Snaps";
-                filename = "HHPSNP1.wav";
-                break;
-            case HHC:
-                 MidiNote = HHCPitch;
-                dir = "HHC";
-                filename = "MetroHihat.wav";
-                break;
+                 dir = "Snaps";
+                 filename = "HHPSNP1.wav";
+                 break;
             case HHO:
                  MidiNote = HHOPitch;
-                dir = "HHO";
-                filename = "HiHatOp(10).WAV";
-                break;
+                 dir = "HHO";
+                 filename = "HiHatOp(10).WAV";
+                 break;
+            case HHC:
+                 MidiNote = HHCPitch;
+                 dir = "HHC";
+                 filename = "MetroHihat.wav";
+                 break;
             case CRASH:
                 MidiNote = CrashPitch;
                 dir = "Crash";
@@ -233,6 +233,7 @@ void SimpleSynth::noteOn(int midiChannel,
                 {
                     //std::cout<<"can play sound "<<voice->canPlayOrionSound(midiNoteNumber);
                     //std::cout<<"current sound " << voice->getCurrentlyPlayingSound();
+                    
                     if(voice->canPlayOrionSound(midiNoteNumber) && voice->getCurrentlyPlayingSound())
                     {
                         //std::cout<<"stopped voice"<<midiNoteNumber<<voice->canPlayOrionSound(midiNoteNumber);
@@ -247,7 +248,6 @@ void SimpleSynth::noteOn(int midiChannel,
                 {
                     if(voice->canPlayOrionSound(midiNoteNumber) && !voice->getCurrentlyPlayingSound())
                     {
-                        //Logger::outputDebugString("Start Voice: " + std::to_string(i) + " with Sound: " + std::to_string(j));
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
                     }
                 }

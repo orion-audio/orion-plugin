@@ -36,6 +36,7 @@
 class OrionSamplerVoice : public SamplerVoice
 , public AudioProcessorValueTreeState::Listener
 {
+    
 private:
     BigInteger midiNote;
     PanPos pan;
@@ -46,19 +47,13 @@ private:
     //float* masterVolume = &masterVolumeCoefficient;
 
     //Sidechain sidechain;
-    Reverb reverb;
-    Reverb::Parameters reverb_param;
-    //color for reverb
-    IIRFilter reverb_lowpass;
-    IIRFilter reverb_highpass;
-    IIRCoefficients lowcoef,highcoef;
-    double reverb_lowfreq {3000};
-    double reverb_highfreq {1000};
-    float reverbColor {0};
+    
+    
     //
     int index = 0;
     int pitchVal;
     double currSampRate;
+    
     //Variables from SamplerVoice Base Class
     double pitchRatio = 0;
     double sourceSamplePosition = 0;
@@ -70,13 +65,30 @@ private:
     bool sidechain_on {true}; 
     int sidechain_from, sidechain_to;
     bool initialized {false};
+    
     // dsp::Gain<float> overallgain;
     std::vector<double> magnitudes;
-    /* Effect Switches */
-    bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
+    
+    
     
 
 public:
+ 
+    //---------- Effect Switches ----------/
+    bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
+    
+    //---------- Reverb ----------/
+    Reverb reverb;
+    Reverb::Parameters reverb_param;
+    /* color for reverb */
+    IIRFilter reverb_lowpass;
+    IIRFilter reverb_highpass;
+    IIRCoefficients lowcoef,highcoef;
+    double reverb_lowfreq {3000};
+    double reverb_highfreq {1000};
+    float reverbColor {0};
+    
+    //---------- EQ ----------/
     EQ eq;
     
     EQ::FilterType getTypefromindex(int index)
@@ -84,11 +96,9 @@ public:
         switch (index)
         {
             case 0:
-                //return OrionSamplerVoice::NoFilter;
                 return EQ::NoFilter;
                 break;
             case 1:
-                //return OrionSamplerVoice::HighPass;
                 return EQ::HighPass;
                 break;
             case 2:
@@ -185,6 +195,11 @@ public:
         }
            //overallgain.setGainLinear(magnitudes.data());
     
+    }
+    
+    double getSampleRate()
+    {
+        return sampleRate;
     }
     
     
@@ -307,7 +322,7 @@ public:
             
             float* outL = outputBuffer.getWritePointer(0, startSample);
             float* outR = outputBuffer.getNumChannels() > 1 ? outputBuffer.getWritePointer(1, startSample) : nullptr;
-            int safelength =(int) 2 * sampleRate;
+            int safelength =(int) 10 * sampleRate;// Previous Value: 2 * sampleRate
             safelength = std::max(playingSound->length,safelength);
             //std::cout<<"playing "<<playingSound->length<<" 2 sec "<<safelength<<"\n";
             
@@ -342,29 +357,32 @@ public:
                 //MARK:- Apply EQ
                 l = eq.bysamples(l);
                 r = l;
-              
-                //MARK:- Apply Reverb
-                if(reverbswitch == true){
-                reverb.processStereo(&l, &r, 1);
-                l = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(l));
-                r = l;
-                }
-                
-                //MARK:- Apply Compressor
-                if(compressorswitch == true){
-                compVal = compressor.bysamples(l);
-                l *= compVal;
-                r *= compVal;
-                }
                 
                 //MARK:- Apply Envelope
                 envVal = env.doEnvelope();
                 // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
                 l *= envVal;
                 r *= envVal;
+              
+                //MARK:- Apply Compressor
+                if(compressorswitch)
+                {
+                    compVal = compressor.bysamples(l);
+                    l *= compVal;
+                    r *= compVal;
+                }
                 
+                //MARK:- Apply Reverb
+                if(reverbswitch)
+                {
+                    reverb.processStereo(&l, &r, 1);
+                    l = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(l));
+                    r = l;
+                }
+                
+
                 //MARK:- Apply Delay
-                if(delayswitch == true)
+                if(delayswitch)
                 {
                     //Apply Delay
                     l = delay.bysamples(l);
@@ -418,6 +436,7 @@ public:
 
                 sourceSamplePosition += pitchRatio;
                
+                
                 if (sourceSamplePosition > safelength)
                 {
                     clearCurrentNote();
@@ -428,6 +447,7 @@ public:
          
     };
     
+
     void parameterChanged(const String &parameterID, float newValue) override
     {
         /* ON-OFF SWITCHES */
@@ -521,8 +541,9 @@ public:
         {
             reverb_param.dryLevel = newValue;
             reverb_param.wetLevel = 1.0f - newValue;
-            
         }
+        
+        
         
         reverb.setParameters(reverb_param);
         for(size_t i=0;i<5;i++)
@@ -531,7 +552,6 @@ public:
         }
         
         /*Envelope*/
-        
         
     };
     

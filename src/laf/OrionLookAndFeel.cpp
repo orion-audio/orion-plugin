@@ -46,6 +46,7 @@ void OrionLookAndFeel::drawRotarySlider (Graphics& g, int x, int y, int width, i
     
     // fill
     g.setColour (Colours::darkgrey);
+    g.setOpacity(0.7);
     g.fillEllipse (rx, ry, rw, rw);
     // outline
     g.setColour (Colours::black);

@@ -91,7 +91,7 @@ processor(p)
     
     //=====================================================================
     compSwitchButton.setButtonText(translate("On/Off"));
-    addAndMakeVisible(compSwitchButton);
+    //addAndMakeVisible(compSwitchButton);
     
     //sends value of the sliders to the tree state in the processor
     // compRatio, compAttack, compRelease, compGain, compThresh

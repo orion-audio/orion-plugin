@@ -435,7 +435,6 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     {
         std::cout<<"Down"<<std::endl;
         
-   
         processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
             processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
@@ -445,20 +444,19 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         tabComponents->setCurrentTab(instrumetSerial);
         tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);
         
-        
-        //--------------------------------
+        //------------------------------------------------------------------------------------------------
         primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
         primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetSerial]);
 
-//        /* Set Solo Button Image */
-//        if(instrumentsSoloStates[instrumetSerial])
-//        {
-//            primaryPane->setInstrumetsSoloButtonImage(true);
-//        }
-//        else
-//        {
-//           primaryPane->setInstrumetsSoloButtonImage(false);
-//        }
+        /* Set Solo Button Image */
+        if(instrumentsSoloStates[instrumetSerial])
+        {
+            primaryPane->setInstrumetsSoloButtonImage(true);
+        }
+        else
+        {
+           primaryPane->setInstrumetsSoloButtonImage(false);
+        }
         
         /* Set Mute Button Image */
         if(instrumentsMuteStates[instrumetSerial])
@@ -468,11 +466,41 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         else
         {
             primaryPane->setInstrumetsMuteButtonImage(false);
-            //primaryPane->waveWiggle->waveColor = Colour(0xff3AE6D1);
-            //primaryPane->waveWiggle->startAnimation();
-            //primaryPane->waveWiggle->setVisible(true);
         }
-        //--------------------------------
+        
+        //----------------------------------------------  --------------------------------------------------//
+        /* Set Compressor Switch Image */
+        if(compSwitches[instrumetSerial])
+        {
+            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 0);
+        }
+        else
+        {
+            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 0);
+        }
+        
+        /* Set Reverb Switch Image */
+        if(reverbSwitches[instrumetSerial])
+        {
+            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 1);
+        }
+        else
+        {
+            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 1);
+        }
+        
+        /* Set Delay Switch Image */
+        if(delaySwitches[instrumetSerial])
+        {
+            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 2);
+        }
+        else
+        {
+            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 2);
+        }
+
+        
+        //------------------------------------------------------------------------------------------------//
     }
     else
     {

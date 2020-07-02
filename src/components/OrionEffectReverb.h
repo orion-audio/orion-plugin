@@ -41,7 +41,6 @@ std::unique_ptr<SliderAttachment> reverbSizeTree;
 std::unique_ptr<SliderAttachment> reverbColorTree;
 std::unique_ptr<SliderAttachment> reverbDecayTree;
 std::unique_ptr<SliderAttachment> reverbDryTree;
-
 std::unique_ptr<ButtonAttachment> reverbSwitchButtonAttachment;
 
 //ScopedPointer<Slider> delayTimeSlider;
@@ -60,20 +59,6 @@ Label reverbColorLabel;
 Label reverbDecayLabel;
 Label reverbDryLabel;
 Label reverbWetLabel;
-
-
-//    ScopedPointer<Slider> delayTimeSlider;
-//    ScopedPointer<Slider> delayFeedbackSlider;
-//    ScopedPointer<Slider> delayColorSlider;
-//    ScopedPointer<Slider> delayPanSlider;
-//    ScopedPointer<Slider> delayDryWetSlider;
-//
-//    ScopedPointer<Label> delayTimeLabel;
-//    ScopedPointer<Label> delayFeedbackLabel;
-//    ScopedPointer<Label> delayColorLabel;
-//    ScopedPointer<Label> delayPanLabel;
-//    ScopedPointer<Label> delayDryWetLabel;
-
 
 JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionEffectReverb)
 };

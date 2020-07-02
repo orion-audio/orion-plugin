@@ -184,7 +184,7 @@ processor(p)
 
     reverbSwitchButton.setButtonText(translate("On/Off"));
     reverbSwitchButton.setBounds(WidthTmp*2.3/3, HeightTmp/10, WidthTmp/3.1, HeightTmp/10);
-    addAndMakeVisible(reverbSwitchButton);
+    //addAndMakeVisible(reverbSwitchButton);
     
     //reverbSwitchButton.onStateChange = [&] { processor.sampler.voices[0]};
 
@@ -259,6 +259,7 @@ void OrionEffectReverb::resized()
     area.translate(getWidth() / 3, 0);
     area.setWidth(getWidth() * .67);
     knobArea = area;
+    //labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
     labelArea = knobArea.removeFromBottom(knobArea.getHeight() * .25);
     reverbDrySlider.setBounds(knobArea);
     labelArea.setWidth(getWidth() / 3);

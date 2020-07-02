@@ -149,6 +149,12 @@ namespace BinaryData
     extern const char*   FXButtonOn_png;
     const int            FXButtonOn_pngSize = 19425;
 
+    extern const char*   PowerOff_png;
+    const int            PowerOff_pngSize = 55972;
+
+    extern const char*   PowerOn_png;
+    const int            PowerOn_pngSize = 43631;
+
     extern const char*   _00compressorBackground_png;
     const int            _00compressorBackground_pngSize = 213101;
 
@@ -187,9 +193,6 @@ namespace BinaryData
 
     extern const char*   file_png;
     const int            file_pngSize = 881;
-
-    extern const char*   PrimaryPaneBackground_png;
-    const int            PrimaryPaneBackground_pngSize = 63366;
 
     extern const char*   headphone_button_png;
     const int            headphone_button_pngSize = 2092;
@@ -235,9 +238,6 @@ namespace BinaryData
 
     extern const char*   s_png;
     const int            s_pngSize = 11507;
-
-    extern const char*   selected_png;
-    const int            selected_pngSize = 25421;
 
     extern const char*   settings_png;
     const int            settings_pngSize = 3452;

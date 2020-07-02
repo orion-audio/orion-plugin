@@ -232,6 +232,10 @@
           </GROUP>
           <GROUP id="{8065FEA0-D75A-588E-18EB-090F3D567EE7}" name="FX"/>
         </GROUP>
+        <GROUP id="{B2660261-C90E-0D9B-7941-A9F4B7930E8D}" name="PowerButton">
+          <FILE id="K6YM9p" name="PowerOff.png" compile="0" resource="1" file="assets/graphics/PowerButton/PowerOff.png"/>
+          <FILE id="uxfe5t" name="PowerOn.png" compile="0" resource="1" file="assets/graphics/PowerButton/PowerOn.png"/>
+        </GROUP>
         <FILE id="kbWvlS" name="00compressorBackground.png" compile="0" resource="1"
               file="assets/graphics/00compressorBackground.png"/>
         <FILE id="eev5V6" name="00delayBackground.png" compile="0" resource="1"
@@ -254,8 +258,6 @@
               file="assets/graphics/EQ_Background.png"/>
         <FILE id="zLIz7o" name="expand.png" compile="0" resource="1" file="assets/graphics/expand.png"/>
         <FILE id="JjKh9U" name="file.png" compile="0" resource="1" file="assets/graphics/file.png"/>
-        <FILE id="wyNKIo" name="PrimaryPaneBackground.png" compile="0" resource="1"
-              file="assets/graphics/PrimaryPaneBackground.png"/>
         <FILE id="Pr6Akp" name="headphone_button.png" compile="0" resource="1"
               file="assets/graphics/headphone_button.png"/>
         <FILE id="AVGiaf" name="knob_1.png" compile="0" resource="1" file="assets/graphics/knob_1.png"/>
@@ -278,7 +280,6 @@
         <FILE id="toKUSh" name="reverbBackground.png" compile="0" resource="1"
               file="assets/graphics/reverbBackground.png"/>
         <FILE id="d0kLXh" name="s.png" compile="0" resource="1" file="assets/graphics/s.png"/>
-        <FILE id="jOD5pZ" name="selected.png" compile="0" resource="1" file="assets/graphics/selected.png"/>
         <FILE id="DLrONF" name="settings.png" compile="0" resource="1" file="assets/graphics/settings.png"/>
         <FILE id="DU3yIN" name="sound_file.png" compile="0" resource="1" file="assets/graphics/sound_file.png"/>
         <FILE id="pnUOOz" name="volume.png" compile="0" resource="1" file="assets/graphics/volume.png"/>
