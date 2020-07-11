@@ -5,13 +5,13 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "OrionTabComponent.h"
-#include "OrionBrowser.h"
+//#include "OrionBrowser.h"
 #include "OrionButton.h"
 #include "Orionlist.h"
 #include "OrionFileBrowser.h"
 #include "OrionFileTreeComponent.h"
 #include "DraggableFileBrowserComponent.h"
-//#include "WaveWiggle.h"
+#include "ThresholdMeter.h"
 #include "CircularMeter.h"
 #include <array>
 #include "OrionResizableCornerComponent.h"
@@ -71,6 +71,8 @@ private:
     
     int dropdownTabSerial = 0;
     std::array<std::unique_ptr<ImageButton>, 4> dropDownTabs;
+    
+    std::unique_ptr<DrawablePath> dropDownBottonBar;
     std::unique_ptr<ImageButton> dropDownEQ;
     std::unique_ptr<ImageButton> dropDownClip;
     std::unique_ptr<ImageButton> dropDownENV;

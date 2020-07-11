@@ -15,16 +15,16 @@ private:
     
     float x_g, x_l,y_g, y_l,c;// input, output, control
 
-    double sampleRate {44100};//gotta change later
+    double sampleRate {48000};//gotta change later
     
     float alphaAttack,alphaRelease,yL_prev;
     
 public:
-    float tauAttack_ {0.1f}; // Length of attack time, in ms
-    float makeUpGain_ {0.0f};      //
-    float ratio_ {1.0f};      // ratio of compression above threshold
-    float tauRelease_ {0.1f};    // Length of release time
     float threshold_ {-60.0f}; // threshold in terms of gain
+    float ratio_ {1.0f};      // ratio of compression above threshold
+    float tauAttack_ {0.1f}; // Length of attack time, in ms
+    float tauRelease_ {0.1f};    // Length of release time
+    float makeUpGain_ {0.0f};      //
     float x_g_r, y_g_r, x_l_r;
 
     Compressor()

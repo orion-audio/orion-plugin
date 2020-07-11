@@ -27,6 +27,19 @@ processor(p)
 //    setBounds(0, 0, WidthTmp, HeightTmp);/* Global: X, Y, W， H */
     
     // slider initialization values
+    
+    //=====================================================================
+    compThreshSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
+    compThreshSlider.setRange(-60.0f, 0.0f);
+    compThreshSlider.setValue(-60.0f);
+    
+    compThreshSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 0, 0);
+    addAndMakeVisible(compThreshSlider);
+    compThreshSlider.setVisible(true);
+    
+    addAndMakeVisible(compThreshLabel);
+    compThreshLabel.setText ("Thresh", dontSendNotification);
+    
     //=====================================================================
     compRatioSlider.setSliderStyle(Slider::SliderStyle::Rotary);
     compRatioSlider.setTextBoxStyle(Slider::TextBoxRight, true, OrionGlobalWidth/30, OrionGlobalHeight/60);
@@ -77,17 +90,6 @@ processor(p)
     addAndMakeVisible(compGainLabel);
     compGainLabel.setText ("Gain", dontSendNotification);
     
-    //=====================================================================
-    compThreshSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
-    compThreshSlider.setRange(-60.0f, 0.0f);
-    compThreshSlider.setValue(-60.0f);
-    
-    compThreshSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 0, 0);
-    addAndMakeVisible(compThreshSlider);
-    compThreshSlider.setVisible(true);
-    
-    addAndMakeVisible(compThreshLabel);
-    compThreshLabel.setText ("Thresh", dontSendNotification);
     
     //=====================================================================
     compSwitchButton.setButtonText(translate("On/Off"));

@@ -38,7 +38,7 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
         midiOutput->startBackgroundThread();
 
     sampler.reset(new SimpleSynth());
-    sampler->setup(44100);
+    sampler->setup(48000);
 
     sequencer.reset(new Sequencer(static_cast<Synthesiser*>(sampler.get())));
     sequencer->setActive(true);

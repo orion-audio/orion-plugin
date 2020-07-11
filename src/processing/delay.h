@@ -17,7 +17,7 @@ private:
     int delayBufferLength_ {1};
     int delayReadPosition_ {0};
     int delayWritePosition_ {0};
-    double sampleRate {44100};//gotta change later
+    double sampleRate {48000};//gotta change later
     int dpr {0};
     int dpw {0};
     float* delayData;
@@ -35,6 +35,7 @@ public:
     float wetMix_ {0.7};      // Mix level of delayed signal (0-1)
     float feedback_ {0.0};    // Feedback level (0-just less than 1)
     float color_ {0.0}; //low pass filter - high pass filter (-1-1)
+    float panIndicator_ {0.5}; // 0L 1R (0-1)
     int serial;
     //constructor: set size, set read and write pointer
     Delay(int index): serial(index)
@@ -129,14 +130,22 @@ public:
     };
     
     //bysamples should output the final signal value at each time step
-    float bysamples(float input)
+    float bysamples(float input, bool isL)
     {
         //dpr = delayReadPosition_;
         //dpw = delayWritePosition_;
         float out = 0.0;
         if(on==1)
         {
-            out = (dryMix_ * input + highpass.processSingleSampleRaw(lowpass.processSingleSampleRaw(wetMix_ * delayData[dpr])));
+            if(isL)
+            {
+                out = (dryMix_ * input + (1 - panIndicator_) * highpass.processSingleSampleRaw(lowpass.processSingleSampleRaw(wetMix_ * delayData[dpr])));
+            }
+            else
+            {
+                out = (dryMix_ * input + panIndicator_ * highpass.processSingleSampleRaw(lowpass.processSingleSampleRaw(wetMix_  * delayData[dpr])));
+            }
+            
         }
         else
         {
@@ -166,6 +175,5 @@ public:
     //color
     
     //dry or wet - y(t)= a x(t) + b x(t-m) ; a+b=1; dry: a=1
-   
-    
+
 };

@@ -58,7 +58,7 @@ public:
             int numRows = 0;
             int numFiles = (int)fileComponents.size() - 1;
         
-            int w = getWidth() * .25;
+            int w = getWidth() * .25;// Previous .25
             
             int windowHeight = (w / 2) + w * 1.2 * ceil((float)(numFiles + 1) / 4.f);
             if (windowHeight < getHeight())
@@ -120,6 +120,7 @@ private:
     
     DirectoryContentsList currentDirectory;
     std::unique_ptr<ImageButton> backButton;
+    std::unique_ptr<ImageButton> forwardButton;
     
     int currentHighlighted = -1;
     

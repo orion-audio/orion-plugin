@@ -59,34 +59,33 @@ void OrionEQConfiguration::paint(Graphics& g)
     
     g.fillAll (Colours::black.withAlpha((.7f)));
     
+    /* Draw Frame */
+//    g.setFont (12.0f);
+//    g.setColour (Colours::silver);
+//    g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
     
-    g.setFont (12.0f);
-    
-    //g.setColour (Colours::silver);
-    //g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
-    
-    //Vertical Lines
-    for (int i=0; i < 40; ++i)
+    /* Vertical Lines */
+    for (int i=0; i < 60; ++i)
     {
         g.setColour (Colours::silver.withAlpha (0.3f));
-        auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.025f;
+        auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.0176f;
         if (i > 0) g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
         
         g.setColour (Colours::silver);
         
-        // Draw Freq Text
-        //auto freq = getFrequencyForPosition (i * 0.025f);
-        //if(abs(round(freq) - freq) < 0.000000000000001)
-        //{
-            //g.drawFittedText ((freq < 1000) ? String (freq) + " Hz" : String (freq / 1000, 1) + " kHz",roundToInt (x + 3), getHeight()/20, 50, 15, Justification::left, 1);
-        //}
+         //Draw Freq Text
+//        auto freq = getFrequencyForPosition (i * 0.025f);
+//        if(abs(round(freq) - freq) < 0.000000000000001)
+//        {
+//            g.drawFittedText ((freq < 1000) ? String (freq) + " Hz" : String (freq / 1000, 1) + " kHz",roundToInt (x + 3), getHeight()/20, 50, 15, Justification::left, 1);
+//        }
         
     }
     
     //Horizontal Lines
     g.setColour (Colours::silver.withAlpha (0.3f));
-    g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.25 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
-    g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.75 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
+    //g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.25 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
+    //g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.75 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
     g.setColour (Colours::silver);
     
     //g.drawFittedText (String (maxDB) + " dB", plotFrame.getX() + 3, plotFrame.getY() + 2, 50, 14, Justification::left, 1);
@@ -94,7 +93,7 @@ void OrionEQConfiguration::paint(Graphics& g)
     //g.drawFittedText (" 0 dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.5  * plotFrame.getHeight()), 50, 14, Justification::left, 1);
     // g.drawFittedText (String (- maxDB / 2) + " dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.75 * plotFrame.getHeight()), 50, 14, Justification::left, 1);
     
-    /* plot input and output audio data
+    /* //plot input and output audio data
     const Colour inputColour = Colours::greenyellow;
     const Colour outputColour = Colours::indianred;
     g.setFont (16.0f);

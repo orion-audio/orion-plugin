@@ -63,6 +63,14 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     
     //--------- DROPDOWN BUTTONS ---------//
+    
+    
+    dropDownBottonBar.reset(new DrawablePath());
+    addAndMakeVisible(dropDownBottonBar.get());
+    dropDownBottonBar->replaceColour(Colours::black,Colours::black);
+
+     
+    
 
     // Dropdown EQ BUTTON
     Image downImage = ImageCache::getFromMemory(BinaryData::EQButtonOn_png,  BinaryData::EQButtonOn_pngSize);
@@ -360,7 +368,7 @@ void OrionaudioAudioProcessorEditor::resized()
     // DROPDOWN WINDOW
     if (dropDownVisible)
     {
-        area = Rectangle<int>(0, getHeight() - 14 * unite, getWidth(), 14 * unite);
+        area = Rectangle<int>(0, getHeight() - 13.1 * unite, getWidth(), 14 * unite);
         tabComponents->setBounds(area);
     }
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
@@ -371,6 +379,10 @@ void OrionaudioAudioProcessorEditor::resized()
     
     
     //--------- DROPDOWN BUTTONS ---------//
+    Path path;
+    path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 4 * unite);
+    dropDownBottonBar->setPath(path);
+    
     // EQ
     area = Rectangle<int>( 5 * uniteW + 0 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
     dropDownEQ->setBounds(area);
@@ -395,7 +407,6 @@ void OrionaudioAudioProcessorEditor::resized()
 
     
     //--------- Footer Path ---------//
-    Path path;
     path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 1.0f);
     footerPath->setPath(path);
     

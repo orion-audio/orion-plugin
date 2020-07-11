@@ -237,11 +237,10 @@ void OrionEnvConfiguration::paint (Graphics& g)
         
     }
     //********for the horizontal lines*************
-    g.setColour (Colours::silver.withAlpha (0.3f));
-    g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.25 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
-    g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.75 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
-    
-    g.setColour (Colours::silver);
+    //g.setColour (Colours::silver.withAlpha (0.3f));
+    //g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.25 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
+    //g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.75 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
+    //g.setColour (Colours::silver);
 }
 
 void OrionEnvConfiguration::resized()

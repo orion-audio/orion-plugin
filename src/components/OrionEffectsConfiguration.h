@@ -11,6 +11,7 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "ThresholdMeter.h"
 #include "OrionEffectComp.h"
 #include "OrionEffectReverb.h"
 #include "OrionEffectDelay.h"
@@ -51,6 +52,23 @@ private:
     std::unique_ptr<ImageButton> delaySwitch;
     
     
+    
+    
+    /* Compressor */
+    std::unique_ptr<ThresholdMeter> thresholdMeters;
+    std::unique_ptr<Slider> compThreshSlider;
+    
+    std::unique_ptr<Slider> compRatioSlider;
+    std::unique_ptr<Slider> compAttackSlider;
+    std::unique_ptr<Slider> compReleaseSlider;
+    std::unique_ptr<Slider> compGainSlider;
+    
+    std::unique_ptr<Label> compRatioLabel;
+    std::unique_ptr<Label> compAttackLabel;
+    std::unique_ptr<Label> compReleaseLabel;
+    std::unique_ptr<Label> compGainLabel;
+    
+    
     /* Reverb */
     std::unique_ptr<Slider> reverbDrySlider;
     
@@ -59,11 +77,24 @@ private:
     std::unique_ptr<Slider> reverbSizeSlider;
     std::unique_ptr<Slider> reverbColorSlider;
     
-    
     std::unique_ptr<Label> reverbPredelayLabel;
     std::unique_ptr<Label> reverbDecayLabel;
     std::unique_ptr<Label> reverbSizeLabel;
     std::unique_ptr<Label> reverbColorLabel;
+    
+    
+    /* Delay */
+    std::unique_ptr<Slider> delayDryWetSlider;
+    
+    std::unique_ptr<Slider> delayTimeSlider;
+    std::unique_ptr<Slider> delayFeedbackSlider;
+    std::unique_ptr<Slider> delayColorSlider;
+    std::unique_ptr<Slider> delayPanSlider;
+    
+    std::unique_ptr<Label> delayTimeLabel;
+    std::unique_ptr<Label> delayFeedbackLabel;
+    std::unique_ptr<Label> delayColorLabel;
+    std::unique_ptr<Label> delayPanLabel;
 
     
     

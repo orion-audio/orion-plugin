@@ -20,7 +20,7 @@ FileComponent::FileComponent(File f, int i) : Button("")
     fileIndex = i;
     Image image;
     if (file.isDirectory())
-        image = ImageCache::getFromMemory(BinaryData::file_png, BinaryData::file_pngSize);
+        image = ImageCache::getFromMemory(BinaryData::folder_Off_png, BinaryData::folder_Off_pngSize);
     else
         image = ImageCache::getFromMemory(BinaryData::sound_file_png, BinaryData::sound_file_pngSize);
 
@@ -42,18 +42,31 @@ void FileComponent::paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted
     
     
     int h = getHeight() * .6;
-    int w = h;
-    g.drawImageWithin(fileImage, getWidth() * .2, getWidth() * .1, w, h, RectanglePlacement::stretchToFit);
+    int w = getHeight() * .7;
+    
+    g.drawImageWithin(fileImage,
+                      getWidth() * .2/* x */,
+                      getWidth() * .1/* y */,
+                      w * 1.0/* width */,
+                      h * 1.0/* height */,
+                      RectanglePlacement::stretchToFit);
+    
     g.setColour(Colours::white);
-    font.setHeight(getHeight() * .2);
+    font.setHeight(getHeight() * .175);// also can adjust font size
     g.setFont(font);
-    g.drawText(name, 0, getHeight() * .75, getWidth(), getHeight() * .2, Justification::centred);
+    g.drawText(name,
+               0/* x */,
+               getHeight() * .75/* y */,
+               getWidth()/* width */,
+               getHeight() * .2/* height */,
+               Justification::centred);
 }
 
 void FileComponent::mouseDown(const MouseEvent &e)
 {
-    
-    isHighlighted = true;
+    Image image = ImageCache::getFromMemory(BinaryData::folder_On_png, BinaryData::folder_On_pngSize);
+    setImage(image);
+    //isHighlighted = true;
     updateHighlighted();
 }
 
@@ -62,10 +75,18 @@ void FileComponent::mouseUp(const MouseEvent &e)
     if (e.getNumberOfClicks() >= 2)
     {
         if (file.isDirectory())
+        {
             notifyListeners(file);
+        }
+            
     }
     else
-        isHighlighted = true;
+    {
+        Image image = ImageCache::getFromMemory(BinaryData::folder_Off_png, BinaryData::folder_Off_pngSize);
+        setImage(image);
+        //isHighlighted = true;
+    }
+        
     
     repaint();
 }

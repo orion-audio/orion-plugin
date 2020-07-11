@@ -16,18 +16,36 @@ DraggableFileBrowserComponent::DraggableFileBrowserComponent() : scannerThread("
     currentDirectory(nullptr, scannerThread)
 {
     
+    //Back Button
     backButton.reset(new ImageButton());
     backButton->setAlwaysOnTop(true);
-    Image backImageOff = ImageCache::getFromMemory(BinaryData::arrow_left_png, BinaryData::arrow_left_pngSize);
-    Image backImageOn = ImageCache::getFromMemory(BinaryData::arrow_leftOn_png, BinaryData::arrow_leftOn_pngSize);
+    Image backImageOff = ImageCache::getFromMemory(BinaryData::dirBackOff_png, BinaryData::dirBackOff_pngSize);
+    Image backImageOn = ImageCache::getFromMemory(BinaryData::dirBackOn_png, BinaryData::dirBackOn_pngSize);
     backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
+    addAndMakeVisible(backButton.get());
     backButton->onClick = [this] {
         scanDirectory(currentDirectory.getDirectory().getParentDirectory());
 
         DBG("2");
     };
-    addAndMakeVisible(backButton.get());
     
+    
+    //Forward Button
+    forwardButton.reset(new ImageButton());
+    forwardButton->setAlwaysOnTop(true);
+    backImageOff = ImageCache::getFromMemory(BinaryData::dirForwardOff_png, BinaryData::dirForwardOff_pngSize);
+    backImageOn = ImageCache::getFromMemory(BinaryData::dirForwardOn_png, BinaryData::dirForwardOn_pngSize);
+    forwardButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
+    addAndMakeVisible(forwardButton.get());
+    /*
+    forwardButton->onClick = [this] {
+        scanDirectory(currentDirectory.getDirectory().getParentDirectory());
+        DBG("1");
+    };
+     */
+    
+
+    //Window Component
     addAndMakeVisible(windowComponent);
     currentDirectory.addChangeListener(this);
     scanDirectory(File("~/Documents"));
@@ -40,7 +58,8 @@ void DraggableFileBrowserComponent::resized()
 {
     windowComponent.setBounds(getLocalBounds());
     viewPort.setBounds(getLocalBounds());
-    backButton->setBounds(getWidth() * 4/9, 0, getWidth() * .15, getWidth() * .15);
+    backButton->setBounds(0-getWidth()/20, 0, getWidth()/2, getWidth() * .15);
+    forwardButton->setBounds(getWidth()/2 + getWidth()/20, 0, getWidth()/2, getWidth() * .15);
 }
 
 void DraggableFileBrowserComponent::scanDirectory(File directory)

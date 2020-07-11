@@ -40,6 +40,13 @@ bool  compSwitches                 [8] = {false, false, false, false, false, fal
 bool  reverbSwitches               [8] = {false, false, false, false, false, false, false, false};
 bool  delaySwitches                [8] = {false, false, false, false, false, false, false, false};
 
+// Compressor
+float compressorThreshCoefficient  [8] = {-60.0f, -60.0f, -60.0f, -60.0f, -60.0f, -60.0f, -60.0f, -60.0f};
+float compressorRatioCoefficient   [8] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
+float compressorAttackCoefficient  [8] = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
+float compressorReleaseCoefficient [8] = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
+float compressorGainCoefficient    [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+
 // Reverb
 float reverbDryCoefficient         [8] = {0.4f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f};
 float reverbPredelayCoefficient    [8] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
@@ -47,8 +54,16 @@ float reverbDecayCoefficient       [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.
 float reverbSizeCoefficient        [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
 float reverbColorCoefficient       [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
+// Delay
+float delayDryWetCoefficient       [8] = {0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f};
+float delayTimeCoefficient         [8] = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
+float delayFeedbackCoefficient     [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+float delayColorCoefficient        [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+float delayPanCoefficient          [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+
 
 #else
+
 extern const int instrumentAmount;
 
 extern const int KickPitch;
@@ -78,12 +93,26 @@ extern bool  compSwitches   [];
 extern bool  reverbSwitches [];
 extern bool  delaySwitches  [];
 
+// Compressor
+extern float compressorThreshCoefficient  [];
+extern float compressorRatioCoefficient   [];
+extern float compressorAttackCoefficient  [];
+extern float compressorReleaseCoefficient [];
+extern float compressorGainCoefficient    [];
+
 // Reverb
 extern float reverbDryCoefficient         [];
 extern float reverbPredelayCoefficient    [];
 extern float reverbDecayCoefficient       [];
 extern float reverbSizeCoefficient        [];
 extern float reverbColorCoefficient       [];
+
+// Delay
+extern float delayDryWetCoefficient       [];
+extern float delayTimeCoefficient         [];
+extern float delayFeedbackCoefficient     [];
+extern float delayColorCoefficient        [];
+extern float delayPanCoefficient          [];
 
 #endif
 

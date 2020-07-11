@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" jucerVersion="5.4.7"
-              pluginVST3Category="Fx,Stereo" pluginFormats="buildAU,buildStandalone,buildVST3"
-              companyName="Orion" pluginAUMainType="'aumu'" pluginManufacturerCode="Orio"
-              pluginCode="orpg" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+<JUCERPROJECT id="YrvQ7b" name="Orion Plugin" projectType="audioplug" pluginVST3Category="Fx,Stereo"
+              pluginFormats="buildAU,buildStandalone,buildVST3" companyName="Orion"
+              pluginAUMainType="'aumu'" pluginManufacturerCode="Orio" pluginCode="orpg"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{7972F1E0-9D9D-922F-3576-753B71DD33A4}" name="src">
       <FILE id="wj17AJ" name="MirrorViews.h" compile="0" resource="0" file="src/MirrorViews.h"/>
@@ -24,6 +25,10 @@
         <FILE id="kVx7FJ" name="CircularMeter.cpp" compile="1" resource="0"
               file="src/components/CircularMeter.cpp"/>
         <FILE id="gQcOjf" name="CircularMeter.h" compile="0" resource="0" file="src/components/CircularMeter.h"/>
+        <FILE id="h5m7qJ" name="ThresholdMeter.cpp" compile="1" resource="0"
+              file="src/components/ThresholdMeter.cpp"/>
+        <FILE id="HMn96K" name="ThresholdMeter.h" compile="0" resource="0"
+              file="src/components/ThresholdMeter.h"/>
         <FILE id="LFNeJv" name="DragAndDropButton.h" compile="0" resource="0"
               file="src/components/DragAndDropButton.h"/>
         <FILE id="L8fFgn" name="DraggableFileBrowserComponent.cpp" compile="1"
@@ -122,11 +127,11 @@
                 file="src/components/OrionClipConfiguration.cpp"/>
           <FILE id="UotE1D" name="OrionClipConfiguration.h" compile="0" resource="0"
                 file="src/components/OrionClipConfiguration.h"/>
+          <FILE id="V9QYjn" name="OrionEffectsConfiguration.cpp" compile="1"
+                resource="0" file="src/components/OrionEffectsConfiguration.cpp"/>
+          <FILE id="X1xeDc" name="OrionEffectsConfiguration.h" compile="0" resource="0"
+                file="src/components/OrionEffectsConfiguration.h"/>
           <GROUP id="{E405DB40-F673-2C5B-99F1-D1853DE29BE9}" name="FX">
-            <FILE id="V9QYjn" name="OrionEffectsConfiguration.cpp" compile="1"
-                  resource="0" file="src/components/OrionEffectsConfiguration.cpp"/>
-            <FILE id="X1xeDc" name="OrionEffectsConfiguration.h" compile="0" resource="0"
-                  file="src/components/OrionEffectsConfiguration.h"/>
             <FILE id="Rg8O4I" name="OrionEffectComp.cpp" compile="1" resource="0"
                   file="src/components/OrionEffectComp.cpp"/>
             <FILE id="CvWsUl" name="OrionEffectComp.h" compile="0" resource="0"
@@ -167,7 +172,19 @@
           <FILE id="QsXHPH" name="arrow_up.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_up.png"/>
         </GROUP>
         <GROUP id="{A5B9F44F-D618-CD65-DCB3-FCD06889DA74}" name="sidePanel">
-          <FILE id="TXGmor" name="sidePanelBackground.png" compile="0" resource="1"
+          <GROUP id="{EA94EC5C-14D1-0F22-D1FB-6BC288246666}" name="indicateButton">
+            <FILE id="AvOCcD" name="dirBackOff.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
+            <FILE id="nmkVAa" name="dirBackOn.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
+            <FILE id="zdgShj" name="dirForwardOff.png" compile="0" resource="1"
+                  file="assets/graphics/sidePanel/indicateButton/dirForwardOff.png"/>
+            <FILE id="bTbkAb" name="dirForwardOn.png" compile="0" resource="1"
+                  file="assets/graphics/sidePanel/indicateButton/dirForwardOn.png"/>
+          </GROUP>
+          <GROUP id="{FEEA064F-2287-A81C-A93B-58995064039C}" name="icons">
+            <FILE id="RJh3aX" name="folder_On.png" compile="0" resource="1" file="assets/graphics/sidePanel/icons/folder_On.png"/>
+            <FILE id="tR38kI" name="folder_Off.png" compile="0" resource="1" file="assets/graphics/sidePanel/icons/folder_Off.png"/>
+          </GROUP>
+          <FILE id="trPDMz" name="sidePanelBackground.png" compile="0" resource="1"
                 file="assets/graphics/sidePanel/sidePanelBackground.png"/>
         </GROUP>
         <GROUP id="{B74DE6F3-E717-806A-956B-7975BA656720}" name="menuBar">
@@ -188,33 +205,34 @@
             <FILE id="Z1YH43" name="MuteOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/muteButton/MuteOn.png"/>
           </GROUP>
           <GROUP id="{ED1D9512-93F5-1E03-8C32-263090C7DF9B}" name="instruments">
-            <FILE id="FaqvNa" name="ClapOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/ClapOff.png"/>
-            <FILE id="NmxdL2" name="ClapOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/ClapOn.png"/>
-            <FILE id="gvfgVf" name="CrashOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/CrashOff.png"/>
-            <FILE id="AJbPV9" name="CrashOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/CrashOn.png"/>
-            <FILE id="plt7dh" name="HHCOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHCOff.png"/>
-            <FILE id="TdNyob" name="HHCOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHCOn.png"/>
-            <FILE id="QxQWgs" name="HHOOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHOOff.png"/>
-            <FILE id="GZXFJG" name="HHOOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHOOn.png"/>
-            <FILE id="pUwEJK" name="KickOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOff.png"/>
-            <FILE id="j4wY2T" name="KickOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOn.png"/>
-            <FILE id="CUm07m" name="PercOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/PercOff.png"/>
-            <FILE id="NyzdAo" name="PercOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/PercOn.png"/>
-            <FILE id="YId7Fo" name="SnapOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnapOff.png"/>
-            <FILE id="doMf9L" name="SnapOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnapOn.png"/>
-            <FILE id="qd33id" name="SnareOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnareOff.png"/>
-            <FILE id="hMz1XS" name="SnareOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnareOn.png"/>
+            <FILE id="CvL4sY" name="ClapOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/ClapOff.png"/>
+            <FILE id="lNHnlt" name="ClapOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/ClapOn.png"/>
+            <FILE id="wgPZmh" name="CrashOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/CrashOff.png"/>
+            <FILE id="FI4G1P" name="CrashOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/CrashOn.png"/>
+            <FILE id="XDPKxr" name="HHCOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHCOff.png"/>
+            <FILE id="IdQRtB" name="HHCOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHCOn.png"/>
+            <FILE id="sj8YDJ" name="HHOOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHOOff.png"/>
+            <FILE id="GyMzwj" name="HHOOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHOOn.png"/>
+            <FILE id="oqyj6H" name="KickOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOff.png"/>
+            <FILE id="HpFGm2" name="KickOn .png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOn .png"/>
+            <FILE id="nYBn2P" name="KickOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOn.png"/>
+            <FILE id="PuA7Ax" name="PercOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/PercOff.png"/>
+            <FILE id="oASupD" name="PercOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/PercOn.png"/>
+            <FILE id="dt5IG2" name="SnapOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnapOff.png"/>
+            <FILE id="w0mIo9" name="SnapOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnapOn.png"/>
+            <FILE id="jo6DTi" name="SnareOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnareOff.png"/>
+            <FILE id="U0uhIK" name="SnareOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnareOn.png"/>
           </GROUP>
         </GROUP>
         <GROUP id="{2F0267F7-D2FA-BE0F-E1A8-CD4D41AE0105}" name="dropdown">
           <GROUP id="{F6DD0F87-F5DA-F643-2575-1592E508BCFE}" name="dropdownBackgrounds">
-            <FILE id="eYvvJV" name="clipBackground.png" compile="0" resource="1"
+            <FILE id="ijJylM" name="clipBackground.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownBackgrounds/clipBackground.png"/>
-            <FILE id="lmKvpA" name="ENVBackground.png" compile="0" resource="1"
+            <FILE id="Ia7UMq" name="ENVBackground.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownBackgrounds/ENVBackground.png"/>
-            <FILE id="yLZEsR" name="EQBackground.png" compile="0" resource="1"
+            <FILE id="jt7rRV" name="EQBackground.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownBackgrounds/EQBackground.png"/>
-            <FILE id="sW8Ggm" name="FXBackground.png" compile="0" resource="1"
+            <FILE id="Sb6Vcv" name="FXBackground.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownBackgrounds/FXBackground.png"/>
           </GROUP>
           <GROUP id="{383C9C54-A218-8D83-4305-EA8E377F2C80}" name="dropdownTab">
@@ -257,7 +275,6 @@
         <FILE id="eLKAyZ" name="EQ_Background.png" compile="0" resource="1"
               file="assets/graphics/EQ_Background.png"/>
         <FILE id="zLIz7o" name="expand.png" compile="0" resource="1" file="assets/graphics/expand.png"/>
-        <FILE id="JjKh9U" name="file.png" compile="0" resource="1" file="assets/graphics/file.png"/>
         <FILE id="Pr6Akp" name="headphone_button.png" compile="0" resource="1"
               file="assets/graphics/headphone_button.png"/>
         <FILE id="AVGiaf" name="knob_1.png" compile="0" resource="1" file="assets/graphics/knob_1.png"/>

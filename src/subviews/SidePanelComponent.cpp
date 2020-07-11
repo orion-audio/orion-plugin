@@ -65,7 +65,7 @@ void SidePanelComponent::resized()
     
     logoImage->setBounds(logoArea);
     
-    Rectangle<int> fileBrowerframeSize(0, 3 * unite, getWidth(), 28 * unite);
+    Rectangle<int> fileBrowerframeSize(getWidth()/30, 3 * unite, getWidth()*18/20, 28 * unite);
     fileBrowser->setBounds(fileBrowerframeSize);
     
     

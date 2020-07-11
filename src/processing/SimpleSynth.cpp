@@ -259,7 +259,7 @@ void SimpleSynth::noteOn(int midiChannel,
                 PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
                 PrimaryPaneMirror->waveWiggle->startAnimation();
                 instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
-                //noteOnPNGChange();
+                noteOnPNGChange();
                 
             }
            
@@ -277,7 +277,7 @@ void SimpleSynth::noteOff(int midiChannel,
     if(!instrumentsMuteStates[instrumetSerial])
     {
         instrumetOffSerial = PitchToInstrumentSerial(midiNoteNumber);
-        //noteOffPNGChange();
+        noteOffPNGChange();
     }
 
 }
@@ -287,6 +287,7 @@ void SimpleSynth::noteOnPNGChange()
 {
     const MessageManagerLock mmLock;//????????????????
     PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
+    //PrimaryPaneMirror->drumButtons[instrumetSerial]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
 }
 
 

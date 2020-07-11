@@ -39,11 +39,8 @@ class OrionSamplerVoice : public SamplerVoice
     
 private:
     BigInteger midiNote;
-    PanPos pan;
-    Delay delay;
     EnvelopeGenerator env;
-    Compressor compressor;
-    
+
     //float* masterVolume = &masterVolumeCoefficient;
 
     //Sidechain sidechain;
@@ -74,8 +71,13 @@ private:
 
 public:
  
-    //---------- Effect Switches ----------/
+    //---------- Pan ----------/
+    PanPos pan;
+    //------- Effect Switches -------/
     bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
+    
+    //-------- Compressor --------/
+    Compressor compressor;
     
     //---------- Reverb ----------/
     Reverb reverb;
@@ -87,6 +89,9 @@ public:
     double reverb_lowfreq {3000};
     double reverb_highfreq {1000};
     float reverbColor {0};
+    
+    //---------- Delay ----------/
+    Delay delay;
     
     //---------- EQ ----------/
     EQ eq;
@@ -119,7 +124,7 @@ public:
 
     std::vector<double> frequencies;
     
-    OrionSamplerVoice(double sr, int i) : pitchVal(0), currSampRate(44100), sampleRate(sr), index(i), delay(Delay(i)), eq(EQ(i))
+    OrionSamplerVoice(double sr, int i) : pitchVal(0), currSampRate(48000), sampleRate(sr), index(i), delay(Delay(i)), eq(EQ(i))
     {
         pan.setPosition(0.0);
         delay.setup(sr);
@@ -354,6 +359,12 @@ public:
                     compressor.update_reference(l);
                 }
                 
+                
+                //MARK:- Apply Instruments Pan
+                pan.setPosition(instrumentsPanCoefficient[instrumetSerial]);
+                l = pan.processLeftChannel(l);
+                r = pan.processRightChannel(r);
+                
                 //MARK:- Apply EQ
                 l = eq.bysamples(l);
                 r = l;
@@ -377,7 +388,8 @@ public:
                 {
                     reverb.processStereo(&l, &r, 1);
                     l = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(l));
-                    r = l;
+                    r = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(l));
+                    //r = l;
                 }
                 
 
@@ -385,19 +397,16 @@ public:
                 if(delayswitch)
                 {
                     //Apply Delay
-                    l = delay.bysamples(l);
-                    r = l;
+                    l = delay.bysamples(l,true);
+                    r = delay.bysamples(r,false);
                 
                     //Apply Pan
                     //pan.setPosition(pan.position);
-                    l = pan.processLeftChannel(l);
-                    r = pan.processRightChannel(r);
+                    //l = pan.processLeftChannel(l);
+                    //r = pan.processRightChannel(r);
                 }
                 
-                //MARK:- Apply Instruments Pan
-                pan.setPosition(instrumentsPanCoefficient[instrumetSerial]);
-                l = pan.processLeftChannel(l);
-                r = pan.processRightChannel(r);
+                
                 
                 //MARK:- Apply Instruments Volume
                 l = l * instrumentsVolumeCoefficient[instrumetSerial];
@@ -483,10 +492,10 @@ public:
          //std::cout<<"what envelope22222"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
         
         /* Comp */
+        if (parameterID == String("compThresh" + String(index))){compressor.threshold_ = newValue;}
         if (parameterID == String("compRatio" + String(index))){compressor.ratio_ = newValue;}
         if (parameterID == String("compAttack" + String(index))){compressor.tauAttack_ = newValue;}
         if (parameterID == String("compRelease" + String(index))){compressor.tauRelease_ = newValue;}
-        if (parameterID == String("compThresh" + String(index))){compressor.threshold_ = newValue;}
         if (parameterID == String("compGain" + String(index))){compressor.makeUpGain_ = newValue;}
         
         compressor.update();

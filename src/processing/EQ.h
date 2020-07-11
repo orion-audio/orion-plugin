@@ -25,7 +25,7 @@
 class EQ
 {
 private:
-    double sampleRate {44100};//gotta change later
+    double sampleRate {48000};//gotta change later
     float* delayData;
     std::vector<double> frequencies;
     
