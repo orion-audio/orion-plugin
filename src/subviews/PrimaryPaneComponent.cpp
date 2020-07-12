@@ -191,6 +191,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     instrumentsVolumeSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text Box
     instrumentsVolumeSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
     instrumentsVolumeSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    instrumentsVolumeSlider->setColour(Slider::thumbColourId, juce::Colours::white);
     instrumentsVolumeSlider->setRange(0.0f, 1.0f);
     instrumentsVolumeSlider->setValue(0.75f);
     instrumentsVolumeSlider->addListener(this);
@@ -226,6 +227,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     instrumentsPanSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text Box
     instrumentsPanSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
     instrumentsPanSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    instrumentsPanSlider->setColour(Slider::thumbColourId, juce::Colours::white);
     instrumentsPanSlider->setRange(-1.0f, 1.0f);
     instrumentsPanSlider->setValue(0.0f);
     instrumentsPanSlider->addListener(this);

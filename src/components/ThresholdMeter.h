@@ -32,7 +32,12 @@ public:
     void pointerMove(float value);
     
 private:
+    
+    Colour volumeColor;
+    Colour overdriveColor;
     std::unique_ptr<DrawablePath> pointerPath;
+    std::unique_ptr<DrawablePath> decoratePathL;
+    std::unique_ptr<DrawablePath> decoratePathR;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ThresholdMeter)
 };

@@ -16,7 +16,7 @@ CircularMeter::CircularMeter()
 {
     setColour(ColourIds::backgroundColourId, Colour(0xff635E5D));
     setColour(ColourIds::filledColourId, Colour(0xff42f5cb));
-    setColour(ColourIds::clipColourId, Colours::red);
+    setColour(ColourIds::clipColourId, Colours::indianred); 
     startTimerHz(30);
 }
 

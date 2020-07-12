@@ -135,10 +135,10 @@ namespace BinaryData
     const int            SnareOn_pngSize = 41597;
 
     extern const char*   clipBackground_png;
-    const int            clipBackground_pngSize = 257280;
+    const int            clipBackground_pngSize = 269589;
 
     extern const char*   ENVBackground_png;
-    const int            ENVBackground_pngSize = 269589;
+    const int            ENVBackground_pngSize = 257280;
 
     extern const char*   EQBackground_png;
     const int            EQBackground_pngSize = 199819;

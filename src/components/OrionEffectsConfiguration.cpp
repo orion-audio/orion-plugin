@@ -13,14 +13,13 @@
 #include "GlobalCoefficients.h"
 #include "ThresholdMeter.h"
 
-OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p, int serial) : processor(p), compGui(p,serial), reverbGui(p,serial), delayGui(p,serial)
+OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p, int serial) : processor(p)//, compGui(p,serial), reverbGui(p,serial), delayGui(p,serial)
 {
     effectSerial = serial;
-    
     //---------------------------------------------
-       addAndMakeVisible(&compGui);
+       //addAndMakeVisible(&compGui);
        //addAndMakeVisible(&reverbGui);
-       addAndMakeVisible(&delayGui);
+       //addAndMakeVisible(&delayGui);
     //---------------------------------------------
     
     
@@ -77,7 +76,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
       
     // Compressor-Threshold Meters
     thresholdMeters.reset(new ThresholdMeter());
-    thresholdMeters->updaterFunction = [this] { return processor.getOutputLevel(0);};
+    thresholdMeters->updaterFunction = [this] { return (processor.getOutputLevel(0) + processor.getOutputLevel(1))/2;};
     //meterLeft->numCircles = 8;
     //meterLeft->backgroundColorHide();
     //meterLeft->setColour(meterRight->ColourIds::backgroundColourId, Colours::darkgrey);
@@ -88,9 +87,10 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compThreshSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
     compThreshSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
     compThreshSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    compThreshSlider->setColour(Slider::thumbColourId, juce::Colours::white);
     compThreshSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
     compThreshSlider->setRange(-60.0f, 0.0f);
-    compThreshSlider->setValue(-60.0f);
+    compThreshSlider->setValue(-30.0f);
     compThreshSlider->addListener(this);
     addAndMakeVisible(compThreshSlider.get());
       
@@ -103,7 +103,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compRatioSlider->addListener(this);
     addAndMakeVisible(compRatioSlider.get());
       
-    compRatioLabel.reset(new Label("1.00", "1.00"));
+    compRatioLabel.reset(new Label("1.00 : 1", "1.00 : 1"));
+    compRatioLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(compRatioLabel.get());
     compRatioLabel->setAlpha(0.8);
       
@@ -116,7 +117,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compAttackSlider->addListener(this);
     addAndMakeVisible(compAttackSlider.get());
       
-    compAttackLabel.reset(new Label("0.50", "0.50"));
+    compAttackLabel.reset(new Label("0.50 ms", "0.50 ms"));
+    compAttackLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(compAttackLabel.get());
     compAttackLabel->setAlpha(0.8);
 
@@ -129,7 +131,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compReleaseSlider->addListener(this);
     addAndMakeVisible(compReleaseSlider.get());
       
-    compReleaseLabel.reset(new Label("0.50", "0.50"));
+    compReleaseLabel.reset(new Label("0.50 ms", "0.50 ms"));
+    compReleaseLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(compReleaseLabel.get());
     compReleaseLabel->setAlpha(0.8);
     
@@ -142,7 +145,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compGainSlider->addListener(this);
     addAndMakeVisible(compGainSlider.get());
       
-    compGainLabel.reset(new Label("0.00", "0.00"));
+    compGainLabel.reset(new Label("0.00 db", "0.00 db"));
+    compGainLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(compGainLabel.get());
     compGainLabel->setAlpha(0.8);
     
@@ -154,6 +158,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     reverbDrySlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
     reverbDrySlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
     reverbDrySlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    reverbDrySlider->setColour(Slider::thumbColourId, juce::Colours::white);
     reverbDrySlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
     reverbDrySlider->setRange(0.0f, 1.0f);
     reverbDrySlider->setValue(0.3f);
@@ -169,7 +174,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     reverbPredelaySlider->addListener(this);
     addAndMakeVisible(reverbPredelaySlider.get());
     
-    reverbPredelayLabel.reset(new Label("1.00", "1.00"));
+    reverbPredelayLabel.reset(new Label("1.00 ms", "1.00 ms"));
+    reverbPredelayLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(reverbPredelayLabel.get());
     reverbPredelayLabel->setAlpha(0.8);
     
@@ -182,7 +188,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     reverbDecaySlider->addListener(this);
     addAndMakeVisible(reverbDecaySlider.get());
     
-    reverbDecayLabel.reset(new Label("0.50", "0.50"));
+    reverbDecayLabel.reset(new Label("0.50 ms", "0.50 ms"));
+    reverbDecayLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(reverbDecayLabel.get());
     reverbDecayLabel->setAlpha(0.8);
 
@@ -195,7 +202,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     reverbSizeSlider->addListener(this);
     addAndMakeVisible(reverbSizeSlider.get());
     
-    reverbSizeLabel.reset(new Label("0.50", "0.50"));
+    reverbSizeLabel.reset(new Label("0.50 ms", "0.50 ms"));
+    reverbSizeLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(reverbSizeLabel.get());
     reverbSizeLabel->setAlpha(0.8);
   
@@ -208,7 +216,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     reverbColorSlider->addListener(this);
     addAndMakeVisible(reverbColorSlider.get());
     
-    reverbColorLabel.reset(new Label("0.00", "0.00"));
+    reverbColorLabel.reset(new Label("0.00 cl", "0.00 cl"));
+    reverbColorLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(reverbColorLabel.get());
     reverbColorLabel->setAlpha(0.8);
 
@@ -219,6 +228,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     delayDryWetSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
     delayDryWetSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
     delayDryWetSlider->setColour(Slider::trackColourId, juce::Colours::grey);
+    delayDryWetSlider->setColour(Slider::thumbColourId, juce::Colours::white);
     delayDryWetSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
     delayDryWetSlider->setRange(0.0f, 1.0f);
     delayDryWetSlider->setValue(0.4f);
@@ -234,7 +244,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     delayTimeSlider->addListener(this);
     addAndMakeVisible(delayTimeSlider.get());
       
-    delayTimeLabel.reset(new Label("0.10", "0.10"));
+    delayTimeLabel.reset(new Label("0.10 ms", "0.10 ms"));
+    delayTimeLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(delayTimeLabel.get());
     delayTimeLabel->setAlpha(0.8);
       
@@ -247,7 +258,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     delayFeedbackSlider->addListener(this);
     addAndMakeVisible(delayFeedbackSlider.get());
       
-    delayFeedbackLabel.reset(new Label("0.00", "0.00"));
+    delayFeedbackLabel.reset(new Label("0.00 ms", "0.00 ms"));
+    delayFeedbackLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(delayFeedbackLabel.get());
     delayFeedbackLabel->setAlpha(0.8);
 
@@ -260,7 +272,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     delayColorSlider->addListener(this);
     addAndMakeVisible(delayColorSlider.get());
       
-    delayColorLabel.reset(new Label("0.00", "0.00"));
+    delayColorLabel.reset(new Label("0.00 cl", "0.00 cl"));
+    delayColorLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(delayColorLabel.get());
     delayColorLabel->setAlpha(0.8);
     
@@ -273,7 +286,8 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     delayPanSlider->addListener(this);
     addAndMakeVisible(delayPanSlider.get());
       
-    delayPanLabel.reset(new Label("0.50", "0.50"));
+    delayPanLabel.reset(new Label("C", "C"));
+    delayPanLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(delayPanLabel.get());
     delayPanLabel->setAlpha(0.8);
     
@@ -307,7 +321,7 @@ void OrionEffectsConfiguration::resized()
     
     float knobSize = uniteW * 4.25;
     
-    float boxHeight = getHeight()/5.95;
+    float boxHeight = getHeight()/5.945;
     
     float sliderHeight = getHeight()/2.775;
     
@@ -323,13 +337,17 @@ void OrionEffectsConfiguration::resized()
     
     
     //------------------------------------ Switches ------------------------------------//
-    area = Rectangle<int>(getWidth()/2 - 10 * uniteW, 0.75 * uniteW,  2 * uniteW, 2 * uniteW);
+    
+    // Compressor Switch
+    area = Rectangle<int>(getWidth()/2 - 9.75 * uniteW, 0.75 * uniteW,  2 * uniteW, 2 * uniteW);
     compSwitch->setBounds(area);
     
-    area = Rectangle<int>(getWidth()*2/3 + 2 * uniteW, 0.75 * uniteW,  2 * uniteW, 2 * uniteW);
+    // Reverb Switch
+    area = Rectangle<int>(getWidth()*2/3 + 2.5 * uniteW, 0.75 * uniteW,  2 * uniteW, 2 * uniteW);
     reverbSwitch->setBounds(area);
     
-    area = Rectangle<int>(getWidth() - 4 * uniteW,    0.75 * uniteW, 2 * uniteW, 2 * uniteW);
+    // Delay Switch
+    area = Rectangle<int>(getWidth() - 3.5 * uniteW, 0.75 * uniteW, 2 * uniteW, 2 * uniteW);
     delaySwitch->setBounds(area);
     
     
@@ -342,7 +360,7 @@ void OrionEffectsConfiguration::resized()
     
     
     // Threshold-Slider-Compressor
-    area = Rectangle<int>(getWidth()/5.25, sliderHeight,  24 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/5.3, sliderHeight,  24 * uniteW, 2 * uniteW);
     compThreshSlider->setBounds(area);
     
     
@@ -350,7 +368,7 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/5.65, knobHeight,  knobSize, knobSize);
     compRatioSlider->setBounds(area);
 
-    area = Rectangle<int>(getWidth()/5.65, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/5.65, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     compRatioLabel->setBounds(area);
     
     
@@ -358,7 +376,7 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/4.125, knobHeight,  knobSize, knobSize);
     compAttackSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/4.125, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/4.125, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     compAttackLabel->setBounds(area);
 
     
@@ -366,7 +384,7 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/3.25, knobHeight,  knobSize, knobSize);
     compReleaseSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/3.25, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/3.25, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     compReleaseLabel->setBounds(area);
 
     
@@ -374,7 +392,7 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/2.675, knobHeight,  knobSize, knobSize);
     compGainSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/2.675, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/2.675, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     compGainLabel->setBounds(area);
     
 
@@ -390,7 +408,7 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/2.15, knobHeight,  knobSize, knobSize);
     reverbPredelaySlider->setBounds(area);
 
-    area = Rectangle<int>(getWidth()/2.15, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/2.15, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     reverbPredelayLabel->setBounds(area);
     
     
@@ -398,7 +416,7 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/1.88, knobHeight,  knobSize, knobSize);
     reverbDecaySlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.88, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.88, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     reverbDecayLabel->setBounds(area);
 
     
@@ -406,7 +424,7 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/1.67, knobHeight, knobSize, knobSize);
     reverbSizeSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.67, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.67, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     reverbSizeLabel->setBounds(area);
 
     
@@ -414,14 +432,14 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/1.515, knobHeight,  knobSize, knobSize);
     reverbColorSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.515, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.515, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     reverbColorLabel->setBounds(area);
     
     
     //------------------------------------ Delay ------------------------------------//
     
     // DryWet-Slider-Delay
-    area = Rectangle<int>(getWidth()/1.35, sliderHeight,  24 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/1.335, sliderHeight,  24 * uniteW, 2 * uniteW);
     delayDryWetSlider->setBounds(area);
     
     
@@ -430,28 +448,28 @@ void OrionEffectsConfiguration::resized()
     area = Rectangle<int>(getWidth()/1.338, knobHeight,  knobSize, knobSize);
     delayTimeSlider->setBounds(area);
 
-    area = Rectangle<int>(getWidth()/1.338, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.338, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     delayTimeLabel->setBounds(area);
     
     // Feedback-Knob-Delay
     area = Rectangle<int>(getWidth()/1.235, knobHeight,  knobSize, knobSize);
     delayFeedbackSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.235, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.235, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     delayFeedbackLabel->setBounds(area);
 
     // Color-Knob-Delay
     area = Rectangle<int>(getWidth()/1.1458, knobHeight,  knobSize, knobSize);
     delayColorSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.1458, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.1458, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     delayColorLabel->setBounds(area);
 
     // Pan-Knob-Delay
     area = Rectangle<int>(getWidth()/1.0618, knobHeight,  knobSize, knobSize);
     delayPanSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.0618, knobVarTextHeight,  5 * uniteW, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.0618, knobVarTextHeight,  knobSize, 1.5 * uniteW);
     delayPanLabel->setBounds(area);
 
     
@@ -589,7 +607,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         
         compressorThreshCoefficient[instrumetSerial] = compThreshSlider->getValue();
-        thresholdMeters->pointerMove((compressorThreshCoefficient[instrumetSerial] + 60.0f) * 3.65);//--Change Later!!!
+        thresholdMeters->pointerMove((compressorThreshCoefficient[instrumetSerial] + 60.0f)/60.0f);//--Change Later!!!
     }
     else if(slider == compRatioSlider.get())// Compressor Ratio
     {
@@ -601,6 +619,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
 
         compressorRatioCoefficient[instrumetSerial] = compRatioSlider->getValue();
         String value = valueDoubleDigitTranslator(compressorRatioCoefficient[instrumetSerial]);
+        value.append(" : 1",4);
         compRatioLabel->setText(value,dontSendNotification);
     }
     else if(slider == compAttackSlider.get())// Compressor Attack
@@ -613,7 +632,9 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         compressorAttackCoefficient[instrumetSerial] = compAttackSlider->getValue();
         String value = valueDoubleDigitTranslator(compressorAttackCoefficient[instrumetSerial]);
+        value.append(" ms",3);// not accurate need to be change later
         compAttackLabel->setText(value,dontSendNotification);
+        
     }
     else if(slider == compReleaseSlider.get())// Compressor Release
     {
@@ -624,6 +645,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
 
         compressorReleaseCoefficient[instrumetSerial] = compReleaseSlider->getValue();
         String value = valueDoubleDigitTranslator(compressorReleaseCoefficient[instrumetSerial]);
+        value.append(" ms",3);// not accurate need to be change later
         compReleaseLabel->setText(value,dontSendNotification);
     }
     else if(slider == compGainSlider.get())// Compressor Gain
@@ -636,6 +658,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         compressorGainCoefficient[instrumetSerial] = compGainSlider->getValue();
         String value = valueDoubleDigitTranslator(compressorGainCoefficient[instrumetSerial]);
+        value.append(" db",3); // not accurate need to be change later
         compGainLabel->setText(value,dontSendNotification);
     }
     
@@ -673,6 +696,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         reverbPredelayCoefficient[instrumetSerial] = reverbPredelaySlider->getValue();
         String value = valueDoubleDigitTranslator(reverbPredelayCoefficient[instrumetSerial]);
+        value.append(" db",3); // not accurate need to be change later
         reverbPredelayLabel->setText(value,dontSendNotification);
     }
     else if(slider == reverbDecaySlider.get())// Reverb Decay
@@ -690,6 +714,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         reverbDecayCoefficient[instrumetSerial] = 1.0f - reverbDecaySlider->getValue();
         String value = valueDoubleDigitTranslator(reverbDecayCoefficient[instrumetSerial]);
+        value.append(" db",3); // not accurate need to be change later
         reverbDecayLabel->setText(value,dontSendNotification);
     }
     else if(slider == reverbSizeSlider.get())// Reverb Size
@@ -707,6 +732,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         reverbSizeCoefficient[instrumetSerial] = reverbSizeSlider->getValue();
         String value = valueDoubleDigitTranslator(reverbSizeCoefficient[instrumetSerial]);
+        value.append(" db",3); // not accurate need to be change later
         reverbSizeLabel->setText(value,dontSendNotification);
     }
     else if(slider == reverbColorSlider.get())// Reverb Color
@@ -761,6 +787,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         reverbColorCoefficient[instrumetSerial] = reverbColorSlider->getValue();
         String value = valueDoubleDigitTranslator(reverbColorCoefficient[instrumetSerial]);
+        value.append(" cl",3); // not real need to be change later
         reverbColorLabel->setText(value,dontSendNotification);
     }
     
@@ -794,6 +821,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
 
         delayTimeCoefficient[instrumetSerial] = delayTimeSlider->getValue();
         String value = valueDoubleDigitTranslator(delayTimeCoefficient[instrumetSerial]);
+        value.append(" db",3); // not accurate need to be change later
         delayTimeLabel->setText(value,dontSendNotification);
     }
     else if(slider == delayFeedbackSlider.get())// Delay Feedback
@@ -806,6 +834,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         delayFeedbackCoefficient[instrumetSerial] = delayFeedbackSlider->getValue();
         String value = valueDoubleDigitTranslator(delayFeedbackCoefficient[instrumetSerial]);
+        value.append(" db",3); // not accurate need to be change later
         delayFeedbackLabel->setText(value,dontSendNotification);
     }
     else if(slider == delayColorSlider.get())// Delay Color
@@ -818,6 +847,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
 
         delayColorCoefficient[instrumetSerial] = delayColorSlider->getValue();
         String value = valueDoubleDigitTranslator(delayColorCoefficient[instrumetSerial]);
+        value.append(" cl",3); // not accurate need to be change later
         delayColorLabel->setText(value,dontSendNotification);
     }
     else if(slider == delayPanSlider.get())// Delay Pan
@@ -829,7 +859,28 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         }
         
         delayPanCoefficient[instrumetSerial] = delayPanSlider->getValue();
-        String value = valueDoubleDigitTranslator(delayPanCoefficient[instrumetSerial]);
+        
+        String value;
+        //value = valueDoubleDigitTranslator(delayPanCoefficient[instrumetSerial]);
+        
+        if(delayPanSlider->getValue() < 0.5)
+        {
+            value = "L ";
+            value.append(valueDoubleDigitTranslator((0.5f - delayPanCoefficient[instrumetSerial])*200),4);// not accurate need to be change later
+            
+        }
+        else if(delayPanSlider->getValue() > 0.5)
+        {
+            DBG(delayPanCoefficient[instrumetSerial]);
+            value = valueDoubleDigitTranslator((delayPanCoefficient[instrumetSerial] - 0.5F)*200);
+            value.append(" R",2); // not accurate need to be change later
+        }
+        else
+        {
+            value = "C";
+        }
+            
+    
         delayPanLabel->setText(value,dontSendNotification);
     }
     

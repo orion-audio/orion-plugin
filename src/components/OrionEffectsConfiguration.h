@@ -12,9 +12,10 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "ThresholdMeter.h"
-#include "OrionEffectComp.h"
-#include "OrionEffectReverb.h"
-#include "OrionEffectDelay.h"
+
+//#include "OrionEffectComp.h"
+//#include "OrionEffectReverb.h"
+//#include "OrionEffectDelay.h"
 
 
 class OrionEffectsConfiguration : public Component,
@@ -28,9 +29,9 @@ public:
     void resized() override;
     int effectSerial;
 
-    OrionEffectComp compGui;
-    OrionEffectReverb reverbGui;
-    OrionEffectDelay delayGui;
+//    OrionEffectComp compGui;
+//    OrionEffectReverb reverbGui;
+//    OrionEffectDelay delayGui;
 
     void sliderValueChanged (Slider* slider)override;
     
@@ -39,6 +40,7 @@ public:
     
 private:
     OrionaudioAudioProcessor& processor;
+    OrionaudioAudioProcessor* processor2;
     std::unique_ptr<DrawableImage> backgroundImageView;
     
     /* Images */
@@ -52,8 +54,7 @@ private:
     std::unique_ptr<ImageButton> delaySwitch;
     
     
-    
-    
+
     /* Compressor */
     std::unique_ptr<ThresholdMeter> thresholdMeters;
     std::unique_ptr<Slider> compThreshSlider;
