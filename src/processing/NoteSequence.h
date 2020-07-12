@@ -12,6 +12,15 @@ class NoteSequence
 {
 public:
 //    static int noteValues[8];
+    enum SubDivision : int {
+        whole = 1,
+        half,
+        quarter,
+        eigth,
+        sixteenth,
+        thirtysecond
+    };
+
     static Array<int> noteValues;
     NoteSequence();
         

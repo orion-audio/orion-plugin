@@ -51,10 +51,10 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
     if (!currentPos.isPlaying)
         return;
     long long posInSamples = currentPos.timeInSamples;
-    posInSamples %= NoteSequence::ppqToSamples(totalLength, 120, lastSampleRate);
+    posInSamples %= NoteSequence::ppqToSamples(sequenceLength, 120, lastSampleRate);
     auto notes = sequence->getNotes();
     
-    int loopEnd = NoteSequence::ppqToSamples(totalLength, sequence->getTempo(), lastSampleRate);
+    int loopEnd = NoteSequence::ppqToSamples(sequenceLength, sequence->getTempo(), lastSampleRate);
     
     // iterate through all notes
     for (int i = 0; i < notes.size(); i++){
@@ -166,5 +166,7 @@ void Sequencer::notifyListenersNotePlayed(int pitch, int note) {
     }
 }
 
-
+void Sequencer::setSequenceLength(int newLength) {
+    sequenceLength = (newLength > 0 ? newLength : sequenceLength);
+}
 

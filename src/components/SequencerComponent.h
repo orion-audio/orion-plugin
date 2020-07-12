@@ -64,9 +64,12 @@ public:
     
     bool isSelected = true;
     
-    virtual void sequenceChanged() override { repaint(); }
     
     void notePlayed(int part, int beat) override;
+   
+    virtual void sequenceChanged() override { repaint(); }
+    virtual void sequenceLengthChanged(int newLength) override;
+
 
     void addListener(Sequencer::Listener* listener) { listeners.push_back(listener); }
     

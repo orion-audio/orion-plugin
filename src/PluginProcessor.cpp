@@ -297,10 +297,9 @@ AudioProcessorValueTreeState::ParameterLayout OrionaudioAudioProcessor::createPa
         layout.add(std::make_unique<AudioParameterFloat>("envDecayBend" + String(i), "envDecayBend", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, "", AudioProcessorParameter::Category::genericParameter));
 
         layout.add(std::make_unique<AudioParameterFloat>("envReleaseBend" + String(i), "envReleaseBend", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 0.01f, "", AudioProcessorParameter::Category::genericParameter));
-
+        
     }
     
-
     return layout;
 
 }

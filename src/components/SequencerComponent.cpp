@@ -20,9 +20,7 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     sequencer.addListener(this);
     
     setOpaque(true);
-    
-    this->shouldFlip = shouldFlip;
-    
+        
     startTimerHz(15);
     
     voiceNames.add("KICK");
@@ -230,6 +228,7 @@ void SequencerComponent::buttonClicked(Button* b)
     if (button != nullptr) {
         int pitch = button->getPitch();
         int beat = button->getBeat();
+        std::cout << pitch << "," << beat << std::endl;
         NoteSequence* sequence = sequencer.getNoteSequence();
         if (sequence->checkAndRemoveNote(pitch, beat))
             DBG("removed");
@@ -258,6 +257,8 @@ void SequencerComponent::handleButtonPress(int pitch, int beat, bool buttonState
 
 void SequencerComponent::setSequenceLength(int newLength) {
     if (newLength <= 0) return;
+    
+    sequencer.setSequenceLength(newLength);
     
     auto deleteToMatchLength = [&] (std::vector<std::unique_ptr<SequencerButton>>& vector, int target) {
         while (vector.size() > target) {
@@ -292,5 +293,8 @@ void SequencerComponent::setSizeWithOverflow(int height) {
 }
 
 
+void SequencerComponent::sequenceLengthChanged(int newLength) {
+    setSequenceLength(newLength);
+}
 
     
