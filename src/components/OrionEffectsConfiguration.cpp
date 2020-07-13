@@ -90,7 +90,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compThreshSlider->setColour(Slider::thumbColourId, juce::Colours::white);
     compThreshSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
     compThreshSlider->setRange(-60.0f, 0.0f);
-    compThreshSlider->setValue(-30.0f);
+    compThreshSlider->setValue(0.0f);
     compThreshSlider->addListener(this);
     addAndMakeVisible(compThreshSlider.get());
       
@@ -302,12 +302,12 @@ void OrionEffectsConfiguration::paint(Graphics& g)
 //MARK:- Resize
 void OrionEffectsConfiguration::resized()
 {
-    Rectangle<int> area = getLocalBounds();
-    float uniteW = getWidth()/100;
+    
+    
     
     /*
     //---------- Previous ---------------//
-    
+    Rectangle<int> area = getLocalBounds();
     area = area.removeFromLeft(getWidth() / 3);
     compGui.setBounds(area);
     
@@ -319,16 +319,23 @@ void OrionEffectsConfiguration::resized()
     */
     
     
-    float knobSize = uniteW * 4.25;
+    float uniteW = getWidth()/100;
+    
+    float textHeight = getWidth()/65;
     
     float boxHeight = getHeight()/5.945;
     
-    float sliderHeight = getHeight()/2.775;
+    float sliderY = getHeight()/2.775;
     
-    float knobHeight = getHeight()/1.675;
+    float sliderHeight = getWidth()/50;
+    
+    float knobY = getHeight()/1.675;
+    
+    float knobSize = getWidth()/25;
     
     float knobVarTextHeight =  getHeight()/1.225;
     
+    Rectangle<int> area = getLocalBounds();
     //--------------------------------- Background Image --------------------------------//
     area = Rectangle<int>(0, 0, getWidth(), getHeight());
     backgroundImageView->setTransformToFit(area.toFloat(), RectanglePlacement::stretchToFit);
@@ -360,116 +367,116 @@ void OrionEffectsConfiguration::resized()
     
     
     // Threshold-Slider-Compressor
-    area = Rectangle<int>(getWidth()/5.3, sliderHeight,  24 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/5.3, sliderY,  24 * uniteW, sliderHeight);
     compThreshSlider->setBounds(area);
     
     
     // Ratio-Knob-Compressor
-    area = Rectangle<int>(getWidth()/5.65, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/5.65, knobY,  knobSize, knobSize);
     compRatioSlider->setBounds(area);
 
-    area = Rectangle<int>(getWidth()/5.65, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/5.65 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     compRatioLabel->setBounds(area);
     
     
     // Attack-Knob-Compressor
-    area = Rectangle<int>(getWidth()/4.125, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/4.125, knobY,  knobSize, knobSize);
     compAttackSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/4.125, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/4.125 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     compAttackLabel->setBounds(area);
 
     
     // Release-Knob-Compressor
-    area = Rectangle<int>(getWidth()/3.25, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/3.25, knobY,  knobSize, knobSize);
     compReleaseSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/3.25, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/3.25 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     compReleaseLabel->setBounds(area);
 
     
     // Gain-Knob-Compressor
-    area = Rectangle<int>(getWidth()/2.675, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/2.675, knobY,  knobSize, knobSize);
     compGainSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/2.675, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/2.675 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     compGainLabel->setBounds(area);
     
 
     //------------------------------------ Reverb ------------------------------------//
     
     // DryWet-Slider-Reverb
-    area = Rectangle<int>(getWidth()/2.125, sliderHeight,  24 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/2.125, sliderY,  24 * uniteW, sliderHeight);
     reverbDrySlider->setBounds(area);
     
     
 
     // PreDelay-Knob-Reverb
-    area = Rectangle<int>(getWidth()/2.15, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/2.15, knobY,  knobSize, knobSize);
     reverbPredelaySlider->setBounds(area);
 
-    area = Rectangle<int>(getWidth()/2.15, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/2.15 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     reverbPredelayLabel->setBounds(area);
     
     
     // Decay-Knob-Reverb
-    area = Rectangle<int>(getWidth()/1.88, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/1.88, knobY,  knobSize, knobSize);
     reverbDecaySlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.88, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.88 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     reverbDecayLabel->setBounds(area);
 
     
     // Size-Knob-Reverb
-    area = Rectangle<int>(getWidth()/1.67, knobHeight, knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/1.67, knobY, knobSize, knobSize);
     reverbSizeSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.67, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.67 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     reverbSizeLabel->setBounds(area);
 
     
     // Color-Knob-Reverb
-    area = Rectangle<int>(getWidth()/1.515, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/1.515, knobY,  knobSize, knobSize);
     reverbColorSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.515, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.515 - knobSize * 0, knobVarTextHeight,  knobSize * 1.25, textHeight);
     reverbColorLabel->setBounds(area);
     
     
     //------------------------------------ Delay ------------------------------------//
     
     // DryWet-Slider-Delay
-    area = Rectangle<int>(getWidth()/1.335, sliderHeight,  24 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/1.335, sliderY,  24 * uniteW, sliderHeight);
     delayDryWetSlider->setBounds(area);
     
     
     
     // Time-Knob-Delay
-    area = Rectangle<int>(getWidth()/1.338, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/1.338, knobY,  knobSize, knobSize);
     delayTimeSlider->setBounds(area);
 
-    area = Rectangle<int>(getWidth()/1.338, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.338 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     delayTimeLabel->setBounds(area);
     
     // Feedback-Knob-Delay
-    area = Rectangle<int>(getWidth()/1.235, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/1.235, knobY,  knobSize, knobSize);
     delayFeedbackSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.235, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.235 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     delayFeedbackLabel->setBounds(area);
 
     // Color-Knob-Delay
-    area = Rectangle<int>(getWidth()/1.1458, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/1.1458, knobY,  knobSize, knobSize);
     delayColorSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.1458, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.1458 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     delayColorLabel->setBounds(area);
 
     // Pan-Knob-Delay
-    area = Rectangle<int>(getWidth()/1.0618, knobHeight,  knobSize, knobSize);
+    area = Rectangle<int>(getWidth()/1.0618, knobY,  knobSize, knobSize);
     delayPanSlider->setBounds(area);
     
-    area = Rectangle<int>(getWidth()/1.0618, knobVarTextHeight,  knobSize, 1.5 * uniteW);
+    area = Rectangle<int>(getWidth()/1.0618 - knobSize * 0.125, knobVarTextHeight,  knobSize * 1.25, textHeight);
     delayPanLabel->setBounds(area);
 
     

@@ -25,7 +25,7 @@ ThresholdMeter::ThresholdMeter()
     decoratePathL.reset(new DrawablePath());
     addAndMakeVisible(decoratePathL.get());
     decoratePathL->replaceColour(Colours::black,Colours::darkgrey);
-    decoratePathL->setAlpha(0.5);
+    decoratePathL->setAlpha(0.0);
     
     decoratePathR.reset(new DrawablePath());
     addAndMakeVisible(decoratePathR.get());
@@ -75,8 +75,6 @@ void ThresholdMeter::paint (juce::Graphics& g)
         }
         
         
-        
-        
         if(level <= 1 && level >= -1)
         {
            if(level == 0)
@@ -101,8 +99,6 @@ void ThresholdMeter::paint (juce::Graphics& g)
             g.fillRoundedRectangle (areaOverDrive.toFloat(), 7.5f);
         }
         
-        
-        
     }
     
         
@@ -115,8 +111,9 @@ void ThresholdMeter::resized()
 {
     //--------- DROPDOWN BUTTONS ---------//
     Path path;
-    path.addRectangle (getWidth()*7.5/15, getHeight()*1.25/15, 1, getHeight()*13/15);
-    pointerPath->setPath(path);
+    
+//    path.addRectangle (getWidth()*7.5/15, getHeight()*1.25/15, 1, getHeight()*13/15);
+//    pointerPath->setPath(path);
     
     path.addRectangle (getWidth()/15, getHeight()*1.25/15, 1, getHeight()*13/15);
     decoratePathL->setPath(path);
@@ -131,7 +128,7 @@ void ThresholdMeter::timerCallback()
     repaint();
 }
 
-void ThresholdMeter::pointerMove(float value)//value range 0->1
+void ThresholdMeter::pointerMove(float value)//value range 0<->1
 {
     Path path;
     path.addRectangle (getWidth()/15 + value * getWidth() * 13/15, getHeight() * 1.25/15, 1, getHeight()*13/15);
