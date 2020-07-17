@@ -148,6 +148,8 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     meterRight->setColour(meterRight->ColourIds::filledColourId, Colours::lightgrey);
     addAndMakeVisible(meterRight.get());
     
+    
+    
 
 //    // DROPDOWN BUTTON
 //    downImage = ImageCache::getFromMemory(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
@@ -401,9 +403,7 @@ void PrimaryPaneComponent::resized()
     // Master Volume "-" Label
     area = Rectangle<int>(getWidth() - 2.88 * uniteW, 11.25 * uniteW, 2 * uniteW, 2 * uniteW);
     MasterVolumeSubtractLabel->setBounds(area);
-    
-    
-    
+
     
     //----------------------------------
     repaint();

@@ -39,7 +39,7 @@ class OrionSamplerVoice : public SamplerVoice
     
 private:
     BigInteger midiNote;
-    EnvelopeGenerator env;
+    
 
     //float* masterVolume = &masterVolumeCoefficient;
 
@@ -73,6 +73,9 @@ public:
  
     //---------- Pan ----------/
     PanPos pan;
+    //---------- Envelope ----------/
+    bool envswitch = false;
+    EnvelopeGenerator env;
     //------- Effect Switches -------/
     bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
     
@@ -370,10 +373,16 @@ public:
                 r = l;
                 
                 //MARK:- Apply Envelope
-                envVal = env.doEnvelope();
-                // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
-                l *= envVal;
-                r *= envVal;
+                
+                if(envswitch)
+                {
+                    envVal = env.doEnvelope();
+                    // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
+                    l *= envVal;
+                    r *= envVal;
+                }
+                
+                
               
                 //MARK:- Apply Compressor
                 if(compressorswitch)

@@ -20,6 +20,8 @@
       <FILE id="tfqxJy" name="OrionGlobalVars.h" compile="0" resource="0"
             file="src/OrionGlobalVars.h"/>
       <GROUP id="{E69628DD-29AF-BEA4-BD8B-5EF337C053E4}" name="components">
+        <FILE id="DAA0Q6" name="DigitTransverter.h" compile="0" resource="0"
+              file="src/components/DigitTransverter.h"/>
         <FILE id="bB4Z5b" name="AutoLabel.cpp" compile="1" resource="0" file="src/components/AutoLabel.cpp"/>
         <FILE id="bMrCgv" name="AutoLabel.h" compile="0" resource="0" file="src/components/AutoLabel.h"/>
         <FILE id="kVx7FJ" name="CircularMeter.cpp" compile="1" resource="0"
@@ -29,6 +31,9 @@
               file="src/components/ThresholdMeter.cpp"/>
         <FILE id="HMn96K" name="ThresholdMeter.h" compile="0" resource="0"
               file="src/components/ThresholdMeter.h"/>
+        <FILE id="ZSHv01" name="EnvelopeMeter.cpp" compile="1" resource="0"
+              file="src/components/EnvelopeMeter.cpp"/>
+        <FILE id="tukfj6" name="EnvelopeMeter.h" compile="0" resource="0" file="src/components/EnvelopeMeter.h"/>
         <FILE id="LFNeJv" name="DragAndDropButton.h" compile="0" resource="0"
               file="src/components/DragAndDropButton.h"/>
         <FILE id="L8fFgn" name="DraggableFileBrowserComponent.cpp" compile="1"

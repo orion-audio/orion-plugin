@@ -38,7 +38,6 @@ public:
     
     std::function<float()> updaterFunction;
     
-
     void backgroundColorHide()
     {
         backgroundColorShow = false;

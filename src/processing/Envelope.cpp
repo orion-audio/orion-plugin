@@ -3,11 +3,15 @@
 using namespace std;
 EnvelopeGenerator::EnvelopeGenerator(void)
 {
-    sampleRate = 48000;
-    attackTime = 0;
-    decayTime = 0;
-    releaseTime = 1000;
-    sustainLevel = 1.0;
+    sampleRate = 44100;
+    
+    attackTime = 0.1f;//Attack
+    decayTime = 1250.0f;//Decay
+    sustainTime = 750.0f;//Hold
+    releaseTime = 1250.0f;//Release
+    
+    sustainLevel = 0.5f;//Bend - Sustain
+    
     envelopeOutput = 0.0;//output is between 0 to 1
     incValueShutdown = 0.0;
     currentTime = 0.0;

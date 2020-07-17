@@ -50,21 +50,16 @@ protected:
     double releaseOffset;
     double releaseTCO;
     
-    
-    double attackTime;
-    double decayTime;
-    double releaseTime;
-    double sustainTime;
-    
+    double attackTime;//Attack
+    double decayTime;//Decay
+    double releaseTime;//Release
+    double sustainTime;//Sustain
     
     double shutdownTime;
     
-    
     double sustainLevel;
     
-    
     double incValueShutdown;
-    
     
     int envelopeState;
     enum { off, attack, decay, sustain, release, shutdown };

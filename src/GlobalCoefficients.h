@@ -35,6 +35,20 @@ bool  instrumentsMuteStates        [8] = {false, false, false, false, false, fal
 float instrumentsVolumeCoefficient [8] = {0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f};
 float instrumentsPanCoefficient    [8] = {0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f};
 
+// Envelope
+bool  envSwitches                  [8] = {false, false, false, false, false, false, false, false};
+
+float envAttackCoefficient         [8] = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
+float envDecayCoefficient          [8] = {1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f};
+float envSustainCoefficient        [8] = {750.0f, 750.0f, 750.0f, 750.0f, 750.0f, 750.0f, 750.0f, 750.0f};
+float envReleaseCoefficient        [8] = {1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f};
+
+float envAttackBendCoefficient     [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+float envDecayBendCoefficient      [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+float envSustainBendCoefficient    [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+float envReleaseBendCoefficient    [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+
+
 // FX Switch
 bool  compSwitches                 [8] = {false, false, false, false, false, false, false, false};
 bool  reverbSwitches               [8] = {false, false, false, false, false, false, false, false};
@@ -87,6 +101,21 @@ extern bool  instrumentsSoloStates[];
 extern bool  instrumentsMuteStates[];
 extern float instrumentsVolumeCoefficient[];
 extern float instrumentsPanCoefficient[];
+
+
+// Envelope
+extern bool  envSwitches                [];
+
+extern float envAttackCoefficient       [];
+extern float envDecayCoefficient        [];
+extern float envSustainCoefficient      [];
+extern float envReleaseCoefficient      [];
+
+extern float envAttackBendCoefficient   [];
+extern float envDecayBendCoefficient    [];
+extern float envSustainBendCoefficient  [];
+extern float envReleaseBendCoefficient  [];
+
 
 // FX Switch
 extern bool  compSwitches   [];

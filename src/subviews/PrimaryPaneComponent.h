@@ -16,7 +16,6 @@
 #include <array>
 #include "DragAndDropButton.h"
 #include "PluginProcessor.h"
-
 class OrionaudioAudioProcessorEditor;
 
 //==============================================================================

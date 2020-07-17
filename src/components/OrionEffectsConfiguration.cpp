@@ -20,8 +20,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
        //addAndMakeVisible(&compGui);
        //addAndMakeVisible(&reverbGui);
        //addAndMakeVisible(&delayGui);
-    //---------------------------------------------
-    
+    //--------------------------------------------
     
     //------------------------------------ Background ------------------------------------//
     
@@ -76,12 +75,11 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
       
     // Compressor-Threshold Meters
     thresholdMeters.reset(new ThresholdMeter());
-    thresholdMeters->updaterFunction = [this] { return (processor.getOutputLevel(0) + processor.getOutputLevel(1))/2;};
-    //meterLeft->numCircles = 8;
-    //meterLeft->backgroundColorHide();
-    //meterLeft->setColour(meterRight->ColourIds::backgroundColourId, Colours::darkgrey);
-    //meterLeft->setColour(meterRight->ColourIds::filledColourId, Colours::lightgrey);
+    thresholdMeters->updaterFunction = [this] { return processor.getOutputLevel(0);};// + processor.getOutputLevel(1))/2
+    thresholdMeters->serial = serial;
     addAndMakeVisible(thresholdMeters.get());
+    
+    
     // Compressor-Threshold
     compThreshSlider.reset(new Slider());
     compThreshSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);

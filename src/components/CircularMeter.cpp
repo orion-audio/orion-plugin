@@ -56,7 +56,7 @@ void CircularMeter::paint (Graphics& g)
             level = updaterFunction();
             //DBG(level);//print level
             for (int i = 0; i < numCircles; i++){
-                if (level > i * (0.75f/* original 1.0f */ / numCircles))
+                if (level > i * (1.0f/* original 1.0f */ / numCircles))
                 {
                     numFilled++;
                 }
@@ -98,7 +98,7 @@ void CircularMeter::paint (Graphics& g)
         {
             level = updaterFunction();
             for (int i = 0; i < numCircles; i++){
-                if (level > i * (0.75f/* original 1.0f */ / numCircles))
+                if (level > i * (1.0f/* original 1.0f */ / numCircles))
                 {
                     numFilled++;
                 }

@@ -444,7 +444,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     if(isDown)
     {
-        std::cout<<"Down"<<std::endl;
+        //std::cout<<"Down"<<std::endl;
         
         processor.getSampler()->noteOn(1, midiNote, 120);
         if (processor.getMidiOutput() != nullptr)
@@ -515,7 +515,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     }
     else
     {
-        std::cout<<"Up"<<std::endl;
+        //std::cout<<"Up"<<std::endl;
         processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
         globalOutputMeterL = 0;
         globalOutputMeterR = 0;
