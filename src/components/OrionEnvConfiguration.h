@@ -27,13 +27,15 @@ public:
     void setSwitchImage(bool On);
     void sliderValueChanged (Slider* slider)override;
     
+    std::unique_ptr<EnvelopeMeter> envelopeMeter;
+    
 private:
     
     
     std::unique_ptr<DrawableImage> backgroundImageView;
     Rectangle<int>          plotFrame;
     
-    std::unique_ptr<EnvelopeMeter> envelopeMeter;
+    
     
     Slider envAttackSlider;
     Slider envHoldSlider;
@@ -65,6 +67,7 @@ private:
     
     
     OrionaudioAudioProcessor& processor;
+    File* audioFile;
     
     /* Images */
     

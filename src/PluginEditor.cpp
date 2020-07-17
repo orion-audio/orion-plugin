@@ -39,10 +39,13 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     tabComponents.reset(new TabComponentHolder(p));
     addAndMakeVisible(tabComponents.get());
+    for (int i = 0; i < instrumentAmount; i++)
+    {
+        tabComponents->tabComponents[i]->envConfiguration->envelopeMeter->initAudioFile(i);
+    }
     
     arrangementWindow.reset(new ArrangementWindowComponent(&p, this));
     addAndMakeVisible(arrangementWindow.get());
-    
     
     footerPath.reset(new DrawablePath());
     addAndMakeVisible(footerPath.get());
@@ -601,26 +604,26 @@ void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
     
     if(newState)
     {
-        if(dropdownTabSerial == 0)
+        if(dropdownTabSerial == 0)//EQ
         {
             dropDownClip->setToggleState(false,sendNotificationSync);
             dropDownENV->setToggleState(false,sendNotificationSync);
             dropDownFX->setToggleState(false,sendNotificationSync);
             
         }
-        else if(dropdownTabSerial == 1)
+        else if(dropdownTabSerial == 1)//Clip
         {
             dropDownEQ->setToggleState(false,sendNotificationSync);
             dropDownENV->setToggleState(false,sendNotificationSync);
             dropDownFX->setToggleState(false,sendNotificationSync);
         }
-        else if(dropdownTabSerial == 2)
+        else if(dropdownTabSerial == 2)//Envelope
         {
             dropDownClip->setToggleState(false,sendNotificationSync);
             dropDownEQ->setToggleState(false,sendNotificationSync);
             dropDownFX->setToggleState(false,sendNotificationSync);
         }
-        else if(dropdownTabSerial == 3)
+        else if(dropdownTabSerial == 3)//FX
         {
             dropDownClip->setToggleState(false,sendNotificationSync);
             dropDownENV->setToggleState(false,sendNotificationSync);

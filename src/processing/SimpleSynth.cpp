@@ -165,6 +165,7 @@ void SimpleSynth::loadSamples()
 
         }
         File file(audiofolder.getChildFile(dir).getChildFile(filename));
+        instrumentSamplePathes[i] = file;
         std::unique_ptr<AudioFormatReader> reader;
         reader.reset(audioFormatManager.createReaderFor(file));
         if (reader == nullptr)

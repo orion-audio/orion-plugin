@@ -7,7 +7,7 @@
 
   ==============================================================================
 */
-
+#include "../JuceLibraryCode/JuceHeader.h"
 
 #ifdef __COEFFICIENTSMAIN__
 
@@ -34,6 +34,7 @@ bool  instrumentsSoloStates        [8] = {false, false, false, false, false, fal
 bool  instrumentsMuteStates        [8] = {false, false, false, false, false, false, false, false};
 float instrumentsVolumeCoefficient [8] = {0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f};
 float instrumentsPanCoefficient    [8] = {0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f};
+File  instrumentSamplePathes       [8];
 
 // Envelope
 bool  envSwitches                  [8] = {false, false, false, false, false, false, false, false};
@@ -101,6 +102,7 @@ extern bool  instrumentsSoloStates[];
 extern bool  instrumentsMuteStates[];
 extern float instrumentsVolumeCoefficient[];
 extern float instrumentsPanCoefficient[];
+extern File  instrumentSamplePathes[];
 
 
 // Envelope

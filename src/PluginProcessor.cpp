@@ -17,7 +17,6 @@
 //==============================================================================
 static String doubleToString(double val) { return String(val); }
 static double stringToDouble(String s){return std::stod(s.toStdString());}
-
 //==============================================================================
 OrionaudioAudioProcessor::OrionaudioAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -37,11 +36,15 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
     if (midiOutput != nullptr)
         midiOutput->startBackgroundThread();
 
+    
     sampler.reset(new SimpleSynth());
-    sampler->setup(48000);
+    sampler->setup(44100);
 
     sequencer.reset(new Sequencer(static_cast<Synthesiser*>(sampler.get())));
     sequencer->setActive(true);
+    
+    //cloneEditor->tabComponents->tabComponents[instrumetSerial]->envConfiguration->envelopeMeter->loadAudioFile();
+    
 }
 
 OrionaudioAudioProcessor::~OrionaudioAudioProcessor()
@@ -206,7 +209,7 @@ bool OrionaudioAudioProcessor::hasEditor() const
 
 AudioProcessorEditor* OrionaudioAudioProcessor::createEditor()
 {
-    return new OrionaudioAudioProcessorEditor (*this);
+    return new OrionaudioAudioProcessorEditor (*this);;
 }
 
 //==============================================================================

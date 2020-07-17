@@ -227,7 +227,11 @@ void ThresholdMeter::meterUpdate()
         if(meterUpdated)
         {
             Path path;
-            path.addRectangle(0, 0,  preLevel * getWidth()*14/15 , getHeight());
+            path.addRoundedRectangle(0, 0,  preLevel * getWidth()*14/15 , getHeight(), 5, 5,
+                                     true /* curveTopLeft */,
+                                     false /*curveTopRight */,
+                                     true /*curveBottomLeft */,
+                                     false /*curveBottomRight */);
 
             meterPath->setPath(path);
 

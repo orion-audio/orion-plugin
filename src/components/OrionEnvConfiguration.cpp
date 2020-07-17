@@ -21,6 +21,8 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
 {
     envSerial = serial;
     
+    
+    audioFile = &instrumentSamplePathes[serial];
     //-------------------------------- Background Image -------------------------------//
     Image backgroundImage = ImageCache::getFromMemory(BinaryData::ENVBackground_png, BinaryData::ENVBackground_pngSize);
     backgroundImageView.reset(new DrawableImage());
@@ -683,6 +685,6 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
 
     }
     
-    envelopeMeter->repaint();
+    envelopeMeter->updateEnvelope();
     
 }

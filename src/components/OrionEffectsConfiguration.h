@@ -41,8 +41,6 @@ public:
 private:
     OrionaudioAudioProcessor& processor;
     
-    //OrionaudioAudioProcessor* processor2;
-    
     std::unique_ptr<DrawableImage> backgroundImageView;
     
     /* Images */
