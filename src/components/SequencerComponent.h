@@ -79,12 +79,15 @@ public:
     int getSequenceLength() { return sequenceLength; }
     
     void setSizeWithOverflow(int height);
+
+    void setSubDivision(NoteSequence::SubDivision s);
+
 private:
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
     std::vector<Note> notesToBePlayed;
     
-    std::array<std::vector<std::unique_ptr<SequencerButton>>, 7> sequencerButtons;
+    std::array<std::vector<std::unique_ptr<SequencerButton>>, 6> sequencerButtons;
     
     int selectedRow = 0;
     int lastBeat = -1;

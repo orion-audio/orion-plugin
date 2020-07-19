@@ -11,16 +11,15 @@
 class NoteSequence
 {
 public:
-//    static int noteValues[8];
+    
     enum SubDivision : int {
-        whole = 1,
-        half,
-        quarter,
-        eigth,
-        sixteenth,
-        thirtysecond
+        half = 2,
+        quarter = 4,
+        eighth = 8,
+        sixteenth = 16,
+        thirtysecond = 32
     };
-
+//    static int noteValues[8];
     static Array<int> noteValues;
     NoteSequence();
         
@@ -43,6 +42,9 @@ public:
     ValueTree toValueTree();
     void fromValueTree(ValueTree);
 
+    
+    SubDivision getSubdivisionForVoice(int voice) { return voiceSubdivisions[voice]; };
+    void setSubdivisionForVoice(int voice, SubDivision subDivision) { voiceSubdivisions[voice] = subDivision; };
     static double ppqToSecs(int ppq, int tempo);
     static int ppqToSamples(int ppq, int tempo, double sampleRate);
     
@@ -50,6 +52,9 @@ public:
 
 private:
     int tempo = 120;
-    std::vector<Note> notes;    
+    std::vector<Note> notes;
+    std::array<SubDivision, 6> voiceSubdivisions;
+
 };
 #endif
+    

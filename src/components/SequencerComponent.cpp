@@ -11,7 +11,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SequencerComponent.h"
 #include "qtils.h"
-
+#include <cmath>
 #define NUM_VOICES 6
 
 //==============================================================================
@@ -132,18 +132,18 @@ void SequencerComponent::paintGrid(Graphics& g)
 
 void SequencerComponent::resized()
 {
-    float xDist = (float)getHeight() / NUM_VOICES;
+    float xDist = (float)getWidth() / (getSequenceLength() + 1);
     float yDist = (float)getHeight() / NUM_VOICES;
+    float diameter = fmin(xDist, yDist);
     Rectangle<int> area(xDist, 0, xDist, yDist);
     for (int i = 0; i < NUM_VOICES; i++) {
-        for (int j = 0; j < sequenceLength; j++) {
-            sequencerButtons[i][j]->setBounds(area.withSizeKeepingCentre(xDist * .75, yDist * .75));
+        for (int j = 0; j < sequencerButtons[0].size(); j++) {
+            sequencerButtons[i][j]->setBounds(area.withSizeKeepingCentre(diameter * .75, diameter * .75));
             area.translate(xDist, 0);
         }
         area.setX(xDist);
         area.translate(0, yDist);
     }
-    setSizeWithOverflow(getHeight());
 }
 
 
@@ -261,16 +261,16 @@ void SequencerComponent::setSequenceLength(int newLength) {
     sequencer.setSequenceLength(newLength);
     
     auto deleteToMatchLength = [&] (std::vector<std::unique_ptr<SequencerButton>>& vector, int target) {
-        while (vector.size() > target) {
+        while (vector.size() != target) {
             vector.pop_back();
         }
     };
     
     auto addToMatchLength = [&] (std::vector<std::unique_ptr<SequencerButton>>& vector, int pitch, int target) {
-        while (vector.size() < target) {
+        while (vector.size() != target) {
             int beat = (int)vector.size() - 1;
             vector.push_back(std::make_unique<SequencerButton>(pitch, beat));
-            addAndMakeVisible(vector[beat].get());
+            addAndMakeVisible(vector[beat + 1].get());
         }
     };
 
@@ -297,4 +297,7 @@ void SequencerComponent::sequenceLengthChanged(int newLength) {
     setSequenceLength(newLength);
 }
 
-    
+void SequencerComponent::setSubDivision(NoteSequence::SubDivision s) {
+    sequencer.setSubDivision(s);
+    setSequenceLength(int(s));
+}
