@@ -271,10 +271,9 @@ public:
         
         if (legatoMode && envelopeState != off && envelopeState != release)
             return;
-        
-        
+
         reset();
-        envelopeState = attack;
+        envelopeState = attack;//Reset Env start from Attack
         currentTime = 0.0;
         
     }
@@ -352,6 +351,7 @@ public:
             {
                 
                 envelopeOutput = sustainLevel;
+                
                 //there's never an automatic move on to release!! only when noteoff is triggered
                 if(attackTime + decayTime + sustainTime <= currentTime)
                 {
@@ -403,10 +403,7 @@ public:
         if (biasedOutput)
             *biasedOutput = envelopeOutput - sustainLevel;
         
-        
         return envelopeOutput;
     }
-    
-    
-    
+
 };

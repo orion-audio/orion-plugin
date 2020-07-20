@@ -39,11 +39,11 @@ void EnvelopeMeter::paint (Graphics& g)
     p.clear();
     p.startNewSubPath(0, getHeight()/2);
     g.setColour (waveColor);
-    g.setOpacity(0.5);
+    g.setOpacity(0.7);
     
     /* Get Waveform */
     auto waveform = getWaveForm();
-    auto ratio = waveform.getNumSamples()/getWidth();
+    int ratio = waveform.getNumSamples()/getWidth();
     auto buffer = waveform.getReadPointer(0);
     
     /* Scale Audio File To Window On X Axis */
@@ -135,7 +135,7 @@ void EnvelopeMeter::updateEnvelope()
 
     p.lineTo(releaseEndPoint);
     
-    envelopePath->setAlpha(0.5);
+    envelopePath->setAlpha(0.3);
     envelopePath->setPath(p);
 }
 

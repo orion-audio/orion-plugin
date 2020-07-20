@@ -241,17 +241,17 @@
                   file="assets/graphics/dropdown/dropdownBackgrounds/FXBackground.png"/>
           </GROUP>
           <GROUP id="{383C9C54-A218-8D83-4305-EA8E377F2C80}" name="dropdownTab">
-            <FILE id="ZLnwm4" name="ClipButtonOff.png" compile="0" resource="1"
+            <FILE id="v0LLlz" name="ClipButtonOff.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownTab/ClipButtonOff.png"/>
-            <FILE id="YqTnD8" name="ClipButtonOn.png" compile="0" resource="1"
+            <FILE id="Q9vduc" name="ClipButtonOn.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownTab/ClipButtonOn.png"/>
-            <FILE id="D33m0Q" name="ENVButtonOff.png" compile="0" resource="1"
+            <FILE id="a9m8fG" name="ENVButtonOff.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownTab/ENVButtonOff.png"/>
-            <FILE id="e21HPt" name="ENVButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/ENVButtonOn.png"/>
-            <FILE id="wkBDBR" name="EQButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOff.png"/>
-            <FILE id="tVU47a" name="EQButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOn.png"/>
-            <FILE id="NoQoNG" name="FXButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOff.png"/>
-            <FILE id="tXc9WR" name="FXButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOn.png"/>
+            <FILE id="bSU5K9" name="ENVButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/ENVButtonOn.png"/>
+            <FILE id="ZSaqy9" name="EQButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOff.png"/>
+            <FILE id="ADezdY" name="EQButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOn.png"/>
+            <FILE id="RR5X7Q" name="FXButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOff.png"/>
+            <FILE id="ASmm2A" name="FXButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOn.png"/>
           </GROUP>
           <GROUP id="{8065FEA0-D75A-588E-18EB-090F3D567EE7}" name="FX"/>
         </GROUP>

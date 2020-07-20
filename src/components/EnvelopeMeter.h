@@ -31,6 +31,8 @@ public:
     void setSustainBendCoefficient(float SBC){sustainBendCoef = SBC;};
     
     AudioBuffer<float>& getWaveForm(){return mWaveForm;};
+    
+    std::vector<float> getmAudioPoints();
         
 
 private:

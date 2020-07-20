@@ -147,28 +147,28 @@ namespace BinaryData
     const int            FXBackground_pngSize = 95282;
 
     extern const char*   ClipButtonOff_png;
-    const int            ClipButtonOff_pngSize = 13174;
+    const int            ClipButtonOff_pngSize = 4295;
 
     extern const char*   ClipButtonOn_png;
-    const int            ClipButtonOn_pngSize = 20604;
+    const int            ClipButtonOn_pngSize = 7658;
 
     extern const char*   ENVButtonOff_png;
-    const int            ENVButtonOff_pngSize = 12747;
+    const int            ENVButtonOff_pngSize = 4158;
 
     extern const char*   ENVButtonOn_png;
-    const int            ENVButtonOn_pngSize = 19714;
+    const int            ENVButtonOn_pngSize = 7440;
 
     extern const char*   EQButtonOff_png;
-    const int            EQButtonOff_pngSize = 12974;
+    const int            EQButtonOff_pngSize = 4175;
 
     extern const char*   EQButtonOn_png;
-    const int            EQButtonOn_pngSize = 19777;
+    const int            EQButtonOn_pngSize = 7461;
 
     extern const char*   FXButtonOff_png;
-    const int            FXButtonOff_pngSize = 12407;
+    const int            FXButtonOff_pngSize = 3923;
 
     extern const char*   FXButtonOn_png;
-    const int            FXButtonOn_pngSize = 19425;
+    const int            FXButtonOn_pngSize = 7189;
 
     extern const char*   PowerOff_png;
     const int            PowerOff_pngSize = 55972;

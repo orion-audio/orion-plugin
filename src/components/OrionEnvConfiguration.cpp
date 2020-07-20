@@ -413,8 +413,8 @@ void OrionEnvConfiguration::resized()
     float envlopeMeterWidth = getWidth()*5.68/10;
     float envlopeMeterHeight = getWidth()/5.45;
     
-    float switchX = getWidth() * 0.7666;
-    float switchY = getWidth()/800;
+    float switchX = getWidth() * 0.9766;
+    float switchY = getWidth()/200;
     float switchSize = getWidth()/55;
     
     float knobY1 = getWidth()/30;
