@@ -18,7 +18,7 @@
 */
 class OrionaudioAudioProcessorEditor;
 
-class ArrangementWindowComponent : public Component
+class ArrangementWindowComponent : public Component, public Slider::Listener
 {
 public:
     ArrangementWindowComponent(OrionaudioAudioProcessor*, OrionaudioAudioProcessorEditor*);
@@ -27,13 +27,19 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
+    void sliderValueChanged(juce::Slider *slider) override;
+
 private:
     
     OrionaudioAudioProcessor* processor;
     OrionaudioAudioProcessorEditor* editor;
     
     std::unique_ptr<SequencerComponent> sequencerComponent;
+    Viewport sequencerViewport;
     
+    ComboBox subdivisionCombo; 
+    
+    std::unique_ptr<Slider> sequenceLengthSlider;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ArrangementWindowComponent)
 };
 

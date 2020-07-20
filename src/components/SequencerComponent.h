@@ -64,24 +64,36 @@ public:
     
     bool isSelected = true;
     
-    virtual void sequenceChanged() override { repaint(); }
     
     void notePlayed(int part, int beat) override;
+   
+    virtual void sequenceChanged() override { repaint(); }
+    virtual void sequenceLengthChanged(int newLength) override;
+
 
     void addListener(Sequencer::Listener* listener) { listeners.push_back(listener); }
     
     void handleButtonPress(int pitch, int beat, bool buttonState);
     
+    void setSequenceLength(int newLength);
+    int getSequenceLength() { return sequenceLength; }
+    
+    void setSizeWithOverflow(int height);
+
+    void setSubDivision(NoteSequence::SubDivision s);
+
 private:
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
     std::vector<Note> notesToBePlayed;
     
-    std::array<std::array<std::unique_ptr<SequencerButton>, 16>, 7> sequencerButtons;
+    std::array<std::vector<std::unique_ptr<SequencerButton>>, 6> sequencerButtons;
     
     int selectedRow = 0;
     int lastBeat = -1;
     bool shouldFlip = false;
+    
+    int sequenceLength = 16;
     
     StringArray voiceNames;
     

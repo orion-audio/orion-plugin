@@ -20,6 +20,7 @@ class Sequencer
 {
 public:
     
+
     struct Layout
     {
         Layout(String n, const char* d, int s, int m) : name(n), data(d), size(s), midiNote(m)
@@ -38,12 +39,13 @@ public:
     {
     public:
         virtual void sequenceChanged()=0;
+        virtual void sequenceLengthChanged(int newLength)=0;
         virtual void notePlayed(int part, int beat)=0;
     };
     
+    
     Sequencer(Synthesiser* sampler);
     
-    int getTotalLength() { return totalLength; }
     
     NoteSequence* getNoteSequence() { return sequence.get(); };
     void setNewSequence(NoteSequence* newSequence);
@@ -74,8 +76,16 @@ public:
    
     std::queue<Note> lastNotesPlayed;
     
+    int getTotalLength() { return sequenceLength; }
+    void setSequenceLength(int newLength);
+    
+    NoteSequence::SubDivision getSubDivision() { return subdivision; };
+    void setSubDivision(NoteSequence::SubDivision s) {subdivision = s; };
+    
 private:
     
+    NoteSequence::SubDivision subdivision;
+
     void notifyListenersNotePlayed(int pitch, int note);
     std::vector<Listener*> listeners;
     
@@ -83,9 +93,9 @@ private:
     AudioPlayHead* playhead;
     Synthesiser* sampler;
     AudioFormatManager formatManager;
-    float lastSampleRate = 48000;
-    int totalLength = 16;
-    
+    float lastSampleRate = 44100;
+    int sequenceLength = 16;
+    NoteSequence::SubDivision currentSubDivision = NoteSequence::SubDivision::sixteenth;
     bool isActive = true;
     
     std::vector<SynthesiserSound::Ptr> samplerSounds;

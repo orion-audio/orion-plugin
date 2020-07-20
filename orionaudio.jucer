@@ -66,6 +66,9 @@
               file="src/components/SequencerComponent.cpp"/>
         <FILE id="wmHqrd" name="SequencerComponent.h" compile="0" resource="0"
               file="src/components/SequencerComponent.h"/>
+        <FILE id="CSqTRN" name="SequencerRow.cpp" compile="1" resource="0"
+              file="src/components/SequencerRow.cpp"/>
+        <FILE id="cABzS4" name="SequencerRow.h" compile="0" resource="0" file="src/components/SequencerRow.h"/>
         <FILE id="r2aXt8" name="TabComponentHolder.h" compile="0" resource="0"
               file="src/components/TabComponentHolder.h"/>
         <FILE id="iHmAZ3" name="WaveWiggle.h" compile="0" resource="0" file="src/components/WaveWiggle.h"/>
