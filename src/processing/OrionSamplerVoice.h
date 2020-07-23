@@ -127,7 +127,7 @@ public:
 
     std::vector<double> frequencies;
     
-    OrionSamplerVoice(double sr, int i) : pitchVal(0), currSampRate(48000), sampleRate(sr), index(i), delay(Delay(i)), eq(EQ(i))
+    OrionSamplerVoice(double sr, int i) : pitchVal(0), currSampRate(globalSampleRate), sampleRate(sr), index(i), delay(Delay(i)), eq(EQ(i))
     {
         pan.setPosition(0.0);
         delay.setup(sr);
@@ -363,24 +363,25 @@ public:
                 }
                 
                 
+                
+                //MARK:- Apply EQ
+                l = eq.bysamples(l);
+                r = eq.bysamples(r);
+                
                 //MARK:- Apply Instruments Pan
                 pan.setPosition(instrumentsPanCoefficient[instrumetSerial]);
                 l = pan.processLeftChannel(l);
                 r = pan.processRightChannel(r);
                 
-                //MARK:- Apply EQ
-                l = eq.bysamples(l);
-                r = l;
-                
                 //MARK:- Apply Envelope
                 
-                if(envswitch)
-                {
-                    envVal = env.doEnvelope();
-                    // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
-                    l *= envVal;
-                    r *= envVal;
-                }
+//                if(envswitch)
+//                {
+//                    envVal = env.doEnvelope();
+//                    // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
+//                    l *= envVal;
+//                    r *= envVal;
+//                }
                 
                 
               

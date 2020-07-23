@@ -9,13 +9,17 @@
 */
 
 #pragma once
+
+#include "GlobalCoefficients.h"
+
+
 class Compressor
 {
 private:
     
     float x_g, x_l,y_g, y_l,c;// input, output, control
 
-    double sampleRate {48000};//gotta change later
+    double sampleRate {globalSampleRate};//gotta change later
     
     float alphaAttack,alphaRelease,yL_prev;
     

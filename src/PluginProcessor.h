@@ -16,6 +16,7 @@
 #include "LookAndFeelHolder.h"
 #include "OrionLookAndFeel.h"
 #include "Sequencer.h"
+#include "GlobalCoefficients.h"
 
 //==============================================================================
 /**
@@ -121,7 +122,7 @@ private:
     AudioBuffer<float> mDelayBuffer;
     AudioBuffer<float> tempbuffer;
     int mWritePosition { 0 };
-    int mSampleRate { 48000 };
+    int mSampleRate { int(globalSampleRate) };
     
     float inputLevel;
     

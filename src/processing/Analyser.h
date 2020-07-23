@@ -11,7 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
+#include "GlobalCoefficients.h"
 //==============================================================================
 /*
 */
@@ -134,7 +134,7 @@ private:
     AudioBuffer<float> averager            { 5, fft.getSize() / 2 };
     int averagerPtr = 1;
 
-    AbstractFifo abstractFifo              { 48000 };
+    AbstractFifo abstractFifo              { int(globalSampleRate) };
     AudioBuffer<Type> audioFifo;
 
     bool newDataAvailable = false;

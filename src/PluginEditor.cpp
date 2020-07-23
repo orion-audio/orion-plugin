@@ -46,6 +46,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     arrangementWindow.reset(new ArrangementWindowComponent(&p, this));
     addAndMakeVisible(arrangementWindow.get());
+    arrangementWindow->setVisible(arrangementWindowVisible);
     
     footerPath.reset(new DrawablePath());
     addAndMakeVisible(footerPath.get());
@@ -365,8 +366,9 @@ void OrionaudioAudioProcessorEditor::resized()
     primaryPane->setBounds(area);
     
     // ARRANGEMENT WINDOW
+    area = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 4 * unite);
     arrangementWindow->setBounds(area);
-    arrangementWindow->setVisible(arrangementWindowVisible);
+    
     
     // DROPDOWN WINDOW
     if (dropDownVisible)

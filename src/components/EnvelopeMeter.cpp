@@ -10,6 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "EnvelopeMeter.h"
+#include "math.h"
 EnvelopeMeter::EnvelopeMeter()
 {
     
@@ -42,9 +43,8 @@ void EnvelopeMeter::paint (Graphics& g)
     g.setOpacity(0.7);
     
     /* Get Waveform */
-    auto waveform = getWaveForm();
-    int ratio = waveform.getNumSamples()/getWidth();
-    auto buffer = waveform.getReadPointer(0);
+    int ratio = mWaveForm.getNumSamples()/getWidth();
+    auto buffer = mWaveForm.getReadPointer(0);
     
     /* Scale Audio File To Window On X Axis */
     for (int sample = 0; sample < mWaveForm.getNumSamples(); sample+=ratio)
@@ -110,6 +110,7 @@ void EnvelopeMeter::updateEnvelope()
 {
     Path p;
     
+    
     float attackEndX  = getWidth() * attackCoef;
     float decayEndX   = getWidth() * decayCoef;
     float sustainEndX = getWidth() * sustainCoef;
@@ -117,23 +118,39 @@ void EnvelopeMeter::updateEnvelope()
     
     float sustainY = getHeight() * (1 - sustainBendCoef);
     
-    Point<float> attackStartPoint  = {static_cast<float>(0.0f),static_cast<float>(getHeight())};
-    Point<float> decayStartPoint   = {static_cast<float>(attackEndX),static_cast<float>(0.0f)};
-    Point<float> sustainStartPoint = {static_cast<float>(decayEndX),static_cast<float>(sustainY)};
-    Point<float> releaseStartPoint = {static_cast<float>(sustainEndX),static_cast<float>(sustainY)};
-    Point<float> releaseEndPoint   = {static_cast<float>(releaseEndX),static_cast<float>(getHeight())};
+    Point<float> attackStartPoint     = {static_cast<float>(0.0f),static_cast<float>(getHeight())};
     
+    Point<float> decayStartPoint      = {static_cast<float>(attackEndX),static_cast<float>(0.0f)};
+    
+    Point<float> sustainStartPoint    = {static_cast<float>(decayEndX),static_cast<float>(sustainY)};
+    
+    Point<float> releaseStartPoint    = {static_cast<float>(sustainEndX),static_cast<float>(sustainY)};
+    
+    Point<float> releaseEndPoint      = {static_cast<float>(releaseEndX),static_cast<float>(getHeight())};
     
     
     p.startNewSubPath(attackStartPoint);
     
-    p.lineTo(decayStartPoint);
-    
-    p.lineTo(sustainStartPoint);
+    Point<float> mid = {static_cast<float>(attackEndX * (1 - attackBendCoef)),static_cast<float>(getHeight() * (1 - attackBendCoef))};
 
+    p.quadraticTo(mid,decayStartPoint);
+    //p.lineTo(decayStartPoint);
+
+    //mid = {static_cast<float>(decayEndX),static_cast<float>(sustainY * (1 - decayBendCoef))};
+    
+    mid = {static_cast<float>(attackEndX + (decayEndX - attackEndX) * decayBendCoef),static_cast<float>(sustainY * (1 - decayBendCoef))};
+    
+    p.quadraticTo(mid,sustainStartPoint);
+    //p.lineTo(sustainStartPoint);
+  
     p.lineTo(releaseStartPoint);
 
-    p.lineTo(releaseEndPoint);
+    float y = getHeight() * (1 - releaseBendCoef);
+    if(y<sustainY){y = sustainY;};
+    mid = {static_cast<float>(sustainEndX + (releaseEndX - sustainEndX) * releaseBendCoef),static_cast<float>(y)};
+    
+    p.quadraticTo(mid,releaseEndPoint);
+    //p.lineTo(releaseEndPoint);
     
     envelopePath->setAlpha(0.3);
     envelopePath->setPath(p);

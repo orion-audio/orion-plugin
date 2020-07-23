@@ -13,7 +13,7 @@
 #include "JuceHeader.h"
 #include <array>
 #include <queue>
-
+#include "GlobalCoefficients.h"
 
 
 class Sequencer
@@ -93,7 +93,7 @@ private:
     AudioPlayHead* playhead;
     Synthesiser* sampler;
     AudioFormatManager formatManager;
-    float lastSampleRate = 44100;
+    float lastSampleRate = globalSampleRate;
     int sequenceLength = 16;
     NoteSequence::SubDivision currentSubDivision = NoteSequence::SubDivision::sixteenth;
     bool isActive = true;

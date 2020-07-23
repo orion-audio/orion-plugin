@@ -26,6 +26,9 @@ public:
     void switchClicked(bool isDown);
     void setSwitchImage(bool On);
     void sliderValueChanged (Slider* slider)override;
+    void sliderDragEnded (Slider* slider)override;
+    
+    void knobsSetRange();
     
     std::unique_ptr<EnvelopeMeter> envelopeMeter;
     
@@ -68,6 +71,8 @@ private:
     
     OrionaudioAudioProcessor& processor;
     File* audioFile;
+    
+    float sampleLength = 0.0f;
     
     /* Images */
     

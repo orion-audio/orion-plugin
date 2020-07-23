@@ -10,6 +10,7 @@
 
 #pragma once
 #include <math.h>
+#include "GlobalCoefficients.h"
 class Delay
 {
 private:
@@ -17,7 +18,7 @@ private:
     int delayBufferLength_ {1};
     int delayReadPosition_ {0};
     int delayWritePosition_ {0};
-    double sampleRate {48000};//gotta change later
+    double sampleRate {globalSampleRate};//gotta change later
     int dpr {0};
     int dpw {0};
     float* delayData;

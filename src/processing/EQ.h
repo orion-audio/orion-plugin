@@ -22,10 +22,11 @@
 */
 
 #pragma once
+#include "GlobalCoefficients.h"
 class EQ
 {
 private:
-    double sampleRate {48000};//gotta change later
+    double sampleRate {globalSampleRate};//gotta change later
     float* delayData;
     std::vector<double> frequencies;
     

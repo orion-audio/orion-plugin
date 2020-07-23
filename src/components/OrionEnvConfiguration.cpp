@@ -35,6 +35,7 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     envelopeMeter->serial = serial;
     addAndMakeVisible(envelopeMeter.get());
     
+    //sampleLength = envelopeMeter->getSampleLength();
     
     
     //-------------------------------- Envelope Switch -------------------------------//
@@ -53,8 +54,6 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     aSlider.reset(new Slider());
     aSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     aSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
-    aSlider->setRange(0.1f, 1500.0f);
-    aSlider->setValue(0.1f);
     aSlider->addListener(this);
     addAndMakeVisible(aSlider.get());
       
@@ -67,8 +66,6 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     dSlider.reset(new Slider());
     dSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     dSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
-    dSlider->setRange(0.1f, 2500.0f);
-    dSlider->setValue(1250.0f);
     dSlider->addListener(this);
     addAndMakeVisible(dSlider.get());
       
@@ -81,8 +78,6 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     hSlider.reset(new Slider());
     hSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     hSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
-    hSlider->setRange(0.1f, 1500.0f);
-    hSlider->setValue(750.0f);
     hSlider->addListener(this);
     addAndMakeVisible(hSlider.get());
       
@@ -95,8 +90,6 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     rSlider.reset(new Slider());
     rSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     rSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
-    rSlider->setRange(0.1f, 2500.0f);
-    rSlider->setValue(1250.0f);
     rSlider->addListener(this);
     addAndMakeVisible(rSlider.get());
       
@@ -105,6 +98,18 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     addAndMakeVisible(rSliderLabel.get());
     rSliderLabel->setAlpha(0.8);
     
+    //Set Knob Range & Init Values
+    
+//    aSlider->setRange(0.1f, 1500.0f);
+//    aSlider->setValue(0.1f);
+//    dSlider->setRange(0.1f, 2500.0f);
+//    dSlider->setValue(1250.0f);
+//    hSlider->setRange(0.1f, 1500.0f);
+//    hSlider->setValue(750.0f);
+//    rSlider->setRange(0.1f, 2500.0f);
+//    rSlider->setValue(1250.0f);
+    
+    knobsSetRange();
     
     //------------------------------------ Bend Sliders ------------------------------------//
     // Attack Bend
@@ -360,24 +365,16 @@ void OrionEnvConfiguration::paint (Graphics& g)
     g.drawImageWithin(envbackground, 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
     */
     
-    /* Customize the sliders*/
-    OrionRotarySlider* cusRotarySliderlook = new OrionRotarySlider();
-    if(auto* newl = dynamic_cast<juce::LookAndFeel*> (cusRotarySliderlook))
-    {
-        envAttackSlider.setLookAndFeel(newl);
-        envHoldSlider.setLookAndFeel(newl);
-        envDecaySlider.setLookAndFeel(newl);
-        envReleaseSlider.setLookAndFeel(newl);\
-        
-    }
+
     //paint vertical lines
     
     
     
-    g.setFont (12.0f);
-    g.setColour (Colours::silver);
-    g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
-    for (int i=0; i < 40; ++i) {
+//    g.setFont (12.0f);
+//    g.setColour (Colours::silver);
+//    g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
+    for (int i=0; i < 40; ++i)
+    {
         g.setColour (Colours::silver.withAlpha (0.3f));
         auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.025f;
         //std::cout<<"where are you plotting "<<x<<"\n";
@@ -517,24 +514,6 @@ OrionEnvConfiguration::~OrionEnvConfiguration()
 }
 
 
-//String valueDoubleDigitTranslator(double inputValue)
-//{
-//    double a = inputValue;
-//    float b = (int)(a * 100 + .5);
-//    float c =  (float)b / 100;
-//    String d = String(c);
-//    if(d == "0")
-//    {
-//        d = "0.00";
-//    }
-//    else if(d == "1")
-//    {
-//        d = "1.00";
-//    }
-//
-//    return d;
-//}
-
 
 //MARK:- Switch Image Changer
 void OrionEnvConfiguration::setSwitchImage(bool On)
@@ -571,120 +550,193 @@ void OrionEnvConfiguration::switchClicked(bool isDown)
 }
 
 
+void OrionEnvConfiguration::knobsSetRange()
+{
+    //DBG("HeyHeyHey");
+    aSlider->setRange(0.000f, envelopeMeter->getDecayCoef() - 0.0001f);
+    aSlider->setValue(envelopeMeter->getAttackCoef());
+
+    dSlider->setRange(envelopeMeter->getAttackCoef() + 0.0001f, envelopeMeter->getSustainCoef() - 0.0001);
+    dSlider->setValue(envelopeMeter->getDecayCoef());
+    aSlider->repaint();
+
+    hSlider->setRange(envelopeMeter->getDecayCoef() + 0.0001f, envelopeMeter->getReleaseCoef() - 0.0001);
+    hSlider->setValue(envelopeMeter->getSustainCoef());
+    aSlider->repaint();
+
+    rSlider->setRange(envelopeMeter->getSustainCoef() + 0.0001f, 1.0f);
+    rSlider->setValue(envelopeMeter->getReleaseCoef());
+    aSlider->repaint();
+
+}
+
 //MARK:- Slider Value Change
 void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
 {
     //------------------------------------ ADSR ------------------------------------//
-    
     if(slider == aSlider.get())// Attack
     {
+        envAttackCoefficient[instrumetSerial] = aSlider->getValue();
+        envelopeMeter->setAttackCoef(envAttackCoefficient[instrumetSerial]);
+        double attackTime = envAttackCoefficient[instrumetSerial] * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-            voice->env.setAttackTime_mSec(aSlider->getValue());
+            voice->env.setAttackTime_mSec(attackTime);//set Attack time
         }
-        
-        envAttackCoefficient[instrumetSerial] = aSlider->getValue();
-        String value = DigitTransverter(envAttackCoefficient[instrumetSerial]);
+        String value = DigitTransverter(attackTime);
         value.append(" ms",3);
         aSliderLabel->setText(value,dontSendNotification);
-        
     }
     else if(slider == dSlider.get())// Decay
     {
+        envelopeMeter->setDecayCoef(dSlider->getValue());
+        envDecayCoefficient[instrumetSerial] = dSlider->getValue();
+        double decayTime = (envDecayCoefficient[instrumetSerial] - envelopeMeter->getAttackCoef()) * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-            voice->env.setDecayTime_mSec(dSlider->getValue());
+            voice->env.setDecayTime_mSec(decayTime);//set Decay time
         }
-        
-        envDecayCoefficient[instrumetSerial] = dSlider->getValue();
-        String value = DigitTransverter(envDecayCoefficient[instrumetSerial]);
+        String value = DigitTransverter(decayTime);
         value.append(" ms",3);
         dSliderLabel->setText(value,dontSendNotification);
-        
     }
     else if(slider == hSlider.get())// Hold
     {
+        envelopeMeter->setSustainCoef(hSlider->getValue());
+        envSustainCoefficient[instrumetSerial] = hSlider->getValue();
+        double sustainTime = (envSustainCoefficient[instrumetSerial] - envelopeMeter->getDecayCoef()) * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-            voice->env.setSustainTime_mSec(hSlider->getValue());
+            voice->env.setSustainTime_mSec(sustainTime);//set Sustain time
         }
-        
-        envSustainCoefficient[instrumetSerial] = hSlider->getValue();
-        String value = DigitTransverter(envSustainCoefficient[instrumetSerial]);
+        String value = DigitTransverter(sustainTime);
         value.append(" ms",3);
         hSliderLabel->setText(value,dontSendNotification);
-        
     }
     else if(slider == rSlider.get())// Release
     {
+        envelopeMeter->setReleaseCoef(rSlider->getValue());
+        envReleaseCoefficient[instrumetSerial] = rSlider->getValue();
+        double releaseTime = (envReleaseCoefficient[instrumetSerial] - envelopeMeter->getSustainCoef()) * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-            voice->env.setReleaseTime_mSec(rSlider->getValue());
+            voice->env.setReleaseTime_mSec(releaseTime);//set Release time
         }
-        
-        
-        envReleaseCoefficient[instrumetSerial] = rSlider->getValue();
-        String value = DigitTransverter(envReleaseCoefficient[instrumetSerial]);
+        String value = DigitTransverter(releaseTime);
         value.append(" ms",3);
         rSliderLabel->setText(value,dontSendNotification);
-        
     }
+    
+    
+//    if(slider == aSlider.get())// Attack
+//    {
+//        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+//        {
+//            voice->env.setAttackTime_mSec(aSlider->getValue());
+//        }
+//
+//        envAttackCoefficient[instrumetSerial] = aSlider->getValue();
+//        String value = DigitTransverter(envAttackCoefficient[instrumetSerial]);
+//        value.append(" ms",3);
+//        aSliderLabel->setText(value,dontSendNotification);
+//
+//    }
+//    else if(slider == dSlider.get())// Decay
+//    {
+//        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+//        {
+//            voice->env.setDecayTime_mSec(dSlider->getValue());
+//        }
+//
+//        envDecayCoefficient[instrumetSerial] = dSlider->getValue();
+//        String value = DigitTransverter(envDecayCoefficient[instrumetSerial]);
+//        value.append(" ms",3);
+//        dSliderLabel->setText(value,dontSendNotification);
+//
+//    }
+//    else if(slider == hSlider.get())// Hold
+//    {
+//        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+//        {
+//            voice->env.setSustainTime_mSec(hSlider->getValue());
+//        }
+//
+//        envSustainCoefficient[instrumetSerial] = hSlider->getValue();
+//        String value = DigitTransverter(envSustainCoefficient[instrumetSerial]);
+//        value.append(" ms",3);
+//        hSliderLabel->setText(value,dontSendNotification);
+//
+//    }
+//    else if(slider == rSlider.get())// Release
+//    {
+//        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+//        {
+//            voice->env.setReleaseTime_mSec(rSlider->getValue());
+//        }
+//
+//
+//        envReleaseCoefficient[instrumetSerial] = rSlider->getValue();
+//        String value = DigitTransverter(envReleaseCoefficient[instrumetSerial]);
+//        value.append(" ms",3);
+//        rSliderLabel->setText(value,dontSendNotification);
+//    }
     
     
     //------------------------------------ Bend ------------------------------------//
     
     if(slider == aBendSlider.get())// Attack Bend
     {
+        envAttackBendCoefficient[instrumetSerial] = aBendSlider->getValue();
+        envelopeMeter->setAttackBendCoef(envAttackBendCoefficient[instrumetSerial]);
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-
+            voice->env.setAttackTCO(envAttackBendCoefficient[instrumetSerial]);
         }
-
-        envAttackBendCoefficient[instrumetSerial] = aBendSlider->getValue();
         String value = DigitTransverter(envAttackBendCoefficient[instrumetSerial]);
         value.append(" bd",3);
         aBendSliderLabel->setText(value,dontSendNotification);
     }
     else if(slider == dBendSlider.get())// Decay Bend
     {
+        envDecayBendCoefficient[instrumetSerial] = dBendSlider->getValue();
+        envelopeMeter->setDecayBendCoef(envDecayBendCoefficient[instrumetSerial]);
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-
+            voice->env.setDecayTCO(envDecayBendCoefficient[instrumetSerial]);
         }
-
-        envDecayBendCoefficient[instrumetSerial] = dBendSlider->getValue();
         String value = DigitTransverter(envDecayBendCoefficient[instrumetSerial]);
         value.append(" bd",3);
         dBendSliderLabel->setText(value,dontSendNotification);
     }
     else if(slider == sBendSlider.get())// Sustain Bend
     {
+        envSustainBendCoefficient[instrumetSerial] = sBendSlider->getValue();
+        envelopeMeter->setSustainBendCoef(envSustainBendCoefficient[instrumetSerial]);
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-            voice->env.setSustainLevel(sBendSlider->getValue());
+            voice->env.setSustainLevel(envSustainBendCoefficient[instrumetSerial]);
         }
-
-        envSustainBendCoefficient[instrumetSerial] = sBendSlider->getValue();
-        envelopeMeter->setSustainBendCoefficient(envSustainBendCoefficient[instrumetSerial]);
         String value = DigitTransverter(envSustainBendCoefficient[instrumetSerial]);
         value.append(" bd",3);
         sBendSliderLabel->setText(value,dontSendNotification);
-
     }
     else if(slider == rBendSlider.get())// Release Bend
     {
+        envReleaseBendCoefficient[instrumetSerial] = rBendSlider->getValue();
+        envelopeMeter->setReleaseBendCoef(envReleaseBendCoefficient[instrumetSerial]);
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-
+            voice->env.setReleaseTCO(envReleaseBendCoefficient[instrumetSerial]);
         }
-
-        envReleaseBendCoefficient[instrumetSerial] = rBendSlider->getValue();
         String value = DigitTransverter(envReleaseBendCoefficient[instrumetSerial]);
         value.append(" bd",3);
         rBendSliderLabel->setText(value,dontSendNotification);
-
     }
-    
     envelopeMeter->updateEnvelope();
-    
+}
+
+
+void OrionEnvConfiguration::sliderDragEnded (Slider* slider)
+{
+    knobsSetRange();
 }

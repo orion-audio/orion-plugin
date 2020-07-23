@@ -1,10 +1,11 @@
 #include "Envelope.h"
+#include "GlobalCoefficients.h"
 
 using namespace std;
 EnvelopeGenerator::EnvelopeGenerator(void)
 {
-    sampleRate = 44100;
-    
+    sampleRate = globalSampleRate;
+    msPerSample = 1000/sampleRate;
     attackTime = 0.1f;//Attack
     decayTime = 1250.0f;//Decay
     sustainTime = 750.0f;//Hold
@@ -35,16 +36,17 @@ void EnvelopeGenerator::setEGMode(int envelopeMode)
     
     if (envelopeMode == analog)
     {
-        attackTCO = exp(-1.5);//TCO quantifies the curvature of envelope
+        /* TCO quantifies the curvature of envelope ? */
+        attackTCO = exp(-1.5);//exp(x) = pow(e,x);
         decayTCO = exp(-4.95);
         releaseTCO = decayTCO;
     }
-    else
+    else// preset init
     {
-        
         attackTCO = 0.99999;
-        decayTCO = exp(-11.05);
-        releaseTCO = decayTCO;
+        //decayTCO = exp(-11.05);//负无穷->0,越趋近于0,下降越平缓
+        decayTCO = 1.0f;
+        releaseTCO = 1.0f;
     }
     
     
@@ -74,9 +76,7 @@ void EnvelopeGenerator::reset()
 
 void EnvelopeGenerator::calculateAttackTime()
 {
-    
     double samples = sampleRate * (attackTime / 1000.0);
-    
     
     attackCoeff = exp(-log((1.0 + attackTCO) / attackTCO) / samples);//TCO is what determines the bend, range ?
     attackOffset = (1.0 + attackTCO)*(1.0 - attackCoeff);
@@ -95,19 +95,17 @@ void EnvelopeGenerator::calculateDecayTime()
 
 void EnvelopeGenerator::calculateReleaseTime()
 {
-    
     double samples = sampleRate * (releaseTime / 1000.0);
-    
-    
+
     releaseCoeff = exp(-log((1.0 + releaseTCO) / releaseTCO) / samples);
+    
     releaseOffset = -releaseTCO * (1.0 - releaseCoeff);
 }
 
 
 void EnvelopeGenerator::noteOff()
 {
-    
-    if (envelopeOutput > 0)
+    if(envelopeOutput > 0)
         envelopeState = release;
     else
         envelopeState = off;
@@ -116,14 +114,13 @@ void EnvelopeGenerator::noteOff()
 
 void EnvelopeGenerator::shutDown()
 {
-    
-    if (legatoMode)
-        return;
-    
-    
-    incValueShutdown = -(1000.0*envelopeOutput) / shutdownTime / sampleRate;
-    
-    
+    if(legatoMode)
+    return;
+    incValueShutdown = -(1000.0 * envelopeOutput) / shutdownTime / sampleRate;
     envelopeState = shutdown;
 }
+
+
+
+
 

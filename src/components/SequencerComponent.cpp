@@ -60,6 +60,10 @@ SequencerComponent::~SequencerComponent()
 void SequencerComponent::paint (Graphics& g)
 {
     g.fillAll(findColour(ColourIds::backgroundColourId));
+    g.setFont (12.0f);
+    g.setColour (Colours::silver);
+    g.setOpacity(0.5);
+    g.drawRoundedRectangle (getLocalBounds().toFloat(), 5, 2);
 }
 
 void SequencerComponent::paintGrid(Graphics& g)

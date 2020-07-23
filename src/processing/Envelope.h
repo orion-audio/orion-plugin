@@ -13,8 +13,9 @@
 #pragma once
 
 #include <cmath>
+#include <iostream>
 #define EG_DEFAULT_STATE_TIME 1000
-
+using namespace std;
 
 class EnvelopeGenerator
 {
@@ -33,6 +34,7 @@ public:
     
 protected:
     double sampleRate;
+    double msPerSample;
     double currentTime;
     
     double envelopeOutput;
@@ -66,55 +68,25 @@ protected:
     
 public:
     
-    /**
-     
-     Returns attack time in ms of the envelope.
-     */
-    
+    /* Returns attack time in ms of the envelope. */
     double getAttackTime() { return attackTime; }
     
-    /**
-     
-     Returns decay time in ms of the envelope.
-     */
-    
+    /* Returns decay time in ms of the envelope. */
     double getDecayTime() { return decayTime; }
     
-    /**
-     
-     Returns sustain level of the envelope.
-     */
-    
+    /* Returns sustain level of the envelope. */
     double getSustainValue() { return sustainLevel; }
     
-    /**
-     
-     Returns sustain time of the envelope.
-     */
-    
+    /* Returns sustain time of the envelope. */
     double getSustainTime() { return sustainTime; }
     
-    
-    /**
-     
-     Returns release time in ms of the envelope.
-     */
-    
+    /* Returns release time in ms of the envelope. */
     double getReleaseTime() { return releaseTime; }
     
-    
-    /**
-     
-     Returns state of the envelope.
-     */
-    
+    /* Returns state of the envelope.*/
     inline int getState() { return envelopeState; }
     
-    /**
-     
-     Returns whether the envelope is active or inactive.
-     */
-    
+    /* Returns whether the envelope is active or inactive.*/
     inline bool isActive()
     {
         if (envelopeState != release && envelopeState != off)
@@ -122,11 +94,7 @@ public:
         return false;
     }
     
-    /**
-     
-     Checks whether noteOff() can be used.
-     */
-    
+    /* Checks whether noteOff() can be used. */
     inline bool canNoteOff()
     {
         if (envelopeState != release && envelopeState != shutdown && envelopeState != off)
@@ -134,196 +102,133 @@ public:
         return false;
     }
     
-    /**
-     
-     Resets the envelope.
-     */
-    
+    /* Resets the envelope. */
     void reset();
     
-    /**
-     
-     Set the envelope mode.
-     */
-    
-    
+    /* Set the envelope mode.*/
     void setEGMode(int envelopeMode);
     
-    /**
-     
-     Calculate attack time parameters.
-     */
-    
+    /* Calculate attack time parameters. */
     void calculateAttackTime();
     
-    /**
-     
-     Calculate decay time parameters.
-     */
-    
+    /* Calculate decay time parameters. */
     void calculateDecayTime();
     
-    /**
-     
-     Calculate release time parameters.
-     */
-    
+    /* Calculate release time parameters. */
     void calculateReleaseTime();
     
-    
-    /**
-     
-     Goes to the release state and resets the counter.
-     */
-    
+    /* Goes to the release state and resets the counter. */
     void noteOff();
     
-    
-    /**
-     
-     Goes to shutdown state.
-     */
-    
+    /* Goes to shutdown state. */
     void shutDown();
     
     
     inline void setSampleRate(double sampleRate) { this->sampleRate = sampleRate; }
     
-    
-    /**
-     
-     Set the attack time in msec.
-     */
-    
-    
+    //----------------------------------- ADSR ----------------------------------//
+    /* Set the attack time in msec. */
     inline void setAttackTime_mSec(double attackTime)
     {
         this->attackTime = attackTime;
         calculateAttackTime();
     }
     
-    /**
-     
-     Set the sustain time in msec.
-     */
-    
-    
+    /* Set the sustain time in msec. */
     inline void setSustainTime_mSec(double sustainTime)
     {
         this->sustainTime = sustainTime;
-        
     }
     
-    
-    /**
-     
-     Set the decay time in msec.
-     */
-    
+    /* Set the decay time in msec. */
     inline void setDecayTime_mSec(double decayTime)
     {
         this->decayTime = decayTime;
         calculateDecayTime();
     }
     
-    /**
-     
-     Set the release time in msec.
-     */
-    
+    /* Set the release time in msec. */
     inline void setReleaseTime_mSec(double releaseTime)
     {
         this->releaseTime = releaseTime;
         calculateReleaseTime();
     }
     
-    
-    /**
-     
-     Set the sustain level.
-     */
-    
-    inline void setSustainLevel(double sustainLevel)
+    //----------------------------- Bend Incomplete ----------------------------//
+    /* Set Attack TCO */
+    inline void setAttackTCO(double value)
     {
-        this->sustainLevel = sustainLevel;
+        this->attackTCO = value;
         
-        
-        calculateDecayTime();
-        
+        calculateAttackTime();
         
         if (envelopeState != release)
             calculateReleaseTime();
     }
     
+    /* Set Decay TCO */
+    inline void setDecayTCO(double value)
+    {
+        this->decayTCO = value;
+        calculateDecayTime();
+    }
     
-    /**
-     
-     Start the envelope generator.
-     */
+    /* Set Sustain Level */
+    inline void setSustainLevel(double sustainLevel)
+    {
+        this->sustainLevel = sustainLevel;
+        
+        if (envelopeState != release)
+            calculateReleaseTime();
+    }
+    
+    /* Set the Release TCO */
+    inline void setReleaseTCO(double value)
+    {
+        this->releaseTCO = value;
+        calculateReleaseTime();
+    }
     
     
+    /* Start the envelope generator */
     inline void startEG()
     {
-        /**
-         
-         Ignore when in legato mode
-         */
-        
+        /* Ignore when in legato mode */
         if (legatoMode && envelopeState != off && envelopeState != release)
             return;
 
         reset();
         envelopeState = attack;//Reset Env start from Attack
         currentTime = 0.0;
-        
     }
     
-    /**
-     
-     Set envelope state to off.
-     */
-    
+    /* Set envelope state to off */
     inline void stopEG()
     {
         envelopeState = off;
     }
     
-    /**
-     
-     Update parameters.
-     */
+    /* Update parameters */
     inline void update()
     {
         // nothing yet
     }
     
-    /**
-     
-     Perform envelope operation.
-     Optionally can have biased output.
-     */
-    
-    
+    /* Perform envelope operation, Optionally can have biased output */
     inline double doEnvelope(double* biasedOutput = nullptr)
     {
-        
-        
-
-        currentTime += 1/sampleRate;
+        currentTime += msPerSample;
         switch (envelopeState)
         {
             case off:
             {
-                
                 if (resetToZeroMode)
                     envelopeOutput = 0.0;
                 break;
             }
             case attack:
             {
-                
                 envelopeOutput = attackOffset + envelopeOutput * attackCoeff;
-                
                 
                 if (envelopeOutput >= 1.0 || attackTime <= 0.0)
                 {
@@ -335,9 +240,7 @@ public:
             }
             case decay:
             {
-                
                 envelopeOutput = decayOffset + envelopeOutput * decayCoeff;
-                
                 
                 if (envelopeOutput <= sustainLevel || decayTime <= 0.0)
                 {
@@ -349,10 +252,9 @@ public:
             }
             case sustain:
             {
-                
                 envelopeOutput = sustainLevel;
-                
-                //there's never an automatic move on to release!! only when noteoff is triggered
+                //std::cout<<"sustain"<<envelopeOutput<<std::endl;
+                //there's never an automatic move on to release!! only when noteoff is triggered, maybe not.
                 if(attackTime + decayTime + sustainTime <= currentTime)
                 {
                     envelopeState = release;
@@ -362,10 +264,9 @@ public:
             }
             case release:
             {
-                
                 envelopeOutput = releaseOffset + envelopeOutput * releaseCoeff;
-                
-                
+                //std::cout<<"release: "<<envelopeOutput<<"="<<releaseOffset<<"+"<<envelopeOutput<<"*"<<releaseCoeff<<std::endl;
+                std::cout<<"releaseCoeff:"<<releaseCoeff<<std::endl;
                 if (envelopeOutput <= 0.0 || releaseTime <= 0.0)
                 {
                     envelopeOutput = 0.0;
@@ -376,13 +277,9 @@ public:
             }
             case shutdown:
             {
-                
                 if (resetToZeroMode)
                 {
-                    
                     envelopeOutput += incValueShutdown;
-                    
-                    
                     if (envelopeOutput <= 0)
                     {
                         envelopeState = off;
@@ -392,13 +289,11 @@ public:
                 }
                 else
                 {
-                    
                     envelopeState = off;
                 }
                 break;
             }
         }
-        
         
         if (biasedOutput)
             *biasedOutput = envelopeOutput - sustainLevel;

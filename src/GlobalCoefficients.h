@@ -22,6 +22,10 @@ const int HHCPitch   = 42;
 const int HHOPitch   = 46;
 const int CrashPitch = 48;
 
+// Global Smaple Rate
+double globalSampleRate = 44100;
+
+
 // Master Meters
 float globalOutputMeterL = 0.0f;
 float globalOutputMeterR = 0.0f;
@@ -89,6 +93,9 @@ extern const int SnapPitch;
 extern const int HHCPitch;
 extern const int HHOPitch;
 extern const int CrashPitch;
+
+// Global Smaple Rate
+extern double globalSampleRate;
 
 // Master Meters
 extern float globalOutputMeterL;
