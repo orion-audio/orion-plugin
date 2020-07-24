@@ -140,8 +140,8 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     dBendSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
     //dBendSlider->setRange(0.0f, 1.00f);
     //dBendSlider->setValue(0.5f);
-    dBendSlider->setRange(-10.0f, 0.0f);
-    dBendSlider->setValue(-5.0f);
+    dBendSlider->setRange(-10.0f, 10.0f);
+    dBendSlider->setValue(0.0f);
     dBendSlider->addListener(this);
     addAndMakeVisible(dBendSlider.get());
       
@@ -656,7 +656,7 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     {
         envDecayBendCoefficient[instrumetSerial] = dBendSlider->getValue();
         
-        float meterCoef = jmap<float>(envDecayBendCoefficient[instrumetSerial], -10.0f, 0.0f, 0.0f,1.0f);
+        float meterCoef = jmap<float>(envDecayBendCoefficient[instrumetSerial], -10.0f, 10.0f, 0.0f,1.0f);
         envelopeMeter->setDecayBendCoef(meterCoef);
         
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
