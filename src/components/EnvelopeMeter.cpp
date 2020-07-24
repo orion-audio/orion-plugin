@@ -69,11 +69,11 @@ void EnvelopeMeter::paint (Graphics& g)
     //------------------------------------ Draw Envelope -------------------------------------//
     
     /*
+     
     Path EnvPath;
     g.setColour (EnvelopeColor);
     
 
-    
     float attackEndX  = getWidth() * attackCoef;
     float decayEndX   = getWidth() * decayCoef;
     float sustainEndX = getWidth() * sustainCoef;
@@ -86,7 +86,6 @@ void EnvelopeMeter::paint (Graphics& g)
     Point<float> sustainStartPoint = {static_cast<float>(decayEndX),static_cast<float>(sustainY)};
     Point<float> releaseStartPoint = {static_cast<float>(sustainEndX),static_cast<float>(sustainY)};
     Point<float> releaseEndPoint   = {static_cast<float>(releaseEndX),static_cast<float>(getHeight())};
-    
     
     
     EnvPath.startNewSubPath(attackStartPoint);

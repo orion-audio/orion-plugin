@@ -39,8 +39,7 @@ void FileComponent::paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted
         g.fillAll(Colours::aqua.withAlpha(.3f));
     }
 //    g.drawRect(getLocalBounds());// Draw Frame
-    
-    
+      
     int h = getHeight() * .6;
     int w = getHeight() * .7;
     

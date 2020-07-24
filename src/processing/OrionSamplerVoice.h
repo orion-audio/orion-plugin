@@ -374,14 +374,13 @@ public:
                 r = pan.processRightChannel(r);
                 
                 //MARK:- Apply Envelope
-                
-//                if(envswitch)
-//                {
-//                    envVal = env.doEnvelope();
-//                    // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
-//                    l *= envVal;
-//                    r *= envVal;
-//                }
+                if(envswitch)
+                {
+                    envVal = env.doEnvelope();
+                    // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
+                    l *= envVal;
+                    r *= envVal;
+                }
                 
                 
               

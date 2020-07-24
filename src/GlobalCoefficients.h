@@ -40,6 +40,9 @@ float instrumentsVolumeCoefficient [8] = {0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.7
 float instrumentsPanCoefficient    [8] = {0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f, 0.00f};
 File  instrumentSamplePathes       [8];
 
+// Dropdown Type
+int dropdownTabSerial = 0;
+
 // Envelope
 bool  envSwitches                  [8] = {false, false, false, false, false, false, false, false};
 
@@ -111,6 +114,8 @@ extern float instrumentsVolumeCoefficient[];
 extern float instrumentsPanCoefficient[];
 extern File  instrumentSamplePathes[];
 
+// Dropdown Type
+extern int dropdownTabSerial;
 
 // Envelope
 extern bool  envSwitches                [];

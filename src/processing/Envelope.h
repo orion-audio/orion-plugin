@@ -9,7 +9,7 @@
  @version v1.0 11/09/2018
  */
 
-
+#include "../JuceLibraryCode/JuceHeader.h"
 #pragma once
 
 #include <cmath>
@@ -46,11 +46,11 @@ protected:
     
     double decayCoeff;
     double decayOffset;
-    double decayTCO;
+    double decayTCO;//Decay Bend
     
     double releaseCoeff;
     double releaseOffset;
-    double releaseTCO;
+    double releaseTCO;//Release Bend
     
     double attackTime;//Attack
     double decayTime;//Decay
@@ -159,11 +159,8 @@ public:
     inline void setAttackTCO(double value)
     {
         this->attackTCO = value;
-        
         calculateAttackTime();
-        
-        if (envelopeState != release)
-            calculateReleaseTime();
+
     }
     
     /* Set Decay TCO */
@@ -171,12 +168,15 @@ public:
     {
         this->decayTCO = value;
         calculateDecayTime();
+
     }
     
     /* Set Sustain Level */
     inline void setSustainLevel(double sustainLevel)
     {
         this->sustainLevel = sustainLevel;
+        
+        calculateDecayTime();
         
         if (envelopeState != release)
             calculateReleaseTime();
@@ -185,6 +185,7 @@ public:
     /* Set the Release TCO */
     inline void setReleaseTCO(double value)
     {
+        //DBG(value);
         this->releaseTCO = value;
         calculateReleaseTime();
     }
@@ -265,8 +266,9 @@ public:
             case release:
             {
                 envelopeOutput = releaseOffset + envelopeOutput * releaseCoeff;
-                //std::cout<<"release: "<<envelopeOutput<<"="<<releaseOffset<<"+"<<envelopeOutput<<"*"<<releaseCoeff<<std::endl;
-                std::cout<<"releaseCoeff:"<<releaseCoeff<<std::endl;
+                //std::cout<<"releaseTCO:"<<releaseTCO<<std::endl;
+                //std::cout<<"releaseCoeff:"<<releaseCoeff<<std::endl;
+                //std::cout<<"releaseOffset:"<<releaseOffset<<std::endl;
                 if (envelopeOutput <= 0.0 || releaseTime <= 0.0)
                 {
                     envelopeOutput = 0.0;

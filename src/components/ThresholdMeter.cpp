@@ -143,11 +143,12 @@ void ThresholdMeter::resized()
 void ThresholdMeter::timerCallback()
 {
     //repaint();
-//    if(serial == instrumetSerial)
-//    {
-//      meterUpdate();
-//    }
-    meterUpdate();
+    if(serial == instrumetSerial && dropdownTabSerial == 3 && compSwitches[instrumetSerial])
+    {
+      meterUpdate();
+      std::cout<<"Call: "<<serial<<std::endl;
+    }
+
 }
 
 void ThresholdMeter::pointerMove(float value)//value range 0<->1

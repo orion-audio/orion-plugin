@@ -44,9 +44,8 @@ void EnvelopeGenerator::setEGMode(int envelopeMode)
     else// preset init
     {
         attackTCO = 0.99999;
-        //decayTCO = exp(-11.05);//负无穷->0,越趋近于0,下降越平缓
-        decayTCO = 1.0f;
-        releaseTCO = 1.0f;
+        decayTCO = exp(-11.05);//负无穷->0,越趋近于0,下降越平缓
+        releaseTCO = exp(-11.05);
     }
     
     
@@ -61,9 +60,8 @@ void EnvelopeGenerator::reset()
     
     envelopeState = off;
     
-    
-    setEGMode(envelopeMode);
-    
+    //DBG("reset");
+    //setEGMode(envelopeMode);
     
     calculateReleaseTime();
     
@@ -88,7 +86,6 @@ void EnvelopeGenerator::calculateDecayTime()
     
     double samples = sampleRate * (decayTime / 1000.0);
     
-    
     decayCoeff = exp(-log((1.0 + decayTCO) / decayTCO) / samples);
     decayOffset = (sustainLevel - decayTCO)*(1.0 - decayCoeff);
 }
@@ -97,9 +94,9 @@ void EnvelopeGenerator::calculateReleaseTime()
 {
     double samples = sampleRate * (releaseTime / 1000.0);
 
-    releaseCoeff = exp(-log((1.0 + releaseTCO) / releaseTCO) / samples);
+    releaseCoeff = exp(-log((1.0f + releaseTCO) / releaseTCO) / samples);
     
-    releaseOffset = -releaseTCO * (1.0 - releaseCoeff);
+    releaseOffset = (- releaseTCO) * (1.0f - releaseCoeff);
 }
 
 

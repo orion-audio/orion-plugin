@@ -639,6 +639,7 @@ void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
     else
     {
         dropDownVisible = newState;
+        //dropdownTabSerial = -1;
         tabComponents->setVisible(dropDownVisible);
     }
 

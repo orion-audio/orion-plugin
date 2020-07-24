@@ -69,7 +69,7 @@ private:
     
     // Dropdown Tabs
     
-    int dropdownTabSerial = 0;
+    
     std::array<std::unique_ptr<ImageButton>, 4> dropDownTabs;
     
     std::unique_ptr<DrawablePath> dropDownBottonBar;

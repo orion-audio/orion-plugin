@@ -159,6 +159,7 @@ void SimpleSynth::loadSamples()
                 MidiNote = CrashPitch;
                 dir = "Crash";
                 filename = "Crash_01.WAV";
+                //filename = "testWhiteNoise5sec.wav";
                 break;
             default:
                 break;
