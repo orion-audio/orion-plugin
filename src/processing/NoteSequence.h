@@ -16,9 +16,9 @@ public:
         half = 2,
         quarter = 4,
         eighth = 8,
-        tripletEigth = 24,
+        tripletEigth = 12,
         sixteenth = 16,
-        tripletSixteenth = 28,
+        tripletSixteenth = 24,
         thirtysecond = 32
     };
 //    static int noteValues[8];
