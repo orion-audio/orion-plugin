@@ -12,7 +12,7 @@
 #include "SequencerButton.h"
 
 //==============================================================================
-SequencerButton::SequencerButton(int p, int b) : ToggleButton(), pitch(p), beat(b)
+SequencerButton::SequencerButton(int p, double b) : ToggleButton(), pitch(p), beat(b)
 {
     setColour(SequencerButton::ColourIds::borderColourOn, Colours::white);
     setColour(SequencerButton::ColourIds::borderColourOff, Colours::white);
@@ -53,6 +53,7 @@ void SequencerButton::paintButton (Graphics& g, bool shouldDrawButtonAsHighlight
         g.setColour(colour);
         g.fillEllipse(buttonArea.withSizeKeepingCentre(diameter - 2, diameter - 2));
     }
+//    g.fillAll(Colours::blue);
 }
 
 void SequencerButton::timerCallback() {

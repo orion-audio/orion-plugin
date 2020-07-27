@@ -42,7 +42,7 @@ public:
     int pitch;
     int velocity;
 
-    int startTime;
-    int endTime;
+    double startTime;
+    double endTime;
 
 };

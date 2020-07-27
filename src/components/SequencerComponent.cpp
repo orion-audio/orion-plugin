@@ -12,7 +12,6 @@
 #include "SequencerComponent.h"
 #include "qtils.h"
 #include <cmath>
-#define NUM_VOICES 6
 
 //==============================================================================
 SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
@@ -39,15 +38,16 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     lengthSlider->setColour(Slider::ColourIds::rotarySliderFillColourId, findColour(ColourIds::beatColourOffId));
     lengthSlider->setColour(Slider::ColourIds::backgroundColourId, Colours::white);
     
-    auto noteButtonFn = [&] (int pitch, int beat) {
-        sequencerButtons[pitch].push_back(std::make_unique<SequencerButton>(NoteSequence::noteValues[pitch], beat));
-        sequencerButtons[pitch][beat].reset(new SequencerButton(NoteSequence::noteValues[pitch], beat));
+    double beatLength = 1.0 / (double)sequencer.getSubDivision();
+
+    auto noteButtonFn = [&] (int pitch, double beat) {
+        sequencerButtons[pitch][beat].reset(new SequencerButton(NoteSequence::noteValues[pitch], beat * beatLength));
         addAndMakeVisible(sequencerButtons[pitch][beat].get());
         sequencerButtons[pitch][beat]->addListener(this);
     };
     
-    for (int pitch = 0; pitch < NoteSequence::noteValues.size(); pitch++) {
-        for (int beat = 0; beat < sequenceLength; beat++) {
+    for (int pitch = 0; pitch < NUM_VOICES; pitch++) {
+        for (double beat = 0; beat < 32; beat++) {
             noteButtonFn(pitch, beat);
         }
     }
@@ -57,91 +57,49 @@ SequencerComponent::~SequencerComponent()
 {
 }
 
-void SequencerComponent::paint (Graphics& g)
+void SequencerComponent::paint(Graphics& g)
 {
-    g.fillAll(findColour(ColourIds::backgroundColourId));
+    paintRows(g);
+    paintCols(g);
 }
 
-void SequencerComponent::paintGrid(Graphics& g)
+void SequencerComponent::paintRows(Graphics& g)
 {
-    SequencerComponent::LookAndFeelMethods* laf = dynamic_cast<SequencerComponent::LookAndFeelMethods*>(&getLookAndFeel());
-    if (laf == nullptr)
-        jassertfalse; // your look and feel must include the sequencer methods
-    
-    NoteSequence* sequence = sequencer.getNoteSequence();
-    int totalLength = sequencer.getTotalLength();
-    float xDist = (float)getWidth() / (totalLength + 1);
-    float yDist = (float)getHeight() / NUM_VOICES;
-    Rectangle<float> area(xDist, 0, xDist, yDist);
-    
-    for (int rows = 0; rows < NUM_VOICES; rows++)
-    {
-        
-        for (int cols = 0; cols < totalLength; cols++)
-        {
-            bool active = false;
-            g.setColour(findColour(ColourIds::beatColourOffId));
-            if (sequence->isNotePresent(NoteSequence::noteValues[rows], cols))
-                active = true;
-//            if (notesToBePlayed)
-            laf->drawNoteBox(g, *this, area.withSizeKeepingCentre(xDist * .9, yDist * .9), active, false);
-
-            area.translate(xDist, 0);
-        }
-        
-        area.translate(0, yDist);
-        area.setX(xDist);
+    g.setColour(Colours::white);
+    for (int i = 0; i < NUM_VOICES - 1; i++) {
+        int yPos = sequencerButtons[i][0]->getBottom() + ((sequencerButtons[i + 1][0]->getY() - sequencerButtons[i][0]->getBottom()) / 2);
+        g.fillRect(0, yPos - 1, getWidth(), 2);
     }
-    Rectangle<float> selectedRowArea(0, 0, getWidth(), getHeight() / 8);
-    
-    selectedRowArea.translate(0, yDist * selectedRow);
-    g.setColour(Colours::white.withAlpha(.4f));
+}
 
-    area.setBounds(0, 0, xDist, yDist);
-
-    if (isSelected)
-    {
-        for (int i = 0; i < NUM_VOICES; i++)
-        {
-            g.setColour(Colours::white);
-            g.drawFittedText(voiceNames[i], area.toNearestInt(), Justification::right, 1);
-            g.setColour(Colours::white.withAlpha(gridPhase));
-            g.drawRect(0.0, area.getY(), float(getWidth()), 1.f);
-            area.translate(0, yDist);
-        }
-        
-        g.drawRect(0.0, area.getY() - 1.f, float(getWidth()), 1.f);
-        
-        if (gridPhase + .05 * gridDirection >= 1 || gridPhase + .05 * gridDirection <= 0)
-        {
-            gridDirection *= -1;
-        }
-        
-        gridPhase += gridDirection * .05;
-        
-        area.setBounds(xDist * 5, 0, 1, getHeight());
-        
-        for (int i = 1; i <= 3; i++)
-        {
-            g.setColour(Colours::white);
-            g.drawRect(area);
-            area.translate(xDist * 4, 0);
-        }
+void SequencerComponent::paintCols(Graphics& g)
+{
+    g.setColour(Colours::white);
+    const int numSections = 4;
+    const int numBeats = int(sequencer.getSubDivision());
+    const int numBeatsPerSection = numBeats / numSections;
+    for (int i = numBeatsPerSection - 1; i < numBeats - numBeatsPerSection; i+=numBeatsPerSection) {
+        int xPos = sequencerButtons[0][i]->getRight() + ((sequencerButtons[0][i + 1]->getX() - sequencerButtons[0][i]->getRight()) / 2);
+        g.fillRect(xPos - 1, 0, 2, getHeight());
     }
 }
 
 void SequencerComponent::resized()
 {
-    float xDist = (float)getWidth() / (getSequenceLength() + 1);
-    float yDist = (float)getHeight() / NUM_VOICES;
+    double subdivision = sequencer.getSubDivision();
+    auto totalArea = getLocalBounds().removeFromRight(getWidth() * .9);
+    float xDist = floor((float)totalArea.getWidth() / (subdivision));
+    float yDist = (float)totalArea.getHeight() / NUM_VOICES;
     float diameter = fmin(xDist, yDist);
-    Rectangle<int> area(xDist, 0, xDist, yDist);
+    
+    Rectangle<int> area(totalArea.getX(), 0, xDist, yDist);
     for (int i = 0; i < NUM_VOICES; i++) {
-        for (int j = 0; j < sequencerButtons[0].size(); j++) {
+        for (int j = 0; j < 32; j++) {
             sequencerButtons[i][j]->setBounds(area.withSizeKeepingCentre(diameter * .75, diameter * .75));
+            sequencerButtons[i][j]->setVisible(j < sequencer.getSubDivision());
             area.translate(xDist, 0);
         }
-        area.setX(xDist);
+        area.setX(totalArea.getX());
         area.translate(0, yDist);
     }
 }
@@ -149,61 +107,9 @@ void SequencerComponent::resized()
 
 void SequencerComponent::mouseUp(const MouseEvent& e)
 {
-    Component::mouseUp(e);
-    std::pair<int, int> result = checkClick(e.getMouseDownPosition().toFloat());
 
-    if (result.first !=-1)
-    {
-        
-        int pitch = NoteSequence::noteValues[result.first];
-        int startTime = result.second;
-
-        NoteSequence* sequence = sequencer.getNoteSequence();
-        if (sequence->checkAndRemoveNote(pitch, startTime))
-            DBG("removed");
-        else
-        {
-            sequence->addNote(Note(pitch, 100, startTime, startTime + 1));
-        }
-    }
-    
-    repaint();
 }
 
-
-std::pair<int, int> SequencerComponent::checkClick(Point<float> p)
-{
-    int totalLength = sequencer.getTotalLength();
-    float xDist = getWidth() / (totalLength + 1);
-    float yDist = getHeight() / NUM_VOICES;
-    
-    Rectangle<float> area(xDist, 0, xDist, yDist);
-
-    for (int rows = 0; rows < NUM_VOICES; rows++)
-    {
-        if (p.getY() > area.getBottom())
-        {
-            area.translate(0, yDist);
-            continue;
-        }
-        for (int cols = 0; cols < totalLength; cols++){
-
-            if (p.getX() > area.getRight())
-            {
-                area.translate(xDist, 0);
-                continue;
-            }
-
-            if (area.contains(p))
-            {
-                selectedRow = rows;
-                return std::pair<int, int>(rows, cols);
-            }
-        }
-    }
-    return std::pair<int, int>(-1, -1);
-    
-}
 
 void SequencerComponent::colourChanged()
 {
@@ -216,8 +122,9 @@ void SequencerComponent::timerCallback()
     std::queue<Note>* noteQueue = &sequencer.lastNotesPlayed;
     for (int i = 0; i < noteQueue->size(); i++) {
         int pitch = NoteSequence::noteValues.indexOf(noteQueue->front().pitch);
-        int beat = noteQueue->front().startTime;
-        sequencerButtons[pitch][beat]->startAnimation();
+        double beat = noteQueue->front().startTime;
+        int index = qtils::map(beat, 0, 1, 0, sequencer.getSubDivision());
+        sequencerButtons[pitch][index]->startAnimation();
         noteQueue->pop();
     }
 }
@@ -227,14 +134,14 @@ void SequencerComponent::buttonClicked(Button* b)
     SequencerButton* button = dynamic_cast<SequencerButton*>(b);
     if (button != nullptr) {
         int pitch = button->getPitch();
-        int beat = button->getBeat();
+        double beat = button->getBeat();
         std::cout << pitch << "," << beat << std::endl;
         NoteSequence* sequence = sequencer.getNoteSequence();
         if (sequence->checkAndRemoveNote(pitch, beat))
             DBG("removed");
         else
         {
-            sequence->addNote(Note(pitch, 100, beat, beat + 1));
+            sequence->addNote(Note(pitch, 100, beat, beat + (1.0 / sequencer.getSubDivision())));
         }
     }
 }
@@ -257,33 +164,6 @@ void SequencerComponent::handleButtonPress(int pitch, int beat, bool buttonState
 
 void SequencerComponent::setSequenceLength(int newLength) {
     if (newLength <= 0) return;
-    
-    sequencer.setSequenceLength(newLength);
-    
-    auto deleteToMatchLength = [&] (std::vector<std::unique_ptr<SequencerButton>>& vector, int target) {
-        while (vector.size() != target) {
-            vector.pop_back();
-        }
-    };
-    
-    auto addToMatchLength = [&] (std::vector<std::unique_ptr<SequencerButton>>& vector, int pitch, int target) {
-        while (vector.size() != target) {
-            int beat = (int)vector.size() - 1;
-            vector.push_back(std::make_unique<SequencerButton>(pitch, beat));
-            addAndMakeVisible(vector[beat + 1].get());
-        }
-    };
-
-    
-    int newIsLonger = newLength - sequenceLength > 0 ? true : false;
-    
-    for (int i = 0; i < sequencerButtons.size(); i++) {
-        if (newIsLonger)
-            addToMatchLength(sequencerButtons[i], i, newLength);
-        else
-            deleteToMatchLength(sequencerButtons[i], newLength);
-    }
-    sequenceLength = newLength;
     resized();
 }
 
@@ -299,5 +179,15 @@ void SequencerComponent::sequenceLengthChanged(int newLength) {
 
 void SequencerComponent::setSubDivision(NoteSequence::SubDivision s) {
     sequencer.setSubDivision(s);
-    setSequenceLength(int(s));
+    double beatLength = 1.0 / (double)sequencer.getSubDivision();
+
+    for (int i = 0; i < NUM_VOICES; i++) {
+        for (double j = 0; j < 32; j++) {
+            double beat = j * beatLength;
+            sequencerButtons[i][j]->setBeat(beat);
+            Button::ButtonState state = sequencer.getNoteSequence()->isNotePresent(NoteSequence::noteValues[i], beat) ? Button::buttonDown : Button::buttonNormal;
+            sequencerButtons[i][j]->setToggleState(sequencer.getNoteSequence()->isNotePresent(NoteSequence::noteValues[i], beat), false);
+        }
+    }
+    resized();
 }

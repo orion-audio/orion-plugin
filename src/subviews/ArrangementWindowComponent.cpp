@@ -35,7 +35,9 @@ ArrangementWindowComponent::ArrangementWindowComponent(OrionaudioAudioProcessor*
     subdivisions.add("8n");
     subdivisions.add("16n");
     subdivisions.add("32n");
-    
+    subdivisions.add("8n triplet");
+    subdivisions.add("16n triplet");
+
     subdivisionCombo.addItemList(subdivisions, 1);
     subdivisionCombo.onChange = [&] {
         NoteSequence::SubDivision newSubdivision;
@@ -55,6 +57,12 @@ ArrangementWindowComponent::ArrangementWindowComponent(OrionaudioAudioProcessor*
                 break;
             case 5:
                 newSubdivision = NoteSequence::SubDivision::thirtysecond;
+                break;
+            case 6:
+                newSubdivision = NoteSequence::SubDivision::tripletEigth;
+                break;
+            case 7:
+                newSubdivision = NoteSequence::SubDivision::tripletSixteenth;
                 break;
             default:
                 break;

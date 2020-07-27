@@ -13,6 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Sequencer.h"
 #include "SequencerButton.h"
+#define NUM_VOICES 6
 //==============================================================================
 /*
 */
@@ -46,16 +47,15 @@ public:
 
     
     void paint (Graphics&) override;
-    void paintGrid(Graphics&);
-    
+    void paintRows(Graphics&);
+    void paintCols(Graphics&);
+
     void resized() override;
     
     virtual void colourChanged() override;
     
     void mouseUp(const MouseEvent& e) override;
     
-    std::pair<int, int> checkClick(Point<float> p);
-
     void timerCallback() override;
     
     // button listener
@@ -87,7 +87,7 @@ private:
     std::unique_ptr<Slider> lengthSlider;
     std::vector<Note> notesToBePlayed;
     
-    std::array<std::vector<std::unique_ptr<SequencerButton>>, 6> sequencerButtons;
+    std::array<std::array<std::unique_ptr<SequencerButton>, 32>, NUM_VOICES> sequencerButtons;
     
     int selectedRow = 0;
     int lastBeat = -1;
