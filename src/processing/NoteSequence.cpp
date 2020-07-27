@@ -29,16 +29,15 @@ std::string NoteSequence::toString()
 void NoteSequence::addNote(Note n)
 {
     notes.push_back(n);
-    int which = noteValues.indexOf(n.pitch);
 }
 
-void NoteSequence::addNote(int pitch, int startTime, int endTime, int velocity)
+void NoteSequence::addNote(int pitch, double startTime, double endTime, int velocity)
 {
     notes.push_back(Note(pitch, velocity, startTime, endTime));
 }
 
 
-void NoteSequence::removeNote(int pitch, int time)
+void NoteSequence::removeNote(int pitch, double time)
 {
     for (int i = 0; i < notes.size(); i++){
         if (notes[i].pitch == pitch && notes[i].startTime == time)
@@ -48,20 +47,20 @@ void NoteSequence::removeNote(int pitch, int time)
     }
 }
 
-bool NoteSequence::checkAndRemoveNote(int pitch, int time)
+bool NoteSequence::checkAndRemoveNote(int pitch, double time)
 {
     for (int i = 0; i < notes.size(); i++)
     {
         if (notes[i].pitch == pitch && notes[i].startTime == time)
         {
-            notes.erase(notes.begin()+i);
+            notes.erase(notes.begin() + i);
             return true;
         }
     }
     return false;
 }
 
-bool NoteSequence::isNotePresent(int pitch, int time)
+bool NoteSequence::isNotePresent(int pitch, double time)
 {
     for (int i = 0; i < notes.size(); i++)
     {
@@ -110,13 +109,14 @@ void NoteSequence::fromValueTree(ValueTree tree)
 }
 
 
-double NoteSequence::ppqToSecs(int ppq, int tempo)
+double NoteSequence::ppqToSecs(double ppq, int tempo)
 {
     return (double)ppq * (15.f / double(tempo));
 }
 
-int NoteSequence::ppqToSamples(int ppq, int tempo, double sampleRate)
+int NoteSequence::ppqToSamples(double ppq, int tempo, SubDivision subdivision, double sampleRate)
 {
-    return ((int)((60.0/tempo*sampleRate) / 4 * ppq));
+    double secsPerMeasure = 4 * (60.0 / double(tempo));
+    return sampleRate * ppq * secsPerMeasure;
 }
 

@@ -16,7 +16,9 @@ public:
         half = 2,
         quarter = 4,
         eighth = 8,
+        tripletEigth = 12,
         sixteenth = 16,
+        tripletSixteenth = 24,
         thirtysecond = 32
     };
 //    static int noteValues[8];
@@ -28,11 +30,11 @@ public:
     int getLength() { return notes.size(); }
     
     void addNote(Note n);
-    void addNote(int pitch, int startTime, int endTime, int velocity = 100);
-    void removeNote(int pitch, int time);
+    void addNote(int pitch, double startTime, double endTime, int velocity = 100);
+    void removeNote(int pitch, double time);
     
-    bool isNotePresent(int pitch, int time);
-    bool checkAndRemoveNote(int pitch, int time);
+    bool isNotePresent(int pitch, double time);
+    bool checkAndRemoveNote(int pitch, double time);
     
     
     std::vector<Note> getNotes();
@@ -45,9 +47,9 @@ public:
     
     SubDivision getSubdivisionForVoice(int voice) { return voiceSubdivisions[voice]; };
     void setSubdivisionForVoice(int voice, SubDivision subDivision) { voiceSubdivisions[voice] = subDivision; };
-    static double ppqToSecs(int ppq, int tempo);
-    static int ppqToSamples(int ppq, int tempo, double sampleRate);
-    
+    static double ppqToSecs(double ppq, int tempo);
+    static int ppqToSamples(double ppq, int tempo, SubDivision subdivision, double sampleRate);
+
     
 
 private:

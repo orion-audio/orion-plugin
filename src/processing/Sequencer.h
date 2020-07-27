@@ -84,7 +84,7 @@ public:
     
 private:
     
-    NoteSequence::SubDivision subdivision;
+    NoteSequence::SubDivision subdivision = NoteSequence::SubDivision::sixteenth;
 
     void notifyListenersNotePlayed(int pitch, int note);
     std::vector<Listener*> listeners;
