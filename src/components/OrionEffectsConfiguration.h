@@ -22,7 +22,7 @@ class OrionEffectsConfiguration : public Component,
                                   public Slider::Listener
 {
 public:
-    OrionEffectsConfiguration(OrionaudioAudioProcessor& p, int serial);
+    OrionEffectsConfiguration(OrionaudioAudioProcessor& p, int serial = 0);
     ~OrionEffectsConfiguration();
     
     void paint(Graphics& g) override;

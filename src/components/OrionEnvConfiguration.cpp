@@ -29,14 +29,9 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     backgroundImageView->setImage(backgroundImage);
     addAndMakeVisible(backgroundImageView.get());
     
-    
     //-------------------------------- Envelope Meter -------------------------------//
     envelopeMeter.reset(new EnvelopeMeter());
-    envelopeMeter->serial = serial;
     addAndMakeVisible(envelopeMeter.get());
-    
-    //sampleLength = envelopeMeter->getSampleLength();
-    
     
     //-------------------------------- Envelope Switch -------------------------------//
     envSwitch.reset(new ImageButton());
@@ -360,8 +355,7 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
 
 void OrionEnvConfiguration::paint (Graphics& g)
 {
-    
-    
+    std::cout<<"paint ENV : "<<instrumetSerial<<std::endl;
    // envbackground = new File(File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("skin").getChildFile("pictures").getChildFile("orionEnvBackground.png"));
     /*
     Image envbackground = ImageCache::getFromMemory(BinaryData::orionEnvBackground_png, BinaryData::orionEnvBackground_pngSize);

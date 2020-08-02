@@ -10,13 +10,13 @@
       <FILE id="wj17AJ" name="MirrorViews.h" compile="0" resource="0" file="src/MirrorViews.h"/>
       <FILE id="KwbrE2" name="GlobalCoefficients.h" compile="0" resource="0"
             file="src/GlobalCoefficients.h"/>
+      <FILE id="DcItTp" name="PluginEditor.h" compile="0" resource="0" file="src/PluginEditor.h"/>
       <FILE id="Daobh9" name="PluginEditor.cpp" compile="1" resource="0"
             file="src/PluginEditor.cpp"/>
-      <FILE id="DcItTp" name="PluginEditor.h" compile="0" resource="0" file="src/PluginEditor.h"/>
-      <FILE id="dBzPp3" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="src/PluginProcessor.cpp"/>
       <FILE id="Vh7RVj" name="PluginProcessor.h" compile="0" resource="0"
             file="src/PluginProcessor.h"/>
+      <FILE id="dBzPp3" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="src/PluginProcessor.cpp"/>
       <FILE id="tfqxJy" name="OrionGlobalVars.h" compile="0" resource="0"
             file="src/OrionGlobalVars.h"/>
       <GROUP id="{E69628DD-29AF-BEA4-BD8B-5EF337C053E4}" name="components">
@@ -69,8 +69,6 @@
         <FILE id="CSqTRN" name="SequencerRow.cpp" compile="1" resource="0"
               file="src/components/SequencerRow.cpp"/>
         <FILE id="cABzS4" name="SequencerRow.h" compile="0" resource="0" file="src/components/SequencerRow.h"/>
-        <FILE id="r2aXt8" name="TabComponentHolder.h" compile="0" resource="0"
-              file="src/components/TabComponentHolder.h"/>
         <FILE id="iHmAZ3" name="WaveWiggle.h" compile="0" resource="0" file="src/components/WaveWiggle.h"/>
       </GROUP>
       <GROUP id="{C90706FB-6F20-E32A-8194-918D7D2D9DB0}" name="laf">
@@ -103,42 +101,47 @@
         <FILE id="WUgXVh" name="SimpleSynth.h" compile="0" resource="0" file="src/processing/SimpleSynth.h"/>
       </GROUP>
       <GROUP id="{9408544A-B7A7-8B71-01CB-59D24DC2F678}" name="subviews">
-        <FILE id="WuGQvx" name="ArrangementWindowComponent.cpp" compile="1"
-              resource="0" file="src/subviews/ArrangementWindowComponent.cpp"/>
         <FILE id="hOkFjz" name="ArrangementWindowComponent.h" compile="0" resource="0"
               file="src/subviews/ArrangementWindowComponent.h"/>
+        <FILE id="WuGQvx" name="ArrangementWindowComponent.cpp" compile="1"
+              resource="0" file="src/subviews/ArrangementWindowComponent.cpp"/>
+        <FILE id="ee1pJe" name="OrionMenuBar.h" compile="0" resource="0" file="src/subviews/OrionMenuBar.h"/>
         <FILE id="GcTBjE" name="OrionMenuBar.cpp" compile="1" resource="0"
               file="src/subviews/OrionMenuBar.cpp"/>
-        <FILE id="ee1pJe" name="OrionMenuBar.h" compile="0" resource="0" file="src/subviews/OrionMenuBar.h"/>
-        <FILE id="G1sjES" name="SidePanelComponent.cpp" compile="1" resource="0"
-              file="src/subviews/SidePanelComponent.cpp"/>
         <FILE id="Ekmnvy" name="SidePanelComponent.h" compile="0" resource="0"
               file="src/subviews/SidePanelComponent.h"/>
-        <FILE id="uMNzri" name="PrimaryPaneComponent.cpp" compile="1" resource="0"
-              file="src/subviews/PrimaryPaneComponent.cpp"/>
+        <FILE id="G1sjES" name="SidePanelComponent.cpp" compile="1" resource="0"
+              file="src/subviews/SidePanelComponent.cpp"/>
         <FILE id="ekzd2f" name="PrimaryPaneComponent.h" compile="0" resource="0"
               file="src/subviews/PrimaryPaneComponent.h"/>
+        <FILE id="uMNzri" name="PrimaryPaneComponent.cpp" compile="1" resource="0"
+              file="src/subviews/PrimaryPaneComponent.cpp"/>
         <GROUP id="{A4FAFCDF-D4A8-CFFE-1BBC-8EA5D011C6AB}" name="dropdown">
-          <FILE id="RTYdbu" name="OrionTabComponent.cpp" compile="1" resource="0"
-                file="src/components/OrionTabComponent.cpp"/>
+          <FILE id="FChOEh" name="DropdownTable.cpp" compile="1" resource="0"
+                file="src/components/DropdownTable.cpp"/>
+          <FILE id="MTl7hz" name="DropdownTable.h" compile="0" resource="0" file="src/components/DropdownTable.h"/>
+          <FILE id="r2aXt8" name="TabComponentHolder.h" compile="0" resource="0"
+                file="src/components/TabComponentHolder.h"/>
           <FILE id="csNh2M" name="OrionTabComponent.h" compile="0" resource="0"
                 file="src/components/OrionTabComponent.h"/>
-          <FILE id="cbs8Ml" name="OrionEQConfiguration.cpp" compile="1" resource="0"
-                file="src/components/OrionEQConfiguration.cpp"/>
+          <FILE id="RTYdbu" name="OrionTabComponent.cpp" compile="1" resource="0"
+                file="src/components/OrionTabComponent.cpp"/>
           <FILE id="vtvxEx" name="OrionEQConfiguration.h" compile="0" resource="0"
                 file="src/components/OrionEQConfiguration.h"/>
-          <FILE id="igJ6pM" name="OrionEnvConfiguration.cpp" compile="1" resource="0"
-                file="src/components/OrionEnvConfiguration.cpp"/>
+          <FILE id="cbs8Ml" name="OrionEQConfiguration.cpp" compile="1" resource="0"
+                file="src/components/OrionEQConfiguration.cpp"/>
           <FILE id="ErIrex" name="OrionEnvConfiguration.h" compile="0" resource="0"
                 file="src/components/OrionEnvConfiguration.h"/>
-          <FILE id="mDY8BU" name="OrionClipConfiguration.cpp" compile="1" resource="0"
-                file="src/components/OrionClipConfiguration.cpp"/>
+          <FILE id="igJ6pM" name="OrionEnvConfiguration.cpp" compile="1" resource="0"
+                file="src/components/OrionEnvConfiguration.cpp"/>
           <FILE id="UotE1D" name="OrionClipConfiguration.h" compile="0" resource="0"
                 file="src/components/OrionClipConfiguration.h"/>
-          <FILE id="V9QYjn" name="OrionEffectsConfiguration.cpp" compile="1"
-                resource="0" file="src/components/OrionEffectsConfiguration.cpp"/>
+          <FILE id="mDY8BU" name="OrionClipConfiguration.cpp" compile="1" resource="0"
+                file="src/components/OrionClipConfiguration.cpp"/>
           <FILE id="X1xeDc" name="OrionEffectsConfiguration.h" compile="0" resource="0"
                 file="src/components/OrionEffectsConfiguration.h"/>
+          <FILE id="V9QYjn" name="OrionEffectsConfiguration.cpp" compile="1"
+                resource="0" file="src/components/OrionEffectsConfiguration.cpp"/>
           <GROUP id="{E405DB40-F673-2C5B-99F1-D1853DE29BE9}" name="FX">
             <FILE id="Rg8O4I" name="OrionEffectComp.cpp" compile="1" resource="0"
                   file="src/components/OrionEffectComp.cpp"/>

@@ -53,19 +53,22 @@ void SequencerButton::paintButton (Graphics& g, bool shouldDrawButtonAsHighlight
         g.setColour(colour);
         g.fillEllipse(buttonArea.withSizeKeepingCentre(diameter - 2, diameter - 2));
     }
-//    g.fillAll(Colours::blue);
+
 }
 
-void SequencerButton::timerCallback() {
+void SequencerButton::timerCallback()
+{
     frameCount += 1;
-    if (frameCount >= ANIMATION_LENGTH) {
+    if (frameCount >= ANIMATION_LENGTH)
+    {
         frameCount = 0;
         stopTimer();
     }
     repaint();
 }
 
-void SequencerButton::startAnimation() {
+void SequencerButton::startAnimation()
+{
     startTimerHz(30);
 }
 

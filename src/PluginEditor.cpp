@@ -37,13 +37,20 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     sidePanel.reset(new SidePanelComponent(&p, this));
     addAndMakeVisible(sidePanel.get());
     
-    tabComponents.reset(new TabComponentHolder(p));
-    addAndMakeVisible(tabComponents.get());
-    for (int i = 0; i < instrumentAmount; i++)
-    {
-        tabComponents->tabComponents[i]->envConfiguration->envelopeMeter->initAudioFile(i);
-    }
     
+    //--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //tabComponents.reset(new TabComponentHolder(p));
+    //addAndMakeVisible(tabComponents.get());
+//    for (int i = 0; i < instrumentAmount; i++)
+//    {
+//        tabComponents->tabComponents[i]->envConfiguration->envelopeMeter->initAudioFile(i);
+//    }
+//
+    //--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    dropdownTable.reset(new DropdownTable(&p));
+    addAndMakeVisible(dropdownTable.get());
+    
+
     arrangementWindow.reset(new ArrangementWindowComponent(&p, this));
     addAndMakeVisible(arrangementWindow.get());
     arrangementWindow->setVisible(arrangementWindowVisible);
@@ -57,10 +64,13 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 
     
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
-    for (int i=0; i<7; i++)
-    {
-        indices[i] = i;
-    }
+//    for (int i=0; i<7; i++)
+//    {
+//        indices[i] = i;
+//    }
+    
+    
+    
     backgroundImage.reset(new ImageComponent("backgroundImage"));
     backgroundImage->setImage(ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize), RectanglePlacement::fillDestination);
     addAndMakeVisible(backgroundImage.get());
@@ -74,15 +84,14 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     dropDownBottonBar->replaceColour(Colours::black,Colours::black);
 
      
-    
-
     // Dropdown EQ BUTTON
     Image downImage = ImageCache::getFromMemory(BinaryData::EQButtonOn_png,  BinaryData::EQButtonOn_pngSize);
     Image upImage   = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
     dropDownEQ.reset(new ImageButton());
     dropDownEQ->setClickingTogglesState(true);
     dropDownEQ->onClick = [&]{
-        if(dropDownEQ->getToggleState()){
+        if(dropDownEQ->getToggleState())
+        {
            dropdownTabSerial = 0;
         }
         updateDropDownEQState(dropDownEQ->getToggleState());
@@ -114,7 +123,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
         if(dropDownENV->getToggleState()){
            dropdownTabSerial = 2;
         }
-        updateDropDownState(dropDownENV->getToggleState());
+        updateDropDownENVState(dropDownENV->getToggleState());
     };
     addAndMakeVisible(dropDownENV.get());
 
@@ -124,11 +133,14 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     dropDownFX.reset(new ImageButton());
     dropDownFX->setClickingTogglesState(true);
     dropDownFX->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
-    dropDownFX->onClick = [&]{
-        if(dropDownFX->getToggleState()){
+    dropDownFX->onClick = [&]
+    {
+        if(dropDownFX->getToggleState())
+        {
            dropdownTabSerial = 3;
         }
-        updateDropDownState(dropDownFX->getToggleState());
+        
+        updateDropDownFXState(dropDownFX->getToggleState());
     };
     addAndMakeVisible(dropDownFX.get());
     
@@ -138,7 +150,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     
     //--------- RESIZE BUTTONS ---------//
-    
     // RESIZE BUTTON
     downImage = ImageCache::getFromMemory(BinaryData::ResizeOff_png, BinaryData::ResizeOff_pngSize);
     upImage   = ImageCache::getFromMemory(BinaryData::ResizeOn_png, BinaryData::ResizeOn_pngSize);
@@ -201,6 +212,8 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     HomDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&HomDir);
     
+    
+  
     //set up up button's images
     Path arrowPath;
     arrowPath.addArrow ({ 50.0f, 100.0f, 50.0f, 0.0f }, 40.0f, 100.0f, 50.0f);
@@ -373,16 +386,15 @@ void OrionaudioAudioProcessorEditor::resized()
     // DROPDOWN WINDOW
     if (dropDownVisible)
     {
-        area = Rectangle<int>(0, getHeight() - 13.1 * unite, getWidth(), 14 * unite);
-        tabComponents->setBounds(area);
+        area = Rectangle<int>(0, getHeight() - 13.1 * unite, getWidth(), 12 * unite);
+        //--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //tabComponents->setBounds(area);
+        dropdownTable->setBounds(area);
+        //--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
+    
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
-    
-    // BACK BUTTON
-//    area = Rectangle<int>(4 * unite, getHeight() - 2.1 * unite, 2 * unite, 2 * unite);
-//    backButton->setBounds(area);
-    
-    
+
     //--------- DROPDOWN BUTTONS ---------//
     Path path;
     path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 4 * unite);
@@ -449,18 +461,23 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
 {
     if(isDown)
     {
+        std::cout<<"                  "<<std::endl;
         //std::cout<<"Down"<<std::endl;
-        
-        processor.getSampler()->noteOn(1, midiNote, 120);
-        if (processor.getMidiOutput() != nullptr)
-            processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
-
+        processor.getSampler()->noteOn(1, midiNote, 120);//
+//        if (processor.getMidiOutput() != nullptr)
+//        {
+//            processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
+//            std::cout<<"MIDINoteOnFromClick"<<std::endl;
+//        }
         instrumetSerial = tabIndex;
         
-        tabComponents->setCurrentTab(instrumetSerial);
-        tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);
+        //tabComponents->setCurrentTab(instrumetSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        dropdownTable->currentTab = instrumetSerial;//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
-        //------------------------------------------------------------------------------------------------
+        std::cout<<"click!!!!!!!!!!!"<<std::endl;
+        std::cout<<"instrumetSerial: "<<instrumetSerial<<std::endl;
+
         primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
         primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetSerial]);
 
@@ -473,7 +490,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         {
            primaryPane->setInstrumetsSoloButtonImage(false);
         }
-        
+
         /* Set Mute Button Image */
         if(instrumentsMuteStates[instrumetSerial])
         {
@@ -484,48 +501,59 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             primaryPane->setInstrumetsMuteButtonImage(false);
         }
         
-        //----------------------------------------------  --------------------------------------------------//
+        //MARK:- ENV
+        if(dropdownTabSerial == 2)
+        {
+            //dropdownTable->envConfiguration->envelopeMeter->repaint();
+        }
+
+        //MARK:- FX
         /* Set Compressor Switch Image */
         if(compSwitches[instrumetSerial])
         {
-            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 0);
+            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 0);//--!!!!!!!!!!!
+            dropdownTable->effectConfiguration->setSwitchImage(true, 0);//--!!!!!!!!!!!
         }
         else
         {
-            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 0);
+            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 0);//--!!!!!!!!!!!
+            dropdownTable->effectConfiguration->setSwitchImage(false, 0);//--!!!!!!!!!!!
         }
-        
+   
         /* Set Reverb Switch Image */
         if(reverbSwitches[instrumetSerial])
         {
-            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 1);
+            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 1);//--!!!!!!!!!!!
+            dropdownTable->effectConfiguration->setSwitchImage(true, 1);//--!!!!!!!!!!!
         }
         else
         {
-            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 1);
+            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 1);//--!!!!!!!!!!!
+            dropdownTable->effectConfiguration->setSwitchImage(false, 1);//--!!!!!!!!!!!
         }
         
         /* Set Delay Switch Image */
         if(delaySwitches[instrumetSerial])
         {
-            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 2);
+            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 2);//--!!!!!!!!!!!
+            dropdownTable->effectConfiguration->setSwitchImage(true, 2);//--!!!!!!!!!!!
         }
         else
         {
-            tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 2);
+            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 2);//--!!!!!!!!!!!
+            dropdownTable->effectConfiguration->setSwitchImage(false, 2);//--!!!!!!!!!!!
         }
 
-        
         //------------------------------------------------------------------------------------------------//
     }
     else
     {
         //std::cout<<"Up"<<std::endl;
-        processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
+        //processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
         globalOutputMeterL = 0;
         globalOutputMeterR = 0;
-        if (processor.getMidiOutput() != nullptr)
-            processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOff(1, midiNote, 0.f));
+//        if (processor.getMidiOutput() != nullptr)
+//            processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOff(1, midiNote, 0.f));
     }
     
 }
@@ -589,7 +617,6 @@ void OrionaudioAudioProcessorEditor::homedirClicked()
 void OrionaudioAudioProcessorEditor::upbutClicked()
 {
     filebrowser.goUp();
-    
 };
 
 void OrionaudioAudioProcessorEditor::setDefaultSize()
@@ -597,55 +624,11 @@ void OrionaudioAudioProcessorEditor::setDefaultSize()
     setSize(orion::defaultWidth, orion::defaultHeight);
 }
 
-void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
-{
-    DBG((int)newState);
-    
-    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
-    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
-    
-    if(newState)
-    {
-        if(dropdownTabSerial == 0)//EQ
-        {
-            dropDownClip->setToggleState(false,sendNotificationSync);
-            dropDownENV->setToggleState(false,sendNotificationSync);
-            dropDownFX->setToggleState(false,sendNotificationSync);
-            
-        }
-        else if(dropdownTabSerial == 1)//Clip
-        {
-            dropDownEQ->setToggleState(false,sendNotificationSync);
-            dropDownENV->setToggleState(false,sendNotificationSync);
-            dropDownFX->setToggleState(false,sendNotificationSync);
-        }
-        else if(dropdownTabSerial == 2)//Envelope
-        {
-            dropDownClip->setToggleState(false,sendNotificationSync);
-            dropDownEQ->setToggleState(false,sendNotificationSync);
-            dropDownFX->setToggleState(false,sendNotificationSync);
-        }
-        else if(dropdownTabSerial == 3)//FX
-        {
-            dropDownClip->setToggleState(false,sendNotificationSync);
-            dropDownENV->setToggleState(false,sendNotificationSync);
-            dropDownEQ->setToggleState(false,sendNotificationSync);
-        }
-        
-        tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);
-        dropDownVisible = newState;
-        tabComponents->setVisible(dropDownVisible);
-    }
-    else
-    {
-        dropDownVisible = newState;
-        //dropdownTabSerial = -1;
-        tabComponents->setVisible(dropDownVisible);
-    }
 
-    resized();
-}
+//--------------------------------------------------------------------------
 
+
+//MARK:- Botton Bar Button Funcs
 void OrionaudioAudioProcessorEditor::updateDropDownEQState(bool newState)
 {
     DBG((int)newState);
@@ -657,17 +640,20 @@ void OrionaudioAudioProcessorEditor::updateDropDownEQState(bool newState)
         dropDownENV->setToggleState(false,sendNotificationSync);
         dropDownFX->setToggleState(false,sendNotificationSync);
         dropDownVisible = newState;
-        tabComponents->setVisible(dropDownVisible);
-        std::cout<<"open"<< instrumetSerial <<std::endl;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
     }
     else
     {
         dropDownVisible = newState;
-        tabComponents->setVisible(dropDownVisible);
-        std::cout<<"close"<< instrumetSerial <<std::endl;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = -1;
+
     }
 
-    tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(0);
+    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(0);//--!!!!!!!!!!!
+    dropdownTable->tabChange(0);//--!!!!!!!!!!!
     resized();
 }
 
@@ -687,21 +673,138 @@ void OrionaudioAudioProcessorEditor::updateDropDownClipState(bool newState)
         dropDownENV->setToggleState(false,sendNotificationSync);
         dropDownFX->setToggleState(false,sendNotificationSync);
         dropDownVisible = newState;
-        tabComponents->setVisible(dropDownVisible);
-        std::cout<<"open"<< instrumetSerial <<std::endl;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
     }
     else
     {
         dropDownVisible = newState;
-        tabComponents->setVisible(dropDownVisible);
-        std::cout<<"close"<< instrumetSerial <<std::endl;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = -1;
+
         
     }
-    tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(1);
-
+    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(1);//--!!!!!!!!!!!
+    dropdownTable->tabChange(1);//--!!!!!!!!!!!
     resized();
 }
 
+
+void OrionaudioAudioProcessorEditor::updateDropDownENVState(bool newState)
+{
+    DBG((int)newState);
+    
+    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
+    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    
+    if(newState)
+    {
+        dropDownEQ->setToggleState(false,sendNotificationSync);
+        dropDownClip->setToggleState(false,sendNotificationSync);
+        dropDownFX->setToggleState(false,sendNotificationSync);
+        dropDownVisible = newState;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+    }
+    else
+    {
+        dropDownVisible = newState;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = -1;
+        
+    }
+    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(2);//--!!!!!!!!!!!
+    dropdownTable->tabChange(2);//--!!!!!!!!!!!
+    resized();
+}
+
+
+void OrionaudioAudioProcessorEditor::updateDropDownFXState(bool newState)
+{
+    DBG((int)newState);
+    
+    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
+    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    
+    if(newState)
+    {
+        dropDownEQ->setToggleState(false,sendNotificationSync);
+        dropDownClip->setToggleState(false,sendNotificationSync);
+        dropDownENV->setToggleState(false,sendNotificationSync);
+        dropDownVisible = newState;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+    }
+    else
+    {
+        dropDownVisible = newState;
+        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = -1;
+        
+    }
+    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(3);//--!!!!!!!!!!!
+    dropdownTable->tabChange(3);//--!!!!!!!!!!!
+    resized();
+}
+
+
+//void OrionaudioAudioProcessorEditor::updateDropDownState(bool newState)
+//{
+//    DBG((int)newState);
+//
+//    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
+//    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+//
+//    if(newState)
+//    {
+//        if(dropdownTabSerial == 0)//EQ
+//        {
+//            dropDownClip->setToggleState(false,sendNotificationSync);
+//            dropDownENV->setToggleState(false,sendNotificationSync);
+//            dropDownFX->setToggleState(false,sendNotificationSync);
+//        }
+//        else if(dropdownTabSerial == 1)//Clip
+//        {
+//            dropDownEQ->setToggleState(false,sendNotificationSync);
+//            dropDownENV->setToggleState(false,sendNotificationSync);
+//            dropDownFX->setToggleState(false,sendNotificationSync);
+//        }
+//        else if(dropdownTabSerial == 2)//Envelope
+//        {
+//            dropDownClip->setToggleState(false,sendNotificationSync);
+//            dropDownEQ->setToggleState(false,sendNotificationSync);
+//            dropDownFX->setToggleState(false,sendNotificationSync);
+//        }
+//        else if(dropdownTabSerial == 3)//FX
+//        {
+//            dropDownClip->setToggleState(false,sendNotificationSync);
+//            dropDownENV->setToggleState(false,sendNotificationSync);
+//            dropDownEQ->setToggleState(false,sendNotificationSync);
+//        }
+//
+//        tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!
+//        dropdownTable->tabChange(dropdownTabSerial);//--!!!!!!!!!!!
+//
+//        dropDownVisible = newState;
+//        tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+//        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+//    }
+//    else
+//    {
+//        dropDownVisible = newState;
+//        tabComponents->setVisible(dropDownVisible);
+//        tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
+//        dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+//    }
+//
+//    resized();
+//}
+
+
+//--------------------------------------------------------------------------
 
 
 
@@ -710,8 +813,6 @@ void OrionaudioAudioProcessorEditor::updateDropDownClipState(bool newState)
 void OrionaudioAudioProcessorEditor::updateResizeViewState(bool newState)
 {
     DBG((int)newState);
-    resizeViewVisible = newState;
-    tabComponents->setVisible(dropDownVisible);
     resized();
 }
 
@@ -721,6 +822,8 @@ void OrionaudioAudioProcessorEditor::toggleArrangmentWindow(bool windowVisible)
     arrangementWindow->setVisible(windowVisible);
     primaryPane->setVisible(!windowVisible);
     resized();
+    
+    DBG("--------------------------------------");
 }
 
 bool OrionaudioAudioProcessorEditor::getDropdownVisible()

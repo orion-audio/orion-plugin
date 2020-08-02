@@ -16,6 +16,8 @@
 
 class TabComponentHolder : public Component
 {
+private:
+    int currentTab = 0;
 public:
     const int numTabs = 8;
     
@@ -62,7 +64,6 @@ public:
         }
     }
     std::array<std::unique_ptr<OrionTabComponent>, 8> tabComponents;
-private:
-    int currentTab = 0;
+
     
 };

@@ -68,8 +68,6 @@ void OrionTabComponent::paint (Graphics& g)
     g.setColour (Colours::darkgrey);
     //g.drawHorizontalLine(0, 0, getWidth());
     g.drawLine(0.0f, 0.0f,getWidth(), 0.0f, 0.5f);
-    
-    //g.setColour (Colours::cyan);
     //g.drawRect(0, 0, getWidth(), getHeight());
 
 

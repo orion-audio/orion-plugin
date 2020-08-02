@@ -35,7 +35,7 @@ public:
     
     void meterUpdate();
     
-    int serial = -1;
+    //int serial = -1;
 private:
     
     Colour volumeColor;

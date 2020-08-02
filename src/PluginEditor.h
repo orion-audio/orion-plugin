@@ -22,6 +22,9 @@
 #include "SidePanelComponent.h"
 #include "ArrangementWindowComponent.h"
 
+//#include "TabComponentHolder.h"
+#include "DropdownTable.h"
+
 //==============================================================================
 /**
  */
@@ -40,7 +43,7 @@ public:
     void resized() override;
     void tabComponentChanged(int serial);
     
-    void updateDropDownState(bool newState);
+    //void updateDropDownState(bool newState);
     
     void updateDropDownEQState(bool newState);
     void updateDropDownClipState(bool newState);
@@ -90,16 +93,17 @@ private:
     std::unique_ptr<ImageButton> resizeButton;
    
     std::unique_ptr<CircularMeter> meterInput;
-    std::unique_ptr<TabComponentHolder> tabComponents;
+    
+    
+    //std::unique_ptr<TabComponentHolder> tabComponents;//--!!!!!!!!!!!!
+    std::unique_ptr<DropdownTable> dropdownTable;//--!!!!!!!!!!!!
+    
     
     //std::unique_ptr<ImageButton> dropDownButton;
     
     std::unique_ptr<DrawablePath> footerPath;
     
-    
-    
-    
-    
+
     FileBrowserComponent filebrowser;
     
     File resourcefolder,skinfolder;
@@ -125,7 +129,7 @@ private:
     Orionlist maindir;
     ListBox mainlist;
         
-    int indices[7];
+    //int indices[7];
 
     DrawableButton AppDir;
     DrawableButton DeskDir;
@@ -142,15 +146,6 @@ private:
     bool dropDownVisible = false;
     bool resizeViewVisible = false;
     bool arrangementWindowVisible = false;
-    
-    //std::unique_ptr<CircularMeter> meterLeft;
-    //std::unique_ptr<CircularMeter> meterRight;
-    //ScopedPointer<OrionTabComponent> tabComponent;
-    //std::array<std::unique_ptr<OrionTabComponent>, 7> tabComponent;
-    //FileTreeComponent tree;
-    //ComboBox directory;
-    //PopupMenu dir;
-    // std::vector<OrionButton>& buttons;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OrionaudioAudioProcessorEditor)
 };

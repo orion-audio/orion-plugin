@@ -16,7 +16,7 @@ class OrionEQConfiguration : public Component
                             // public ChangeListener
 {
 public:
-    OrionEQConfiguration(OrionaudioAudioProcessor& p, int serial);
+    OrionEQConfiguration(OrionaudioAudioProcessor& p, int serial = 0);
     ~OrionEQConfiguration();
     
     void paint(Graphics& g) override;

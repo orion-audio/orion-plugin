@@ -17,7 +17,7 @@ class OrionEnvConfiguration : public Component,
                               public Slider::Listener
 {
 public:
-    OrionEnvConfiguration(OrionaudioAudioProcessor& p,int serial);
+    OrionEnvConfiguration(OrionaudioAudioProcessor& p,int serial = 0);
     ~OrionEnvConfiguration();
     void paint(Graphics& g) override;
     void resized() override;

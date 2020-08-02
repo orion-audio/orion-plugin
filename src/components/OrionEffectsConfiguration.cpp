@@ -13,7 +13,7 @@
 #include "GlobalCoefficients.h"
 #include "ThresholdMeter.h"
 
-OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p, int serial) : processor(p)//, compGui(p,serial), reverbGui(p,serial), delayGui(p,serial)
+OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p, int serial) : processor(p)
 {
     effectSerial = serial;
     //---------------------------------------------
@@ -76,7 +76,6 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     // Compressor-Threshold Meters
     thresholdMeters.reset(new ThresholdMeter());
     thresholdMeters->updaterFunction = [this] { return processor.getOutputLevel(0);};// + processor.getOutputLevel(1))/2
-    thresholdMeters->serial = serial;
     addAndMakeVisible(thresholdMeters.get());
     
     
@@ -295,6 +294,7 @@ void OrionEffectsConfiguration::paint(Graphics& g)
 {
     //g.fillAll();
     //g.fillAll(Colours::darkgoldenrod);
+    std::cout<<"paint FX : "<<instrumetSerial<<std::endl;
 }
 
 //MARK:- Resize
@@ -488,7 +488,7 @@ void OrionEffectsConfiguration::switchClicked(bool isDown)
         if(switchSerial == 0)/* Compressor Switch */
         {
             
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
             {
                 voice->compressorswitch = !voice->compressorswitch;
                 
@@ -500,7 +500,7 @@ void OrionEffectsConfiguration::switchClicked(bool isDown)
         else if(switchSerial == 1)/* Reverb Switch */
         {
             
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
             {
                 voice->reverbswitch = !voice->reverbswitch;
                 
@@ -512,7 +512,7 @@ void OrionEffectsConfiguration::switchClicked(bool isDown)
         else if(switchSerial == 2)/* Delay Switch */
         {
             
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
             {
                 voice->delayswitch = !voice->delayswitch;
                 
@@ -604,7 +604,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     if(slider == compThreshSlider.get())// Compressor Threshold
     {
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->compressor.threshold_  = compThreshSlider->getValue();
             voice->compressor.update();
@@ -616,7 +616,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == compRatioSlider.get())// Compressor Ratio
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->compressor.ratio_  = compRatioSlider->getValue();
             voice->compressor.update();
@@ -629,7 +629,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == compAttackSlider.get())// Compressor Attack
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->compressor.tauAttack_  = compAttackSlider->getValue();
             voice->compressor.update();
@@ -643,7 +643,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == compReleaseSlider.get())// Compressor Release
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->compressor.tauRelease_  = compReleaseSlider->getValue();
         }
@@ -655,7 +655,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == compGainSlider.get())// Compressor Gain
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->compressor.makeUpGain_  = compGainSlider->getValue();
             voice->compressor.update();
@@ -671,7 +671,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     if(slider == reverbDrySlider.get())// Reverb Dry-Wet
     {
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->reverb_param.dryLevel = 1.0f - reverbDrySlider->getValue();
             voice->reverb_param.wetLevel = 1.0f - 1.0f - reverbDrySlider->getValue();
@@ -688,7 +688,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == reverbPredelaySlider.get())// Reverb Pre-delay
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->reverb_param.width = reverbPredelaySlider->getValue();
             
@@ -706,7 +706,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == reverbDecaySlider.get())// Reverb Decay
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->reverb_param.damping = 1.0f - reverbDecaySlider->getValue();
             
@@ -724,7 +724,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == reverbSizeSlider.get())// Reverb Size
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->reverb_param.roomSize = reverbSizeSlider->getValue();
             
@@ -742,7 +742,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == reverbColorSlider.get())// Reverb Color
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->reverbColor =  reverbColorSlider->getValue();
             if(voice->reverbColor == 0)
@@ -802,7 +802,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     if(slider == delayDryWetSlider.get())// Delay DryWet
     {
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             //voice->reverb_param.dryLevel = 1.0f - delayDryWetSlider->getValue();
             //voice->reverb_param.wetLevel = 1.0f - 1.0f - delayDryWetSlider->getValue();
@@ -818,7 +818,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == delayTimeSlider.get())// Delay Time
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->delay.delayLength_ = delayTimeSlider->getValue();
             voice->delay.update();
@@ -831,7 +831,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == delayFeedbackSlider.get())// Delay Feedback
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->delay.feedback_ = delayFeedbackSlider->getValue();
             voice->delay.update();
@@ -844,7 +844,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == delayColorSlider.get())// Delay Color
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->delay.color_ = delayColorSlider->getValue();
             voice->delay.update();
@@ -857,7 +857,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == delayPanSlider.get())// Delay Pan
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(effectSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->delay.panIndicator_ = delayPanSlider->getValue();
             voice->delay.update();

@@ -51,7 +51,7 @@ OrionEQConfiguration::OrionEQConfiguration(OrionaudioAudioProcessor& p,int seria
 
 void OrionEQConfiguration::paint(Graphics& g)
 {
-   
+   DBG("paint EQ");
     
     Graphics::ScopedSaveState state (g);
     

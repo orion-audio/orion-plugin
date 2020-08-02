@@ -59,13 +59,6 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     for (int i = 0; i < drumButtons.size(); i++)
     {
         drumButtons[i].reset(new DragAndDropButton());
-        
-        /*
-        drumButtons[i]->onClick = [&] {
-            waveWiggle->startAnimation();
-        };
-        */
-  
         addAndMakeVisible(drumButtons[i].get());
         
         drumButtonCoverImageViews[i].reset(new DrawableImage());
@@ -363,7 +356,6 @@ void PrimaryPaneComponent::resized()
     instrumentsVolumeSliderLabel->setBounds(area);
     
     //--------- Instrument Pan ---------//
-    
     // Instruments Pan Label
     area = Rectangle<int>(getWidth()/2 - 10 * uniteW, 1 * uniteW,  14 * uniteW, 2 * uniteW);
     instrumentsPanLabel->setBounds(area);
@@ -379,7 +371,6 @@ void PrimaryPaneComponent::resized()
     
     
     //--------- Master Volume ---------//
-    
     // Master Volume Meter Left
     area = Rectangle<int>(getWidth() - 8 * uniteW, 1 * uniteW, 1.75 * uniteW, 11 * uniteW);
     meterLeft->setBounds(area);

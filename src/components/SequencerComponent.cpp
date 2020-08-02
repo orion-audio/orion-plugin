@@ -61,6 +61,7 @@ void SequencerComponent::paint(Graphics& g)
 {
     paintRows(g);
     paintCols(g);
+
 }
 
 void SequencerComponent::paintRows(Graphics& g)

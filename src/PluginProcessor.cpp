@@ -43,7 +43,6 @@ OrionaudioAudioProcessor::OrionaudioAudioProcessor()
     sequencer.reset(new Sequencer(static_cast<Synthesiser*>(sampler.get())));
     sequencer->setActive(true);
     
-    //cloneEditor->tabComponents->tabComponents[instrumetSerial]->envConfiguration->envelopeMeter->loadAudioFile();
     
 }
 

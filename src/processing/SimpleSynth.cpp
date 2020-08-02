@@ -235,7 +235,6 @@ void SimpleSynth::noteOn(int midiChannel,
                 {
                     //std::cout<<"can play sound "<<voice->canPlayOrionSound(midiNoteNumber);
                     //std::cout<<"current sound " << voice->getCurrentlyPlayingSound();
-                    
                     if(voice->canPlayOrionSound(midiNoteNumber) && voice->getCurrentlyPlayingSound())
                     {
                         //std::cout<<"stopped voice"<<midiNoteNumber<<voice->canPlayOrionSound(midiNoteNumber);
@@ -260,12 +259,12 @@ void SimpleSynth::noteOn(int midiChannel,
             {
                 PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
                 PrimaryPaneMirror->waveWiggle->startAnimation();
-                instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
-                noteOnPNGChange();
+                //instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
+                //noteOnPNGChange();
                 
             }
            
-            
+            DBG("KeyboardPress!!!!!!!!!!!");
         }
     }
 }
@@ -276,25 +275,27 @@ void SimpleSynth::noteOff(int midiChannel,
                          bool allowTailOff)
 {
     /* Set PrimaryPane Images */
-    if(!instrumentsMuteStates[instrumetSerial])
-    {
-        instrumetOffSerial = PitchToInstrumentSerial(midiNoteNumber);
-        noteOffPNGChange();
-    }
+    //if(!instrumentsMuteStates[instrumetSerial])
+    //{
+        //instrumetOffSerial = PitchToInstrumentSerial(midiNoteNumber);
+        //noteOffPNGChange();
+    //}
+    
+    std::cout<< "Note Off"<<std::endl;
 
 }
 
 
 void SimpleSynth::noteOnPNGChange()
 {
-    const MessageManagerLock mmLock;//????????????????
-    PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
+    //const MessageManagerLock mmLock;//????????????????
+    //PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
     //PrimaryPaneMirror->drumButtons[instrumetSerial]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
 }
 
 
 void SimpleSynth::noteOffPNGChange()
 {
-    const MessageManagerLock mmLock;// ????????????????
-    PrimaryPaneMirror->drumButtonCoverImageViews[instrumetOffSerial]->setVisible(false);
+    //const MessageManagerLock mmLock;// ????????????????
+    //PrimaryPaneMirror->drumButtonCoverImageViews[instrumetOffSerial]->setVisible(false);
 }

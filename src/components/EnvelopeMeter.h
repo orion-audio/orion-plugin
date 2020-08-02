@@ -20,11 +20,9 @@ public:
     ~EnvelopeMeter() override;
     void paint (juce::Graphics&) override;
     void resized() override;
-    //------------------------------------
-    int serial = -1;
     
     void loadAudioFile();
-    void initAudioFile(int serialIn);
+    void initAudioFile();
     
     void updateEnvelope();
     
@@ -76,8 +74,6 @@ private:
     float decayBendCoef   = 0.5f;
     float sustainBendCoef = 0.5f;
     float releaseBendCoef = 0.5f;
-    
-
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EnvelopeMeter)
 };
