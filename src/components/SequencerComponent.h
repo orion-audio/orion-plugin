@@ -83,6 +83,8 @@ public:
     void setSubDivision(NoteSequence::SubDivision s);
 
 private:
+    
+    void setValuesFromPlugin();
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
     std::vector<Note> notesToBePlayed;
