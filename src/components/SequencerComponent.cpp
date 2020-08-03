@@ -61,6 +61,9 @@ void SequencerComponent::paint(Graphics& g)
 {
     paintRows(g);
     paintCols(g);
+    g.fillAll(Colours::black);
+    g.setColour (Colours::darkgrey);
+    g.drawRect(0, 0, getWidth(), getHeight());
 
 }
 

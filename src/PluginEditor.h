@@ -143,7 +143,7 @@ private:
     AudioFormatManager formatManager;
     double startTime;
     
-    bool dropDownVisible = false;
+    
     bool resizeViewVisible = false;
     bool arrangementWindowVisible = false;
     

@@ -330,7 +330,7 @@ public:
             
             float* outL = outputBuffer.getWritePointer(0, startSample);
             float* outR = outputBuffer.getNumChannels() > 1 ? outputBuffer.getWritePointer(1, startSample) : nullptr;
-            int safelength =(int) 10 * sampleRate;// Previous Value: 2 * sampleRate
+            int safelength =(int) 2 * sampleRate;// Previous Value: 2 * sampleRate
             safelength = std::max(playingSound->length,safelength);
             //std::cout<<"playing "<<playingSound->length<<" 2 sec "<<safelength<<"\n";
             

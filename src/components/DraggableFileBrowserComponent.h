@@ -120,7 +120,6 @@ private:
     
     DirectoryContentsList currentDirectory;
     std::unique_ptr<ImageButton> backButton;
-    std::unique_ptr<ImageButton> forwardButton;
     
     int currentHighlighted = -1;
     

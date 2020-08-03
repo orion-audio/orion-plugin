@@ -271,6 +271,7 @@ PrimaryPaneComponent::PrimaryPaneComponent(OrionaudioAudioProcessor* p, Orionaud
     addAndMakeVisible(MasterVolumeSubtractLabel.get());
     MasterVolumeSubtractLabel->setAlpha(0.5);
 
+    resized();
     
 }
 
@@ -312,14 +313,14 @@ void PrimaryPaneComponent::resized()
     //--------- Instrument Pads ---------//
     int drumCount = 0;
     double localWidth = 13.5 * uniteW;
-    double localHeight = 14 * uniteW;
+    double localHeight = getWidth() * 3/25;
     area.setSize(localWidth, localHeight);
     
     for (int i = 0; i < 2; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            area.setPosition(10 * uniteW + j * localWidth * 1.6, 13 * uniteW + i * localHeight * 1);
+            area.setPosition(10 * uniteW + j * localWidth * 1.6, 13 * uniteW + i * localHeight * 1.05);
             drumButtons[drumCount]->setBounds(area);
             drumButtonCoverImageViews[drumCount]->setBounds(area);
             drumButtonCoverImageViews[drumCount]->setTransformToFit(area.toFloat(), RectanglePlacement::onlyReduceInSize);
@@ -328,7 +329,7 @@ void PrimaryPaneComponent::resized()
     }
 
     //--------- Wave Wiggle ---------//
-    area = Rectangle<int>(getWidth()/2 - 18.5 * uniteW, getHeight()/2 + 5 * uniteW, 42 * uniteW, 16 * uniteW);
+    area = Rectangle<int>(getWidth()/2 - 18.5 * uniteW, getHeight()/1.75,  getWidth() * 7/20, 16 * uniteW);
     waveWiggle->setBounds(area);
     //waveWiggle->setCentrePosition(getWidth()/2,39 * uniteW);
 

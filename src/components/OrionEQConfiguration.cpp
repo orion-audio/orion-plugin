@@ -158,7 +158,9 @@ void OrionEQConfiguration::paint(Graphics& g)
 void OrionEQConfiguration::resized()
 {
   
-    plotFrame = getLocalBounds();//.reduced (3, 3);
+    //plotFrame = getLocalBounds();//.reduced (3, 3);
+    plotFrame = Rectangle<int>(0, 0,  getWidth(), getHeight() * 0.925);
+    
     updateFrequencyResponses();
     float uniteW = getWidth()/100;
     

@@ -19,8 +19,7 @@ EnvelopeMeter::EnvelopeMeter()
     //EnvelopeColor = juce::Colours::greenyellow;
     EnvelopeColor = juce::Colours::cyan;
     mFormatManager.registerBasicFormats();
-    audioFile = new File();
-    
+    //audioFile = new File();
     envelopePath.reset(new DrawablePath());
     addAndMakeVisible(envelopePath.get());
     envelopePath->replaceColour(Colours::black,EnvelopeColor);
@@ -36,6 +35,34 @@ void EnvelopeMeter::paint (Graphics& g)
     initAudioFile();
     //DBG(audioFile->getFullPathName());//-!!!!!!!!
     //------------------------------------ Draw Waveform -------------------------------------//
+    File* audioFile;
+    audioFile = &instrumentSamplePathes[instrumetSerial];
+    
+    if(audioFile != nullptr)
+    {
+        AudioFormatReader*  mFormatReader {nullptr};
+        
+        
+            
+        mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetSerial]);
+        auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
+        //AudioBuffer<float> mWaveForm;
+        mWaveForm.setSize(1, sampleLength);
+        mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
+        
+        mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
+        //auto buffer = mWaveForm.getReadPointer(0);//Ch 1
+    //      for (int sample = 0; sample < mWaveForm.getNumSamples(); ++sample)
+    //      {
+    //          DBG(buffer[sample]);
+    //      }
+        }
+        else
+        {
+            return;
+        }
+    
+    
     
     /* Creat Path & Init Start Point & Change Pencil Color & Change Pencil Opeacity*/
     Path p;
@@ -47,6 +74,7 @@ void EnvelopeMeter::paint (Graphics& g)
     /* Get Waveform */
     int ratio = mWaveForm.getNumSamples()/getWidth();
     auto buffer = mWaveForm.getReadPointer(0);
+    std::vector<float> mAudioPoints;
     
     /* Scale Audio File To Window On X Axis */
     for (int sample = 0; sample < mWaveForm.getNumSamples(); sample+=ratio)
@@ -65,8 +93,7 @@ void EnvelopeMeter::paint (Graphics& g)
     g.strokePath(p, PathStrokeType(1.0,
                                    PathStrokeType::JointStyle::curved,
                                    PathStrokeType::EndCapStyle::rounded));
-    
-    
+
 }
 
 void EnvelopeMeter::updateEnvelope()
@@ -121,6 +148,7 @@ void EnvelopeMeter::updateEnvelope()
 
 void EnvelopeMeter::loadAudioFile()
 {
+    /*
     if(audioFile != nullptr)
     {
         audioFile = &instrumentSamplePathes[instrumetSerial];
@@ -144,12 +172,14 @@ void EnvelopeMeter::loadAudioFile()
     {
         return;
     }
+     */
 }
 
 
 void EnvelopeMeter::initAudioFile()
 {
 
+ /*
     if(audioFile != nullptr)
     {
         audioFile = &instrumentSamplePathes[instrumetSerial];
@@ -169,7 +199,12 @@ void EnvelopeMeter::initAudioFile()
     {
         return;
     }
+ 
+ */
 }
+
+
+
 
 
 

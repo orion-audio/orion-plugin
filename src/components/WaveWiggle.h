@@ -68,7 +68,7 @@ public:
     {
         float height = getHeight() * .1;
         float middle = getHeight() / 2;
-        for (int i = 0; i < 24; i+=2){
+        for (int i = 0; i < 25; i+=2){
             controlPoints[i].startingY = middle - height;
             controlPoints[i].targetY = middle;
             controlPoints[i].direction = (controlPoints[i].targetY - controlPoints[i].startingY) / 6 ;
@@ -94,9 +94,10 @@ public:
         p.startNewSubPath(0, getHeight() / 2);
         
         int x = 0;
-        int w = getWidth() * 0.020;
+        int w = getWidth()/44;
         
-        for (int i = 0; i < 23; i++){
+        for (int i = 0; i < 25; i++)
+        {
             p.quadraticTo(x - w / 2,
                           controlPoints[i].y,
                           x,
@@ -105,7 +106,8 @@ public:
 
         }
         
-        for (int i = 23; i > 0; i--){
+        for (int i = 25; i > 0; i--)
+        {
             p.quadraticTo(x - w / 2,
                           controlPoints[i].y,
                           x,
@@ -128,7 +130,7 @@ public:
         //std::cout<<"height: "<< height <<std::endl;
         //std::cout<<"middle: "<< middle <<std::endl;
         
-        for (int i = 0; i < 24; i++){
+        for (int i = 0; i < 26; i++){
             controlPoints[i].reset();
         }
         startTimerHz(30);
@@ -139,7 +141,7 @@ public:
         //std::cout<<"called"<<std::endl;
         
         bool shouldStop = true;
-        for (int i = 0; i < 24; i++){
+        for (int i = 0; i < 26; i++){
             controlPoints[i].update();
             if (controlPoints[i].y != controlPoints[i].targetY)
                 shouldStop = false;
@@ -156,7 +158,7 @@ public:
     }
 
 private:
-    std::array<ControlPoint, 24> controlPoints;
+    std::array<ControlPoint, 26> controlPoints;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WaveWiggle)
 };

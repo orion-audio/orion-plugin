@@ -54,11 +54,11 @@ public:
     };
 
 private:
-    File* audioFile;
+    //File* audioFile;
     AudioBuffer<float> mWaveForm;
     AudioFormatManager  mFormatManager;
-    AudioFormatReader*  mFormatReader {nullptr};
-    std::vector<float> mAudioPoints;
+    //AudioFormatReader*  mFormatReader {nullptr};
+    //std::vector<float> mAudioPoints;
     
     Colour waveColor;
     Colour EnvelopeColor;

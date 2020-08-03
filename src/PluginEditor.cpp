@@ -395,25 +395,32 @@ void OrionaudioAudioProcessorEditor::resized()
     
     setUIScale(float(getWidth() / float(orion::defaultWidth)));
 
-    //--------- DROPDOWN BUTTONS ---------//
+    
+    //--------- DROPDOWN Window ---------//
     Path path;
+    
+    // Footer Path
+    path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 1.0f);
+    footerPath->setPath(path);
+    
+    // Dropdown Bar
     path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 4 * unite);
     dropDownBottonBar->setPath(path);
     
     // EQ
-    area = Rectangle<int>( 5 * uniteW + 0 * 5 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 0 * 5 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
     dropDownEQ->setBounds(area);
 
     // CLIP
-    area = Rectangle<int>( 5 * uniteW + 1 * 6 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 1 * 6 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
     dropDownClip->setBounds(area);
 
     // ENV
-    area = Rectangle<int>( 5 * uniteW + 2 * 6 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 2 * 6 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
     dropDownENV->setBounds(area);
 
     // FX
-    area = Rectangle<int>( 5 * uniteW + 3 * 6 * uniteW, getHeight() - 3 * unite, 2 * uniteW, 4 * unite);
+    area = Rectangle<int>( 5 * uniteW + 3 * 6 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
     dropDownFX->setBounds(area);
     
     
@@ -423,9 +430,7 @@ void OrionaudioAudioProcessorEditor::resized()
     resizeButton->setBounds(area);
 
     
-    //--------- Footer Path ---------//
-    path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 1.0f);
-    footerPath->setPath(path);
+    
     
     
     
@@ -459,6 +464,7 @@ void OrionaudioAudioProcessorEditor::addMessageToList (const MidiMessage& messag
 
 void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabIndex, bool isDown)
 {
+    //return;
     if(isDown)
     {
         std::cout<<"                  "<<std::endl;

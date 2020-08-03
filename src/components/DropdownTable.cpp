@@ -43,7 +43,7 @@ DropdownTable::~DropdownTable()
 
 void DropdownTable::paint (Graphics& g)
 {
-
+    DBG("DropdownTable ");
     g.fillAll(Colours::black);
     g.setColour (Colours::darkgrey);
     //g.drawHorizontalLine(0, 0, getWidth());

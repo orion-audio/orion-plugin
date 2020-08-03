@@ -131,5 +131,9 @@ void CircularMeter::resized()
 
 void CircularMeter::timerCallback()
 {
-    repaint();
+    float level = updaterFunction();
+    if(level != 0)
+    {
+        repaint();
+    }
 }

@@ -258,12 +258,12 @@ void SimpleSynth::noteOn(int midiChannel,
             if(!instrumentsMuteStates[instrumetSerial])
             {
                 PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
-                PrimaryPaneMirror->waveWiggle->startAnimation();
-                //instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
-                //noteOnPNGChange();
                 
+                if(!dropDownVisible)
+                {
+                  PrimaryPaneMirror->waveWiggle->startAnimation();
+                }
             }
-           
             DBG("KeyboardPress!!!!!!!!!!!");
         }
     }
