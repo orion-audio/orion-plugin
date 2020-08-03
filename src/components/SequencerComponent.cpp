@@ -51,6 +51,8 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
             noteButtonFn(pitch, beat);
         }
     }
+    
+    setValuesFromPlugin();
 }
 
 SequencerComponent::~SequencerComponent()
@@ -139,13 +141,14 @@ void SequencerComponent::buttonClicked(Button* b)
     if (button != nullptr) {
         int pitch = button->getPitch();
         double beat = button->getBeat();
-        std::cout << pitch << "," << beat << std::endl;
+//        std::cout << pitch << "," << beat << std::endl;
         NoteSequence* sequence = sequencer.getNoteSequence();
         if (sequence->checkAndRemoveNote(pitch, beat))
             DBG("removed");
         else
         {
             sequence->addNote(Note(pitch, 100, beat, beat + (1.0 / sequencer.getSubDivision())));
+            DBG(sequencer.getNoteSequence()->toString());
         }
     }
 }
@@ -189,9 +192,22 @@ void SequencerComponent::setSubDivision(NoteSequence::SubDivision s) {
         for (double j = 0; j < 32; j++) {
             double beat = j * beatLength;
             sequencerButtons[i][j]->setBeat(beat);
-            Button::ButtonState state = sequencer.getNoteSequence()->isNotePresent(NoteSequence::noteValues[i], beat) ? Button::buttonDown : Button::buttonNormal;
             sequencerButtons[i][j]->setToggleState(sequencer.getNoteSequence()->isNotePresent(NoteSequence::noteValues[i], beat), false);
         }
     }
     resized();
+}
+
+void SequencerComponent::setValuesFromPlugin() {
+    double beatLength = 1.0 / (double)sequencer.getSubDivision();
+
+    for (int i = 0; i < NUM_VOICES; i++) {
+        for (double j = 0; j < 32; j++) {
+            double beat = j * beatLength;
+            sequencerButtons[i][j]->setBeat(beat);
+            sequencerButtons[i][j]->setToggleState(sequencer.getNoteSequence()->isNotePresent(NoteSequence::noteValues[i], beat), false);
+        }
+    }
+    resized();
+
 }

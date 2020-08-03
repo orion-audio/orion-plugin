@@ -80,7 +80,7 @@ public:
     void setSequenceLength(int newLength);
     
     NoteSequence::SubDivision getSubDivision() { return subdivision; };
-    void setSubDivision(NoteSequence::SubDivision s) {subdivision = s; };
+    void setSubDivision(NoteSequence::SubDivision s);
     
 private:
     

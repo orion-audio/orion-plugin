@@ -87,16 +87,12 @@ ValueTree Sequencer::getStateInformation()
 void Sequencer::setStateInformation(ValueTree tree)
 {
     sequence->fromValueTree(tree);
+    
 }
 
 void Sequencer::setNewSequence(NoteSequence* newSequence)
 {
     sequence.reset(newSequence);
-//    for (int i = 0; i < listeners.size(); i++)
-//    {
-//        MessageManager::callAsync([&]{ listeners[i]->sequenceChanged(); });
-//
-//    }
     for (int i = 0; i < listeners.size(); i++){
         listeners[i]->sequenceChanged();
     }
@@ -170,3 +166,12 @@ void Sequencer::setSequenceLength(int newLength) {
     sequenceLength = (newLength > 0 ? newLength : sequenceLength);
 }
 
+void Sequencer::setSubDivision(NoteSequence::SubDivision s) {
+    subdivision = s;
+//    for (int i = 0; i < sequence->getNotes().size(); i++) {
+//        Note currentNote = sequence->getNotes()[i];
+//        DBG(std::fmod(currentNote.startTime,subdivision));
+//        if (std::fmod(currentNote.startTime,subdivision) != 0)
+//            sequence->removeNote(currentNote.pitch, currentNote.startTime);
+//    }
+}
