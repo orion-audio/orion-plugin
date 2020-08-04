@@ -87,7 +87,7 @@ private:
     std::unique_ptr<PrimaryPaneComponent> primaryPane; 
     std::unique_ptr<SidePanelComponent> sidePanel;
     std::unique_ptr<ArrangementWindowComponent> arrangementWindow;
-    std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
+    //std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     
     std::unique_ptr<ImageButton> backButton;
     std::unique_ptr<ImageButton> resizeButton;

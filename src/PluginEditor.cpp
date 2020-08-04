@@ -228,8 +228,8 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     
     
-    fileBrowser.reset(new DraggableFileBrowserComponent());
-    addAndMakeVisible(fileBrowser.get());
+    //fileBrowser.reset(new DraggableFileBrowserComponent());
+    //addAndMakeVisible(fileBrowser.get());
     
     
     
