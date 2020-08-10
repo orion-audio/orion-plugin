@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Sequencer.h"
 #include "SequencerButton.h"
-#define NUM_VOICES 6
+#define NUM_VOICES 8
 //==============================================================================
 /*
 */
@@ -90,7 +90,7 @@ private:
     std::vector<Note> notesToBePlayed;
     
     std::array<std::array<std::unique_ptr<SequencerButton>, 32>, NUM_VOICES> sequencerButtons;
-    
+    std::array<std::unique_ptr<Label>, NUM_VOICES> labels;
     int selectedRow = 0;
     int lastBeat = -1;
     bool shouldFlip = false;

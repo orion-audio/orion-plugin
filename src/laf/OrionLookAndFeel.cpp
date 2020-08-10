@@ -187,7 +187,7 @@ Font OrionLookAndFeel::getLabelFont (Label &l)
         return Font();
     
     Font f;
-    f.setHeight(l.getHeight() * .75);
+    f.setHeight(l.getHeight() * .5);
     return f;
 }
 
