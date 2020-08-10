@@ -261,7 +261,7 @@ void SimpleSynth::noteOn(int midiChannel,
                 PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
                 PrimaryPaneMirror->waveWiggle->startAnimation();
                 instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
-                noteOnPNGChange();
+                //noteOnPNGChange();
                 
             }
            
@@ -279,7 +279,7 @@ void SimpleSynth::noteOff(int midiChannel,
     if(!instrumentsMuteStates[instrumetSerial])
     {
         instrumetOffSerial = PitchToInstrumentSerial(midiNoteNumber);
-        noteOffPNGChange();
+        //noteOffPNGChange();
     }
 
 }
