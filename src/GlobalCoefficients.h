@@ -42,6 +42,7 @@ File  instrumentSamplePathes       [8];
 
 // Dropdown Type
 int dropdownTabSerial = 0;
+bool dropDownVisible = false;
 
 // Envelope
 bool  envSwitches                  [8] = {false, false, false, false, false, false, false, false};
@@ -116,6 +117,7 @@ extern File  instrumentSamplePathes[];
 
 // Dropdown Type
 extern int dropdownTabSerial;
+extern bool dropDownVisible;
 
 // Envelope
 extern bool  envSwitches                [];

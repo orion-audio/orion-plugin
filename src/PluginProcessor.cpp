@@ -231,6 +231,9 @@ void OrionaudioAudioProcessor::getStateInformation (MemoryBlock& destData)
 void OrionaudioAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     std::unique_ptr<juce::XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    
+    if (xmlState == nullptr) return;
+    
     ValueTree state = ValueTree::fromXml(*xmlState);
     DBG(state.toXmlString());
     parameters.replaceState(state.getChildWithName("PARAMETERS"));

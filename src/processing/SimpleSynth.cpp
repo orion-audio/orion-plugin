@@ -256,13 +256,18 @@ void SimpleSynth::noteOn(int midiChannel,
             }
             
             /* Set PrimaryPane Images */
-            if(!instrumentsMuteStates[instrumetSerial])
+//            if(!instrumentsMuteStates[instrumetSerial])
+//            {
+//                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
+//                PrimaryPaneMirror->waveWiggle->startAnimation();
+//                instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
+//                //noteOnPNGChange();
+//
+//            }
+            
+            if(!dropDownVisible)
             {
-                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
                 PrimaryPaneMirror->waveWiggle->startAnimation();
-                instrumetSerial = PitchToInstrumentSerial(midiNoteNumber);
-                //noteOnPNGChange();
-                
             }
            
             
@@ -276,11 +281,11 @@ void SimpleSynth::noteOff(int midiChannel,
                          bool allowTailOff)
 {
     /* Set PrimaryPane Images */
-    if(!instrumentsMuteStates[instrumetSerial])
-    {
-        instrumetOffSerial = PitchToInstrumentSerial(midiNoteNumber);
-        //noteOffPNGChange();
-    }
+//    if(!instrumentsMuteStates[instrumetSerial])
+//    {
+//        instrumetOffSerial = PitchToInstrumentSerial(midiNoteNumber);
+//        //noteOffPNGChange();
+//    }
 
 }
 

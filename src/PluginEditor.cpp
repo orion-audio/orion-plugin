@@ -723,7 +723,7 @@ void OrionaudioAudioProcessorEditor::toggleArrangmentWindow(bool windowVisible)
     resized();
 }
 
-bool OrionaudioAudioProcessorEditor::getDropdownVisible()
-{
-    return dropDownVisible;
-}
+//bool OrionaudioAudioProcessorEditor::getDropdownVisible()
+//{
+//    return dropDownVisible;
+//}

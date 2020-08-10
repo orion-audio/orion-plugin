@@ -57,7 +57,7 @@ public:
 
     void toggleArrangmentWindow(bool windowVisible);
     
-    bool getDropdownVisible();
+    //bool getDropdownVisible();
     
     ComponentBoundsConstrainer constrainer;
 private:
@@ -139,7 +139,7 @@ private:
     AudioFormatManager formatManager;
     double startTime;
     
-    bool dropDownVisible = false;
+    //bool dropDownVisible = false;
     bool resizeViewVisible = false;
     bool arrangementWindowVisible = false;
     
