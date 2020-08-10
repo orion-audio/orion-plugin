@@ -29,8 +29,24 @@ public:
     void sliderDragEnded (Slider* slider)override;
     
     void knobsSetRange();
+    void knobsInitRange();
     
     std::unique_ptr<EnvelopeMeter> envelopeMeter;
+    
+
+    
+    void aSliderValueChange(double value){aSlider->setValue(value,sendNotificationSync);};
+    void dSliderValueChange(double value){dSlider->setValue(value,sendNotificationSync);};
+    void hSliderValueChange(double value){hSlider->setValue(value,sendNotificationSync);};
+    void rSliderValueChange(double value){rSlider->setValue(value,sendNotificationSync);};
+    
+    void aBendSliderValueChange(double value){aBendSlider->setValue(value,sendNotificationSync);};
+    void dBendSliderValueChange(double value){dBendSlider->setValue(value,sendNotificationSync);};
+    void sBendSliderValueChange(double value){sBendSlider->setValue(value,sendNotificationSync);};
+    void rBendSliderValueChange(double value){rBendSlider->setValue(value,sendNotificationSync);};
+
+    
+
     
 private:
     
@@ -40,31 +56,31 @@ private:
     
     
     
-    Slider envAttackSlider;
-    Slider envHoldSlider;
-    Slider envDecaySlider;
-    Slider envReleaseSlider;
+//    Slider envAttackSlider;
+//    Slider envHoldSlider;
+//    Slider envDecaySlider;
+//    Slider envReleaseSlider;
+//
+//    Slider envAttackBendSlider;
+//    Slider envSustainSlider;
+//    Slider envDecayBendSlider;
+//    Slider envReleaseBendSlider;
+//
+//
+//    ToggleButton envSwitchButton;
+//
+//    Label envAttackLabel;
+//    Label envHoldLabel;
+//    Label envDecayLabel;
+//    Label envReleaseLabel;
+//
+//    Label envAttackBendLabel;
+//    Label envSustainLabel;
+//    Label envDecayBendLabel;
+//    Label envReleaseBendLabel;
     
-    Slider envAttackBendSlider;
-    Slider envSustainSlider;
-    Slider envDecayBendSlider;
-    Slider envReleaseBendSlider;
     
-    
-    ToggleButton envSwitchButton;
-    
-    Label envAttackLabel;
-    Label envHoldLabel;
-    Label envDecayLabel;
-    Label envReleaseLabel;
-    
-    Label envAttackBendLabel;
-    Label envSustainLabel;
-    Label envDecayBendLabel;
-    Label envReleaseBendLabel;
-    
-    
-    File* envbackground;
+    //File* envbackground;
     
     //--------------------- Previous
     

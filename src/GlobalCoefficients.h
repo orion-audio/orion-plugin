@@ -44,18 +44,24 @@ File  instrumentSamplePathes       [8];
 int dropdownTabSerial = 0;
 bool dropDownVisible = false;
 
+
+// EQ
+
+
+
+
 // Envelope
 bool  envSwitches                  [8] = {false, false, false, false, false, false, false, false};
 
 float envAttackCoefficient         [8] = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
-float envDecayCoefficient          [8] = {1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f};
-float envSustainCoefficient        [8] = {750.0f, 750.0f, 750.0f, 750.0f, 750.0f, 750.0f, 750.0f, 750.0f};
-float envReleaseCoefficient        [8] = {1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f, 1250.0f};
+float envDecayCoefficient          [8] = {0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f};
+float envSustainCoefficient        [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+float envReleaseCoefficient        [8] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
 
-float envAttackBendCoefficient     [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
-float envDecayBendCoefficient      [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+float envAttackBendCoefficient     [8] = {-5.0f, -5.0f, -5.0f, -5.0f, -5.0f, -5.0f, -5.0f, -5.0f};
+float envDecayBendCoefficient      [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 float envSustainBendCoefficient    [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
-float envReleaseBendCoefficient    [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+float envReleaseBendCoefficient    [8] = {-5.0f, -5.0f, -5.0f, -5.0f, -5.0f, -5.0f, -5.0f, -5.0f};
 
 
 // FX Switch

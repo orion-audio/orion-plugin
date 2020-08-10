@@ -21,7 +21,6 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
 {
     envSerial = serial;
     
-    
     audioFile = &instrumentSamplePathes[serial];
     //-------------------------------- Background Image -------------------------------//
     Image backgroundImage = ImageCache::getFromMemory(BinaryData::ENVBackground_png, BinaryData::ENVBackground_pngSize);
@@ -94,7 +93,6 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     rSliderLabel->setAlpha(0.8);
     
     //Set Knob Range & Init Values
-    
 //    aSlider->setRange(0.1f, 1500.0f);
 //    aSlider->setValue(0.1f);
 //    dSlider->setRange(0.1f, 2500.0f);
@@ -181,181 +179,17 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
     addAndMakeVisible(rBendSliderLabel.get());
     rBendSliderLabel->setAlpha(0.8);
     
-    //----------------------------------------------------------------------------------//
-    
-    
-//    int WidthTmp = OrionGlobalWidth;
-//    int HeightTmp = OrionGlobalHeight*9/30;
-//
-//    int textboxHeight = OrionGlobalHeight/60;
-//    int knobWidth = OrionGlobalWidth*1/25;
-//    int knobHeight = knobWidth + textboxHeight;
-//
-//
-//    setBounds(0, 0, OrionGlobalWidth, OrionGlobalHeight/3);
-//    /**************** slider initialization values ********************/
-//
-//    //==================================================================
-//    envAttackSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-//    envAttackSlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envAttackSlider.setRange(0.1f, 1500.0f);
-//    envAttackSlider.setValue(0.1f);
-//    envAttackSlider.setTextValueSuffix (" ms");
-//    envAttackSlider.setBounds(((WidthTmp*2/10)/2) - knobWidth*1.5, HeightTmp/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envAttackSlider);
-//    //envAttackSlider.setVisible(true);
-//    //addAndMakeVisible(envAttackLabel);
-//    envAttackLabel.setText ("Attack", dontSendNotification);
-//    envAttackLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envAttackLabel.attachToComponent (&envAttackSlider, false);
-//
-//
-//
-//    //==================================================================
-//    envDecaySlider.setSliderStyle(Slider::SliderStyle::Rotary);
-//    envDecaySlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envDecaySlider.setRange(0.1f, 2500.0f);
-//    envDecaySlider.setValue(0.1f);
-//    envDecaySlider.setTextValueSuffix (" ms");
-//    envDecaySlider.setBounds(((WidthTmp*2/10)/2) + knobWidth*1, HeightTmp/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envDecaySlider);
-//    //envDecaySlider.setVisible(true);
-//    //addAndMakeVisible(envDecayLabel);
-//    envDecayLabel.setText ("Decay", dontSendNotification);
-//    envDecayLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envDecayLabel.attachToComponent (&envDecaySlider, false);
-//
-//
-//    //==================================================================
-//    envHoldSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-//    envHoldSlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envHoldSlider.setRange(0.1f, 1500.0f);
-//    envHoldSlider.setValue(0.1f);
-//    envHoldSlider.setTextValueSuffix (" ms");
-//    envHoldSlider.setBounds(((WidthTmp*2/10)/2) - knobWidth*1.5, HeightTmp*4/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envHoldSlider);
-//    //envHoldSlider.setVisible(true);
-//    //addAndMakeVisible(envAttackLabel);
-//    envHoldLabel.setText ("Hold", dontSendNotification);
-//    envHoldLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envHoldLabel.attachToComponent (&envHoldSlider, false);
-//
-//    //==================================================================
-//    envReleaseSlider.setSliderStyle(Slider::SliderStyle::Rotary);
-//    envReleaseSlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envReleaseSlider.setRange(0.1f, 2500.0f);
-//    envReleaseSlider.setValue(0.1f);
-//    envReleaseSlider.setTextValueSuffix (" ms");
-//    envReleaseSlider.setBounds(((WidthTmp*2/10)/2) + knobWidth*1, HeightTmp*4/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envReleaseSlider);
-//    //envReleaseSlider.setVisible(true);
-//    //addAndMakeVisible(envReleaseLabel);
-//    envReleaseLabel.setText ("Release", dontSendNotification);
-//    envReleaseLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envReleaseLabel.attachToComponent (&envReleaseSlider, false);
-//
-//
-//
-//
-//    //==================================================================
-//    envAttackBendSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
-//    envAttackBendSlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envAttackBendSlider.setRange(0.0f, 1.00f);
-//    envAttackBendSlider.setValue(0.01f);
-//    envAttackBendSlider.setTextValueSuffix (" ms");
-//    envAttackBendSlider.setBounds((WidthTmp*9/10) - knobWidth*1.5, HeightTmp/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envAttackBendSlider);
-//    envAttackBendSlider.setVisible(true);
-//    envAttackBendSlider.setColour(Slider::thumbColourId, Colours::darkgrey);
-//    envAttackBendSlider.setColour(Slider::trackColourId, Colours::grey);
-//    envAttackBendSlider.setColour(Slider::backgroundColourId, Colours::grey);
-//
-//    //addAndMakeVisible(envAttackBendLabel);
-//    envAttackBendLabel.setText ("A-Bend", dontSendNotification);
-//    envAttackBendLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envAttackBendLabel.attachToComponent (&envAttackBendSlider, false);
-//
-//
-//
-//
-//    //==================================================================
-//    envSustainSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
-//    envSustainSlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envSustainSlider.setRange(0.0f, 1.00f);
-//    envSustainSlider.setValue(0.01f);
-//    envSustainSlider.setTextValueSuffix (" ms");
-//    envSustainSlider.setBounds((WidthTmp*9/10) - knobWidth*1.5, HeightTmp*4/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envSustainSlider);
-//    envSustainSlider.setVisible(true);
-//    envSustainSlider.setColour(Slider::thumbColourId, Colours::darkgrey);
-//    envSustainSlider.setColour(Slider::trackColourId, Colours::grey);
-//    envSustainSlider.setColour(Slider::backgroundColourId, Colours::grey);
-//
-//    //addAndMakeVisible(envSustainLabel);
-//    envSustainLabel.setText ("Sustain", dontSendNotification);
-//    envSustainLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envSustainLabel.attachToComponent (&envSustainSlider, false);
-//
-//
-//
-//
-//    //==================================================================
-//    envDecayBendSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
-//    envDecayBendSlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envDecayBendSlider.setRange(0.0f, 1.00f);
-//    envDecayBendSlider.setValue(0.01f);
-//    envDecayBendSlider.setTextValueSuffix (" ms");
-//    envDecayBendSlider.setBounds((WidthTmp*9/10) + knobWidth*1, HeightTmp/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envDecayBendSlider);
-//
-//    envDecayBendSlider.setVisible(true);
-//    envDecayBendSlider.setColour(Slider::thumbColourId, Colours::darkgrey);
-//    envDecayBendSlider.setColour(Slider::trackColourId, Colours::grey);
-//    envDecayBendSlider.setColour(Slider::backgroundColourId, Colours::grey);
-//
-//    //addAndMakeVisible(envDecayBendLabel);
-//    envDecayBendLabel.setText ("D-Bend", dontSendNotification);
-//    envDecayBendLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envDecayBendLabel.attachToComponent (&envDecayBendSlider, false);
-//
-//    //==================================================================
-//    envReleaseBendSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
-//    envReleaseBendSlider.setTextBoxStyle(Slider::TextBoxBelow, false, OrionGlobalWidth/23, textboxHeight);
-//    envReleaseBendSlider.setRange(0.0f, 1.00f);
-//    envReleaseBendSlider.setValue(0.01f);
-//    envReleaseBendSlider.setTextValueSuffix (" ms");
-//    envReleaseBendSlider.setBounds((WidthTmp*9/10) + knobWidth*1, HeightTmp*4/6, knobWidth, knobHeight);/* local: X, Y, W， H */
-//    //addAndMakeVisible(envReleaseBendSlider);
-//    envReleaseBendSlider.setVisible(true);
-//    envReleaseBendSlider.setColour(Slider::thumbColourId, Colours::darkgrey);
-//    envReleaseBendSlider.setColour(Slider::trackColourId, Colours::grey);
-//    envReleaseBendSlider.setColour(Slider::backgroundColourId, Colours::grey);
-//
-//    //addAndMakeVisible(envReleaseBendLabel);
-//    envReleaseBendLabel.setText ("R-Bend", dontSendNotification);
-//    envReleaseBendLabel.setColour(Label::textColourId, Colours::lightgrey);
-//    envReleaseBendLabel.attachToComponent (&envReleaseBendSlider, false);
-//
-//
-//
-//
-//    //==================================================================
-//    envAttackTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envAttack"+String(envSerial), envAttackSlider));
-//    envHoldTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envHold"+String(envSerial), envHoldSlider));
-//    envDecayTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envDecay"+String(envSerial), envDecaySlider));
-//    envReleaseTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envRelease"+String(envSerial), envReleaseSlider));
-//
-//    envAttackBendTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envAttackBend"+String(envSerial), envAttackBendSlider));
-//    envSustainTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envSustain"+String(envSerial), envSustainSlider));
-//    envDecayBendTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envDecayBend"+String(envSerial), envDecayBendSlider));
-//    envReleaseBendTree.reset(new AudioProcessorValueTreeState::SliderAttachment (processor.getValueTree(), "envReleaseBend"+String(envSerial), envReleaseBendSlider));
+
     
     
 }
 
 void OrionEnvConfiguration::paint (Graphics& g)
 {
-    std::cout<<"paint ENV : "<<instrumetSerial<<std::endl;
+    //std::cout<<"paint ENV : "<<instrumetSerial<<std::endl;
+    
+    
+    
    // envbackground = new File(File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("skin").getChildFile("pictures").getChildFile("orionEnvBackground.png"));
     /*
     Image envbackground = ImageCache::getFromMemory(BinaryData::orionEnvBackground_png, BinaryData::orionEnvBackground_pngSize);
@@ -537,38 +371,70 @@ void OrionEnvConfiguration::switchClicked(bool isDown)
 {
     if(isDown)
     {
-        
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
-            voice->envswitch = !voice->envswitch;
-            
+            //voice->envswitch = !voice->envswitch;
             envSwitches[instrumetSerial] = !envSwitches[instrumetSerial];
+            voice->envswitch = envSwitches[instrumetSerial];
             setSwitchImage(voice->envswitch);
         }
-
     }
 }
 
-
+//MARK:- Knobs Set Range
 void OrionEnvConfiguration::knobsSetRange()
 {
     //DBG("HeyHeyHey");
     aSlider->setRange(0.000f, envelopeMeter->getDecayCoef() - 0.0001f);
     aSlider->setValue(envelopeMeter->getAttackCoef());
+    aSlider->repaint();
 
     dSlider->setRange(envelopeMeter->getAttackCoef() + 0.0001f, envelopeMeter->getSustainCoef() - 0.0001);
     dSlider->setValue(envelopeMeter->getDecayCoef());
-    aSlider->repaint();
+    dSlider->repaint();
 
     hSlider->setRange(envelopeMeter->getDecayCoef() + 0.0001f, envelopeMeter->getReleaseCoef() - 0.0001);
     hSlider->setValue(envelopeMeter->getSustainCoef());
-    aSlider->repaint();
+    hSlider->repaint();
 
     rSlider->setRange(envelopeMeter->getSustainCoef() + 0.0001f, 1.0f);
     rSlider->setValue(envelopeMeter->getReleaseCoef());
-    aSlider->repaint();
-
+    rSlider->repaint();
 }
+
+//MARK:- Knobs Init Range
+void OrionEnvConfiguration::knobsInitRange()
+{
+
+    
+    //-------------------------------------------------
+    aSlider->setRange(0.000f, envelopeMeter->getDecayCoef() - 0.0001f);
+    aSlider->setValue(envelopeMeter->getAttackCoef());
+    aSlider->repaint();
+    
+    dSlider->setRange(envelopeMeter->getAttackCoef() + 0.0001f, envelopeMeter->getSustainCoef() - 0.0001);
+    dSlider->setValue(envelopeMeter->getDecayCoef());
+    dSlider->repaint();
+
+
+    hSlider->setRange(envelopeMeter->getDecayCoef() + 0.0001f, envelopeMeter->getReleaseCoef() - 0.0001);
+    hSlider->setValue(envelopeMeter->getSustainCoef());
+    hSlider->repaint();
+
+    
+    rSlider->setRange(envelopeMeter->getSustainCoef() + 0.0001f, 1.0f);
+    rSlider->setValue(envelopeMeter->getReleaseCoef());
+    rSlider->repaint();
+    
+    
+//    envAttackCoefficient[instrumetSerial] = aSlider->getValue();
+//    envDecayCoefficient[instrumetSerial] = dSlider->getValue();
+//    envSustainCoefficient[instrumetSerial] = hSlider->getValue();
+//    envReleaseCoefficient[instrumetSerial] = rSlider->getValue();
+}
+
+
+
 
 //MARK:- Slider Value Change
 void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
@@ -576,8 +442,10 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     //------------------------------------ ADSR ------------------------------------//
     if(slider == aSlider.get())/* Attack */
     {
+        DBG("a");
         envAttackCoefficient[instrumetSerial] = aSlider->getValue();
         envelopeMeter->setAttackCoef(envAttackCoefficient[instrumetSerial]);
+        
         double attackTime = envAttackCoefficient[instrumetSerial] * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
@@ -589,8 +457,10 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == dSlider.get())/* Decay */
     {
-        envelopeMeter->setDecayCoef(dSlider->getValue());
+        DBG("d");
         envDecayCoefficient[instrumetSerial] = dSlider->getValue();
+        envelopeMeter->setDecayCoef(envDecayCoefficient[instrumetSerial]);
+        
         double decayTime = (envDecayCoefficient[instrumetSerial] - envelopeMeter->getAttackCoef()) * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
@@ -602,8 +472,10 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == hSlider.get())/* Hold */
     {
-        envelopeMeter->setSustainCoef(hSlider->getValue());
+        DBG("s");
         envSustainCoefficient[instrumetSerial] = hSlider->getValue();
+        envelopeMeter->setSustainCoef(envSustainCoefficient[instrumetSerial]);
+        
         double sustainTime = (envSustainCoefficient[instrumetSerial] - envelopeMeter->getDecayCoef()) * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
@@ -615,8 +487,10 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == rSlider.get())/* Release */
     {
-        envelopeMeter->setReleaseCoef(rSlider->getValue());
+        DBG("r");
         envReleaseCoefficient[instrumetSerial] = rSlider->getValue();
+        envelopeMeter->setReleaseCoef(envReleaseCoefficient[instrumetSerial]);
+        
         double releaseTime = (envReleaseCoefficient[instrumetSerial] - envelopeMeter->getSustainCoef()) * envelopeMeter->getSampleLength();
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
         {
@@ -632,9 +506,8 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     if(slider == aBendSlider.get())/* Attack Bend */
     {
         envAttackBendCoefficient[instrumetSerial] = aBendSlider->getValue();
-        
+
         float meterCoef = jmap<float>(envAttackBendCoefficient[instrumetSerial], -10.0f, 0.0f, 0.0f,1.0f);
-        //float meterCoef = envAttackBendCoefficient[instrumetSerial];
         envelopeMeter->setAttackBendCoef(meterCoef);
         
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
@@ -694,8 +567,11 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
         rBendSliderLabel->setText(value,dontSendNotification);
     }
     
+    
+    
     // Update envelopeMeter
     envelopeMeter->updateEnvelope();
+    //knobsSetRange();
 }
 
 

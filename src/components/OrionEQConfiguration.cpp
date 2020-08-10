@@ -429,10 +429,9 @@ void OrionEQConfiguration::mouseDoubleClick (const MouseEvent& e)
     repaint(plotFrame);
 }
 
-void OrionEQConfiguration::updateFrequencyResponses ()
+void OrionEQConfiguration::updateFrequencyResponses()
 {
     auto pixelsPerDouble = 2.0f * plotFrame.getHeight() / Decibels::decibelsToGain (maxDB);
-    
     for (int i=0; i < 5; ++i)
     {
         
@@ -452,7 +451,6 @@ void OrionEQConfiguration::updateFrequencyResponses ()
         voice->createFrequencyPlot (frequencyResponse, voice->getMagnitudes(), plotFrame, pixelsPerDouble);
         //std::cout<<"overall magnitudes "<<voice->getMagnitudes()[30]<<"\n";
     }
-    
 }
 
 

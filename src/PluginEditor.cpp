@@ -61,15 +61,11 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     //processor->sampler->editor = this;
     //setColour
     
-
-    
     //indices = {kickButton.index, snareButton.index, clapButton.index, percButton.index, HiHatButton.index, cymbalButton.index, snapButton.index};
 //    for (int i=0; i<7; i++)
 //    {
 //        indices[i] = i;
 //    }
-    
-    
     
     backgroundImage.reset(new ImageComponent("backgroundImage"));
     backgroundImage->setImage(ImageCache::getFromMemory(BinaryData::orionBackground_png, BinaryData::orionBackground_pngSize), RectanglePlacement::fillDestination);
@@ -182,7 +178,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(&AppDir);
     
     DeskDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
-    // DeskDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ deskdirClicked(); };
+    //DeskDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ deskdirClicked(); };
     DeskDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DeskDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DeskDir);
@@ -194,17 +190,16 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(&DownDir);
     
     MusicDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
-    // MusicDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ musicdirClicked(); };
+    //MusicDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ musicdirClicked(); };
     MusicDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     MusicDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&MusicDir);
     
     DocDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
-    // DocDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ docdirClicked(); };
+    //DocDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ docdirClicked(); };
     DocDir.setColour(TextButton::buttonColourId, Colours::darkgrey);
     DocDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&DocDir);
-    
     
     HomDir.setImages(buttonOn.get(), buttonOn.get(), buttonOn.get());
     //HomDir.onStateChange = [this]/*capture this event 执行后面{}的指令*/{ homedirClicked(); };
@@ -212,8 +207,6 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     HomDir.setEnabled(true);//防止用户多次按
     addAndMakeVisible(&HomDir);
     
-    
-  
     //set up up button's images
     Path arrowPath;
     arrowPath.addArrow ({ 50.0f, 100.0f, 50.0f, 0.0f }, 40.0f, 100.0f, 50.0f);
@@ -429,11 +422,6 @@ void OrionaudioAudioProcessorEditor::resized()
     area = Rectangle<int>(getWidth() - 2.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
     resizeButton->setBounds(area);
 
-    
-    
-    
-    
-    
     // CORNER COMPONENT
     cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
@@ -469,21 +457,29 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     {
         std::cout<<"                  "<<std::endl;
         //std::cout<<"Down"<<std::endl;
-        processor.getSampler()->noteOn(1, midiNote, 120);//
-//        if (processor.getMidiOutput() != nullptr)
-//        {
-//            processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
-//            std::cout<<"MIDINoteOnFromClick"<<std::endl;
-//        }
-        instrumetSerial = tabIndex;
+        
+        //if (processor.getMidiOutput() != nullptr)
+        //{
+            //processor.getMidiOutput()->sendMessageNow(MidiMessage::noteOn(1, midiNote, 1.f));
+            //std::cout<<"MIDINoteOnFromClick"<<std::endl;
+        //}
         
         //tabComponents->setCurrentTab(instrumetSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        dropdownTable->currentTab = instrumetSerial;//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
-        std::cout<<"click!!!!!!!!!!!"<<std::endl;
+        //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+        processor.getSampler()->noteOn(1, midiNote, 120);//
+        
+        instrumetSerial = tabIndex;
+        
+        dropdownTable->currentTab = instrumetSerial;
+        
+        std::cout<<"click!!"<<std::endl;
         std::cout<<"instrumetSerial: "<<instrumetSerial<<std::endl;
+        std::cout<<"dropdownTabSerial: "<<dropdownTabSerial<<std::endl;
+        
 
+        //MARK:- Primary Pane
         primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
         primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetSerial]);
 
@@ -507,55 +503,109 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             primaryPane->setInstrumetsMuteButtonImage(false);
         }
         
-        //MARK:- ENV
-        if(dropdownTabSerial == 2)
+        if(dropdownTabSerial == 0)//MARK:- EQ
         {
+            
+        }
+        else if(dropdownTabSerial == 1)//MARK:- Clip
+        {
+            
+        }
+        else if(dropdownTabSerial == 2)//MARK:- ENV
+        {
+            
+            
             //dropdownTable->envConfiguration->envelopeMeter->repaint();
+            
+            if(envSwitches[instrumetSerial])
+            {
+               dropdownTable->envConfiguration->setSwitchImage(true);
+            }
+            else
+            {
+               dropdownTable->envConfiguration->setSwitchImage(false);
+            }
+            
+            dropdownTable->envConfiguration->knobsInitRange();
+
+            dropdownTable->envConfiguration->aSliderValueChange(envAttackCoefficient[instrumetSerial]);
+            
+            dropdownTable->envConfiguration->dSliderValueChange(envDecayCoefficient[instrumetSerial]);
+            
+            dropdownTable->envConfiguration->hSliderValueChange(envSustainCoefficient[instrumetSerial]);
+            
+            dropdownTable->envConfiguration->rSliderValueChange(envReleaseCoefficient[instrumetSerial]);
+
+            dropdownTable->envConfiguration->aBendSliderValueChange(envAttackBendCoefficient[instrumetSerial]);
+            
+            dropdownTable->envConfiguration->dBendSliderValueChange(envDecayBendCoefficient[instrumetSerial]);
+            
+            dropdownTable->envConfiguration->sBendSliderValueChange(envSustainBendCoefficient[instrumetSerial]);
+            
+            dropdownTable->envConfiguration->rBendSliderValueChange(envReleaseBendCoefficient[instrumetSerial]);
+            
+            DBG("EVN Change");
+            
+        }
+        else if(dropdownTabSerial == 3)//MARK:- FX
+        {
+            /* Set Compressor Switch Image */
+            if(compSwitches[instrumetSerial])
+            {
+                dropdownTable->effectConfiguration->setSwitchImage(true, 0);//--!!!!!!!!!!!
+            }
+            else
+            {
+                dropdownTable->effectConfiguration->setSwitchImage(false, 0);//--!!!!!!!!!!!
+            }
+            
+            /* Set Reverb Switch Image */
+            if(reverbSwitches[instrumetSerial])
+            {
+                dropdownTable->effectConfiguration->setSwitchImage(true, 1);//--!!!!!!!!!!!
+            }
+            else
+            {
+                dropdownTable->effectConfiguration->setSwitchImage(false, 1);//--!!!!!!!!!!!
+            }
+                 
+            /* Set Delay Switch Image */
+            if(delaySwitches[instrumetSerial])
+            {
+                dropdownTable->effectConfiguration->setSwitchImage(true, 2);//--!!!!!!!!!!!
+            }
+            else
+            {
+                dropdownTable->effectConfiguration->setSwitchImage(false, 2);//--!!!!!!!!!!!
+            }
+            
+            
+            //------------ Set Slidervalues ----------------//
+            dropdownTable->effectConfiguration->compThreshSliderValueChange(compressorThreshCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->compRatioSliderValueChange(compressorRatioCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->compAttackSliderValueChange(compressorAttackCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->compReleaseSliderValueChange(compressorReleaseCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->compGainSliderValueChange(compressorGainCoefficient[instrumetSerial]);
+            
+            dropdownTable->effectConfiguration->reverbDrySliderValueChange(reverbDryCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->reverbPredelaySliderValueChange(reverbPredelayCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->reverbDecaySliderValueChange(reverbDecayCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->reverbSizeSliderValueChange(reverbSizeCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->reverbColorSliderValueChange(reverbColorCoefficient[instrumetSerial]);
+               
+            dropdownTable->effectConfiguration->delayDryWetSliderValueChange(delayDryWetCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->delayTimeSliderValueChange(delayTimeCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->delayFeedbackSliderValueChange(delayFeedbackCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->delayColorSliderValueChange(delayColorCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->delayPanSliderValueChange(delayPanCoefficient[instrumetSerial]);
+            
         }
 
-        //MARK:- FX
-        /* Set Compressor Switch Image */
-        if(compSwitches[instrumetSerial])
-        {
-            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 0);//--!!!!!!!!!!!
-            dropdownTable->effectConfiguration->setSwitchImage(true, 0);//--!!!!!!!!!!!
-        }
-        else
-        {
-            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 0);//--!!!!!!!!!!!
-            dropdownTable->effectConfiguration->setSwitchImage(false, 0);//--!!!!!!!!!!!
-        }
-   
-        /* Set Reverb Switch Image */
-        if(reverbSwitches[instrumetSerial])
-        {
-            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 1);//--!!!!!!!!!!!
-            dropdownTable->effectConfiguration->setSwitchImage(true, 1);//--!!!!!!!!!!!
-        }
-        else
-        {
-            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 1);//--!!!!!!!!!!!
-            dropdownTable->effectConfiguration->setSwitchImage(false, 1);//--!!!!!!!!!!!
-        }
-        
-        /* Set Delay Switch Image */
-        if(delaySwitches[instrumetSerial])
-        {
-            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(true, 2);//--!!!!!!!!!!!
-            dropdownTable->effectConfiguration->setSwitchImage(true, 2);//--!!!!!!!!!!!
-        }
-        else
-        {
-            //tabComponents->tabComponents[instrumetSerial]->effectConfiguration->setSwitchImage(false, 2);//--!!!!!!!!!!!
-            dropdownTable->effectConfiguration->setSwitchImage(false, 2);//--!!!!!!!!!!!
-        }
-
-        //------------------------------------------------------------------------------------------------//
     }
     else
     {
         //std::cout<<"Up"<<std::endl;
-        //processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
+        processor.getSampler()->noteOff(1, midiNote, 0, true /*有淡出*/);
         globalOutputMeterL = 0;
         globalOutputMeterR = 0;
 //        if (processor.getMidiOutput() != nullptr)
@@ -564,23 +614,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
     
 }
 
-void OrionaudioAudioProcessorEditor::dropDownButtonClicked()
-{
-//            dropDown = !dropDown;
-//            std::unique_ptr<Drawable> buttonBackground;
-//            if(dropDown)
-//            {
-//                    setSize (orion::defaultWidth * getUIScale(), orion::defaultHeight * getUIScale());
-//
-//                    buttonBackground = Drawable::createFromImageData(BinaryData::arrow_up_png, BinaryData::arrow_up_pngSize);
-//            }
-//
-//            else
-//            {
-//                    setSize (orion::defaultWidth * getUIScale(), orion::defaultHeight * getUIScale() * 2/3);
-//                    buttonBackground = Drawable::createFromImageData(BinaryData::arrow_down_png, BinaryData::arrow_down_pngSize);
-//            }
-}
+
 
 void OrionaudioAudioProcessorEditor::appdirClicked()
 {
@@ -640,25 +674,22 @@ void OrionaudioAudioProcessorEditor::updateDropDownEQState(bool newState)
     DBG((int)newState);
     std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
     std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    
     if(newState)
     {
         dropDownClip->setToggleState(false,sendNotificationSync);
         dropDownENV->setToggleState(false,sendNotificationSync);
         dropDownFX->setToggleState(false,sendNotificationSync);
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = 0;
     }
     else
     {
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
-        dropdownTabSerial = -1;
-
+        if(!dropDownVisible){dropdownTabSerial = -1;};
     }
-
-    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(0);//--!!!!!!!!!!!
     dropdownTable->tabChange(0);//--!!!!!!!!!!!
     resized();
 }
@@ -679,19 +710,15 @@ void OrionaudioAudioProcessorEditor::updateDropDownClipState(bool newState)
         dropDownENV->setToggleState(false,sendNotificationSync);
         dropDownFX->setToggleState(false,sendNotificationSync);
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = 1;
     }
     else
     {
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
-        dropdownTabSerial = -1;
-
-        
+        if(!dropDownVisible){dropdownTabSerial = -1;};
     }
-    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(1);//--!!!!!!!!!!!
     dropdownTable->tabChange(1);//--!!!!!!!!!!!
     resized();
 }
@@ -710,18 +737,15 @@ void OrionaudioAudioProcessorEditor::updateDropDownENVState(bool newState)
         dropDownClip->setToggleState(false,sendNotificationSync);
         dropDownFX->setToggleState(false,sendNotificationSync);
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = 2;
     }
     else
     {
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
-        dropdownTabSerial = -1;
-        
+        if(!dropDownVisible){dropdownTabSerial = -1;};
     }
-    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(2);//--!!!!!!!!!!!
     dropdownTable->tabChange(2);//--!!!!!!!!!!!
     resized();
 }
@@ -740,18 +764,17 @@ void OrionaudioAudioProcessorEditor::updateDropDownFXState(bool newState)
         dropDownClip->setToggleState(false,sendNotificationSync);
         dropDownENV->setToggleState(false,sendNotificationSync);
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
+        dropdownTabSerial = 3;
     }
     else
     {
         dropDownVisible = newState;
-        //tabComponents->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
-        dropdownTabSerial = -1;
-        
+        if(!dropDownVisible){dropdownTabSerial = -1;};
     }
-    //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(3);//--!!!!!!!!!!!
+    
+    
     dropdownTable->tabChange(3);//--!!!!!!!!!!!
     resized();
 }

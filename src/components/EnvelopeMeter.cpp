@@ -32,7 +32,7 @@ void EnvelopeMeter::paint (Graphics& g)
     //g.setColour (juce::Colours::lightyellow);
     //g.drawRect (getLocalBounds().toFloat(),  1);
     std::cout<<"Paint ENV Meter: "<<instrumetSerial<<std::endl;
-    initAudioFile();
+
     //DBG(audioFile->getFullPathName());//-!!!!!!!!
     //------------------------------------ Draw Waveform -------------------------------------//
     File* audioFile;
@@ -41,9 +41,7 @@ void EnvelopeMeter::paint (Graphics& g)
     if(audioFile != nullptr)
     {
         AudioFormatReader*  mFormatReader {nullptr};
-        
-        
-            
+  
         mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetSerial]);
         auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
         //AudioBuffer<float> mWaveForm;
@@ -56,11 +54,11 @@ void EnvelopeMeter::paint (Graphics& g)
     //      {
     //          DBG(buffer[sample]);
     //      }
-        }
-        else
-        {
-            return;
-        }
+    }
+    else
+    {
+        return;
+    }
     
     
     
@@ -174,37 +172,6 @@ void EnvelopeMeter::loadAudioFile()
     }
      */
 }
-
-
-void EnvelopeMeter::initAudioFile()
-{
-
- /*
-    if(audioFile != nullptr)
-    {
-        audioFile = &instrumentSamplePathes[instrumetSerial];
-        
-        mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetSerial]);
-        auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
-        mWaveForm.setSize(1, sampleLength);
-        mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-
-        //auto buffer = mWaveForm.getReadPointer(0);//Ch 1
-//        for (int sample = 0; sample < mWaveForm.getNumSamples(); ++sample)
-//        {
-//            DBG(buffer[sample]);
-//        }
-    }
-    else
-    {
-        return;
-    }
- 
- */
-}
-
-
-
 
 
 

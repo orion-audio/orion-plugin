@@ -108,14 +108,13 @@ private:
     
     File resourcefolder,skinfolder;
     std::unique_ptr<ImageComponent> backgroundImage;
-    File* clipbackground;
-    File* envbackground;
-    File* eqbackground;
+    
+    //File* clipbackground;
+    //File* envbackground;
+    //File* eqbackground;
     
     void addMessageToList (const MidiMessage& message);
-    
-    void dropDownButtonClicked();
-    
+
     void appdirClicked();
     void deskdirClicked();
     void downdirClicked();

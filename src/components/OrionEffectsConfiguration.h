@@ -29,14 +29,27 @@ public:
     void resized() override;
     int effectSerial;
 
-//    OrionEffectComp compGui;
-//    OrionEffectReverb reverbGui;
-//    OrionEffectDelay delayGui;
-
     void sliderValueChanged (Slider* slider)override;
-    
     void switchClicked(bool isDown);
     void setSwitchImage(bool On, int Serial);
+    
+    void compThreshSliderValueChange(double value){compThreshSlider->setValue(value,sendNotificationSync);};
+    void compRatioSliderValueChange(double value){compRatioSlider->setValue(value,sendNotificationSync);};
+    void compAttackSliderValueChange(double value){compAttackSlider->setValue(value,sendNotificationSync);};
+    void compReleaseSliderValueChange(double value){compReleaseSlider->setValue(value,sendNotificationSync);};
+    void compGainSliderValueChange(double value){compGainSlider->setValue(value,sendNotificationSync);};
+    
+    void reverbDrySliderValueChange(double value){reverbDrySlider->setValue(value,sendNotificationSync);};
+    void reverbPredelaySliderValueChange(double value){reverbPredelaySlider->setValue(value,sendNotificationSync);};
+    void reverbDecaySliderValueChange(double value){reverbDecaySlider->setValue(value,sendNotificationSync);};
+    void reverbSizeSliderValueChange(double value){reverbSizeSlider->setValue(value,sendNotificationSync);};
+    void reverbColorSliderValueChange(double value){reverbColorSlider->setValue(value,sendNotificationSync);};
+    
+    void delayDryWetSliderValueChange(double value){delayDryWetSlider->setValue(value,sendNotificationSync);};
+    void delayTimeSliderValueChange(double value){delayTimeSlider->setValue(value,sendNotificationSync);};
+    void delayFeedbackSliderValueChange(double value){delayFeedbackSlider->setValue(value,sendNotificationSync);};
+    void delayColorSliderValueChange(double value){delayColorSlider->setValue(value,sendNotificationSync);};
+    void delayPanSliderValueChange(double value){delayPanSlider->setValue(value,sendNotificationSync);};
     
 private:
     OrionaudioAudioProcessor& processor;
@@ -52,11 +65,10 @@ private:
     std::unique_ptr<ImageButton> compSwitch;
     std::unique_ptr<ImageButton> reverbSwitch;
     std::unique_ptr<ImageButton> delaySwitch;
-    
-    
 
     /* Compressor */
     std::unique_ptr<ThresholdMeter> thresholdMeters;
+    
     std::unique_ptr<Slider> compThreshSlider;
     
     std::unique_ptr<Slider> compRatioSlider;

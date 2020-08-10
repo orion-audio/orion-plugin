@@ -264,7 +264,7 @@ void SimpleSynth::noteOn(int midiChannel,
                   PrimaryPaneMirror->waveWiggle->startAnimation();
                 }
             }
-            DBG("KeyboardPress!!!!!!!!!!!");
+            DBG("KeyboardPress!!");
         }
     }
 }
@@ -281,7 +281,7 @@ void SimpleSynth::noteOff(int midiChannel,
         //noteOffPNGChange();
     //}
     
-    std::cout<< "Note Off"<<std::endl;
+    //std::cout<< "Note Off"<<std::endl;
 
 }
 

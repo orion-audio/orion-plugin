@@ -684,7 +684,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             
         }
         
-        reverbDryCoefficient[instrumetSerial] = 1.0f - reverbDrySlider->getValue();
+        reverbDryCoefficient[instrumetSerial] = reverbDrySlider->getValue();
     }
     else if(slider == reverbPredelaySlider.get())// Reverb Pre-delay
     {
@@ -814,7 +814,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             voice->delay.update();
         }
         
-        delayDryWetCoefficient[instrumetSerial] = 1.0f - delayDryWetSlider->getValue();
+        delayDryWetCoefficient[instrumetSerial] = delayDryWetSlider->getValue();
     }
     else if(slider == delayTimeSlider.get())// Delay Time
     {
