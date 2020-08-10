@@ -515,8 +515,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         else if(dropdownTabSerial == 2)//MARK:- ENV
         {
             
-            
-            //dropdownTable->envConfiguration->envelopeMeter->repaint();
+            dropdownTable->envConfiguration->envelopeMeter->repaint();
             
             if(envSwitches[instrumetSerial])
             {

@@ -371,7 +371,7 @@ void OrionEnvConfiguration::switchClicked(bool isDown)
 {
     if(isDown)
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             //voice->envswitch = !voice->envswitch;
             envSwitches[instrumetSerial] = !envSwitches[instrumetSerial];
@@ -442,12 +442,12 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     //------------------------------------ ADSR ------------------------------------//
     if(slider == aSlider.get())/* Attack */
     {
-        DBG("a");
+        //DBG("a");
         envAttackCoefficient[instrumetSerial] = aSlider->getValue();
         envelopeMeter->setAttackCoef(envAttackCoefficient[instrumetSerial]);
         
         double attackTime = envAttackCoefficient[instrumetSerial] * envelopeMeter->getSampleLength();
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setAttackTime_mSec(attackTime);//set Attack time
         }
@@ -457,12 +457,12 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == dSlider.get())/* Decay */
     {
-        DBG("d");
+        //DBG("d");
         envDecayCoefficient[instrumetSerial] = dSlider->getValue();
         envelopeMeter->setDecayCoef(envDecayCoefficient[instrumetSerial]);
         
         double decayTime = (envDecayCoefficient[instrumetSerial] - envelopeMeter->getAttackCoef()) * envelopeMeter->getSampleLength();
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setDecayTime_mSec(decayTime);//set Decay time
         }
@@ -472,12 +472,12 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == hSlider.get())/* Hold */
     {
-        DBG("s");
+        //DBG("s");
         envSustainCoefficient[instrumetSerial] = hSlider->getValue();
         envelopeMeter->setSustainCoef(envSustainCoefficient[instrumetSerial]);
         
         double sustainTime = (envSustainCoefficient[instrumetSerial] - envelopeMeter->getDecayCoef()) * envelopeMeter->getSampleLength();
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setSustainTime_mSec(sustainTime);//set Sustain time
         }
@@ -487,12 +487,12 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     }
     else if(slider == rSlider.get())/* Release */
     {
-        DBG("r");
+        //DBG("r");
         envReleaseCoefficient[instrumetSerial] = rSlider->getValue();
         envelopeMeter->setReleaseCoef(envReleaseCoefficient[instrumetSerial]);
         
         double releaseTime = (envReleaseCoefficient[instrumetSerial] - envelopeMeter->getSustainCoef()) * envelopeMeter->getSampleLength();
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setReleaseTime_mSec(releaseTime);//set Release time
         }
@@ -510,7 +510,7 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
         float meterCoef = jmap<float>(envAttackBendCoefficient[instrumetSerial], -10.0f, 0.0f, 0.0f,1.0f);
         envelopeMeter->setAttackBendCoef(meterCoef);
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setAttackTCO(exp(-(envAttackBendCoefficient[instrumetSerial] + 10)));
         }
@@ -526,7 +526,7 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
         float meterCoef = jmap<float>(envDecayBendCoefficient[instrumetSerial], -10.0f, 10.0f, 0.0f,1.0f);
         envelopeMeter->setDecayBendCoef(meterCoef);
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setDecayTCO(exp(envDecayBendCoefficient[instrumetSerial]));
         }
@@ -541,7 +541,7 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
         
         envelopeMeter->setSustainBendCoef(envSustainBendCoefficient[instrumetSerial]);
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setSustainLevel(envSustainBendCoefficient[instrumetSerial]);
         }
@@ -557,7 +557,7 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
         float meterCoef = jmap<float>(envReleaseBendCoefficient[instrumetSerial], -10.0f, 0.0f, 0.0f,1.0f);
         envelopeMeter->setReleaseBendCoef(meterCoef);
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(envSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
             voice->env.setReleaseTCO(exp(envReleaseBendCoefficient[instrumetSerial]));
         }
@@ -571,11 +571,11 @@ void OrionEnvConfiguration::sliderValueChanged (Slider* slider)
     
     // Update envelopeMeter
     envelopeMeter->updateEnvelope();
-    //knobsSetRange();
+    knobsSetRange();
 }
 
 
 void OrionEnvConfiguration::sliderDragEnded (Slider* slider)
 {
-    knobsSetRange();
+    //knobsSetRange();
 }

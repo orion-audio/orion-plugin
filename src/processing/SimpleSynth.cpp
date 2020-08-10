@@ -226,7 +226,7 @@ void SimpleSynth::noteOn(int midiChannel,
     //DBG("Hey");
     for(int j = 0; j < getNumSounds(); j++)
     {
-        DBG("KeyboardPress!!");
+        
         auto sound = getSound(j);
         if(sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
         {
@@ -251,6 +251,7 @@ void SimpleSynth::noteOn(int midiChannel,
                     if(voice->canPlayOrionSound(midiNoteNumber) && !voice->getCurrentlyPlayingSound())
                     {
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
+                        DBG("KeyboardPress!!");
                         instrumetSerial = i;
                     }
                 }

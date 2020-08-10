@@ -377,7 +377,7 @@ public:
                 if(envswitch)
                 {
                     envVal = env.doEnvelope();
-                    // std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
+                    //std::cout<<"what envelope"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
                     l *= envVal;
                     r *= envVal;
                 }
