@@ -184,8 +184,8 @@
         </GROUP>
         <GROUP id="{A5B9F44F-D618-CD65-DCB3-FCD06889DA74}" name="sidePanel">
           <GROUP id="{EA94EC5C-14D1-0F22-D1FB-6BC288246666}" name="indicateButton">
-            <FILE id="yNAFfW" name="dirBackOff.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
-            <FILE id="NWLqKV" name="dirBackOn.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
+            <FILE id="tIhWXb" name="dirBackOff.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
+            <FILE id="huvUOy" name="dirBackOn.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
             <FILE id="zdgShj" name="dirForwardOff.png" compile="0" resource="1"
                   file="assets/graphics/sidePanel/indicateButton/dirForwardOff.png"/>
             <FILE id="bTbkAb" name="dirForwardOn.png" compile="0" resource="1"

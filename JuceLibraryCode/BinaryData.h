@@ -39,10 +39,10 @@ namespace BinaryData
     const int            arrow_up_pngSize = 37153;
 
     extern const char*   dirBackOff_png;
-    const int            dirBackOff_pngSize = 81965;
+    const int            dirBackOff_pngSize = 156581;
 
     extern const char*   dirBackOn_png;
-    const int            dirBackOn_pngSize = 215847;
+    const int            dirBackOn_pngSize = 212630;
 
     extern const char*   dirForwardOff_png;
     const int            dirForwardOff_pngSize = 45009;

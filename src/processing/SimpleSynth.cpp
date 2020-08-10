@@ -226,6 +226,7 @@ void SimpleSynth::noteOn(int midiChannel,
     //DBG("Hey");
     for(int j = 0; j < getNumSounds(); j++)
     {
+        DBG("KeyboardPress!!");
         auto sound = getSound(j);
         if(sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
         {
@@ -250,6 +251,7 @@ void SimpleSynth::noteOn(int midiChannel,
                     if(voice->canPlayOrionSound(midiNoteNumber) && !voice->getCurrentlyPlayingSound())
                     {
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
+                        instrumetSerial = i;
                     }
                 }
             }
@@ -263,8 +265,11 @@ void SimpleSynth::noteOn(int midiChannel,
                 {
                   PrimaryPaneMirror->waveWiggle->startAnimation();
                 }
+                
             }
-            DBG("KeyboardPress!!");
+            
+
+            
         }
     }
 }
@@ -282,20 +287,24 @@ void SimpleSynth::noteOff(int midiChannel,
     //}
     
     //std::cout<< "Note Off"<<std::endl;
+    
+
 
 }
 
 
 void SimpleSynth::noteOnPNGChange()
 {
-    //const MessageManagerLock mmLock;//????????????????
-    //PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
+    const MessageManagerLock mmLock;//????????????????
+    PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
+    return;
     //PrimaryPaneMirror->drumButtons[instrumetSerial]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
 }
 
 
 void SimpleSynth::noteOffPNGChange()
 {
-    //const MessageManagerLock mmLock;// ????????????????
-    //PrimaryPaneMirror->drumButtonCoverImageViews[instrumetOffSerial]->setVisible(false);
+    const MessageManagerLock mmLock;// ????????????????
+    PrimaryPaneMirror->drumButtonCoverImageViews[instrumetOffSerial]->setVisible(false);
+    return;
 }

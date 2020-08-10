@@ -83,14 +83,17 @@ public:
     
     
     std::array<std::unique_ptr<DrawableImage>, 8> drumButtonCoverImageViews;
+    
+    // BUTTONS
+    std::array<std::unique_ptr<DragAndDropButton>, 8> drumButtons;
+    
 private:
     OrionaudioAudioProcessor* processor;
     OrionaudioAudioProcessorEditor* editor;
     
 
 
-    // BUTTONS
-    std::array<std::unique_ptr<DragAndDropButton>, 8> drumButtons;
+    
     //std::unique_ptr<ImageButton> dropDownButton;
     
     std::unique_ptr<ImageButton> soloButton;
