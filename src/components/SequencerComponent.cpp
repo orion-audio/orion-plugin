@@ -52,7 +52,25 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
         }
     }
     
+    auto labelFn = [&] (std::unique_ptr<Label> &l, String name) {
+        l = std::make_unique<Label>(name, name);
+        l->setFont(Font().withHeight(3));
+        addAndMakeVisible(l.get());
+    };
+    
+    labelFn(labels[0], "Kick");
+    labelFn(labels[1], "Snare");
+    labelFn(labels[2], "Closed Hat");
+    labelFn(labels[3], "Open Hat");
+    labelFn(labels[4], "Clap");
+    labelFn(labels[5], "Perc");
+    labelFn(labels[6], "Snap");
+    labelFn(labels[7], "Crash");
+
+    
     setValuesFromPlugin();
+    
+
 }
 
 SequencerComponent::~SequencerComponent()
@@ -61,6 +79,7 @@ SequencerComponent::~SequencerComponent()
 
 void SequencerComponent::paint(Graphics& g)
 {
+    g.fillAll(Colours::black);
     paintRows(g);
     paintCols(g);
 }
@@ -89,7 +108,7 @@ void SequencerComponent::paintCols(Graphics& g)
 void SequencerComponent::resized()
 {
     double subdivision = sequencer.getSubDivision();
-    auto totalArea = getLocalBounds().removeFromRight(getWidth() * .9);
+    auto totalArea = getLocalBounds().removeFromRight(getWidth() * .85);
     float xDist = floor((float)totalArea.getWidth() / (subdivision));
     float yDist = (float)totalArea.getHeight() / NUM_VOICES;
     float diameter = fmin(xDist, yDist);
@@ -102,6 +121,13 @@ void SequencerComponent::resized()
             area.translate(xDist, 0);
         }
         area.setX(totalArea.getX());
+        area.translate(0, yDist);
+    }
+    
+    area.setBounds(0, 0, getWidth() * .15, yDist);
+    
+    for (int i = 0; i < labels.size(); i++) {
+        labels[i]->setBounds(area);
         area.translate(0, yDist);
     }
 }
@@ -144,7 +170,6 @@ void SequencerComponent::buttonClicked(Button* b)
         else
         {
             sequence->addNote(Note(pitch, 100, beat, beat + (1.0 / sequencer.getSubDivision())));
-            DBG(sequencer.getNoteSequence()->toString());
         }
     }
 }

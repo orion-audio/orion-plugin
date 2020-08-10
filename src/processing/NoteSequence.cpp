@@ -98,7 +98,6 @@ ValueTree NoteSequence::toValueTree()
 
 void NoteSequence::fromValueTree(ValueTree tree)
 {
-    DBG(tree.toXmlString());
     for (int i = 0; i < tree.getNumChildren(); i++){
         
         int pitch = tree.getChild(i).getPropertyAsValue("pitch", nullptr).getValue();

@@ -168,10 +168,11 @@ void Sequencer::setSequenceLength(int newLength) {
 
 void Sequencer::setSubDivision(NoteSequence::SubDivision s) {
     subdivision = s;
-//    for (int i = 0; i < sequence->getNotes().size(); i++) {
-//        Note currentNote = sequence->getNotes()[i];
-//        DBG(std::fmod(currentNote.startTime,subdivision));
-//        if (std::fmod(currentNote.startTime,subdivision) != 0)
-//            sequence->removeNote(currentNote.pitch, currentNote.startTime);
-//    }
+    
+    for (int i = 0; i < sequence->getNotes().size(); i++) {
+        Note currentNote = sequence->getNotes()[i];
+        DBG(currentNote.startTime / double(subdivision));
+        if (std::fmod(currentNote.startTime, subdivision) != 0)
+            sequence->removeNote(currentNote.pitch, currentNote.startTime);
+    }
 }
