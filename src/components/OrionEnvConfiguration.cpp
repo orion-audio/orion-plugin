@@ -384,7 +384,6 @@ void OrionEnvConfiguration::switchClicked(bool isDown)
 //MARK:- Knobs Set Range
 void OrionEnvConfiguration::knobsSetRange()
 {
-    //DBG("HeyHeyHey");
     aSlider->setRange(0.000f, envelopeMeter->getDecayCoef() - 0.0001f);
     aSlider->setValue(envelopeMeter->getAttackCoef());
     aSlider->repaint();
