@@ -564,6 +564,7 @@ public:
         
         
         reverb.setParameters(reverb_param);
+        
         for(size_t i=0;i<5;i++)
         {
             eq.updateBand(i);

@@ -432,6 +432,7 @@ void OrionEQConfiguration::mouseDoubleClick (const MouseEvent& e)
 void OrionEQConfiguration::updateFrequencyResponses()
 {
     auto pixelsPerDouble = 2.0f * plotFrame.getHeight() / Decibels::decibelsToGain (maxDB);
+    
     for (int i=0; i < 5; ++i)
     {
         

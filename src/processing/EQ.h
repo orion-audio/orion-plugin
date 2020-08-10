@@ -134,10 +134,12 @@ private:
     //extract magnitudes for each filter
     void updateBand(const size_t index)
     {
-        if (sampleRate > 0) {
+        if (sampleRate > 0)
+        {
             dsp::IIR::Coefficients<float>::Ptr newCoefficients;
             juce::IIRCoefficients newCoef;
-            switch (bands [index].type) {
+            switch (bands [index].type)
+            {
                 case NoFilter:
                     newCoefficients = new dsp::IIR::Coefficients<float> (1, 0, 1, 0);
                     activity[index] = 0;

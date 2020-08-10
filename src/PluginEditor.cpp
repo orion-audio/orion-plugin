@@ -505,7 +505,8 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         
         if(dropdownTabSerial == 0)//MARK:- EQ
         {
-            
+            dropdownTable->eqConfiguration->EQserial = instrumetSerial;
+            dropdownTable->eqConfiguration->repaint();
         }
         else if(dropdownTabSerial == 1)//MARK:- Clip
         {
