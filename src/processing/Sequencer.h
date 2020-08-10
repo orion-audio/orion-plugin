@@ -80,11 +80,11 @@ public:
     void setSequenceLength(int newLength);
     
     NoteSequence::SubDivision getSubDivision() { return subdivision; };
-    void setSubDivision(NoteSequence::SubDivision s) {subdivision = s; };
+    void setSubDivision(NoteSequence::SubDivision s);
     
 private:
     
-    NoteSequence::SubDivision subdivision;
+    NoteSequence::SubDivision subdivision = NoteSequence::SubDivision::sixteenth;
 
     void notifyListenersNotePlayed(int pitch, int note);
     std::vector<Listener*> listeners;

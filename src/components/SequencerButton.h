@@ -27,7 +27,7 @@ public:
         fillColourOff
     };
     
-    SequencerButton(int p, int b);
+    SequencerButton(int p, double b);
     ~SequencerButton();
     
     virtual void paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
@@ -37,11 +37,13 @@ public:
     void startAnimation();
     
     int getPitch() { return pitch; }
-    int getBeat() { return beat; }
+    double getBeat() { return beat; }
+    
+    void setBeat(double beat) {this->beat = beat;};
 
 private:
     int pitch;
-    int beat;
+    double beat;
 
     int frameCount = 0;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SequencerButton)

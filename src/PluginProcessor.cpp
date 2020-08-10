@@ -215,26 +215,26 @@ AudioProcessorEditor* OrionaudioAudioProcessor::createEditor()
 //==============================================================================
 void OrionaudioAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
-    MemoryOutputStream stream(destData, false);
-    parameters.state.writeToStream(stream);
+    ValueTree state
+    { "ORION_PLUGIN", {},
+        {
+            { "SEQUENCER", {}},
+        }
+    };
+    state.addChild(parameters.copyState(), 0, nullptr);
+    state.getChildWithName("SEQUENCER").addChild(sequencer->getStateInformation(), 1, nullptr);
+//    DBG(state.toXmlString());
+    std::unique_ptr<juce::XmlElement> xml (state.createXml());
+    copyXmlToBinary (*xml, destData);
 }
 
 void OrionaudioAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
-    ValueTree tree = ValueTree::readFromData(data, sizeInBytes);
-
-    if(tree.isValid())
-    {
-        if(tree.hasType("OrionParameters"))
-        {
-            parameters.state = tree;
-        }
-    }
+    std::unique_ptr<juce::XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    ValueTree state = ValueTree::fromXml(*xmlState);
+    DBG(state.toXmlString());
+    parameters.replaceState(state.getChildWithName("PARAMETERS"));
+    sequencer->setStateInformation(state.getChildWithName("SEQUENCER").getChild(0));
 }
 
 AudioProcessorValueTreeState::ParameterLayout OrionaudioAudioProcessor::createParameterLayout()

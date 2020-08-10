@@ -51,14 +51,14 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
     if (!currentPos.isPlaying)
         return;
     long long posInSamples = currentPos.timeInSamples;
-    posInSamples %= NoteSequence::ppqToSamples(sequenceLength, 120, lastSampleRate);
+    posInSamples %= NoteSequence::ppqToSamples(1, currentPos.bpm, subdivision, lastSampleRate);
     auto notes = sequence->getNotes();
     
-    int loopEnd = NoteSequence::ppqToSamples(sequenceLength, sequence->getTempo(), lastSampleRate);
+    double loopEnd = NoteSequence::ppqToSamples(1, currentPos.bpm, subdivision, lastSampleRate);
     
     // iterate through all notes
     for (int i = 0; i < notes.size(); i++){
-        int beatInSamples = NoteSequence::ppqToSamples(notes[i].startTime, sequence->getTempo(), lastSampleRate);
+        int beatInSamples = NoteSequence::ppqToSamples(notes[i].startTime, currentPos.bpm, subdivision, lastSampleRate);
         
         // check first beat
         if (posInSamples + samplesPerBlock >= loopEnd && posInSamples <= loopEnd && notes[i].startTime == 0)
@@ -87,16 +87,12 @@ ValueTree Sequencer::getStateInformation()
 void Sequencer::setStateInformation(ValueTree tree)
 {
     sequence->fromValueTree(tree);
+    
 }
 
 void Sequencer::setNewSequence(NoteSequence* newSequence)
 {
     sequence.reset(newSequence);
-//    for (int i = 0; i < listeners.size(); i++)
-//    {
-//        MessageManager::callAsync([&]{ listeners[i]->sequenceChanged(); });
-//
-//    }
     for (int i = 0; i < listeners.size(); i++){
         listeners[i]->sequenceChanged();
     }
@@ -170,3 +166,13 @@ void Sequencer::setSequenceLength(int newLength) {
     sequenceLength = (newLength > 0 ? newLength : sequenceLength);
 }
 
+void Sequencer::setSubDivision(NoteSequence::SubDivision s) {
+    subdivision = s;
+    
+    for (int i = 0; i < sequence->getNotes().size(); i++) {
+        Note currentNote = sequence->getNotes()[i];
+        DBG(currentNote.startTime / double(subdivision));
+        if (std::fmod(currentNote.startTime, subdivision) != 0)
+            sequence->removeNote(currentNote.pitch, currentNote.startTime);
+    }
+}

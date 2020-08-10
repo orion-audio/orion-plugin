@@ -469,7 +469,6 @@ public:
     void parameterChanged(const String &parameterID, float newValue) override
     {
         /* ON-OFF SWITCHES */
-        //DBG("parameterChanged");
         if (parameterID == String("delaySwitch" + String(index))){delayswitch = newValue;}
         if (parameterID == String("compressorSwitch" + String(index))){compressorswitch = newValue;}
         if (parameterID == String("reverbSwitch" + String(index))){reverbswitch = newValue;}
