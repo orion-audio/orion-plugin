@@ -473,11 +473,6 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         dropdownTable->currentTab = instrumetSerial;
         processor.getSampler()->noteOn(1, midiNote, 120);//
         
-        
-        
-        
-        
-        
         std::cout<<"instrumetSerial: "<<instrumetSerial<<std::endl;
         std::cout<<"dropdownTabSerial: "<<dropdownTabSerial<<std::endl;
         
@@ -530,22 +525,34 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             }
             
             dropdownTable->envConfiguration->knobsInitRange();
-
+            
+            dropdownTable->envConfiguration->knobsSetRange();
+            
+            //bool a = false;
             dropdownTable->envConfiguration->aSliderValueChange(envAttackCoefficient[instrumetSerial]);
-            
+
+            //for (int i = 0; i < 50; i++){a = false;}
             dropdownTable->envConfiguration->dSliderValueChange(envDecayCoefficient[instrumetSerial]);
-            
+
+            //for (int i = 0; i < 50; i++){a = false;}
             dropdownTable->envConfiguration->hSliderValueChange(envSustainCoefficient[instrumetSerial]);
-            
+
+            //for (int i = 0; i < 50; i++){a = false;}
             dropdownTable->envConfiguration->rSliderValueChange(envReleaseCoefficient[instrumetSerial]);
 
+            //for (int i = 0; i < 50; i++){a = false;}
             dropdownTable->envConfiguration->aBendSliderValueChange(envAttackBendCoefficient[instrumetSerial]);
-            
+
+            //for (int i = 0; i < 50; i++){a = false;}
             dropdownTable->envConfiguration->dBendSliderValueChange(envDecayBendCoefficient[instrumetSerial]);
-            
+
+            //for (int i = 0; i < 50; i++){a = false;}
             dropdownTable->envConfiguration->sBendSliderValueChange(envSustainBendCoefficient[instrumetSerial]);
-            
+
+            //for (int i = 0; i < 50; i++){a = false;}
             dropdownTable->envConfiguration->rBendSliderValueChange(envReleaseBendCoefficient[instrumetSerial]);
+
+
             
             DBG("EVN Change");
             

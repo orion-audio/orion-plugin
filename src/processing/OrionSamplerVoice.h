@@ -363,7 +363,6 @@ public:
                 }
                 
                 
-                
                 //MARK:- Apply EQ
                 l = eq.bysamples(l);
                 r = eq.bysamples(r);
@@ -397,7 +396,7 @@ public:
                 {
                     reverb.processStereo(&l, &r, 1);
                     l = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(l));
-                    r = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(l));
+                    r = reverb_highpass.processSingleSampleRaw(reverb_lowpass.processSingleSampleRaw(r));
                     //r = l;
                 }
                 

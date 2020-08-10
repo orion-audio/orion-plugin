@@ -717,7 +717,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             }
         }
         
-        reverbDecayCoefficient[instrumetSerial] = 1.0f - reverbDecaySlider->getValue();
+        reverbDecayCoefficient[instrumetSerial] = reverbDecaySlider->getValue();
         String value = valueDoubleDigitTranslator(reverbDecayCoefficient[instrumetSerial]);
         value.append(" db",3); // not accurate need to be change later
         reverbDecayLabel->setText(value,dontSendNotification);

@@ -366,7 +366,7 @@ void PrimaryPaneComponent::resized()
     instrumentsPanSlider->setBounds(area);
     
     // Instruments Pan "L C R" Label
-    area = Rectangle<int>(getWidth()/2 - 13.5 * uniteW, 5.75 * uniteW,  14 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/2.605, 5.75 * getWidth()/100,  14 * getWidth()/100, 2 * getWidth()/100);
     instrumentsPanLCRLabel->setBounds(area);
 
     
