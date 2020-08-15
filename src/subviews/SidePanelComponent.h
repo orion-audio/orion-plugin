@@ -27,13 +27,15 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
+    
+    std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
 
 private:
     OrionaudioAudioProcessor* processor;
     OrionaudioAudioProcessorEditor* editor;
 
     std::unique_ptr<ImageComponent> logoImage;
-    std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
+    
     
     std::unique_ptr<ImageButton> dropDownButton;
     

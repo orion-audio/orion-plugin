@@ -254,10 +254,11 @@ void SimpleSynth::noteOn(int midiChannel,
                         std::cout<<"in voice instrumetSerial: "<< instrumetSerial<<std::endl;
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
                         DBG("KeyboardPress!!");
-                        
                     }
                 }
             }
+            
+            //noteOnPNGChange();
             
             /* Set PrimaryPane Images */
             if(!instrumentsMuteStates[instrumetSerial])
@@ -270,9 +271,6 @@ void SimpleSynth::noteOn(int midiChannel,
                 }
                 
             }
-            
-
-            
         }
     }
 }
@@ -301,10 +299,10 @@ void SimpleSynth::noteOnPNGChange()
     const MessageManagerLock mmLock;//????????????????
     PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
     return;
-    //PrimaryPaneMirror->drumButtons[instrumetSerial]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
 }
 
 
+//PrimaryPaneMirror->drumButtons[instrumetSerial]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
 void SimpleSynth::noteOffPNGChange()
 {
     const MessageManagerLock mmLock;// ????????????????

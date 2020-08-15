@@ -115,11 +115,11 @@ public:
     
     virtual void filesDropped (const StringArray &files, int x, int y) override;
     
+    DirectoryContentsList currentDirectory;
     
 private:
     
-    DirectoryContentsList currentDirectory;
-    std::unique_ptr<ImageButton> backButton;
+    //std::unique_ptr<ImageButton> backButton;
     
     int currentHighlighted = -1;
     

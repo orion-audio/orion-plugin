@@ -38,6 +38,12 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(sidePanel.get());
     
     
+    meterInput.reset(new CircularMeter());
+    meterInput->updaterFunction = [this] {
+        return processor.getInputLevel();
+    };
+    addAndMakeVisible(meterInput.get());
+    
     //--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //tabComponents.reset(new TabComponentHolder(p));
     //addAndMakeVisible(tabComponents.get());
@@ -221,39 +227,17 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     
     
-    //fileBrowser.reset(new DraggableFileBrowserComponent());
-    //addAndMakeVisible(fileBrowser.get());
-    
-    
-    
     
     // BACK BUTTON
-//    backButton.reset(new ImageButton());
-//    backButton->setAlwaysOnTop(true);
-//    Image backImageOff = ImageCache::getFromMemory(BinaryData::arrow_left_png, BinaryData::arrow_left_pngSize);
-//    Image backImageOn = ImageCache::getFromMemory(BinaryData::arrow_leftOn_png, BinaryData::arrow_leftOn_pngSize);
-//    backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
-//    backButton->onClick = [&] {
-//        fileBrowser->backButton->onClick();
-//        //fileBrowser->scanDirectory(fileBrowser->currentDirectory.getDirectory().getParentDirectory());
-//        fileBrowser->scannerThread.stopThread(-1);
-//        fileBrowser->windowComponent.setBounds(getLocalBounds());
-//        fileBrowser->windowComponent.setNewDirectory(currentDirectory);
-//        for (int i = 0; i < fileBrowser->windowComponent.fileComponents.size(); i++){
-//            windowComponent.fileComponents[i]->addListener(this);
-//        }
-//    };
-//    addAndMakeVisible(backButton.get());
-    
-
-    
-
-    
-    meterInput.reset(new CircularMeter());
-    meterInput->updaterFunction = [this] {
-        return processor.getInputLevel();
+    backButton.reset(new ImageButton());
+    backButton->setAlwaysOnTop(true);
+    Image backImageOff = ImageCache::getFromMemory(BinaryData::dirBackOff_png, BinaryData::dirBackOff_pngSize);
+    Image backImageOn = ImageCache::getFromMemory(BinaryData::dirBackOn_png, BinaryData::dirBackOn_pngSize);
+    backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
+    backButton->onClick = [&] {
+        sidePanel->fileBrowser->scanDirectory(sidePanel->fileBrowser->currentDirectory.getDirectory().getParentDirectory());
     };
-    addAndMakeVisible(meterInput.get());
+    addAndMakeVisible(backButton.get());
     
 
     
@@ -400,37 +384,35 @@ void OrionaudioAudioProcessorEditor::resized()
     path.addRectangle (0, getHeight() - 2.1 * unite, getWidth(), 4 * unite);
     dropDownBottonBar->setPath(path);
     
+    // Back Button
+    area = Rectangle<int>(0.005 * getWidth(), 0.95 * getHeight(), 0.175 * getWidth(), 0.045 * getHeight());
+    backButton->setBounds(area);
+    
     // EQ
-    area = Rectangle<int>( 5 * uniteW + 0 * 5 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
+    area = Rectangle<int>( 0.225 * getWidth(), 0.945 * getHeight(), 2 * uniteW, 1.9  * unite);
     dropDownEQ->setBounds(area);
 
     // CLIP
-    area = Rectangle<int>( 5 * uniteW + 1 * 6 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
+    area = Rectangle<int>( 0.4125 * getWidth(), 0.945 * getHeight(), 2 * uniteW, 1.9  * unite);
     dropDownClip->setBounds(area);
 
     // ENV
-    area = Rectangle<int>( 5 * uniteW + 2 * 6 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
+    area = Rectangle<int>( 0.6 * getWidth(), 0.945 * getHeight(), 2 * uniteW, 1.9  * unite);
     dropDownENV->setBounds(area);
 
     // FX
-    area = Rectangle<int>( 5 * uniteW + 3 * 6 * uniteW, getHeight() - 2 * unite, 2 * uniteW, 2.1  * unite);
+    area = Rectangle<int>( 0.775 * getWidth(), 0.945 * getHeight(), 2 * uniteW, 1.9  * unite);
     dropDownFX->setBounds(area);
     
     
-    
     //--------- RESIZE BUTTONS ---------//
-    area = Rectangle<int>(getWidth() - 2.5 * unite, getHeight() - 2 * unite, 2 * unite, 2 * unite);
+    area = Rectangle<int>(getWidth() - 2.5 * unite, 0.95 * getHeight(), 2 * unite, 1.5 * unite);
     resizeButton->setBounds(area);
 
     // CORNER COMPONENT
     cornerComponent->setBounds(getWidth() - (getWidth() * .03), getHeight() - (getWidth() * .03), (getWidth() * .03), (getWidth() * .03));
     
 
-    
-    //************************************DO NOT PUT ANY SET BOUNDS METHODS OR ANYTHING OTHER THAN DRAWING METHODS********************************
-    //*********************************************************************************************************************************************
-    //*********************************************************************************************************************************************
-    //*********************************************************************************************************************************************
     
     
 }

@@ -358,7 +358,7 @@ void PrimaryPaneComponent::resized()
     
     //--------- Instrument Pan ---------//
     // Instruments Pan Label
-    area = Rectangle<int>(getWidth()/2 - 10 * uniteW, 1 * uniteW,  14 * uniteW, 2 * uniteW);
+    area = Rectangle<int>(getWidth()/2 - 9 * uniteW, 1 * uniteW,  14 * uniteW, 2 * uniteW);
     instrumentsPanLabel->setBounds(area);
     
     // Instruments Pan Slider

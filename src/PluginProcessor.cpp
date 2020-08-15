@@ -14,6 +14,7 @@
 
 #define __COEFFICIENTSMAIN__
 #include "GlobalCoefficients.h"
+
 //==============================================================================
 static String doubleToString(double val) { return String(val); }
 static double stringToDouble(String s){return std::stod(s.toStdString());}

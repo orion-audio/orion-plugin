@@ -73,13 +73,16 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     
     //------------------------------------ Compressor ------------------------------------//
       
+    // Compressor Meter
+    compressorMeter.reset(new CompressorMeter());
+    addAndMakeVisible(compressorMeter.get());
+    
     // Compressor-Threshold Meters
     thresholdMeters.reset(new ThresholdMeter());
     thresholdMeters->updaterFunction = [this] { return processor.getOutputLevel(0);};// + processor.getOutputLevel(1))/2
     addAndMakeVisible(thresholdMeters.get());
     
-    
-    // Compressor-Threshold
+    // Compressor-Threshold-Slider
     compThreshSlider.reset(new Slider());
     compThreshSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
     compThreshSlider->setColour(Slider::backgroundColourId, juce::Colours::grey);
@@ -87,11 +90,11 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compThreshSlider->setColour(Slider::thumbColourId, juce::Colours::white);
     compThreshSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
     compThreshSlider->setRange(-60.0f, 0.0f);
-    compThreshSlider->setValue(0.0f);
+    compThreshSlider->setValue(-30.5f);
     compThreshSlider->addListener(this);
     addAndMakeVisible(compThreshSlider.get());
       
-    // Compressor-Ratio
+    // Compressor-Ratio-Knob
     compRatioSlider.reset(new Slider());
     compRatioSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     compRatioSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
@@ -105,7 +108,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     addAndMakeVisible(compRatioLabel.get());
     compRatioLabel->setAlpha(0.8);
       
-    // Compressor-Attack
+    // Compressor-Attack-Knob
     compAttackSlider.reset(new Slider());
     compAttackSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     compAttackSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
@@ -119,7 +122,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     addAndMakeVisible(compAttackLabel.get());
     compAttackLabel->setAlpha(0.8);
 
-    // Compressor-Release
+    // Compressor-Release-Knob
     compReleaseSlider.reset(new Slider());
     compReleaseSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     compReleaseSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
@@ -133,7 +136,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     addAndMakeVisible(compReleaseLabel.get());
     compReleaseLabel->setAlpha(0.8);
     
-    // Compressor-Gain
+    // Compressor-Gain-Knob
     compGainSlider.reset(new Slider());
     compGainSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     compGainSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
@@ -357,6 +360,10 @@ void OrionEffectsConfiguration::resized()
     
     
     //------------------------------------ Compressor ------------------------------------//
+    
+    // Compressor-Meter
+    area = Rectangle<int>(getWidth() * 0.035, getHeight() * 0.3275,  getWidth() * 0.111, getHeight() * 0.511);
+    compressorMeter->setBounds(area);
     
     
     // Threshold-Meters-Compressor
@@ -603,26 +610,35 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     //------------------------------------ Compressor ------------------------------------//
     if(slider == compThreshSlider.get())// Compressor Threshold
     {
+         compressorThreshCoefficient[instrumetSerial] = compThreshSlider->getValue();
         
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
-            voice->compressor.threshold_  = compThreshSlider->getValue();
+            voice->compressor.threshold_  = compressorThreshCoefficient[instrumetSerial];
             voice->compressor.update();
         }
         
+        float meterCoef = jmap<float>(compressorThreshCoefficient[instrumetSerial], -60.0f, 0.0f, 1.0f,0.0f);
         
-        compressorThreshCoefficient[instrumetSerial] = compThreshSlider->getValue();
+        compressorMeter->setThreshCoef(meterCoef);
+        
+       
         thresholdMeters->pointerMove((compressorThreshCoefficient[instrumetSerial] + 60.0f)/60.0f);//--Change Later!!!
     }
     else if(slider == compRatioSlider.get())// Compressor Ratio
     {
+        compressorRatioCoefficient[instrumetSerial] = compRatioSlider->getValue();
+        
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
         {
-            voice->compressor.ratio_  = compRatioSlider->getValue();
+            voice->compressor.ratio_  = compressorRatioCoefficient[instrumetSerial];
             voice->compressor.update();
         }
-
-        compressorRatioCoefficient[instrumetSerial] = compRatioSlider->getValue();
+        
+        float meterCoef = jmap<float>(compressorRatioCoefficient[instrumetSerial], 1, 100, 1.0f, 0.0f);
+        
+        compressorMeter->setRatioCoef(meterCoef);
+        
         String value = valueDoubleDigitTranslator(compressorRatioCoefficient[instrumetSerial]);
         value.append(" : 1",4);
         compRatioLabel->setText(value,dontSendNotification);

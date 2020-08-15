@@ -12,11 +12,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "ThresholdMeter.h"
-
-//#include "OrionEffectComp.h"
-//#include "OrionEffectReverb.h"
-//#include "OrionEffectDelay.h"
-
+#include "CompressorMeter.h"
 
 class OrionEffectsConfiguration : public Component,
                                   public Slider::Listener
@@ -67,6 +63,7 @@ private:
     std::unique_ptr<ImageButton> delaySwitch;
 
     /* Compressor */
+    std::unique_ptr<CompressorMeter> compressorMeter;
     std::unique_ptr<ThresholdMeter> thresholdMeters;
     
     std::unique_ptr<Slider> compThreshSlider;

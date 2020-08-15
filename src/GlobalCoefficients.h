@@ -11,6 +11,8 @@
 
 #ifdef __COEFFICIENTSMAIN__
 
+const double globalPi = 3.14159265;
+
 const int instrumentAmount = 8;
 
 const int KickPitch  = 36;
@@ -70,7 +72,7 @@ bool  reverbSwitches               [8] = {false, false, false, false, false, fal
 bool  delaySwitches                [8] = {false, false, false, false, false, false, false, false};
 
 // Compressor
-float compressorThreshCoefficient  [8] = {-60.0f, -60.0f, -60.0f, -60.0f, -60.0f, -60.0f, -60.0f, -60.0f};
+float compressorThreshCoefficient  [8] = {-30.5f, -30.5f, -30.5f, -30.5f, -30.5f, -30.5f, -30.5f, -30.5f};
 float compressorRatioCoefficient   [8] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
 float compressorAttackCoefficient  [8] = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
 float compressorReleaseCoefficient [8] = {0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f};
@@ -92,7 +94,7 @@ float delayPanCoefficient          [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.
 
 
 #else
-
+extern const double globalPi;
 extern const int instrumentAmount;
 
 extern const int KickPitch;

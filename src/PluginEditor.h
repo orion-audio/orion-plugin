@@ -90,6 +90,7 @@ private:
     //std::unique_ptr<DraggableFileBrowserComponent> fileBrowser;
     
     std::unique_ptr<ImageButton> backButton;
+    
     std::unique_ptr<ImageButton> resizeButton;
    
     std::unique_ptr<CircularMeter> meterInput;

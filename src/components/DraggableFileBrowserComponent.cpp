@@ -17,15 +17,15 @@ DraggableFileBrowserComponent::DraggableFileBrowserComponent() : scannerThread("
 {
     
     //Back Button
-    backButton.reset(new ImageButton());
-    backButton->setAlwaysOnTop(true);
-    Image backImageOff = ImageCache::getFromMemory(BinaryData::dirBackOff_png, BinaryData::dirBackOff_pngSize);
-    Image backImageOn = ImageCache::getFromMemory(BinaryData::dirBackOn_png, BinaryData::dirBackOn_pngSize);
-    backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
-    addAndMakeVisible(backButton.get());
-    backButton->onClick = [this] {
-        scanDirectory(currentDirectory.getDirectory().getParentDirectory());
-    };
+    //backButton.reset(new ImageButton());
+    //backButton->setAlwaysOnTop(true);
+    //Image backImageOff = ImageCache::getFromMemory(BinaryData::dirBackOff_png, BinaryData::dirBackOff_pngSize);
+    //Image backImageOn = ImageCache::getFromMemory(BinaryData::dirBackOn_png, BinaryData::dirBackOn_pngSize);
+    //backButton->setImages(false, true, true, backImageOff, 1.f, Colours::transparentBlack, backImageOff, 1.f, Colours::transparentBlack, backImageOn, 1.f, Colours::transparentBlack);
+    //addAndMakeVisible(backButton.get());
+    //backButton->onClick = [this] {
+        //scanDirectory(currentDirectory.getDirectory().getParentDirectory());
+    //};
     
     
     
@@ -43,7 +43,8 @@ void DraggableFileBrowserComponent::resized()
 {
     windowComponent.setBounds(getLocalBounds());
     viewPort.setBounds(getLocalBounds());
-    backButton->setBounds(0, getHeight()*0.975, getWidth(), getWidth() * 0.1);
+    //backButton->setBounds(0, getHeight()*0.975, getWidth(), getWidth() * 0.1);
+    
 }
 
 void DraggableFileBrowserComponent::scanDirectory(File directory)
@@ -56,8 +57,12 @@ void DraggableFileBrowserComponent::scanDirectory(File directory)
 void DraggableFileBrowserComponent::changeListenerCallback (ChangeBroadcaster* source)
 {
     scannerThread.stopThread(-1);
+    
     windowComponent.setBounds(getLocalBounds());
+    //windowComponent.setBounds(0, 0, getWidth(), getHeight() - backButton->getHeight());
+    
     windowComponent.setNewDirectory(currentDirectory);
+    
     for (int i = 0; i < windowComponent.fileComponents.size(); i++){
         windowComponent.fileComponents[i]->addListener(this);
     }
