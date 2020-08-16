@@ -75,7 +75,8 @@ public:
     void setActive(bool active) { isActive = active; }
    
     std::queue<Note> lastNotesPlayed;
-    
+    int currentDownbeat = 0;
+
     int getTotalLength() { return sequenceLength; }
     void setSequenceLength(int newLength);
     
