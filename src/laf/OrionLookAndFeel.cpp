@@ -193,7 +193,7 @@ Font OrionLookAndFeel::getLabelFont (Label &l)
 
 void OrionLookAndFeel::drawComboBox(juce::Graphics &g, int width, int height, bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, juce::ComboBox &combo) {
     
-    g.setColour(Colours::black);
+    g.setColour(Colour(ThemeColors::backgroundColor));
     g.fillRoundedRectangle(combo.getLocalBounds().toFloat(), 2.f);
    
     // DRAW ARROW
@@ -205,6 +205,8 @@ void OrionLookAndFeel::drawComboBox(juce::Graphics &g, int width, int height, bo
     arrow.lineTo(arrowBounds.getCentreX(), arrowBounds.getBottom());
     arrow.lineTo(arrowBounds.getRight(), arrowBounds.getY());
     g.strokePath(arrow, PathStrokeType(1.f));
+//    g.setColour(Colours::white);
+//    g.drawRect(combo.getBounds().withSizeKeepingCentre(combo.getWidth() - 2, combo.getHeight() - 2), 1);
 }
 
 void OrionLookAndFeel::drawNoteBox(juce::Graphics &g, SequencerComponent &s, Rectangle<float> bounds, bool isActive, bool isPlaying) { 
@@ -218,5 +220,3 @@ void OrionLookAndFeel::drawNoteBox(juce::Graphics &g, SequencerComponent &s, Rec
         g.drawEllipse(newBounds, 1.f);
     
 }
-
-

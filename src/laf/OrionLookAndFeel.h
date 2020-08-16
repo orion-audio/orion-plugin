@@ -29,7 +29,9 @@ class OrionLookAndFeel : public LookAndFeel_V4, public SequencerComponent::LookA
 {
 public:
 //    static String tabButtonProperty {"tabButtonType"};
-    
+    enum ThemeColors {
+        backgroundColor = 0x0FF0D0D0D
+    };
     enum TabButtonType
     {
         eq=0,
