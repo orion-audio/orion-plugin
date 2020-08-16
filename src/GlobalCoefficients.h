@@ -24,6 +24,9 @@ const int HHCPitch   = 42;
 const int HHOPitch   = 46;
 const int CrashPitch = 48;
 
+
+
+
 // Global Smaple Rate
 double globalSampleRate = 44100;
 
@@ -36,6 +39,7 @@ float globalOutputMeterR = 0.0f;
 int   instrumetSerial = 0;
 int   instrumetOffSerial = 0;
 float masterVolumeCoefficient = 0.75f;
+bool  instrumentsOnStates          [8] = {false, false, false, false, false, false, false, false};
 bool  instrumentsSoloStates        [8] = {false, false, false, false, false, false, false, false};
 bool  instrumentsMuteStates        [8] = {false, false, false, false, false, false, false, false};
 float instrumentsVolumeCoefficient [8] = {0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f};
@@ -106,6 +110,7 @@ extern const int HHCPitch;
 extern const int HHOPitch;
 extern const int CrashPitch;
 
+
 // Global Smaple Rate
 extern double globalSampleRate;
 
@@ -117,6 +122,7 @@ extern float globalOutputMeterR;
 extern int   instrumetSerial;
 extern int   instrumetOffSerial;
 extern float masterVolumeCoefficient;
+extern bool  instrumentsOnStates[]; 
 extern bool  instrumentsSoloStates[];
 extern bool  instrumentsMuteStates[];
 extern float instrumentsVolumeCoefficient[];

@@ -18,8 +18,6 @@ SidePanelComponent::SidePanelComponent(OrionaudioAudioProcessor* p, OrionaudioAu
     processor = p;
     editor = e;
 
-    
-    
     // Background Image
     Image backgroundImage = ImageCache::getFromMemory(BinaryData::sidePanelBackground_png, BinaryData::sidePanelBackground_pngSize);
     backgroundImageView.reset(new DrawableImage());

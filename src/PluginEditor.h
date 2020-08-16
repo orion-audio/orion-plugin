@@ -1,8 +1,15 @@
 
 
+
+
 #pragma once
 
+
 #include "../JuceLibraryCode/JuceHeader.h"
+
+
+
+
 #include "PluginProcessor.h"
 #include "OrionTabComponent.h"
 //#include "OrionBrowser.h"
@@ -21,9 +28,8 @@
 #include "PrimaryPaneComponent.h"
 #include "SidePanelComponent.h"
 #include "ArrangementWindowComponent.h"
-
-//#include "TabComponentHolder.h"
 #include "DropdownTable.h"
+//#include "TabComponentHolder.h"
 
 //==============================================================================
 /**

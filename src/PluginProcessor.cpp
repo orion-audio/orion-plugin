@@ -9,7 +9,10 @@
 */
 
 #include "PluginProcessor.h"
+
+
 #include "PluginEditor.h"
+
 #define NUM_VOICES 8
 
 #define __COEFFICIENTSMAIN__

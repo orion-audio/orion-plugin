@@ -105,6 +105,10 @@
         <FILE id="WUgXVh" name="SimpleSynth.h" compile="0" resource="0" file="src/processing/SimpleSynth.h"/>
       </GROUP>
       <GROUP id="{9408544A-B7A7-8B71-01CB-59D24DC2F678}" name="subviews">
+        <FILE id="AxDCkU" name="OrionInstrumentView.cpp" compile="1" resource="0"
+              file="src/subviews/OrionInstrumentView.cpp"/>
+        <FILE id="RBTrTt" name="OrionInstrumentView.h" compile="0" resource="0"
+              file="src/subviews/OrionInstrumentView.h"/>
         <FILE id="hOkFjz" name="ArrangementWindowComponent.h" compile="0" resource="0"
               file="src/subviews/ArrangementWindowComponent.h"/>
         <FILE id="WuGQvx" name="ArrangementWindowComponent.cpp" compile="1"
@@ -188,8 +192,8 @@
         </GROUP>
         <GROUP id="{A5B9F44F-D618-CD65-DCB3-FCD06889DA74}" name="sidePanel">
           <GROUP id="{EA94EC5C-14D1-0F22-D1FB-6BC288246666}" name="indicateButton">
-            <FILE id="ier0Da" name="dirBackOff.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
-            <FILE id="wSjSSj" name="dirBackOn.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
+            <FILE id="qYDGvV" name="dirBackOff.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
+            <FILE id="scqVlY" name="dirBackOn.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
             <FILE id="zdgShj" name="dirForwardOff.png" compile="0" resource="1"
                   file="assets/graphics/sidePanel/indicateButton/dirForwardOff.png"/>
             <FILE id="bTbkAb" name="dirForwardOn.png" compile="0" resource="1"

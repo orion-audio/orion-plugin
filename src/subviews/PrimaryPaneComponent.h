@@ -16,6 +16,8 @@
 #include <array>
 #include "DragAndDropButton.h"
 #include "PluginProcessor.h"
+#include "OrionInstrumentView.h"
+
 class OrionaudioAudioProcessorEditor;
 
 //==============================================================================
@@ -82,18 +84,19 @@ public:
     }
     
     
-    std::array<std::unique_ptr<DrawableImage>, 8> drumButtonCoverImageViews;
+    //std::array<std::unique_ptr<DrawableImage>, 8> drumButtonCoverImageViews;
     
     // BUTTONS
     std::array<std::unique_ptr<DragAndDropButton>, 8> drumButtons;
+    
+    
+    
     
 private:
     OrionaudioAudioProcessor* processor;
     OrionaudioAudioProcessorEditor* editor;
     
-
-
-    
+    std::unique_ptr<OrionInstrumentView> InstrumentView;
     //std::unique_ptr<ImageButton> dropDownButton;
     
     std::unique_ptr<ImageButton> soloButton;
