@@ -114,7 +114,7 @@ double NoteSequence::ppqToSecs(double ppq, int tempo)
     return (double)ppq * (15.f / double(tempo));
 }
 
-int NoteSequence::ppqToSamples(double ppq, int tempo, SubDivision subdivision, double sampleRate)
+int NoteSequence::ppqToSamples(double ppq, int tempo, double sampleRate)
 {
     double secsPerMeasure = 4 * (60.0 / double(tempo));
     return sampleRate * ppq * secsPerMeasure;
