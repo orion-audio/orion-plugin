@@ -79,6 +79,7 @@ SequencerComponent::~SequencerComponent()
 
 void SequencerComponent::paint(Graphics& g)
 {
+    g.fillAll();
     paintRows(g);
     paintCols(g);
     paintBar(g);

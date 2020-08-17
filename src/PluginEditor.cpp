@@ -86,15 +86,13 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     dropDownBottonBar.reset(new DrawablePath());
     addAndMakeVisible(dropDownBottonBar.get());
     //dropDownBottonBar->replaceColour(Colours::black,Colours::black);
-
+    
     const String colourString ("404041");
     const Colour colour (Colour::fromString ("FF" + colourString));
     //dropDownBottonBar->replaceColour(Colours::black,colour);
     dropDownBottonBar->replaceColour(Colours::black,Colours::black);
     
     
-    
-     
     // Dropdown EQ BUTTON
     Image downImage = ImageCache::getFromMemory(BinaryData::EQButtonOn_png,  BinaryData::EQButtonOn_pngSize);
     Image upImage   = ImageCache::getFromMemory(BinaryData::EQButtonOff_png, BinaryData::EQButtonOff_pngSize);
