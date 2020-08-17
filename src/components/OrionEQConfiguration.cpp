@@ -33,6 +33,14 @@ static int   clickRadius = 4;
 OrionEQConfiguration::OrionEQConfiguration(OrionaudioAudioProcessor& p,int serial) : processor(p)
 {
     EQserial = serial;
+    
+    //-------------------------------- Background Image -------------------------------//
+//    Image backgroundImage = ImageCache::getFromMemory(BinaryData::EQBackground_png, BinaryData::EQBackground_pngSize);
+//    backgroundImageView.reset(new DrawableImage());
+//    backgroundImageView->setImage(backgroundImage);
+//    addAndMakeVisible(backgroundImageView.get());
+    
+    
     frame.setText (TRANS ("Output"));
     frame.setTextLabelPosition (Justification::centred);
     addAndMakeVisible (frame);
@@ -64,16 +72,28 @@ void OrionEQConfiguration::paint(Graphics& g)
 //    g.setColour (Colours::silver);
 //    g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
     
+    // Upper Line
+    g.setColour (Colours::whitesmoke);
+    //g.drawHorizontalLine(0, 0, getWidth());
+    
+    g.drawLine (0, 0, getWidth(), 0, 0.5);
+    
     /* Vertical Lines */
-    for (int i=0; i < 60; ++i)
+    for (int i=0; i < 70; ++i)
     {
-        g.setColour (Colours::silver.withAlpha (0.3f));
-        auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.0176f;
-        if (i > 0) g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
+        g.setColour (Colours::white/*.withAlpha (0.75f)*/);
+        auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.0160f;
         
-        g.setColour (Colours::silver);
+        if (i > 0)
+        {
+            //g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
+            g.drawLine (roundToInt (x), plotFrame.getY(), roundToInt (x), plotFrame.getBottom(), 0.25);
+        }
+        
+        
         
          //Draw Freq Text
+        //g.setColour (Colours::silver);
 //        auto freq = getFrequencyForPosition (i * 0.025f);
 //        if(abs(round(freq) - freq) < 0.000000000000001)
 //        {
@@ -158,13 +178,17 @@ void OrionEQConfiguration::paint(Graphics& g)
 void OrionEQConfiguration::resized()
 {
   
+    
+    Rectangle<int> area = getLocalBounds();
+    //backgroundImageView->setTransformToFit(area.toFloat(), RectanglePlacement::stretchToFit);
+    
     //plotFrame = getLocalBounds();//.reduced (3, 3);
     plotFrame = Rectangle<int>(0, 0,  getWidth(), getHeight() * 0.925);
     
     updateFrequencyResponses();
     float uniteW = getWidth()/100;
     
-    Rectangle<int> area;
+
     /* 30 */
     area = Rectangle<int>( 2 * uniteW, 0.5 * uniteW,  6 * uniteW, 2.25 * uniteW);
     freqLabels[0]->setBounds(area);

@@ -33,6 +33,9 @@ public:
      int EQserial;
      GroupComponent          frame;
 private:
+    
+    //std::unique_ptr<DrawableImage> backgroundImageView;
+    
     void updateFrequencyResponses ();
     static float getPositionForFrequency (float freq);
     static float getFrequencyForPosition (float pos);

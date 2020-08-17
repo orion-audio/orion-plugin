@@ -207,22 +207,22 @@ void OrionEnvConfiguration::paint (Graphics& g)
 //    g.setFont (12.0f);
 //    g.setColour (Colours::silver);
 //    g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
-    for (int i=0; i < 40; ++i)
-    {
-        g.setColour (Colours::silver.withAlpha (0.3f));
-        auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.025f;
-        //std::cout<<"where are you plotting "<<x<<"\n";
-        if (i > 0) g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
-        /*
-        g.setColour (Colours::silver);
-        auto freq = getFrequencyForPosition (i * 0.025f);
-        if(abs(round(freq) - freq) < 0.000000000000001){
-            g.drawFittedText ((freq < 1000) ? String (freq) + " Hz" : String (freq / 1000, 1) + " kHz",
-                              roundToInt (x + 3), getHeight()/20, 50, 15, Justification::left, 1);
-        }
-         */
-        
-    }
+//    for (int i=0; i < 40; ++i)
+//    {
+//        g.setColour (Colours::silver.withAlpha (0.3f));
+//        auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.025f;
+//        //std::cout<<"where are you plotting "<<x<<"\n";
+//        if (i > 0) g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
+//        /*
+//        g.setColour (Colours::silver);
+//        auto freq = getFrequencyForPosition (i * 0.025f);
+//        if(abs(round(freq) - freq) < 0.000000000000001){
+//            g.drawFittedText ((freq < 1000) ? String (freq) + " Hz" : String (freq / 1000, 1) + " kHz",
+//                              roundToInt (x + 3), getHeight()/20, 50, 15, Justification::left, 1);
+//        }
+//         */
+//        
+//    }
     
     
     //******** for the horizontal lines *************

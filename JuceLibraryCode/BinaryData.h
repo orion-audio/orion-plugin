@@ -59,6 +59,9 @@ namespace BinaryData
     extern const char*   sidePanelBackground_png;
     const int            sidePanelBackground_pngSize = 94166;
 
+    extern const char*   logo_png;
+    const int            logo_pngSize = 11732;
+
     extern const char*   a_png;
     const int            a_pngSize = 3863;
 
@@ -141,10 +144,10 @@ namespace BinaryData
     const int            ENVBackground_pngSize = 257280;
 
     extern const char*   EQBackground_png;
-    const int            EQBackground_pngSize = 199819;
+    const int            EQBackground_pngSize = 157916;
 
     extern const char*   FXBackground_png;
-    const int            FXBackground_pngSize = 95282;
+    const int            FXBackground_pngSize = 208635;
 
     extern const char*   ClipButtonOff_png;
     const int            ClipButtonOff_pngSize = 4295;
@@ -220,9 +223,6 @@ namespace BinaryData
 
     extern const char*   knob_2_png;
     const int            knob_2_pngSize = 991;
-
-    extern const char*   logo_png;
-    const int            logo_pngSize = 61073;
 
     extern const char*   m_png;
     const int            m_pngSize = 11100;

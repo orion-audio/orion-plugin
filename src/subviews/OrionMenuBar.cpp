@@ -45,10 +45,17 @@ OrionMenuBar::~OrionMenuBar()
 
 void OrionMenuBar::paint (Graphics& g)
 {
-    g.setGradientFill(backgroundGradient);
+    
+    
+    const String colourString ("0000000");
+    const Colour colour (Colour::fromString ("FF" + colourString));
+    
+    //g.setColour(Colours::black);
+    g.setColour(colour);
+    
+    //g.setGradientFill(backgroundGradient);
     g.fillAll();
     
-    g.setColour(Colours::black);
     Rectangle<float> area;
     area.setX(inputMeterLabel->getX());
     area.setY(inputMeterLabel->getY());

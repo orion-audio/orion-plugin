@@ -19,10 +19,11 @@ SidePanelComponent::SidePanelComponent(OrionaudioAudioProcessor* p, OrionaudioAu
     editor = e;
 
     // Background Image
-    Image backgroundImage = ImageCache::getFromMemory(BinaryData::sidePanelBackground_png, BinaryData::sidePanelBackground_pngSize);
+    
     backgroundImageView.reset(new DrawableImage());
-    backgroundImageView->setImage(backgroundImage);
     addAndMakeVisible(backgroundImageView.get());
+    Image backgroundImage = ImageCache::getFromMemory(BinaryData::sidePanelBackground_png, BinaryData::sidePanelBackground_pngSize);
+    backgroundImageView->setImage(backgroundImage);
     
     // Logo Image
     logoImage.reset(new ImageComponent());
@@ -42,7 +43,10 @@ SidePanelComponent::~SidePanelComponent()
 
 void SidePanelComponent::paint (Graphics& g)
 {
-    //g.fillAll(Colours::red);
+    //const String colourString ("404041");
+    //const Colour colour (Colour::fromString ("FF" + colourString));
+    //g.setColour(colour);
+    //g.fillAll();
 }
 
 void SidePanelComponent::resized()

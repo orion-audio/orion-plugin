@@ -205,6 +205,7 @@
           </GROUP>
           <FILE id="trPDMz" name="sidePanelBackground.png" compile="0" resource="1"
                 file="assets/graphics/sidePanel/sidePanelBackground.png"/>
+          <FILE id="JugQyc" name="logo.png" compile="0" resource="1" file="assets/graphics/sidePanel/logo.png"/>
         </GROUP>
         <GROUP id="{B74DE6F3-E717-806A-956B-7975BA656720}" name="menuBar">
           <FILE id="rO09Qq" name="a.png" compile="0" resource="1" file="assets/graphics/a.png"/>
@@ -249,9 +250,9 @@
                   file="assets/graphics/dropdown/dropdownBackgrounds/clipBackground.png"/>
             <FILE id="Ia7UMq" name="ENVBackground.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownBackgrounds/ENVBackground.png"/>
-            <FILE id="jt7rRV" name="EQBackground.png" compile="0" resource="1"
+            <FILE id="Qn5JCO" name="EQBackground.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownBackgrounds/EQBackground.png"/>
-            <FILE id="Sb6Vcv" name="FXBackground.png" compile="0" resource="1"
+            <FILE id="mmCmAI" name="FXBackground.png" compile="0" resource="1"
                   file="assets/graphics/dropdown/dropdownBackgrounds/FXBackground.png"/>
           </GROUP>
           <GROUP id="{383C9C54-A218-8D83-4305-EA8E377F2C80}" name="dropdownTab">
@@ -298,7 +299,6 @@
               file="assets/graphics/headphone_button.png"/>
         <FILE id="AVGiaf" name="knob_1.png" compile="0" resource="1" file="assets/graphics/knob_1.png"/>
         <FILE id="JDsX7S" name="knob_2.png" compile="0" resource="1" file="assets/graphics/knob_2.png"/>
-        <FILE id="W3TFSt" name="logo.png" compile="0" resource="1" file="assets/graphics/logo.png"/>
         <FILE id="VpcawU" name="m.png" compile="0" resource="1" file="assets/graphics/m.png"/>
         <FILE id="XrysFq" name="meter.png" compile="0" resource="1" file="assets/graphics/meter.png"/>
         <FILE id="WpMN08" name="navigator_background.png" compile="0" resource="1"

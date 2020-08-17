@@ -83,8 +83,13 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     
     dropDownBottonBar.reset(new DrawablePath());
     addAndMakeVisible(dropDownBottonBar.get());
-    dropDownBottonBar->replaceColour(Colours::black,Colours::black);
+    //dropDownBottonBar->replaceColour(Colours::black,Colours::black);
 
+    const String colourString ("404041");
+    const Colour colour (Colour::fromString ("FF" + colourString));
+    dropDownBottonBar->replaceColour(Colours::black,colour);
+    
+    
      
     // Dropdown EQ BUTTON
     Image downImage = ImageCache::getFromMemory(BinaryData::EQButtonOn_png,  BinaryData::EQButtonOn_pngSize);
@@ -214,14 +219,14 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(&HomDir);
     
     //set up up button's images
-    Path arrowPath;
-    arrowPath.addArrow ({ 50.0f, 100.0f, 50.0f, 0.0f }, 40.0f, 100.0f, 50.0f);
-    
-    DrawablePath arrowImage;
-    arrowImage.setFill (Colours::black.withAlpha (0.4f));
-    arrowImage.setPath (arrowPath);
-    UpBut.setImages(&arrowImage);
-    addAndMakeVisible(&UpBut);
+//    Path arrowPath;
+//    arrowPath.addArrow ({ 50.0f, 100.0f, 50.0f, 0.0f }, 40.0f, 100.0f, 50.0f);
+//    
+//    DrawablePath arrowImage;
+//    arrowImage.setFill (Colours::black.withAlpha (0.4f));
+//    arrowImage.setPath (arrowPath);
+//    UpBut.setImages(&arrowImage);
+//    addAndMakeVisible(&UpBut);
     
     formatManager.registerBasicFormats();
     
@@ -294,8 +299,8 @@ void OrionaudioAudioProcessorEditor::paint (Graphics& g)
     //*********************************************************************************************************************************************
     
     //g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-    g.setColour (Colours::grey);
-    g.drawHorizontalLine(getHeight()*4/36, getHeight()*4/36, getWidth());
+    g.setColour (Colours::white);
+    g.drawHorizontalLine(getHeight()*4/36, 0, getWidth());
 }
 
 void OrionaudioAudioProcessorEditor::resized()
