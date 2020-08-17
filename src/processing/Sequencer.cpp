@@ -51,20 +51,28 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
     if (!currentPos.isPlaying)
         return;
     long long posInSamples = currentPos.timeInSamples;
-    posInSamples %= NoteSequence::ppqToSamples(1, currentPos.bpm, subdivision, lastSampleRate);
+    posInSamples %= NoteSequence::ppqToSamples(1, currentPos.bpm, lastSampleRate);
     auto notes = sequence->getNotes();
-    
-    double loopEnd = NoteSequence::ppqToSamples(1, currentPos.bpm, subdivision, lastSampleRate);
-    
+    double loopEnd = NoteSequence::ppqToSamples(1, currentPos.bpm, lastSampleRate);
+
+    for (int i = 0; i < 4; i++) {
+        double downbeat = NoteSequence::ppqToSamples((int)i * .25, currentPos.bpm, lastSampleRate);
+        double nextBeat =NoteSequence::ppqToSamples((int)(i + 1) * .25, currentPos.bpm, lastSampleRate);
+        if (posInSamples + samplesPerBlock >= downbeat && posInSamples < nextBeat) {
+            currentDownbeat = i;
+            break;
+        }
+    }
+
     // iterate through all notes
     for (int i = 0; i < notes.size(); i++){
-        int beatInSamples = NoteSequence::ppqToSamples(notes[i].startTime, currentPos.bpm, subdivision, lastSampleRate);
+        int beatInSamples = NoteSequence::ppqToSamples(notes[i].startTime, currentPos.bpm, lastSampleRate);
         
         // check first beat
         if (posInSamples + samplesPerBlock >= loopEnd && posInSamples <= loopEnd && notes[i].startTime == 0)
         {
             long long offset = loopEnd - posInSamples;
-            midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), offset);
+            midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), (int)offset);
             lastNotesPlayed.push(notes[i]);
         }
         
@@ -73,7 +81,7 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
             beatInSamples < posInSamples + samplesPerBlock)
         {
             long long offset = beatInSamples - posInSamples;
-            midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), offset);
+            midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), (int)offset);
             lastNotesPlayed.push(notes[i]);
         }
     }

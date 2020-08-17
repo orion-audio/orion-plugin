@@ -17,6 +17,9 @@
 //==============================================================================
 /*
 */
+
+const float widthPerc = .85;
+
 class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener {
 public:
     
@@ -49,6 +52,7 @@ public:
     void paint (Graphics&) override;
     void paintRows(Graphics&);
     void paintCols(Graphics&);
+    void paintBar(Graphics&);
 
     void resized() override;
     
@@ -81,14 +85,17 @@ public:
     void setSizeWithOverflow(int height);
 
     void setSubDivision(NoteSequence::SubDivision s);
-
+    
 private:
+    std::array<Rectangle<int>, 4> barLines;
+    Rectangle<int> plotArea;
     
     void setValuesFromPlugin();
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;
     std::vector<Note> notesToBePlayed;
-    
+    int currentBeat = 0;
+    int previousBeat = 0;
     std::array<std::array<std::unique_ptr<SequencerButton>, 32>, NUM_VOICES> sequencerButtons;
     std::array<std::unique_ptr<Label>, NUM_VOICES> labels;
     int selectedRow = 0;

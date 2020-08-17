@@ -48,7 +48,7 @@ public:
     SubDivision getSubdivisionForVoice(int voice) { return voiceSubdivisions[voice]; };
     void setSubdivisionForVoice(int voice, SubDivision subDivision) { voiceSubdivisions[voice] = subDivision; };
     static double ppqToSecs(double ppq, int tempo);
-    static int ppqToSamples(double ppq, int tempo, SubDivision subdivision, double sampleRate);
+    static int ppqToSamples(double ppq, int tempo, double sampleRate);
 
     
 

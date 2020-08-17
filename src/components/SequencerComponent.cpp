@@ -79,13 +79,9 @@ SequencerComponent::~SequencerComponent()
 
 void SequencerComponent::paint(Graphics& g)
 {
-    g.fillAll(Colours::black);
     paintRows(g);
     paintCols(g);
-    g.fillAll(Colours::black);
-    g.setColour (Colours::darkgrey);
-    g.drawRect(0, 0, getWidth(), getHeight());
-
+    paintBar(g);
 }
 
 void SequencerComponent::paintRows(Graphics& g)
@@ -100,39 +96,60 @@ void SequencerComponent::paintRows(Graphics& g)
 void SequencerComponent::paintCols(Graphics& g)
 {
     g.setColour(Colours::white);
-    const int numSections = 4;
-    const int numBeats = int(sequencer.getSubDivision());
-    const int numBeatsPerSection = numBeats / numSections;
-    for (int i = numBeatsPerSection - 1; i < numBeats - numBeatsPerSection; i+=numBeatsPerSection) {
-        int xPos = sequencerButtons[0][i]->getRight() + ((sequencerButtons[0][i + 1]->getX() - sequencerButtons[0][i]->getRight()) / 2);
-        g.fillRect(xPos - 1, 0, 2, getHeight());
+    for (int i = 0; i < barLines.size(); i++) {
+        g.fillRect(barLines[i]);
     }
+}
+
+void SequencerComponent::paintBar(Graphics& g)
+{
+    int start = barLines[currentBeat].getX();
+    int end = currentBeat == 3 ? plotArea.getRight() : barLines[currentBeat + 1].getRight();
+    int width = end - start;
+    g.fillRect(start, 0, width, getHeight() * .05);
+    
 }
 
 void SequencerComponent::resized()
 {
     double subdivision = sequencer.getSubDivision();
-    auto totalArea = getLocalBounds().removeFromRight(getWidth() * .85);
-    float xDist = floor((float)totalArea.getWidth() / (subdivision));
-    float yDist = (float)totalArea.getHeight() / NUM_VOICES;
+    plotArea = getLocalBounds().removeFromRight(getWidth() * widthPerc);
+    plotArea = plotArea.removeFromBottom(getHeight() * .9);
+    float xDist = floor((float)plotArea.getWidth() / (subdivision));
+    float yDist = (float)plotArea.getHeight() / NUM_VOICES;
     float diameter = fmin(xDist, yDist);
     
-    Rectangle<int> area(totalArea.getX(), 0, xDist, yDist);
+    Rectangle<int> area(plotArea.getX(), plotArea.getY(), xDist, yDist);
     for (int i = 0; i < NUM_VOICES; i++) {
         for (int j = 0; j < 32; j++) {
             sequencerButtons[i][j]->setBounds(area.withSizeKeepingCentre(diameter * .75, diameter * .75));
             sequencerButtons[i][j]->setVisible(j < sequencer.getSubDivision());
             area.translate(xDist, 0);
         }
-        area.setX(totalArea.getX());
+        area.setX(plotArea.getX());
         area.translate(0, yDist);
     }
     
-    area.setBounds(0, 0, getWidth() * .15, yDist);
+    area.setBounds(0, plotArea.getY(), getWidth() * .15, yDist);
     
     for (int i = 0; i < labels.size(); i++) {
         labels[i]->setBounds(area);
         area.translate(0, yDist);
+    }
+    
+    const int numSections = 4;
+    const int numBeats = int(sequencer.getSubDivision());
+    const int numBeatsPerSection = numBeats / numSections;
+    int barNum = 0;
+    barLines[barNum] = Rectangle<int>(plotArea.getX(), 0, 2, plotArea.getHeight());
+    barNum++;
+    for (int i = numBeatsPerSection - 1; i < numBeats - numBeatsPerSection; i+=numBeatsPerSection) {
+        
+        int right = sequencerButtons[0][i + 1]->getX();
+        int left = sequencerButtons[0][i]->getRight();
+        int xPos = right + ((left - right) / 2);
+        barLines[barNum] = {int(xPos - 1), 0, 2, getHeight()};
+        barNum++;
     }
 }
 
@@ -159,6 +176,10 @@ void SequencerComponent::timerCallback()
         sequencerButtons[pitch][index]->startAnimation();
         noteQueue->pop();
     }
+    
+    previousBeat = currentBeat;
+    currentBeat = sequencer.currentDownbeat;
+    if (previousBeat != currentBeat) repaint();
 }
 
 void SequencerComponent::buttonClicked(Button* b)
