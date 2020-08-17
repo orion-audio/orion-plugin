@@ -61,9 +61,7 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(arrangementWindow.get());
     arrangementWindow->setVisible(arrangementWindowVisible);
     
-    footerPath.reset(new DrawablePath());
-    addAndMakeVisible(footerPath.get());
-    footerPath->replaceColour(Colours::black,Colours::darkgrey);
+    
     //processor->sampler->editor = this;
     //setColour
     
@@ -78,8 +76,12 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     addAndMakeVisible(backgroundImage.get());
     
     
-    //--------- DROPDOWN BUTTONS ---------//
+    //--------- DROPDOWN Window ---------//
     
+    // Footer Bar
+    footerPath.reset(new DrawablePath());
+    addAndMakeVisible(footerPath.get());
+    footerPath->replaceColour(Colours::black,Colours::grey);
     
     dropDownBottonBar.reset(new DrawablePath());
     addAndMakeVisible(dropDownBottonBar.get());
@@ -87,7 +89,9 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
 
     const String colourString ("404041");
     const Colour colour (Colour::fromString ("FF" + colourString));
-    dropDownBottonBar->replaceColour(Colours::black,colour);
+    //dropDownBottonBar->replaceColour(Colours::black,colour);
+    dropDownBottonBar->replaceColour(Colours::black,Colours::black);
+    
     
     
      
