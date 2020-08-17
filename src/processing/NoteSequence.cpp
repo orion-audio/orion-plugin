@@ -3,7 +3,7 @@
 #include "NoteSequence.h"
 
 
-Array<int> NoteSequence::noteValues({36, 38, 42, 46, 49, 39});
+Array<int> NoteSequence::noteValues({36, 38, 40, 41, 43, 45, 47, 48});
 
 int noteSort(const Note &n1, const Note &n2)
 {

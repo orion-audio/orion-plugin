@@ -12,7 +12,7 @@
 #include "SequencerComponent.h"
 #include "qtils.h"
 #include <cmath>
-
+#include "OrionLookAndFeel.h"
 //==============================================================================
 SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
 {
@@ -54,20 +54,31 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     
     auto labelFn = [&] (std::unique_ptr<Label> &l, String name) {
         l = std::make_unique<Label>(name, name);
-        l->setFont(Font().withHeight(3));
+        l->setFont(Font().withHeight(1));
         addAndMakeVisible(l.get());
     };
     
     labelFn(labels[0], "Kick");
     labelFn(labels[1], "Snare");
-    labelFn(labels[2], "Closed Hat");
-    labelFn(labels[3], "Open Hat");
-    labelFn(labels[4], "Clap");
-    labelFn(labels[5], "Perc");
-    labelFn(labels[6], "Snap");
+    labelFn(labels[2], "Clap");
+    labelFn(labels[3], "Perc");
+    labelFn(labels[4], "Snap");
+    labelFn(labels[5], "Closed Hat");
+    labelFn(labels[6], "Open Hat");
     labelFn(labels[7], "Crash");
-
     
+    StringArray channels;
+    channels.add("none");
+    for (int i = 0; i < NUM_VOICES; i++) {
+        channels.add(String(i + 1));
+    }
+    
+    for (int i = 0; i < NUM_VOICES; i++) {
+        channelCombos[i].addItemList(channels, 1);
+        channelCombos[i].setSelectedId(1);
+        addAndMakeVisible(channelCombos[i]);
+    }
+
     setValuesFromPlugin();
     
 
@@ -79,7 +90,7 @@ SequencerComponent::~SequencerComponent()
 
 void SequencerComponent::paint(Graphics& g)
 {
-    g.fillAll();
+    g.fillAll(Colour(OrionLookAndFeel::ThemeColors::backgroundColor));
     paintRows(g);
     paintCols(g);
     paintBar(g);
@@ -135,6 +146,7 @@ void SequencerComponent::resized()
     
     for (int i = 0; i < labels.size(); i++) {
         labels[i]->setBounds(area);
+        channelCombos[i].setBounds(area.translated(area.getWidth(), 0).withSizeKeepingCentre(area.getWidth() * .5, area.getHeight() * .5));
         area.translate(0, yDist);
     }
     
@@ -145,7 +157,6 @@ void SequencerComponent::resized()
     barLines[barNum] = Rectangle<int>(plotArea.getX(), 0, 2, plotArea.getHeight());
     barNum++;
     for (int i = numBeatsPerSection - 1; i < numBeats - numBeatsPerSection; i+=numBeatsPerSection) {
-        
         int right = sequencerButtons[0][i + 1]->getX();
         int left = sequencerButtons[0][i]->getRight();
         int xPos = right + ((left - right) / 2);

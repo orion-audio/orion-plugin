@@ -18,7 +18,7 @@
 /*
 */
 
-const float widthPerc = .85;
+const float widthPerc = .65;
 
 class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener {
 public:
@@ -89,7 +89,7 @@ public:
 private:
     std::array<Rectangle<int>, 4> barLines;
     Rectangle<int> plotArea;
-    
+    std::array<ComboBox, NUM_VOICES> channelCombos;
     void setValuesFromPlugin();
     Sequencer &sequencer;
     std::unique_ptr<Slider> lengthSlider;

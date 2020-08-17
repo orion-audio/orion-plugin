@@ -19,9 +19,9 @@ const int KickPitch  = 36;
 const int SnarePitch = 38;
 const int ClapPitch  = 40;
 const int PercPitch  = 41;
-const int SnapPitch  = 39;
-const int HHCPitch   = 42;
-const int HHOPitch   = 46;
+const int SnapPitch  = 43;
+const int HHCPitch   = 45;
+const int HHOPitch   = 47;
 const int CrashPitch = 48;
 
 
