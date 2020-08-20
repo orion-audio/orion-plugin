@@ -24,8 +24,9 @@ const int HHCPitch   = 45;
 const int HHOPitch   = 47;
 const int CrashPitch = 48;
 
-
-
+const String instrumentName[8] = {"Kick",   "Snare", "Clap",   "Perc",   "Snap",   "HHO",    "HHC",    "Crash"};
+int sidechainIndex[8]          = {-1,       -1,       -1,       -1,       -1,       -1,       -1,       -1};
+bool InstrumentMakeNoise[8]    = {false,    false,    false,    false,    false,    false,    false,    false};
 
 // Global Smaple Rate
 double globalSampleRate = 44100;
@@ -110,6 +111,9 @@ extern const int HHCPitch;
 extern const int HHOPitch;
 extern const int CrashPitch;
 
+extern const String instrumentName[];
+extern int  sidechainIndex[];
+extern bool InstrumentMakeNoise[];
 
 // Global Smaple Rate
 extern double globalSampleRate;

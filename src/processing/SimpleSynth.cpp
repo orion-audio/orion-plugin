@@ -251,9 +251,9 @@ void SimpleSynth::noteOn(int midiChannel,
                     if(voice->canPlayOrionSound(midiNoteNumber) && !voice->getCurrentlyPlayingSound())
                     {
                         instrumetSerial = i;
-                        std::cout<<"in voice instrumetSerial: "<< instrumetSerial<<std::endl;
+                        //std::cout<<"in voice instrumetSerial: "<< instrumetSerial<<std::endl;
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
-                        DBG("KeyboardPress!!");
+                        //DBG("KeyboardPress!!");
                         
                         instrumentsOnStates[instrumetSerial] = true;
                     }
@@ -263,16 +263,16 @@ void SimpleSynth::noteOn(int midiChannel,
             //noteOnPNGChange();
             
             /* Set PrimaryPane Images */
-            if(!instrumentsMuteStates[instrumetSerial])
-            {
-                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
-                
-                if(!dropDownVisible)
-                {
-                  PrimaryPaneMirror->waveWiggle->startAnimation();
-                }
-                
-            }
+//            if(!instrumentsMuteStates[instrumetSerial])
+//            {
+//                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
+//
+//                if(!dropDownVisible)
+//                {
+//                  PrimaryPaneMirror->waveWiggle->startAnimation();
+//                }
+//
+//            }
         }
     }
 }
@@ -291,25 +291,11 @@ void SimpleSynth::noteOff(int midiChannel,
             if(voice->canPlayOrionSound(midiNoteNumber))
             {
                 instrumentsOnStates[i] = false;
-                DBG("KeyboardRelease!!");
+                //DBG("KeyboardRelease!!");
             }
         }
     }
 }
 
 
-void SimpleSynth::noteOnPNGChange()
-{
-    const MessageManagerLock mmLock;//????????????????
-    //PrimaryPaneMirror->drumButtonCoverImageViews[instrumetSerial]->setVisible(true);
-    return;
-}
 
-
-//PrimaryPaneMirror->drumButtons[instrumetSerial]->setImages(false, true, true, upImage, 1.f, Colours::transparentBlack, upImage, 1.f, Colours::transparentBlack, downImage, 1.f, Colours::transparentBlack);
-void SimpleSynth::noteOffPNGChange()
-{
-    const MessageManagerLock mmLock;// ????????????????
-    //PrimaryPaneMirror->drumButtonCoverImageViews[instrumetOffSerial]->setVisible(false);
-    return;
-}

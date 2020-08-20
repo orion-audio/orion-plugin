@@ -462,8 +462,8 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         dropdownTable->currentTab = instrumetSerial;
         processor.getSampler()->noteOn(1, midiNote, 120);//
         
-        std::cout<<"instrumetSerial: "<<instrumetSerial<<std::endl;
-        std::cout<<"dropdownTabSerial: "<<dropdownTabSerial<<std::endl;
+        //std::cout<<"instrumetSerial: "<<instrumetSerial<<std::endl;
+        //std::cout<<"dropdownTabSerial: "<<dropdownTabSerial<<std::endl;
         
 
         //MARK:- Primary Pane

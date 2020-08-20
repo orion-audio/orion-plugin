@@ -12,7 +12,10 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "ThresholdMeter.h"
+#include "CompressorSidechainSelectWindow.h"
+#include "FXComboBox.h"
 #include "CompressorMeter.h"
+
 
 class OrionEffectsConfiguration : public Component,
                                   public Slider::Listener
@@ -26,6 +29,8 @@ public:
     int effectSerial;
 
     void sliderValueChanged (Slider* slider)override;
+    void sidechainSwitchClicked(bool isDown);
+    void sidechainCellClicked(bool isDown, int tag);
     void switchClicked(bool isDown);
     void setSwitchImage(bool On, int Serial);
     
@@ -63,6 +68,8 @@ private:
     std::unique_ptr<ImageButton> delaySwitch;
 
     /* Compressor */
+    std::unique_ptr<FXComboBox> compressorComboBox;
+    std::unique_ptr<CompressorSidechainSelectWindow> compressorSidechainSelectWindow;
     std::unique_ptr<CompressorMeter> compressorMeter;
     std::unique_ptr<ThresholdMeter> thresholdMeters;
     

@@ -11,7 +11,6 @@
 #include "OrionEffectsConfiguration.h"
 #include "OrionGlobalVars.h"
 #include "GlobalCoefficients.h"
-#include "ThresholdMeter.h"
 
 OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p, int serial) : processor(p)
 {
@@ -73,6 +72,54 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     
     //------------------------------------ Compressor ------------------------------------//
       
+    // Compressor Sidechain ComboBox
+    compressorComboBox.reset(new FXComboBox());
+    addAndMakeVisible(compressorComboBox.get());
+    
+    compressorComboBox->comboSwitch->onStateChange = [&]
+    {
+        //switchSerial = 0;
+        sidechainSwitchClicked(compressorComboBox->comboSwitch->isDown());
+    };
+    
+    // Compressor Sidechain Select Window
+    compressorSidechainSelectWindow.reset(new CompressorSidechainSelectWindow());
+    addAndMakeVisible(compressorSidechainSelectWindow.get());
+    compressorSidechainSelectWindow->setVisible(false);
+    
+    
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[0]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[0]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[0]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[1]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[1]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[1]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[2]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[2]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[2]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[3]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[3]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[3]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[4]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[4]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[4]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[5]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[5]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[5]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[6]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[6]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[6]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[7]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[7]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[7]->tag);};
+    
+    compressorSidechainSelectWindow->sidechainSelectCells[8]->onStateChange =
+    [&]{sidechainCellClicked(compressorSidechainSelectWindow->sidechainSelectCells[8]->isDown(),compressorSidechainSelectWindow->sidechainSelectCells[8]->tag);};
+        
+        
+    
+    
+    
     // Compressor Meter
     compressorMeter.reset(new CompressorMeter());
     addAndMakeVisible(compressorMeter.get());
@@ -361,6 +408,16 @@ void OrionEffectsConfiguration::resized()
     
     //------------------------------------ Compressor ------------------------------------//
     
+    // Compressor-Sidechain ComboBox
+    area = Rectangle<int>(getWidth() * 0.0320, getHeight() * 0.1625,  getWidth() * 0.1175, getHeight() * 0.1215);
+    compressorComboBox->setBounds(area);
+    
+    // Compressor-Sidechain Select Window
+    area = Rectangle<int>(getWidth() * 0.0320, getHeight() * 0.3250,  getWidth() * 0.1175, getHeight() * 0.5215);
+    compressorSidechainSelectWindow->setBounds(area);
+    
+    
+    
     // Compressor-Meter
     area = Rectangle<int>(getWidth() * 0.035, getHeight() * 0.3275,  getWidth() * 0.111, getHeight() * 0.511);
     compressorMeter->setBounds(area);
@@ -486,6 +543,41 @@ void OrionEffectsConfiguration::resized()
 
     
 }
+
+
+
+//MARK:- Sidechain Switch Clicked
+void OrionEffectsConfiguration::sidechainSwitchClicked(bool isDown)
+{
+    if(isDown)
+    {
+        compressorMeter->setVisible(false);
+        compressorSidechainSelectWindow->setVisible(true);
+    }
+}
+
+//MARK:- Sidechain Switch Clicked
+void OrionEffectsConfiguration::sidechainCellClicked(bool isDown, int tag)
+{
+    if(isDown)
+    {
+        if(tag == 0)
+        {
+            compressorComboBox->comboSwitch->setButtonText("None");
+        }
+        else
+        {
+            compressorComboBox->comboSwitch->setButtonText(instrumentName[tag-1]);
+        }
+        
+        std::cout<<"tag: "<<tag<<std::endl;
+        
+        sidechainIndex[instrumetSerial] = tag - 1;
+        compressorMeter->setVisible(true);
+        compressorSidechainSelectWindow->setVisible(false);
+    }
+}
+
 
 //MARK:- Switch Clicker
 void OrionEffectsConfiguration::switchClicked(bool isDown)

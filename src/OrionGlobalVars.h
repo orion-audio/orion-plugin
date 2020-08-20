@@ -7,7 +7,7 @@
  
  ==============================================================================
  */
-
+#include "GlobalCoefficients.h"
 #pragma once
 
 //--- Height/Width = 3/5 --- //
@@ -21,24 +21,24 @@ namespace orion
     const int defaultWidth = 1080;
     const int defaultHeight = 648;
     
-    enum DrumPart : int
-    {
-        Kick = 0,
-        Snare,
-        HHC,
-        HHO,
-        Clap
-    };
+//    enum DrumPart : int
+//    {
+//        Kick = 0,
+//        Snare,
+//        HHC,
+//        HHO,
+//        Clap
+//    };
     
     enum MidiNotes : int
     {
-        kick = 36,
+        kick  = 36,
         snare = 38,
-        clap = 40,
-        perc = 41,
-        snap = 39,
-        hho = 46,
-        hhc = 42,
+        clap  = 40,
+        perc  = 41,
+        snap  = 43,
+        hhc   = 45,
+        hho   = 47,
         crash = 48
     };
     
@@ -53,6 +53,7 @@ namespace orion
         hhcTab   = 6,
         crashTab = 7
     };
+    
 
 }
 

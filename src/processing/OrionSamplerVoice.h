@@ -67,6 +67,7 @@ private:
     std::vector<double> magnitudes;
     
     
+    int* instrumetSerialLocal = &instrumetSerial;
     
 
 public:
@@ -381,7 +382,16 @@ public:
                     r *= envVal;
                 }
                 
-                
+                //MARK:- Sidechain Compressor
+                if(l == 0.0 && r == 0)
+                {
+                    InstrumentMakeNoise[instrumetSerial] = false;
+                }
+                else
+                {
+                    InstrumentMakeNoise[instrumetSerial] = true;
+                }
+
               
                 //MARK:- Apply Compressor
                 if(compressorswitch)

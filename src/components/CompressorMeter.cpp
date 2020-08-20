@@ -51,10 +51,10 @@ void CompressorMeter::paint (Graphics& g)
     Point<float> endPoint          = {static_cast<float>(getWidth()),static_cast<float>(endY)};
     
     /* Draw Points */
-    float ellipseSize = 1.0f;
+    float ellipseSize = 2.0f;
     
     g.drawEllipse (startPoint.getX() + 0.5, startPoint.getY() - 1.5, ellipseSize, ellipseSize, ellipseSize);
-    g.drawEllipse (threshStartPoint.getX(), threshStartPoint.getY()-0.5, ellipseSize, ellipseSize, ellipseSize);
+    g.drawEllipse (threshStartPoint.getX(), threshStartPoint.getY()-1.0, ellipseSize, ellipseSize, ellipseSize);
     g.drawEllipse (endPoint.getX() - 1.5, endPoint.getY() + 0.25f, ellipseSize, ellipseSize, ellipseSize);
     
     
@@ -66,7 +66,7 @@ void CompressorMeter::paint (Graphics& g)
     //p.quadraticTo(mid,endPoint);
     p.lineTo(endPoint);
     
-    g.strokePath(p, PathStrokeType(0.25,
+    g.strokePath(p, PathStrokeType(1.0,
     PathStrokeType::JointStyle::curved,
     PathStrokeType::EndCapStyle::rounded));
     
