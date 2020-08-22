@@ -18,6 +18,9 @@ Sequencer::Sequencer(Synthesiser* s)
 
     sequence.reset(new NoteSequence());
     
+    for (int i = 0; i < NoteSequence::noteValues.size(); i++) {
+        channels[NoteSequence::noteValues[i]] = 1;
+    }
 }
 
 void Sequencer::prepareToPlay(double sampleRate)
@@ -72,7 +75,14 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
         if (posInSamples + samplesPerBlock >= loopEnd && posInSamples <= loopEnd && notes[i].startTime == 0)
         {
             long long offset = loopEnd - posInSamples;
-            midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), (int)offset);
+            
+            int channel = channels[notes[i].pitch];
+            if (channel != 1) {
+                midiBuffer.addEvent(MidiMessage::allNotesOff(channel), (int)offset);
+                midiBuffer.addEvent(MidiMessage::allSoundOff(channel), (int)offset);
+            }
+            DBG(channel);
+            midiBuffer.addEvent(MidiMessage::noteOn(channel, notes[i].pitch, .8f), (int)offset);
             lastNotesPlayed.push(notes[i]);
         }
         
@@ -81,7 +91,13 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
             beatInSamples < posInSamples + samplesPerBlock)
         {
             long long offset = beatInSamples - posInSamples;
-            midiBuffer.addEvent(MidiMessage::noteOn(1, notes[i].pitch, .8f), (int)offset);
+
+            int channel = channels[notes[i].pitch];
+            if (channel != 1) {
+                midiBuffer.addEvent(MidiMessage::allNotesOff(channel), (int)offset);
+                midiBuffer.addEvent(MidiMessage::allSoundOff(channel), (int)offset);
+            }
+            midiBuffer.addEvent(MidiMessage::noteOn(channel, notes[i].pitch, .8f), (int)offset);
             lastNotesPlayed.push(notes[i]);
         }
     }

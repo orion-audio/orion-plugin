@@ -24,8 +24,6 @@ CompressorMeter::CompressorMeter()
 
 void CompressorMeter::paint (Graphics& g)
 {
-    std::cout<<"Paint Compressor Meter: "<<instrumetSerial<<std::endl;
-    
     //g.fillAll();
     
     //g.setColour (juce::Colours::lightyellow);
@@ -40,9 +38,6 @@ void CompressorMeter::paint (Graphics& g)
     float threshY  = getHeight() * threshCoef;
     
     float degree = atan((getHeight() - threshY)/(getWidth()/2))  * 180 / globalPi;;
-    
-    
-    std::cout<<"degree: "<<degree<<std::endl;
     
     float endY = threshY - tan(degree * ratioCoef * globalPi / 180) * getWidth()/2;
 

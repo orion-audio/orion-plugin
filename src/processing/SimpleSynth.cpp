@@ -251,9 +251,7 @@ void SimpleSynth::noteOn(int midiChannel,
                     if(voice->canPlayOrionSound(midiNoteNumber) && !voice->getCurrentlyPlayingSound())
                     {
                         instrumetSerial = i;
-                        std::cout<<"in voice instrumetSerial: "<< instrumetSerial<<std::endl;
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
-                        DBG("KeyboardPress!!");
                     }
                 }
             }

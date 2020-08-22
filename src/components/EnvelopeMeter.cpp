@@ -31,8 +31,6 @@ void EnvelopeMeter::paint (Graphics& g)
     //g.fillAll();
     //g.setColour (juce::Colours::lightyellow);
     //g.drawRect (getLocalBounds().toFloat(),  1);
-    std::cout<<"Paint ENV Meter: "<<instrumetSerial<<std::endl;
-
     //DBG(audioFile->getFullPathName());//-!!!!!!!!
     //------------------------------------ Draw Waveform -------------------------------------//
     File* audioFile;

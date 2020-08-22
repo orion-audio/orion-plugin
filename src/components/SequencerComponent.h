@@ -20,7 +20,7 @@
 
 const float widthPerc = .65;
 
-class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener {
+class SequencerComponent : public Component, public Timer, public Button::Listener, public Sequencer::Listener, public ComboBox::Listener {
 public:
     
     
@@ -47,7 +47,8 @@ public:
     
     SequencerComponent(Sequencer &s);
     ~SequencerComponent();
-
+    
+    void comboBoxChanged(juce::ComboBox *comboBoxThatHasChanged) override;
     
     void paint (Graphics&) override;
     void paintRows(Graphics&);
@@ -86,6 +87,7 @@ public:
 
     void setSubDivision(NoteSequence::SubDivision s);
     
+//    void
 private:
     std::array<Rectangle<int>, 4> barLines;
     Rectangle<int> plotArea;
