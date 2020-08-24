@@ -145,7 +145,7 @@ OrionEffectsConfiguration::OrionEffectsConfiguration(OrionaudioAudioProcessor& p
     compRatioSlider.reset(new Slider());
     compRatioSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     compRatioSlider->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
-    compRatioSlider->setRange(1.0f, 100.0f);
+    compRatioSlider->setRange(1.0f, 50.0f);
     compRatioSlider->setValue(1.0f);
     compRatioSlider->addListener(this);
     addAndMakeVisible(compRatioSlider.get());
@@ -344,7 +344,7 @@ void OrionEffectsConfiguration::paint(Graphics& g)
 {
     //g.fillAll();
     //g.fillAll(Colours::darkgoldenrod);
-    std::cout<<"paint FX : "<<instrumetSerial<<std::endl;
+    //std::cout<<"paint FX : "<<instrumetClickedSerial<<std::endl;
 }
 
 //MARK:- Resize
@@ -572,7 +572,7 @@ void OrionEffectsConfiguration::sidechainCellClicked(bool isDown, int tag)
         
         std::cout<<"tag: "<<tag<<std::endl;
         
-        sidechainIndex[instrumetSerial] = tag - 1;
+        sidechainIndex[instrumetClickedSerial] = tag - 1;
         compressorMeter->setVisible(true);
         compressorSidechainSelectWindow->setVisible(false);
     }
@@ -587,11 +587,11 @@ void OrionEffectsConfiguration::switchClicked(bool isDown)
         if(switchSerial == 0)/* Compressor Switch */
         {
             
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
             {
                 voice->compressorswitch = !voice->compressorswitch;
                 
-                compSwitches[instrumetSerial] = !compSwitches[instrumetSerial];
+                compSwitches[instrumetClickedSerial] = !compSwitches[instrumetClickedSerial];
                 setSwitchImage(voice->compressorswitch,switchSerial);
             }
             
@@ -599,24 +599,24 @@ void OrionEffectsConfiguration::switchClicked(bool isDown)
         else if(switchSerial == 1)/* Reverb Switch */
         {
             
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
             {
                 voice->reverbswitch = !voice->reverbswitch;
                 
-                reverbSwitches[instrumetSerial] = !reverbSwitches[instrumetSerial];
-                setSwitchImage(reverbSwitches[instrumetSerial],switchSerial);
+                reverbSwitches[instrumetClickedSerial] = !reverbSwitches[instrumetClickedSerial];
+                setSwitchImage(reverbSwitches[instrumetClickedSerial],switchSerial);
             }
             
         }
         else if(switchSerial == 2)/* Delay Switch */
         {
             
-            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+            if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
             {
                 voice->delayswitch = !voice->delayswitch;
                 
-                delaySwitches[instrumetSerial] = !delaySwitches[instrumetSerial];
-                setSwitchImage(delaySwitches[instrumetSerial],switchSerial);
+                delaySwitches[instrumetClickedSerial] = !delaySwitches[instrumetClickedSerial];
+                setSwitchImage(delaySwitches[instrumetClickedSerial],switchSerial);
             }
             
         }
@@ -702,75 +702,75 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     //------------------------------------ Compressor ------------------------------------//
     if(slider == compThreshSlider.get())// Compressor Threshold
     {
-         compressorThreshCoefficient[instrumetSerial] = compThreshSlider->getValue();
+         compressorThreshCoefficient[instrumetClickedSerial] = compThreshSlider->getValue();
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
-            voice->compressor.threshold_  = compressorThreshCoefficient[instrumetSerial];
+            voice->compressor.threshold_  = compressorThreshCoefficient[instrumetClickedSerial];
             voice->compressor.update();
         }
         
-        float meterCoef = jmap<float>(compressorThreshCoefficient[instrumetSerial], -60.0f, 0.0f, 1.0f,0.0f);
+        float meterCoef = jmap<float>(compressorThreshCoefficient[instrumetClickedSerial], -60.0f, 0.0f, 1.0f,0.0f);
         
         compressorMeter->setThreshCoef(meterCoef);
         
        
-        thresholdMeters->pointerMove((compressorThreshCoefficient[instrumetSerial] + 60.0f)/60.0f);//--Change Later!!!
+        thresholdMeters->pointerMove((compressorThreshCoefficient[instrumetClickedSerial] + 60.0f)/60.0f);//--Change Later!!!
     }
     else if(slider == compRatioSlider.get())// Compressor Ratio
     {
-        compressorRatioCoefficient[instrumetSerial] = compRatioSlider->getValue();
+        compressorRatioCoefficient[instrumetClickedSerial] = compRatioSlider->getValue();
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
-            voice->compressor.ratio_  = compressorRatioCoefficient[instrumetSerial];
+            voice->compressor.ratio_  = compressorRatioCoefficient[instrumetClickedSerial];
             voice->compressor.update();
         }
         
-        float meterCoef = jmap<float>(compressorRatioCoefficient[instrumetSerial], 1, 100, 1.0f, 0.0f);
+        float meterCoef = jmap<float>(compressorRatioCoefficient[instrumetClickedSerial], 1, 100, 1.0f, 0.0f);
         
         compressorMeter->setRatioCoef(meterCoef);
         
-        String value = valueDoubleDigitTranslator(compressorRatioCoefficient[instrumetSerial]);
+        String value = valueDoubleDigitTranslator(compressorRatioCoefficient[instrumetClickedSerial]);
         value.append(" : 1",4);
         compRatioLabel->setText(value,dontSendNotification);
     }
     else if(slider == compAttackSlider.get())// Compressor Attack
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->compressor.tauAttack_  = compAttackSlider->getValue();
             voice->compressor.update();
         }
         
-        compressorAttackCoefficient[instrumetSerial] = compAttackSlider->getValue();
-        String value = valueDoubleDigitTranslator(compressorAttackCoefficient[instrumetSerial]);
+        compressorAttackCoefficient[instrumetClickedSerial] = compAttackSlider->getValue();
+        String value = valueDoubleDigitTranslator(compressorAttackCoefficient[instrumetClickedSerial]);
         value.append(" ms",3);// not accurate need to be change later
         compAttackLabel->setText(value,dontSendNotification);
         
     }
     else if(slider == compReleaseSlider.get())// Compressor Release
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->compressor.tauRelease_  = compReleaseSlider->getValue();
         }
 
-        compressorReleaseCoefficient[instrumetSerial] = compReleaseSlider->getValue();
-        String value = valueDoubleDigitTranslator(compressorReleaseCoefficient[instrumetSerial]);
+        compressorReleaseCoefficient[instrumetClickedSerial] = compReleaseSlider->getValue();
+        String value = valueDoubleDigitTranslator(compressorReleaseCoefficient[instrumetClickedSerial]);
         value.append(" ms",3);// not accurate need to be change later
         compReleaseLabel->setText(value,dontSendNotification);
     }
     else if(slider == compGainSlider.get())// Compressor Gain
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->compressor.makeUpGain_  = compGainSlider->getValue();
             voice->compressor.update();
         }
         
-        compressorGainCoefficient[instrumetSerial] = compGainSlider->getValue();
-        String value = valueDoubleDigitTranslator(compressorGainCoefficient[instrumetSerial]);
+        compressorGainCoefficient[instrumetClickedSerial] = compGainSlider->getValue();
+        String value = valueDoubleDigitTranslator(compressorGainCoefficient[instrumetClickedSerial]);
         value.append(" db",3); // not accurate need to be change later
         compGainLabel->setText(value,dontSendNotification);
     }
@@ -779,7 +779,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     if(slider == reverbDrySlider.get())// Reverb Dry-Wet
     {
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->reverb_param.dryLevel = 1.0f - reverbDrySlider->getValue();
             voice->reverb_param.wetLevel = 1.0f - 1.0f - reverbDrySlider->getValue();
@@ -792,11 +792,11 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             
         }
         
-        reverbDryCoefficient[instrumetSerial] = reverbDrySlider->getValue();
+        reverbDryCoefficient[instrumetClickedSerial] = reverbDrySlider->getValue();
     }
     else if(slider == reverbPredelaySlider.get())// Reverb Pre-delay
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->reverb_param.width = reverbPredelaySlider->getValue();
             
@@ -807,14 +807,14 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             }
         }
         
-        reverbPredelayCoefficient[instrumetSerial] = reverbPredelaySlider->getValue();
-        String value = valueDoubleDigitTranslator(reverbPredelayCoefficient[instrumetSerial]);
+        reverbPredelayCoefficient[instrumetClickedSerial] = reverbPredelaySlider->getValue();
+        String value = valueDoubleDigitTranslator(reverbPredelayCoefficient[instrumetClickedSerial]);
         value.append(" db",3); // not accurate need to be change later
         reverbPredelayLabel->setText(value,dontSendNotification);
     }
     else if(slider == reverbDecaySlider.get())// Reverb Decay
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->reverb_param.damping = 1.0f - reverbDecaySlider->getValue();
             
@@ -825,14 +825,14 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             }
         }
         
-        reverbDecayCoefficient[instrumetSerial] = reverbDecaySlider->getValue();
-        String value = valueDoubleDigitTranslator(reverbDecayCoefficient[instrumetSerial]);
+        reverbDecayCoefficient[instrumetClickedSerial] = reverbDecaySlider->getValue();
+        String value = valueDoubleDigitTranslator(reverbDecayCoefficient[instrumetClickedSerial]);
         value.append(" db",3); // not accurate need to be change later
         reverbDecayLabel->setText(value,dontSendNotification);
     }
     else if(slider == reverbSizeSlider.get())// Reverb Size
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->reverb_param.roomSize = reverbSizeSlider->getValue();
             
@@ -843,14 +843,14 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             }
         }
         
-        reverbSizeCoefficient[instrumetSerial] = reverbSizeSlider->getValue();
-        String value = valueDoubleDigitTranslator(reverbSizeCoefficient[instrumetSerial]);
+        reverbSizeCoefficient[instrumetClickedSerial] = reverbSizeSlider->getValue();
+        String value = valueDoubleDigitTranslator(reverbSizeCoefficient[instrumetClickedSerial]);
         value.append(" db",3); // not accurate need to be change later
         reverbSizeLabel->setText(value,dontSendNotification);
     }
     else if(slider == reverbColorSlider.get())// Reverb Color
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->reverbColor =  reverbColorSlider->getValue();
             if(voice->reverbColor == 0)
@@ -898,8 +898,8 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
         
         }
         
-        reverbColorCoefficient[instrumetSerial] = reverbColorSlider->getValue();
-        String value = valueDoubleDigitTranslator(reverbColorCoefficient[instrumetSerial]);
+        reverbColorCoefficient[instrumetClickedSerial] = reverbColorSlider->getValue();
+        String value = valueDoubleDigitTranslator(reverbColorCoefficient[instrumetClickedSerial]);
         value.append(" cl",3); // not real need to be change later
         reverbColorLabel->setText(value,dontSendNotification);
     }
@@ -910,7 +910,7 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
     if(slider == delayDryWetSlider.get())// Delay DryWet
     {
         
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             //voice->reverb_param.dryLevel = 1.0f - delayDryWetSlider->getValue();
             //voice->reverb_param.wetLevel = 1.0f - 1.0f - delayDryWetSlider->getValue();
@@ -922,70 +922,70 @@ void OrionEffectsConfiguration::sliderValueChanged (Slider* slider)
             voice->delay.update();
         }
         
-        delayDryWetCoefficient[instrumetSerial] = delayDryWetSlider->getValue();
+        delayDryWetCoefficient[instrumetClickedSerial] = delayDryWetSlider->getValue();
     }
     else if(slider == delayTimeSlider.get())// Delay Time
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->delay.delayLength_ = delayTimeSlider->getValue();
             voice->delay.update();
         }
 
-        delayTimeCoefficient[instrumetSerial] = delayTimeSlider->getValue();
-        String value = valueDoubleDigitTranslator(delayTimeCoefficient[instrumetSerial]);
+        delayTimeCoefficient[instrumetClickedSerial] = delayTimeSlider->getValue();
+        String value = valueDoubleDigitTranslator(delayTimeCoefficient[instrumetClickedSerial]);
         value.append(" db",3); // not accurate need to be change later
         delayTimeLabel->setText(value,dontSendNotification);
     }
     else if(slider == delayFeedbackSlider.get())// Delay Feedback
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->delay.feedback_ = delayFeedbackSlider->getValue();
             voice->delay.update();
         }
         
-        delayFeedbackCoefficient[instrumetSerial] = delayFeedbackSlider->getValue();
-        String value = valueDoubleDigitTranslator(delayFeedbackCoefficient[instrumetSerial]);
+        delayFeedbackCoefficient[instrumetClickedSerial] = delayFeedbackSlider->getValue();
+        String value = valueDoubleDigitTranslator(delayFeedbackCoefficient[instrumetClickedSerial]);
         value.append(" db",3); // not accurate need to be change later
         delayFeedbackLabel->setText(value,dontSendNotification);
     }
     else if(slider == delayColorSlider.get())// Delay Color
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->delay.color_ = delayColorSlider->getValue();
             voice->delay.update();
         }
 
-        delayColorCoefficient[instrumetSerial] = delayColorSlider->getValue();
-        String value = valueDoubleDigitTranslator(delayColorCoefficient[instrumetSerial]);
+        delayColorCoefficient[instrumetClickedSerial] = delayColorSlider->getValue();
+        String value = valueDoubleDigitTranslator(delayColorCoefficient[instrumetClickedSerial]);
         value.append(" cl",3); // not accurate need to be change later
         delayColorLabel->setText(value,dontSendNotification);
     }
     else if(slider == delayPanSlider.get())// Delay Pan
     {
-        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetSerial)))
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(instrumetClickedSerial)))
         {
             voice->delay.panIndicator_ = delayPanSlider->getValue();
             voice->delay.update();
         }
         
-        delayPanCoefficient[instrumetSerial] = delayPanSlider->getValue();
+        delayPanCoefficient[instrumetClickedSerial] = delayPanSlider->getValue();
         
         String value;
-        //value = valueDoubleDigitTranslator(delayPanCoefficient[instrumetSerial]);
+        //value = valueDoubleDigitTranslator(delayPanCoefficient[instrumetClickedSerial]);
         
         if(delayPanSlider->getValue() < 0.5)
         {
             value = "L ";
-            value.append(valueDoubleDigitTranslator((0.5f - delayPanCoefficient[instrumetSerial])*200),4);// not accurate need to be change later
+            value.append(valueDoubleDigitTranslator((0.5f - delayPanCoefficient[instrumetClickedSerial])*200),4);// not accurate need to be change later
             
         }
         else if(delayPanSlider->getValue() > 0.5)
         {
-            DBG(delayPanCoefficient[instrumetSerial]);
-            value = valueDoubleDigitTranslator((delayPanCoefficient[instrumetSerial] - 0.5F)*200);
+            DBG(delayPanCoefficient[instrumetClickedSerial]);
+            value = valueDoubleDigitTranslator((delayPanCoefficient[instrumetClickedSerial] - 0.5F)*200);
             value.append(" R",2); // not accurate need to be change later
         }
         else

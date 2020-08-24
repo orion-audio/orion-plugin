@@ -24,7 +24,7 @@ CompressorMeter::CompressorMeter()
 
 void CompressorMeter::paint (Graphics& g)
 {
-    std::cout<<"Paint Compressor Meter: "<<instrumetSerial<<std::endl;
+    //std::cout<<"Paint Compressor Meter: "<<instrumetClickedSerial<<std::endl;
     
     //g.fillAll();
     

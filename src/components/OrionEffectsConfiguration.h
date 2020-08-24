@@ -29,6 +29,7 @@ public:
     int effectSerial;
 
     void sliderValueChanged (Slider* slider)override;
+    void setCompressorComboBoxDisplay(String name){compressorComboBox->comboSwitch->setButtonText(name);};
     void sidechainSwitchClicked(bool isDown);
     void sidechainCellClicked(bool isDown, int tag);
     void switchClicked(bool isDown);

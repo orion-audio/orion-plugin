@@ -24,7 +24,7 @@ OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : pr
 
 void OrionClipConfiguration::paint (Graphics& g)
 {
-    std::cout<<"paint Clip : "<<instrumetSerial<<std::endl;
+    std::cout<<"paint Clip : "<<instrumetClickedSerial<<std::endl;
 //    Image clipbackground = ImageCache::getFromMemory(BinaryData::orionClipBackground_png, BinaryData::orionClipBackground_pngSize);
 //    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
 //    RectanglePlacement orionBackgroundRectanglePlacement(64);

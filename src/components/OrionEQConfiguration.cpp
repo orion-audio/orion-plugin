@@ -323,7 +323,6 @@ void OrionEQConfiguration::mouseDown (const MouseEvent& e)
                                                    }
                                                }
                                            });
-                
                 return;
             }
         }

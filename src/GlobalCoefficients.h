@@ -37,8 +37,9 @@ float globalOutputMeterL = 0.0f;
 float globalOutputMeterR = 0.0f;
 
 // Instruments
-int   instrumetSerial = 0;
-int   instrumetOffSerial = 0;
+int   instrumetClickedSerial = 0;
+int   instrumetNoteOnSerial = 0;
+//int   instrumetOffSerial = 0;
 float masterVolumeCoefficient = 0.75f;
 bool  instrumentsOnStates          [8] = {false, false, false, false, false, false, false, false};
 bool  instrumentsSoloStates        [8] = {false, false, false, false, false, false, false, false};
@@ -123,8 +124,9 @@ extern float globalOutputMeterL;
 extern float globalOutputMeterR;
 
 // Instruments
-extern int   instrumetSerial;
-extern int   instrumetOffSerial;
+extern int   instrumetClickedSerial;
+extern int   instrumetNoteOnSerial;
+//extern int   instrumetOffSerial;
 extern float masterVolumeCoefficient;
 extern bool  instrumentsOnStates[]; 
 extern bool  instrumentsSoloStates[];

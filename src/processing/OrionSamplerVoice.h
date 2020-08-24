@@ -67,10 +67,12 @@ private:
     std::vector<double> magnitudes;
     
     
-    int* instrumetSerialLocal = &instrumetSerial;
+    //int* instrumetSerialPtr = &instrumetClickedSerial;
     
 
 public:
+    
+    int instrumetSerialInVoice = -1;
  
     //---------- Pan ----------/
     PanPos pan;
@@ -369,7 +371,7 @@ public:
                 r = eq.bysamples(r);
                 
                 //MARK:- Apply Instruments Pan
-                pan.setPosition(instrumentsPanCoefficient[instrumetSerial]);
+                pan.setPosition(instrumentsPanCoefficient[instrumetSerialInVoice]);
                 l = pan.processLeftChannel(l);
                 r = pan.processRightChannel(r);
                 
@@ -385,21 +387,42 @@ public:
                 //MARK:- Sidechain Compressor
                 if(l == 0.0 && r == 0)
                 {
-                    InstrumentMakeNoise[instrumetSerial] = false;
+                    InstrumentMakeNoise[instrumetSerialInVoice] = false;
                 }
                 else
                 {
-                    InstrumentMakeNoise[instrumetSerial] = true;
+                    InstrumentMakeNoise[instrumetSerialInVoice] = true;
                 }
+                
+                
+                
 
               
                 //MARK:- Apply Compressor
-                if(compressorswitch)
+                
+                
+                if(sidechainIndex[instrumetSerialInVoice] == -1)
                 {
-                    compVal = compressor.bysamples(l);
-                    l *= compVal;
-                    r *= compVal;
+                    /* Compressor Local */
+                    if(compressorswitch)
+                    {
+                        compVal = compressor.bysamples(l);
+                        l *= compVal;
+                        r *= compVal;
+                    }
                 }
+                else
+                {
+                    /* Sidechain Compressor */
+                    if(InstrumentMakeNoise[sidechainIndex[instrumetSerialInVoice]])
+                    {
+                        compVal = compressor.bysamples(l);
+                        l *= compVal;
+                        r *= compVal;
+                    }
+                }
+                
+                
                 
                 //MARK:- Apply Reverb
                 if(reverbswitch)
@@ -427,15 +450,15 @@ public:
                 
                 
                 //MARK:- Apply Instruments Volume
-                l = l * instrumentsVolumeCoefficient[instrumetSerial];
-                r = r * instrumentsVolumeCoefficient[instrumetSerial];
+                l = l * instrumentsVolumeCoefficient[instrumetSerialInVoice];
+                r = r * instrumentsVolumeCoefficient[instrumetSerialInVoice];
 
                 //MARK:- Apply Master Volume
                 l = l * masterVolumeCoefficient;
                 r = r * masterVolumeCoefficient;
                 
                 //MARK:- Apply Solo & Mute
-                if(!instrumentsSoloStates[instrumetSerial] && instrumentsMuteStates[instrumetSerial])
+                if(!instrumentsSoloStates[instrumetSerialInVoice] && instrumentsMuteStates[instrumetSerialInVoice])
                 {
                     l = l * 0.0f;
                     r = r * 0.0f;

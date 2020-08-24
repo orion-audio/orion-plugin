@@ -50,12 +50,12 @@ public:
     float getSampleLength()
     {
         File* audioFile;
-        audioFile = &instrumentSamplePathes[instrumetSerial];
+        audioFile = &instrumentSamplePathes[instrumetClickedSerial];
           
         if(audioFile != nullptr)
         {
             AudioFormatReader*  mFormatReader {nullptr};
-            mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetSerial]);
+            mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetClickedSerial]);
             auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
             mWaveForm.setSize(1, sampleLength);
             

@@ -453,25 +453,25 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             //std::cout<<"MIDINoteOnFromClick"<<std::endl;
         //}
         
-        //tabComponents->setCurrentTab(instrumetSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //tabComponents->setCurrentTab(instrumetClickedSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
-        //tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //tabComponents->tabComponents[instrumetClickedSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
         std::cout<<"click!!"<<std::endl;
-        instrumetSerial = tabIndex;
-        dropdownTable->currentTab = instrumetSerial;
+        instrumetClickedSerial = tabIndex;
+        dropdownTable->currentTab = instrumetClickedSerial;
         processor.getSampler()->noteOn(1, midiNote, 120);//
         
-        //std::cout<<"instrumetSerial: "<<instrumetSerial<<std::endl;
+        //std::cout<<"instrumetClickedSerial: "<<instrumetClickedSerial<<std::endl;
         //std::cout<<"dropdownTabSerial: "<<dropdownTabSerial<<std::endl;
         
 
         //MARK:- Primary Pane
-        primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetSerial]);
-        primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetSerial]);
+        primaryPane->setInstrumetsVolumeSliderValue(instrumentsVolumeCoefficient[instrumetClickedSerial]);
+        primaryPane->setInstrumetsPanSliderValue(instrumentsPanCoefficient[instrumetClickedSerial]);
 
         /* Set Solo Button Image */
-        if(instrumentsSoloStates[instrumetSerial])
+        if(instrumentsSoloStates[instrumetClickedSerial])
         {
             primaryPane->setInstrumetsSoloButtonImage(true);
         }
@@ -481,7 +481,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         }
 
         /* Set Mute Button Image */
-        if(instrumentsMuteStates[instrumetSerial])
+        if(instrumentsMuteStates[instrumetClickedSerial])
         {
             primaryPane->setInstrumetsMuteButtonImage(true);
         }
@@ -492,7 +492,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         
         if(dropdownTabSerial == 0)//MARK:- EQ
         {
-            dropdownTable->eqConfiguration->EQserial = instrumetSerial;
+            dropdownTable->eqConfiguration->EQserial = instrumetClickedSerial;
             dropdownTable->eqConfiguration->repaint();
         }
         else if(dropdownTabSerial == 1)//MARK:- Clip
@@ -504,7 +504,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             
             dropdownTable->envConfiguration->envelopeMeter->repaint();
             
-            if(envSwitches[instrumetSerial])
+            if(envSwitches[instrumetClickedSerial])
             {
                dropdownTable->envConfiguration->setSwitchImage(true);
             }
@@ -518,28 +518,28 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             dropdownTable->envConfiguration->knobsSetRange();
             
             //bool a = false;
-            dropdownTable->envConfiguration->aSliderValueChange(envAttackCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->aSliderValueChange(envAttackCoefficient[instrumetClickedSerial]);
 
             //for (int i = 0; i < 50; i++){a = false;}
-            dropdownTable->envConfiguration->dSliderValueChange(envDecayCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->dSliderValueChange(envDecayCoefficient[instrumetClickedSerial]);
 
             //for (int i = 0; i < 50; i++){a = false;}
-            dropdownTable->envConfiguration->hSliderValueChange(envSustainCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->hSliderValueChange(envSustainCoefficient[instrumetClickedSerial]);
 
             //for (int i = 0; i < 50; i++){a = false;}
-            dropdownTable->envConfiguration->rSliderValueChange(envReleaseCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->rSliderValueChange(envReleaseCoefficient[instrumetClickedSerial]);
 
             //for (int i = 0; i < 50; i++){a = false;}
-            dropdownTable->envConfiguration->aBendSliderValueChange(envAttackBendCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->aBendSliderValueChange(envAttackBendCoefficient[instrumetClickedSerial]);
 
             //for (int i = 0; i < 50; i++){a = false;}
-            dropdownTable->envConfiguration->dBendSliderValueChange(envDecayBendCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->dBendSliderValueChange(envDecayBendCoefficient[instrumetClickedSerial]);
 
             //for (int i = 0; i < 50; i++){a = false;}
-            dropdownTable->envConfiguration->sBendSliderValueChange(envSustainBendCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->sBendSliderValueChange(envSustainBendCoefficient[instrumetClickedSerial]);
 
             //for (int i = 0; i < 50; i++){a = false;}
-            dropdownTable->envConfiguration->rBendSliderValueChange(envReleaseBendCoefficient[instrumetSerial]);
+            dropdownTable->envConfiguration->rBendSliderValueChange(envReleaseBendCoefficient[instrumetClickedSerial]);
 
 
             
@@ -549,7 +549,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         else if(dropdownTabSerial == 3)//MARK:- FX
         {
             /* Set Compressor Switch Image */
-            if(compSwitches[instrumetSerial])
+            if(compSwitches[instrumetClickedSerial])
             {
                 dropdownTable->effectConfiguration->setSwitchImage(true, 0);//--!!!!!!!!!!!
             }
@@ -559,7 +559,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             }
             
             /* Set Reverb Switch Image */
-            if(reverbSwitches[instrumetSerial])
+            if(reverbSwitches[instrumetClickedSerial])
             {
                 dropdownTable->effectConfiguration->setSwitchImage(true, 1);//--!!!!!!!!!!!
             }
@@ -569,7 +569,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             }
                  
             /* Set Delay Switch Image */
-            if(delaySwitches[instrumetSerial])
+            if(delaySwitches[instrumetClickedSerial])
             {
                 dropdownTable->effectConfiguration->setSwitchImage(true, 2);//--!!!!!!!!!!!
             }
@@ -579,24 +579,36 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             }
             
             
-            //------------ Set Slidervalues ----------------//
-            dropdownTable->effectConfiguration->compThreshSliderValueChange(compressorThreshCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->compRatioSliderValueChange(compressorRatioCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->compAttackSliderValueChange(compressorAttackCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->compReleaseSliderValueChange(compressorReleaseCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->compGainSliderValueChange(compressorGainCoefficient[instrumetSerial]);
+            /* Set Sidechain Image */
             
-            dropdownTable->effectConfiguration->reverbDrySliderValueChange(reverbDryCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->reverbPredelaySliderValueChange(reverbPredelayCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->reverbDecaySliderValueChange(reverbDecayCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->reverbSizeSliderValueChange(reverbSizeCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->reverbColorSliderValueChange(reverbColorCoefficient[instrumetSerial]);
+            if(sidechainIndex[instrumetClickedSerial] == -1)
+            {
+                dropdownTable->effectConfiguration->setCompressorComboBoxDisplay("None");
+            }
+            else
+            {
+                dropdownTable->effectConfiguration->setCompressorComboBoxDisplay(instrumentName[sidechainIndex[instrumetClickedSerial]]);
+            }
+  
+            
+            //------------ Set Slidervalues ----------------//
+            dropdownTable->effectConfiguration->compThreshSliderValueChange(compressorThreshCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->compRatioSliderValueChange(compressorRatioCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->compAttackSliderValueChange(compressorAttackCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->compReleaseSliderValueChange(compressorReleaseCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->compGainSliderValueChange(compressorGainCoefficient[instrumetClickedSerial]);
+            
+            dropdownTable->effectConfiguration->reverbDrySliderValueChange(reverbDryCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->reverbPredelaySliderValueChange(reverbPredelayCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->reverbDecaySliderValueChange(reverbDecayCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->reverbSizeSliderValueChange(reverbSizeCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->reverbColorSliderValueChange(reverbColorCoefficient[instrumetClickedSerial]);
                
-            dropdownTable->effectConfiguration->delayDryWetSliderValueChange(delayDryWetCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->delayTimeSliderValueChange(delayTimeCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->delayFeedbackSliderValueChange(delayFeedbackCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->delayColorSliderValueChange(delayColorCoefficient[instrumetSerial]);
-            dropdownTable->effectConfiguration->delayPanSliderValueChange(delayPanCoefficient[instrumetSerial]);
+            dropdownTable->effectConfiguration->delayDryWetSliderValueChange(delayDryWetCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->delayTimeSliderValueChange(delayTimeCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->delayFeedbackSliderValueChange(delayFeedbackCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->delayColorSliderValueChange(delayColorCoefficient[instrumetClickedSerial]);
+            dropdownTable->effectConfiguration->delayPanSliderValueChange(delayPanCoefficient[instrumetClickedSerial]);
             
         }
 
@@ -672,7 +684,7 @@ void OrionaudioAudioProcessorEditor::updateDropDownEQState(bool newState)
 {
     DBG((int)newState);
     std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
-    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    std::cout<<"instrumetClickedSerial: "<< instrumetClickedSerial <<std::endl;
     
     if(newState)
     {
@@ -701,7 +713,7 @@ void OrionaudioAudioProcessorEditor::updateDropDownClipState(bool newState)
     DBG((int)newState);
     
     std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
-    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    std::cout<<"instrumetClickedSerial: "<< instrumetClickedSerial <<std::endl;
     
     if(newState)
     {
@@ -728,7 +740,7 @@ void OrionaudioAudioProcessorEditor::updateDropDownENVState(bool newState)
     DBG((int)newState);
     
     std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
-    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    std::cout<<"instrumetClickedSerial: "<< instrumetClickedSerial <<std::endl;
     
     if(newState)
     {
@@ -755,7 +767,7 @@ void OrionaudioAudioProcessorEditor::updateDropDownFXState(bool newState)
     DBG((int)newState);
     
     std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
-    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+    std::cout<<"instrumetClickedSerial: "<< instrumetClickedSerial <<std::endl;
     
     if(newState)
     {
@@ -784,7 +796,7 @@ void OrionaudioAudioProcessorEditor::updateDropDownFXState(bool newState)
 //    DBG((int)newState);
 //
 //    std::cout<<"dropdownTabSerial: "<< dropdownTabSerial <<std::endl;
-//    std::cout<<"instrumetSerial: "<< instrumetSerial <<std::endl;
+//    std::cout<<"instrumetClickedSerial: "<< instrumetClickedSerial <<std::endl;
 //
 //    if(newState)
 //    {
@@ -813,7 +825,7 @@ void OrionaudioAudioProcessorEditor::updateDropDownFXState(bool newState)
 //            dropDownEQ->setToggleState(false,sendNotificationSync);
 //        }
 //
-//        tabComponents->tabComponents[instrumetSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!
+//        tabComponents->tabComponents[instrumetClickedSerial]->setCurrentTabIndex(dropdownTabSerial);//--!!!!!!!!!!!
 //        dropdownTable->tabChange(dropdownTabSerial);//--!!!!!!!!!!!
 //
 //        dropDownVisible = newState;

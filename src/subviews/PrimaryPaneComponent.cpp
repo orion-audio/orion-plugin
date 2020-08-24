@@ -443,9 +443,9 @@ void PrimaryPaneComponent::sliderValueChanged (Slider* slider)
     }
     else if(slider == instrumentsVolumeSlider.get())
     {
-        instrumentsVolumeCoefficient[instrumetSerial] = instrumentsVolumeSlider->getValue();
+        instrumentsVolumeCoefficient[instrumetClickedSerial] = instrumentsVolumeSlider->getValue();
         
-        double a = instrumentsVolumeCoefficient[instrumetSerial];
+        double a = instrumentsVolumeCoefficient[instrumetClickedSerial];
         float b = (int)(a * 100 + .5);
         float c =  (float)b / 100;
         String d = String(c);
@@ -462,7 +462,7 @@ void PrimaryPaneComponent::sliderValueChanged (Slider* slider)
     }
     else if(slider == instrumentsPanSlider.get())
     {
-        instrumentsPanCoefficient[instrumetSerial] = instrumentsPanSlider->getValue();
+        instrumentsPanCoefficient[instrumetClickedSerial] = instrumentsPanSlider->getValue();
     }
 }
 
@@ -473,12 +473,12 @@ void PrimaryPaneComponent::instrumentSoloButtonClicked(bool isDown)
 {
     if(isDown)
     {
-        instrumentsSoloStates[instrumetSerial] = !instrumentsSoloStates[instrumetSerial];
+        instrumentsSoloStates[instrumetClickedSerial] = !instrumentsSoloStates[instrumetClickedSerial];
         
       
-        if(instrumentsSoloStates[instrumetSerial])
+        if(instrumentsSoloStates[instrumetClickedSerial])
         {
-            instrumentsMuteStates[instrumetSerial] = false;
+            instrumentsMuteStates[instrumetClickedSerial] = false;
             soloButton->setImages(false, true, true, soloButtonDown, 1.f, Colours::transparentBlack, soloButtonDown, 1.f, Colours::transparentBlack, soloButtonDown, 1.f, Colours::transparentBlack);
             muteButton->setImages(false, true, true, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack, muteButtonUp, 1.f, Colours::transparentBlack);
             
@@ -540,7 +540,7 @@ void PrimaryPaneComponent::instrumentSoloButtonClicked(bool isDown)
         
         
         /* Incase Previous Mute State */
-        if(instrumentsMuteStates[instrumetSerial])
+        if(instrumentsMuteStates[instrumetClickedSerial])
         {
             muteButton->setImages(false, true, true, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack);
         }
@@ -557,12 +557,12 @@ void PrimaryPaneComponent::instrumentMuteButtonClicked(bool isDown)
 {
     if(isDown)
     {
-        instrumentsMuteStates[instrumetSerial] = !instrumentsMuteStates[instrumetSerial];
+        instrumentsMuteStates[instrumetClickedSerial] = !instrumentsMuteStates[instrumetClickedSerial];
         
         /* Set Solo & Mute Button Images */
-        if(instrumentsMuteStates[instrumetSerial])
+        if(instrumentsMuteStates[instrumetClickedSerial])
         {
-            instrumentsSoloStates[instrumetSerial] = false;
+            instrumentsSoloStates[instrumetClickedSerial] = false;
             muteButton->setImages(false, true, true, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack, muteButtonDown, 1.f, Colours::transparentBlack);
             
             soloButton->setImages(false, true, true, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack, soloButtonUp, 1.f, Colours::transparentBlack);

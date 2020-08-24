@@ -61,6 +61,7 @@ void SimpleSynth::setup(double sr)
     for (int i = 0; i < MAX_VOICES; i++)
     {
         auto* voice = new OrionSamplerVoice(sampleRate,i);
+        voice->instrumetSerialInVoice = i;
         //auto* voice = new SamplerVoice();
         switch(i)
         {
@@ -250,12 +251,12 @@ void SimpleSynth::noteOn(int midiChannel,
                 {
                     if(voice->canPlayOrionSound(midiNoteNumber) && !voice->getCurrentlyPlayingSound())
                     {
-                        instrumetSerial = i;
-                        //std::cout<<"in voice instrumetSerial: "<< instrumetSerial<<std::endl;
+                        //instrumetNoteOnSerial = i;
+                        //std::cout<<"in voice instrumetClickedSerial: "<< instrumetClickedSerial<<std::endl;
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
                         //DBG("KeyboardPress!!");
                         
-                        instrumentsOnStates[instrumetSerial] = true;
+                        instrumentsOnStates[i] = true;
                     }
                 }
             }
@@ -263,7 +264,7 @@ void SimpleSynth::noteOn(int midiChannel,
             //noteOnPNGChange();
             
             /* Set PrimaryPane Images */
-//            if(!instrumentsMuteStates[instrumetSerial])
+//            if(!instrumentsMuteStates[instrumetClickedSerial])
 //            {
 //                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
 //

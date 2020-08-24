@@ -142,7 +142,7 @@ void ThresholdMeter::resized()
 
 void ThresholdMeter::timerCallback()
 {
-    if(dropdownTabSerial == 3 && compSwitches[instrumetSerial])
+    if( (dropdownTabSerial == 3 && compSwitches[instrumetClickedSerial]) || (dropdownTabSerial == 3 && sidechainIndex[instrumetClickedSerial] != -1) )
     {
       meterUpdate();
     }
