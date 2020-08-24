@@ -117,7 +117,7 @@ public:
         }
         
         
-        g.strokePath(p, PathStrokeType(1.f));
+        g.strokePath(p, PathStrokeType(1.5f));
         
 
     }

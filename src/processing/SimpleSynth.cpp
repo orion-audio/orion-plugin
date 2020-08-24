@@ -264,16 +264,16 @@ void SimpleSynth::noteOn(int midiChannel,
             //noteOnPNGChange();
             
             /* Set PrimaryPane Images */
-//            if(!instrumentsMuteStates[instrumetClickedSerial])
-//            {
-//                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
-//
-//                if(!dropDownVisible)
-//                {
-//                  PrimaryPaneMirror->waveWiggle->startAnimation();
-//                }
-//
-//            }
+            if(!instrumentsMuteStates[instrumetClickedSerial])
+            {
+                PrimaryPaneMirror->waveWiggle->waveColor = Colour(0xff3AE6D1);
+
+                if(!dropDownVisible)
+                {
+                  PrimaryPaneMirror->waveWiggle->startAnimation();
+                }
+
+            }
         }
     }
 }
