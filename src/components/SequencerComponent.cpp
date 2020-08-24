@@ -76,6 +76,7 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     for (int i = 0; i < NUM_VOICES; i++) {
         channelCombos[i].addItemList(channels, 1);
         channelCombos[i].setSelectedId(1);
+        channelCombos[i].addListener(this);
         addAndMakeVisible(channelCombos[i]);
     }
 
@@ -269,3 +270,12 @@ void SequencerComponent::setValuesFromPlugin() {
     resized();
 
 }
+
+void SequencerComponent::comboBoxChanged(juce::ComboBox *combo) {
+    for (int i = 0; i < channelCombos.size(); i++) {
+        if (combo == &channelCombos[i]) {
+            sequencer.setChannel(NoteSequence::noteValues[i], combo->getSelectedId());
+        }
+    }
+}
+

@@ -83,7 +83,9 @@ public:
     NoteSequence::SubDivision getSubDivision() { return subdivision; };
     void setSubDivision(NoteSequence::SubDivision s);
     
+    void setChannel(int voice, int channel) { channels[voice] = channel; };
 private:
+    std::map<int, int> channels;
     
     NoteSequence::SubDivision subdivision = NoteSequence::SubDivision::sixteenth;
 
