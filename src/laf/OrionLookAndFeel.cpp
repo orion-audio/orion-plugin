@@ -193,6 +193,11 @@ Font OrionLookAndFeel::getLabelFont (Label &l)
 
 void OrionLookAndFeel::drawComboBox(juce::Graphics &g, int width, int height, bool isButtonDown, int buttonX, int buttonY, int buttonW, int buttonH, juce::ComboBox &combo) {
     
+    if (combo.getProperties().contains("CHANNEL_COMBO") || combo.getProperties().contains("SUBDIVISION_COMBO")) {
+        g.setColour(Colour(0xFF313131));
+        g.fillRoundedRectangle(combo.getLocalBounds().toFloat(), 8.f);
+        return;
+    }
     g.setColour(Colour(ThemeColors::backgroundColor));
     g.fillRoundedRectangle(combo.getLocalBounds().toFloat(), 2.f);
    
@@ -205,8 +210,6 @@ void OrionLookAndFeel::drawComboBox(juce::Graphics &g, int width, int height, bo
     arrow.lineTo(arrowBounds.getCentreX(), arrowBounds.getBottom());
     arrow.lineTo(arrowBounds.getRight(), arrowBounds.getY());
     g.strokePath(arrow, PathStrokeType(1.f));
-//    g.setColour(Colours::white);
-//    g.drawRect(combo.getBounds().withSizeKeepingCentre(combo.getWidth() - 2, combo.getHeight() - 2), 1);
 }
 
 void OrionLookAndFeel::drawNoteBox(juce::Graphics &g, SequencerComponent &s, Rectangle<float> bounds, bool isActive, bool isPlaying) { 
@@ -217,6 +220,14 @@ void OrionLookAndFeel::drawNoteBox(juce::Graphics &g, SequencerComponent &s, Rec
     if (isActive)
         g.fillEllipse(newBounds);
     else
-        g.drawEllipse(newBounds, 1.f);
+        g.drawEllipse(newBounds.withSizeKeepingCentre(radius - 5, radius - 5), 5.f);
     
 }
+
+void OrionLookAndFeel::positionComboBoxText(ComboBox &combo,Label &label) {
+    label.setBounds(combo.getLocalBounds());
+    if (combo.getProperties().contains("CHANNEL_COMBO") || combo.getProperties().contains("SUBDIVISION_COMBO")) {
+        label.setJustificationType(Justification::centred);
+    }
+}
+

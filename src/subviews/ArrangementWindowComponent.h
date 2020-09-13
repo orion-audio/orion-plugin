@@ -29,6 +29,10 @@ public:
 
     void sliderValueChanged(juce::Slider *slider) override;
 
+    void handleNewBarSelection(int);
+
+    void handleNewBarActive(int);
+
 private:
     
     OrionaudioAudioProcessor* processor;
@@ -37,9 +41,6 @@ private:
     std::unique_ptr<SequencerComponent> sequencerComponent;
     Viewport sequencerViewport;
     
-    ComboBox subdivisionCombo; 
-    
-    std::unique_ptr<Slider> sequenceLengthSlider;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ArrangementWindowComponent)
 };
 
