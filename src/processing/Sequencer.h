@@ -95,9 +95,9 @@ public:
     }
 private:
     std::map<int, int> channels;
-    std::array<bool, 4> activeSequences = {true, false, false, false};
+    std::array<bool, 4> activeSequences = {true, true, true, true};
     NoteSequence::SubDivision subdivision = NoteSequence::SubDivision::sixteenth;
-    double loopEnd = 1;
+    double loopEnd = 4;
     void notifyListenersNotePlayed(int pitch, int note);
     std::vector<Listener*> listeners;
     
@@ -108,6 +108,8 @@ private:
     float lastSampleRate = globalSampleRate;
     int sequenceLength = 16;
     NoteSequence::SubDivision currentSubDivision = NoteSequence::SubDivision::sixteenth;
+    NoteSequence::SubDivision currentSubDivisions[4] = {NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth};
+
     bool isActive = true;
     
     std::vector<SynthesiserSound::Ptr> samplerSounds;

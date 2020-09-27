@@ -26,28 +26,35 @@ public:
     ~BarButton()
     {
     }
+    
+    juce::String getTooltip() override {
+        return "Command click to toggle active, click to edit sequence";
+    }
+
 
     virtual void paintButton (Graphics& g,
                               bool shouldDrawButtonAsHighlighted,
                               bool shouldDrawButtonAsDown) override
     {
-
+        Colour textColour;
         if (selected) {
             g.setColour(Colour(0xFF36FEE2));
-            g.fillRoundedRectangle(getLocalBounds().toFloat(), 8.f);
-            g.setColour(Colours::black);
-            g.drawFittedText(String(barNum), getLocalBounds(), Justification::centred, 1);
+            textColour = Colours::black;
         }
+        
+        else if (active) {
+            g.setColour(Colour(0xFF36FEE2).darker(.5));
+            textColour = Colours::black;
+        }
+        
         else {
             g.setColour(Colour(0xFF313131));
-            g.fillRoundedRectangle(getLocalBounds().toFloat(), 8.f);
-            g.setColour(Colours::white);
-            g.drawFittedText(String(barNum), getLocalBounds(), Justification::centred, 1);
-
+            textColour = Colours::white;
         }
 
-        g.setColour(Colours::white);
-        if (active) g.drawRect(getLocalBounds(), 5.f);
+        g.fillRoundedRectangle(getLocalBounds().toFloat(), 8.f);
+        g.setColour(textColour);
+        g.drawFittedText(String(barNum + 1), getLocalBounds(), Justification::centred, 1);
 
     }
     

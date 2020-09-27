@@ -56,6 +56,7 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
         l = std::make_unique<Label>(name, name);
         l->setFont(Font().withHeight(1));
         l->setColour(Label::ColourIds::textColourId, Colour(0xFF32EDD6));
+        l->setJustificationType(Justification::centred);
         addAndMakeVisible(l.get());
     };
     
@@ -148,7 +149,15 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
 
     notesLabel.setText("NOTES", NotificationType::dontSendNotification);
     addAndMakeVisible(notesLabel);
+
+    instLabel.setText("INSTRUMENT", dontSendNotification);
+    instLabel.setJustificationType(Justification::centred);
+    addAndMakeVisible(instLabel);
     
+    channelLabel.setText("CHANNEL", dontSendNotification);
+    channelLabel.setJustificationType(Justification::centred);
+    addAndMakeVisible(channelLabel);
+
     setValuesFromPlugin();
 
 }
@@ -221,7 +230,7 @@ void SequencerComponent::resized()
     area.setBounds(0, plotArea.getY(), getWidth() * .1, yDist);
     
     for (int i = 0; i < labels.size(); i++) {
-        labels[i]->setBounds(area.withSizeKeepingCentre(area.getWidth(), area.getHeight() * .75));
+        labels[i]->setBounds(area.withSizeKeepingCentre(area.getWidth(), area.getHeight() * .5));
         channelCombos[i].setBounds(area.translated(area.getWidth(), 0).withSizeKeepingCentre(area.getWidth() * .85, area.getHeight() * .5));
         area.translate(0, yDist);
     }
@@ -257,6 +266,14 @@ void SequencerComponent::resized()
     beatCountLabel.setBounds(barButtonGroupArea.translated(0, barButtonGroupArea.getHeight()).withSizeKeepingCentre(barButtonGroupArea.getWidth(), barButtonGroupArea.getHeight()));
     
     arrangeLabel.setBounds(Rectangle<int>(0, 0, plotArea.getX(), getHeight() * .15).withSizeKeepingCentre(plotArea.getX(), getHeight() * .05).withY(barButtonArea.getY()));
+    
+    
+    
+    instLabel.setBounds(labels[0]->getBounds().translated(0, -labels[0]->getHeight()).withHeight(labels[0]->getHeight()));
+    
+    channelLabel.setBounds(instLabel.getBounds().translated(instLabel.getWidth(), 0));
+
+
 }
 
 
@@ -350,7 +367,6 @@ void SequencerComponent::setSubDivision(NoteSequence::SubDivision s) {
 
 void SequencerComponent::setValuesFromPlugin() {
     double beatLength = 1.0 / (double)sequencer.getSubDivision();
-
     for (int i = 0; i < NUM_VOICES; i++) {
         for (double j = 0; j < 32; j++) {
             double beat = j * beatLength;

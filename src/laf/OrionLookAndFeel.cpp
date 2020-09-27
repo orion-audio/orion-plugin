@@ -183,7 +183,7 @@ void OrionLookAndFeel::drawTabButton (TabBarButton& button, Graphics& g, bool is
 
 Font OrionLookAndFeel::getLabelFont (Label &l)
 {
-    if (l.getProperties().contains(AutoLabel::propertyName))
+    if (l.getProperties().contains("STATIC_SIZE"))
         return Font();
     
     Font f;

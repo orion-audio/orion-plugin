@@ -101,6 +101,8 @@ private:
     Label notesLabel;
     Label barCountLabel;
     Label beatCountLabel;
+    Label instLabel;
+    Label channelLabel;
     
     ComboBox subdivisionCombo;
 

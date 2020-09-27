@@ -24,7 +24,8 @@ DocDir("Documents",DrawableButton::ButtonStyle::ImageFitted),
 HomDir("Home",DrawableButton::ButtonStyle::ImageFitted),
 UpBut("Up",DrawableButton::ImageOnButtonBackground),
 filebrowser(1|4|8|32,File::getSpecialLocation(File::SpecialLocationType::userHomeDirectory),nullptr,nullptr),
-mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001)
+mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMillisecondCounterHiRes()*0.001),
+tooltip(this, 400)
 {
     
     menuBar.reset(new OrionMenuBar(&p, this));
@@ -268,6 +269,8 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     //    };
     //    addAndMakeVisible(meterRight.get());
     
+    addAndMakeVisible(tooltip);
+    
 }
 
 
@@ -356,7 +359,7 @@ void OrionaudioAudioProcessorEditor::resized()
     primaryPane->setBounds(area);
     
     // ARRANGEMENT WINDOW
-    area = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 4 * unite);
+    area = Rectangle<int>(sidePanel->getWidth(), 3 * unite, getWidth() - sidePanel->getWidth(), getHeight() - 5 * unite);
     arrangementWindow->setBounds(area);
     
     

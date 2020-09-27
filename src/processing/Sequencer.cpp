@@ -49,13 +49,14 @@ void Sequencer::processBlock(AudioPlayHead* p, AudioBuffer<float> &buffer, MidiB
             
 void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &midiBuffer)
 {
+    
     // get current position
     AudioPlayHead::CurrentPositionInfo currentPos;
     playhead->getCurrentPosition(currentPos);
     if (!currentPos.isPlaying)
         return;
     long long posInSamples = currentPos.timeInSamples;
-    posInSamples %= NoteSequence::ppqToSamples(1, currentPos.bpm, lastSampleRate);
+    posInSamples %= NoteSequence::ppqToSamples(loopEnd, currentPos.bpm, lastSampleRate);
     double loopEndInSamples = NoteSequence::ppqToSamples(loopEnd, currentPos.bpm, lastSampleRate);
 
     for (int i = 0; i < 4; i++) {
@@ -74,10 +75,10 @@ void Sequencer::addToBufferIfNeeded(int which, int samplesPerBlock, MidiBuffer &
         auto notes = sequences[s]->getNotes();
 
         for (int i = 0; i < notes.size(); i++) {
-        int beatInSamples = NoteSequence::ppqToSamples(notes[i].startTime, currentPos.bpm, lastSampleRate);
+        int beatInSamples = NoteSequence::ppqToSamples(beatOffset + notes[i].startTime, currentPos.bpm, lastSampleRate);
         
         // check first beat
-        if (posInSamples + samplesPerBlock >= loopEndInSamples && posInSamples <= loopEndInSamples && notes[i].startTime == 0)
+        if (posInSamples + samplesPerBlock >= loopEndInSamples && posInSamples <= loopEndInSamples && notes[i].startTime + beatOffset == 0)
         {
             long long offset = loopEndInSamples - posInSamples;
             
