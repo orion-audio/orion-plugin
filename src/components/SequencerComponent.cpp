@@ -38,7 +38,7 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     lengthSlider->setColour(Slider::ColourIds::rotarySliderFillColourId, findColour(ColourIds::beatColourOffId));
     lengthSlider->setColour(Slider::ColourIds::backgroundColourId, Colours::white);
     
-    double beatLength = 1.0 / (double)sequencer.getSubDivision();
+    double beatLength = 1.0 / (double)sequencer.getSubDivision(currentSequence);
 
     auto noteButtonFn = [&] (int pitch, double beat) {
         sequencerButtons[pitch][beat].reset(new SequencerButton(NoteSequence::noteValues[pitch], beat * beatLength));
@@ -207,7 +207,7 @@ void SequencerComponent::paintBar(Graphics& g)
 
 void SequencerComponent::resized()
 {
-    double subdivision = sequencer.getSubDivision();
+    double subdivision = sequencer.getSubDivision(currentSequence);
     
     plotArea = getLocalBounds().removeFromRight(getWidth() * widthPerc);
     plotArea = plotArea.removeFromBottom(getHeight() * .85);
@@ -220,7 +220,7 @@ void SequencerComponent::resized()
     for (int i = 0; i < NUM_VOICES; i++) {
         for (int j = 0; j < 32; j++) {
             sequencerButtons[i][j]->setBounds(area.withSizeKeepingCentre(diameter * .5, diameter * .5));
-            sequencerButtons[i][j]->setVisible(j < sequencer.getSubDivision());
+            sequencerButtons[i][j]->setVisible(j < sequencer.getSubDivision(currentSequence));
             area.translate(xDist, 0);
         }
         area.setX(plotArea.getX());
@@ -236,7 +236,7 @@ void SequencerComponent::resized()
     }
     
     const int numSections = 4;
-    const int numBeats = int(sequencer.getSubDivision());
+    const int numBeats = int(sequencer.getSubDivision(currentSequence));
     const int numBeatsPerSection = numBeats / numSections;
     int barNum = 0;
     barLines[barNum] = Rectangle<int>(plotArea.getX(), plotArea.getY() - getHeight() * .025, 2, plotArea.getHeight());
@@ -295,7 +295,7 @@ void SequencerComponent::timerCallback()
     for (int i = 0; i < noteQueue->size(); i++) {
         int pitch = NoteSequence::noteValues.indexOf(noteQueue->front().pitch);
         double beat = noteQueue->front().startTime;
-        int index = qtils::map(beat, 0, 1, 0, sequencer.getSubDivision());
+        int index = qtils::map(beat, 0, 1, 0, sequencer.getSubDivision(currentSequence));
         sequencerButtons[pitch][index]->startAnimation();
         noteQueue->pop();
     }
@@ -315,7 +315,7 @@ void SequencerComponent::buttonClicked(Button* b)
         NoteSequence* sequence = sequencer.getNoteSequence(currentSequence);
         if (!sequence->checkAndRemoveNote(pitch, beat))
         {
-            sequence->addNote(Note(pitch, 100, beat, beat + (1.0 / sequencer.getSubDivision())));
+            sequence->addNote(Note(pitch, 100, beat, beat + (1.0 / sequencer.getSubDivision(currentSequence))));
         }
     }
 }
@@ -352,8 +352,8 @@ void SequencerComponent::sequenceLengthChanged(int newLength) {
 }
 
 void SequencerComponent::setSubDivision(NoteSequence::SubDivision s) {
-    sequencer.setSubDivision(s);
-    double beatLength = 1.0 / (double)sequencer.getSubDivision();
+    sequencer.setSubDivision(currentSequence, s);
+    double beatLength = 1.0 / (double)sequencer.getSubDivision(currentSequence);
 
     for (int i = 0; i < NUM_VOICES; i++) {
         for (double j = 0; j < 32; j++) {
@@ -366,7 +366,7 @@ void SequencerComponent::setSubDivision(NoteSequence::SubDivision s) {
 }
 
 void SequencerComponent::setValuesFromPlugin() {
-    double beatLength = 1.0 / (double)sequencer.getSubDivision();
+    double beatLength = 1.0 / (double)sequencer.getSubDivision(currentSequence);
     for (int i = 0; i < NUM_VOICES; i++) {
         for (double j = 0; j < 32; j++) {
             double beat = j * beatLength;
