@@ -20,6 +20,7 @@
       <FILE id="tfqxJy" name="OrionGlobalVars.h" compile="0" resource="0"
             file="src/OrionGlobalVars.h"/>
       <GROUP id="{E69628DD-29AF-BEA4-BD8B-5EF337C053E4}" name="components">
+        <FILE id="ZADLlY" name="BarButton.h" compile="0" resource="0" file="src/components/BarButton.h"/>
         <FILE id="DAA0Q6" name="DigitTransverter.h" compile="0" resource="0"
               file="src/components/DigitTransverter.h"/>
         <FILE id="bB4Z5b" name="AutoLabel.cpp" compile="1" resource="0" file="src/components/AutoLabel.cpp"/>
