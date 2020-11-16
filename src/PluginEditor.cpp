@@ -275,7 +275,11 @@ mainlist("main", dynamic_cast<ListBoxModel*> (&maindir)), startTime(Time::getMil
     //    };
     //    addAndMakeVisible(meterRight.get());
     
+    
+
 }
+
+
 
 
 
@@ -442,6 +446,13 @@ void OrionaudioAudioProcessorEditor::addMessageToList (const MidiMessage& messag
 void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabIndex, bool isDown)
 {
     //return;
+    DBG("---------");
+    //DBG(midiNote);
+    //DBG(tabIndex);
+    //DBG(isDown);
+    DBG("---------");
+    
+    
     if(isDown)
     {
         std::cout<<"                  "<<std::endl;
@@ -497,7 +508,24 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
         }
         else if(dropdownTabSerial == 1)//MARK:- Clip
         {
+            //------------ Set Slidervalues ----------------//
             
+            dropdownTable->clipConfiguration->initSEPointSlider(&startPointCoefficient[instrumetClickedSerial], &endPointCoefficient[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->setClipOnOffSwitchImage(clipOnOffSwitches[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->setImagerOnOffSwitchImage(imagerOnOffSwitches[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->setReverseSwitchImage(reverseSwitches[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->setimagerSwitchImage(imagerModeSwitches[instrumetClickedSerial]);
+            
+            dropdownTable->clipConfiguration->clipSaturationValueChange(clipSaturationCoefficient[instrumetClickedSerial]);
+            
+            dropdownTable->clipConfiguration->clipPitchKnobValueChange(clipPitchCoefficient[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->clipFineTuneKnobValueChange(clipFineTuneCoefficient[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->clipImagerSliderValueChange(imagerCoefficient[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->clipImagerSharpSliderValueChange(imagerSharpCoefficient[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->setReverseMode(reverseSwitches[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->setImagerMode(imagerModeSwitches[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->refreashImagerMeter();
+            dropdownTable->clipConfiguration->refreashClipMeter();
         }
         else if(dropdownTabSerial == 2)//MARK:- ENV
         {
@@ -723,6 +751,18 @@ void OrionaudioAudioProcessorEditor::updateDropDownClipState(bool newState)
         dropDownVisible = newState;
         dropdownTable->setVisible(dropDownVisible);//--!!!!!!!!!!!
         dropdownTabSerial = 1;
+        
+        
+        dropdownTable->clipConfiguration->setReverseSwitchImage(reverseSwitches[instrumetClickedSerial]);
+        dropdownTable->clipConfiguration->setimagerSwitchImage(imagerModeSwitches[instrumetClickedSerial]);
+        dropdownTable->clipConfiguration->clipImagerSliderValueChange(imagerCoefficient[instrumetClickedSerial]);
+        dropdownTable->clipConfiguration->clipImagerSharpSliderValueChange(imagerSharpCoefficient[instrumetClickedSerial]);
+        dropdownTable->clipConfiguration->setReverseMode(reverseSwitches[instrumetClickedSerial]);
+        dropdownTable->clipConfiguration->setImagerMode(imagerModeSwitches[instrumetClickedSerial]);
+        dropdownTable->clipConfiguration->refreashImagerMeter();
+        dropdownTable->clipConfiguration->refreashClipMeter();
+        
+        dropdownTable->clipConfiguration->initSEPointSlider(&startPointCoefficient[instrumetClickedSerial], &endPointCoefficient[instrumetClickedSerial]);
     }
     else
     {

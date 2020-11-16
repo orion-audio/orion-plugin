@@ -186,50 +186,7 @@ OrionEnvConfiguration::OrionEnvConfiguration(OrionaudioAudioProcessor& p, int se
 
 void OrionEnvConfiguration::paint (Graphics& g)
 {
-    //std::cout<<"paint ENV : "<<instrumetClickedSerial<<std::endl;
-    
-    
-    
-   // envbackground = new File(File::getSpecialLocation(File::globalApplicationsDirectory).getChildFile("Orion").getChildFile("OrionSampler").getChildFile("OrionSampler").getChildFile("Contents").getChildFile("Resources").getChildFile("skin").getChildFile("pictures").getChildFile("orionEnvBackground.png"));
-    /*
-    Image envbackground = ImageCache::getFromMemory(BinaryData::orionEnvBackground_png, BinaryData::orionEnvBackground_pngSize);
-  
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-    RectanglePlacement orionBackgroundRectanglePlacement(64);
-    g.drawImageWithin(envbackground, 0, 0,OrionGlobalWidth,OrionGlobalHeight/3/11*10,orionBackgroundRectanglePlacement,false);
-    */
-    
 
-    //paint vertical lines
-    
-    
-    
-//    g.setFont (12.0f);
-//    g.setColour (Colours::silver);
-//    g.drawRoundedRectangle (plotFrame.toFloat(), 5, 2);
-//    for (int i=0; i < 40; ++i)
-//    {
-//        g.setColour (Colours::silver.withAlpha (0.3f));
-//        auto x = plotFrame.getX() + plotFrame.getWidth() * i * 0.025f;
-//        //std::cout<<"where are you plotting "<<x<<"\n";
-//        if (i > 0) g.drawVerticalLine (roundToInt (x), plotFrame.getY(), plotFrame.getBottom());
-//        /*
-//        g.setColour (Colours::silver);
-//        auto freq = getFrequencyForPosition (i * 0.025f);
-//        if(abs(round(freq) - freq) < 0.000000000000001){
-//            g.drawFittedText ((freq < 1000) ? String (freq) + " Hz" : String (freq / 1000, 1) + " kHz",
-//                              roundToInt (x + 3), getHeight()/20, 50, 15, Justification::left, 1);
-//        }
-//         */
-//        
-//    }
-    
-    
-    //******** for the horizontal lines *************
-    //g.setColour (Colours::silver.withAlpha (0.3f));
-    //g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.25 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
-    //g.drawHorizontalLine (roundToInt (plotFrame.getY() + 0.75 * plotFrame.getHeight()), plotFrame.getX(), plotFrame.getRight());
-    //g.setColour (Colours::silver);
 }
 
 void OrionEnvConfiguration::resized()

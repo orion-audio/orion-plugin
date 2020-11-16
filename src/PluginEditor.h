@@ -65,7 +65,7 @@ public:
     void drumButtonClicked(int midiNote, int tabIndex, bool isDown);
 
     void toggleArrangmentWindow(bool windowVisible);
-    
+  
     bool getDropdownVisible();
     
     ComponentBoundsConstrainer constrainer;

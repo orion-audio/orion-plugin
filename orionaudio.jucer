@@ -7,328 +7,431 @@
               displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{7972F1E0-9D9D-922F-3576-753B71DD33A4}" name="src">
-      <FILE id="wj17AJ" name="MirrorViews.h" compile="0" resource="0" file="src/MirrorViews.h"/>
-      <FILE id="KwbrE2" name="GlobalCoefficients.h" compile="0" resource="0"
-            file="src/GlobalCoefficients.h"/>
-      <FILE id="DcItTp" name="PluginEditor.h" compile="0" resource="0" file="src/PluginEditor.h"/>
-      <FILE id="Daobh9" name="PluginEditor.cpp" compile="1" resource="0"
-            file="src/PluginEditor.cpp"/>
-      <FILE id="Vh7RVj" name="PluginProcessor.h" compile="0" resource="0"
-            file="src/PluginProcessor.h"/>
-      <FILE id="dBzPp3" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="src/PluginProcessor.cpp"/>
-      <FILE id="tfqxJy" name="OrionGlobalVars.h" compile="0" resource="0"
-            file="src/OrionGlobalVars.h"/>
-      <GROUP id="{E69628DD-29AF-BEA4-BD8B-5EF337C053E4}" name="components">
-        <FILE id="DAA0Q6" name="DigitTransverter.h" compile="0" resource="0"
-              file="src/components/DigitTransverter.h"/>
-        <FILE id="bB4Z5b" name="AutoLabel.cpp" compile="1" resource="0" file="src/components/AutoLabel.cpp"/>
-        <FILE id="bMrCgv" name="AutoLabel.h" compile="0" resource="0" file="src/components/AutoLabel.h"/>
-        <FILE id="kVx7FJ" name="CircularMeter.cpp" compile="1" resource="0"
+      <GROUP id="{84899CBE-90A2-AE76-E23F-B80F68DAC29C}" name="components">
+        <FILE id="HId9tK" name="AutoLabel.cpp" compile="1" resource="0" file="src/components/AutoLabel.cpp"/>
+        <FILE id="P0ai3x" name="AutoLabel.h" compile="0" resource="0" file="src/components/AutoLabel.h"/>
+        <FILE id="k3TpUU" name="CircularMeter.cpp" compile="1" resource="0"
               file="src/components/CircularMeter.cpp"/>
-        <FILE id="gQcOjf" name="CircularMeter.h" compile="0" resource="0" file="src/components/CircularMeter.h"/>
-        <FILE id="h5m7qJ" name="ThresholdMeter.cpp" compile="1" resource="0"
-              file="src/components/ThresholdMeter.cpp"/>
-        <FILE id="HMn96K" name="ThresholdMeter.h" compile="0" resource="0"
-              file="src/components/ThresholdMeter.h"/>
-        <FILE id="Hsf5WP" name="FXComboBox.cpp" compile="1" resource="0" file="src/components/FXComboBox.cpp"/>
-        <FILE id="dxtyES" name="FXComboBox.h" compile="0" resource="0" file="src/components/FXComboBox.h"/>
-        <FILE id="OiWt8t" name="CompressorSidechainSelectWindow.cpp" compile="1"
-              resource="0" file="src/components/CompressorSidechainSelectWindow.cpp"/>
-        <FILE id="lIZJjY" name="CompressorSidechainSelectWindow.h" compile="0"
-              resource="0" file="src/components/CompressorSidechainSelectWindow.h"/>
-        <FILE id="PlwFs0" name="CompressorMeter.cpp" compile="1" resource="0"
+        <FILE id="heEkaw" name="CircularMeter.h" compile="0" resource="0" file="src/components/CircularMeter.h"/>
+        <FILE id="bWrDrR" name="ClipMeter.cpp" compile="1" resource="0" file="src/components/ClipMeter.cpp"/>
+        <FILE id="SllZnW" name="ClipMeter.h" compile="0" resource="0" file="src/components/ClipMeter.h"/>
+        <FILE id="fRSaSJ" name="DoubleThumbSlider.cpp" compile="1" resource="0"
+              file="src/components/DoubleThumbSlider.cpp"/>
+        <FILE id="p0wHiw" name="DoubleThumbSlider.h" compile="0" resource="0"
+              file="src/components/DoubleThumbSlider.h"/>
+        <FILE id="haOmBH" name="CompressorMeter.cpp" compile="1" resource="0"
               file="src/components/CompressorMeter.cpp"/>
-        <FILE id="T7I8gU" name="CompressorMeter.h" compile="0" resource="0"
+        <FILE id="flFGem" name="CompressorMeter.h" compile="0" resource="0"
               file="src/components/CompressorMeter.h"/>
-        <FILE id="ZSHv01" name="EnvelopeMeter.cpp" compile="1" resource="0"
-              file="src/components/EnvelopeMeter.cpp"/>
-        <FILE id="tukfj6" name="EnvelopeMeter.h" compile="0" resource="0" file="src/components/EnvelopeMeter.h"/>
-        <FILE id="LFNeJv" name="DragAndDropButton.h" compile="0" resource="0"
+        <FILE id="zv4Ca5" name="CompressorSidechainSelectWindow.cpp" compile="1"
+              resource="0" file="src/components/CompressorSidechainSelectWindow.cpp"/>
+        <FILE id="sjgbyW" name="CompressorSidechainSelectWindow.h" compile="0"
+              resource="0" file="src/components/CompressorSidechainSelectWindow.h"/>
+        <FILE id="xZt8jr" name="DigitTransverter.h" compile="0" resource="0"
+              file="src/components/DigitTransverter.h"/>
+        <FILE id="gjkNEB" name="DragAndDropButton.h" compile="0" resource="0"
               file="src/components/DragAndDropButton.h"/>
-        <FILE id="L8fFgn" name="DraggableFileBrowserComponent.cpp" compile="1"
+        <FILE id="FjnNtt" name="DraggableFileBrowserComponent.cpp" compile="1"
               resource="0" file="src/components/DraggableFileBrowserComponent.cpp"/>
-        <FILE id="hUzLdN" name="DraggableFileBrowserComponent.h" compile="0"
+        <FILE id="FROJGa" name="DraggableFileBrowserComponent.h" compile="0"
               resource="0" file="src/components/DraggableFileBrowserComponent.h"/>
-        <FILE id="CZTgNL" name="FileComponent.cpp" compile="1" resource="0"
+        <FILE id="hMMjw2" name="DropdownTable.cpp" compile="1" resource="0"
+              file="src/components/DropdownTable.cpp"/>
+        <FILE id="LKwKGP" name="DropdownTable.h" compile="0" resource="0" file="src/components/DropdownTable.h"/>
+        <FILE id="bWgKZJ" name="EnvelopeMeter.cpp" compile="1" resource="0"
+              file="src/components/EnvelopeMeter.cpp"/>
+        <FILE id="ugaRqJ" name="EnvelopeMeter.h" compile="0" resource="0" file="src/components/EnvelopeMeter.h"/>
+        <FILE id="nSEk2Y" name="FileComponent.cpp" compile="1" resource="0"
               file="src/components/FileComponent.cpp"/>
-        <FILE id="HDtwoH" name="FileComponent.h" compile="0" resource="0" file="src/components/FileComponent.h"/>
-        <FILE id="Ewe93L" name="OrionBrowser.h" compile="0" resource="0" file="src/components/OrionBrowser.h"/>
-        <FILE id="SI3guT" name="OrionButton.h" compile="0" resource="0" file="src/components/OrionButton.h"/>
-        <FILE id="oggNbr" name="OrionFileBrowser.h" compile="0" resource="0"
+        <FILE id="VL4dhP" name="FileComponent.h" compile="0" resource="0" file="src/components/FileComponent.h"/>
+        <FILE id="dSK7dp" name="FXComboBox.cpp" compile="1" resource="0" file="src/components/FXComboBox.cpp"/>
+        <FILE id="APDQ53" name="FXComboBox.h" compile="0" resource="0" file="src/components/FXComboBox.h"/>
+        <FILE id="JS0d00" name="ImagerMeter.cpp" compile="1" resource="0" file="src/components/ImagerMeter.cpp"/>
+        <FILE id="XNaUJw" name="ImagerMeter.h" compile="0" resource="0" file="src/components/ImagerMeter.h"/>
+        <FILE id="nqSdse" name="OrionBrowser.h" compile="0" resource="0" file="src/components/OrionBrowser.h"/>
+        <FILE id="IdRSFw" name="OrionButton.h" compile="0" resource="0" file="src/components/OrionButton.h"/>
+        <FILE id="ZuwmTW" name="OrionClipConfiguration.cpp" compile="1" resource="0"
+              file="src/components/OrionClipConfiguration.cpp"/>
+        <FILE id="dK1LOO" name="OrionClipConfiguration.h" compile="0" resource="0"
+              file="src/components/OrionClipConfiguration.h"/>
+        <FILE id="ZfbV6D" name="OrionEffectComp.cpp" compile="1" resource="0"
+              file="src/components/OrionEffectComp.cpp"/>
+        <FILE id="PrMa3h" name="OrionEffectComp.h" compile="0" resource="0"
+              file="src/components/OrionEffectComp.h"/>
+        <FILE id="QMNriq" name="OrionEffectDelay.cpp" compile="1" resource="0"
+              file="src/components/OrionEffectDelay.cpp"/>
+        <FILE id="rMUyd2" name="OrionEffectDelay.h" compile="0" resource="0"
+              file="src/components/OrionEffectDelay.h"/>
+        <FILE id="ttn7S9" name="OrionEffectReverb.cpp" compile="1" resource="0"
+              file="src/components/OrionEffectReverb.cpp"/>
+        <FILE id="mBYJGl" name="OrionEffectReverb.h" compile="0" resource="0"
+              file="src/components/OrionEffectReverb.h"/>
+        <FILE id="W7bwVl" name="OrionEffectsConfiguration.cpp" compile="1"
+              resource="0" file="src/components/OrionEffectsConfiguration.cpp"/>
+        <FILE id="gv08h2" name="OrionEffectsConfiguration.h" compile="0" resource="0"
+              file="src/components/OrionEffectsConfiguration.h"/>
+        <FILE id="dm0IwR" name="OrionEnvConfiguration.cpp" compile="1" resource="0"
+              file="src/components/OrionEnvConfiguration.cpp"/>
+        <FILE id="mq0Spq" name="OrionEnvConfiguration.h" compile="0" resource="0"
+              file="src/components/OrionEnvConfiguration.h"/>
+        <FILE id="FnSH0J" name="OrionEQConfiguration.cpp" compile="1" resource="0"
+              file="src/components/OrionEQConfiguration.cpp"/>
+        <FILE id="IZ82VW" name="OrionEQConfiguration.h" compile="0" resource="0"
+              file="src/components/OrionEQConfiguration.h"/>
+        <FILE id="GfESlb" name="OrionFileBrowser.h" compile="0" resource="0"
               file="src/components/OrionFileBrowser.h"/>
-        <FILE id="DuckEc" name="OrionFileTreeComponent.h" compile="0" resource="0"
+        <FILE id="ji9Qj8" name="OrionFileTreeComponent.h" compile="0" resource="0"
               file="src/components/OrionFileTreeComponent.h"/>
-        <FILE id="Vp3fWr" name="Orionlist.h" compile="0" resource="0" file="src/components/Orionlist.h"/>
-        <FILE id="IrHUxs" name="OrionResizableCornerComponent.h" compile="0"
+        <FILE id="a3bbM7" name="Orionlist.h" compile="0" resource="0" file="src/components/Orionlist.h"/>
+        <FILE id="SxsEUd" name="OrionResizableCornerComponent.h" compile="0"
               resource="0" file="src/components/OrionResizableCornerComponent.h"/>
-        <FILE id="Ae9THI" name="OrionRotarySlider.h" compile="0" resource="0"
+        <FILE id="iRPugc" name="OrionRotarySlider.h" compile="0" resource="0"
               file="src/components/OrionRotarySlider.h"/>
-        <FILE id="T1DMMw" name="OrionTabButton.h" compile="0" resource="0"
+        <FILE id="gE6105" name="OrionTabButton.h" compile="0" resource="0"
               file="src/components/OrionTabButton.h"/>
-        <FILE id="lMuKXJ" name="ResizableContainer.h" compile="0" resource="0"
+        <FILE id="rouilJ" name="OrionTabComponent.cpp" compile="1" resource="0"
+              file="src/components/OrionTabComponent.cpp"/>
+        <FILE id="NMAerx" name="OrionTabComponent.h" compile="0" resource="0"
+              file="src/components/OrionTabComponent.h"/>
+        <FILE id="nx9y8g" name="ResizableContainer.h" compile="0" resource="0"
               file="src/components/ResizableContainer.h"/>
-        <FILE id="JQfR69" name="SequencerButton.cpp" compile="1" resource="0"
+        <FILE id="YxS4HV" name="SequencerButton.cpp" compile="1" resource="0"
               file="src/components/SequencerButton.cpp"/>
-        <FILE id="QjcMhA" name="SequencerButton.h" compile="0" resource="0"
+        <FILE id="hy1czz" name="SequencerButton.h" compile="0" resource="0"
               file="src/components/SequencerButton.h"/>
-        <FILE id="GqnPjP" name="SequencerComponent.cpp" compile="1" resource="0"
+        <FILE id="D9cG7r" name="SequencerComponent.cpp" compile="1" resource="0"
               file="src/components/SequencerComponent.cpp"/>
-        <FILE id="wmHqrd" name="SequencerComponent.h" compile="0" resource="0"
+        <FILE id="tF48AF" name="SequencerComponent.h" compile="0" resource="0"
               file="src/components/SequencerComponent.h"/>
-        <FILE id="CSqTRN" name="SequencerRow.cpp" compile="1" resource="0"
+        <FILE id="Lut3FI" name="SequencerRow.cpp" compile="1" resource="0"
               file="src/components/SequencerRow.cpp"/>
-        <FILE id="cABzS4" name="SequencerRow.h" compile="0" resource="0" file="src/components/SequencerRow.h"/>
-        <FILE id="iHmAZ3" name="WaveWiggle.h" compile="0" resource="0" file="src/components/WaveWiggle.h"/>
+        <FILE id="RN4wLN" name="SequencerRow.h" compile="0" resource="0" file="src/components/SequencerRow.h"/>
+        <FILE id="R9GOo4" name="TabComponentHolder.h" compile="0" resource="0"
+              file="src/components/TabComponentHolder.h"/>
+        <FILE id="mCEVYZ" name="ThresholdMeter.cpp" compile="1" resource="0"
+              file="src/components/ThresholdMeter.cpp"/>
+        <FILE id="lYy9E1" name="ThresholdMeter.h" compile="0" resource="0"
+              file="src/components/ThresholdMeter.h"/>
+        <FILE id="LZ9xln" name="WaveWiggle.h" compile="0" resource="0" file="src/components/WaveWiggle.h"/>
       </GROUP>
-      <GROUP id="{C90706FB-6F20-E32A-8194-918D7D2D9DB0}" name="laf">
-        <FILE id="KmwaIf" name="LookAndFeelHolder.h" compile="0" resource="0"
+      <GROUP id="{1DCCC709-E668-51CE-65E3-E504B9472D4F}" name="laf">
+        <FILE id="kV6HaV" name="LookAndFeelHolder.h" compile="0" resource="0"
               file="src/laf/LookAndFeelHolder.h"/>
-        <FILE id="NS8fSr" name="OrionLookAndFeel.cpp" compile="1" resource="0"
+        <FILE id="nAIv2T" name="OrionLookAndFeel.cpp" compile="1" resource="0"
               file="src/laf/OrionLookAndFeel.cpp"/>
-        <FILE id="iQLbSi" name="OrionLookAndFeel.h" compile="0" resource="0"
+        <FILE id="t6XGsN" name="OrionLookAndFeel.h" compile="0" resource="0"
               file="src/laf/OrionLookAndFeel.h"/>
       </GROUP>
-      <GROUP id="{3B2C7590-E156-3526-ECDD-16B82017EE50}" name="processing">
-        <FILE id="IVe8Tu" name="Analyser.h" compile="0" resource="0" file="src/processing/Analyser.h"/>
-        <FILE id="PE2Kfu" name="compressor.h" compile="0" resource="0" file="src/processing/compressor.h"/>
-        <FILE id="v1QShz" name="delay.h" compile="0" resource="0" file="src/processing/delay.h"/>
-        <FILE id="cpdWAp" name="Envelope.cpp" compile="1" resource="0" file="src/processing/Envelope.cpp"/>
-        <FILE id="u35iTv" name="Envelope.h" compile="0" resource="0" file="src/processing/Envelope.h"/>
-        <FILE id="c6OR9q" name="EQ.h" compile="0" resource="0" file="src/processing/EQ.h"/>
-        <FILE id="Z0BSCF" name="Note.h" compile="0" resource="0" file="src/processing/Note.h"/>
-        <FILE id="F1UQSC" name="NoteSequence.cpp" compile="1" resource="0"
+      <GROUP id="{8AD85421-9959-3298-6A7A-0E1655FB1ACE}" name="processing">
+        <FILE id="PgpM29" name="Analyser.h" compile="0" resource="0" file="src/processing/Analyser.h"/>
+        <FILE id="AEXPSl" name="compressor.h" compile="0" resource="0" file="src/processing/compressor.h"/>
+        <FILE id="g3uJDX" name="delay.h" compile="0" resource="0" file="src/processing/delay.h"/>
+        <FILE id="fKlJ96" name="Envelope.cpp" compile="1" resource="0" file="src/processing/Envelope.cpp"/>
+        <FILE id="NagDHf" name="Envelope.h" compile="0" resource="0" file="src/processing/Envelope.h"/>
+        <FILE id="sgN8hh" name="EQ.h" compile="0" resource="0" file="src/processing/EQ.h"/>
+        <FILE id="Vu5dfB" name="Note.h" compile="0" resource="0" file="src/processing/Note.h"/>
+        <FILE id="Vc1ERZ" name="NoteSequence.cpp" compile="1" resource="0"
               file="src/processing/NoteSequence.cpp"/>
-        <FILE id="l24Afe" name="NoteSequence.h" compile="0" resource="0" file="src/processing/NoteSequence.h"/>
-        <FILE id="z2zA3O" name="OrionSamplerSound.h" compile="0" resource="0"
+        <FILE id="EtIj9Q" name="NoteSequence.h" compile="0" resource="0" file="src/processing/NoteSequence.h"/>
+        <FILE id="WaRipN" name="OrionSamplerSound.h" compile="0" resource="0"
               file="src/processing/OrionSamplerSound.h"/>
-        <FILE id="NqfzZe" name="OrionSamplerVoice.h" compile="0" resource="0"
+        <FILE id="qm2mhW" name="OrionSamplerVoice.h" compile="0" resource="0"
               file="src/processing/OrionSamplerVoice.h"/>
-        <FILE id="HO5ATj" name="panpos.h" compile="0" resource="0" file="src/processing/panpos.h"/>
-        <FILE id="Z6tUDv" name="Sequencer.cpp" compile="1" resource="0" file="src/processing/Sequencer.cpp"/>
-        <FILE id="nkLcHB" name="Sequencer.h" compile="0" resource="0" file="src/processing/Sequencer.h"/>
-        <FILE id="ILio9R" name="SimpleSynth.cpp" compile="1" resource="0" file="src/processing/SimpleSynth.cpp"/>
-        <FILE id="WUgXVh" name="SimpleSynth.h" compile="0" resource="0" file="src/processing/SimpleSynth.h"/>
+        <FILE id="lmMVpa" name="panpos.h" compile="0" resource="0" file="src/processing/panpos.h"/>
+        <FILE id="ZxLNJd" name="Sequencer.cpp" compile="1" resource="0" file="src/processing/Sequencer.cpp"/>
+        <FILE id="QJeMuZ" name="Sequencer.h" compile="0" resource="0" file="src/processing/Sequencer.h"/>
+        <FILE id="hLUFMg" name="SimpleSynth.cpp" compile="1" resource="0" file="src/processing/SimpleSynth.cpp"/>
+        <FILE id="w22idp" name="SimpleSynth.h" compile="0" resource="0" file="src/processing/SimpleSynth.h"/>
       </GROUP>
-      <GROUP id="{9408544A-B7A7-8B71-01CB-59D24DC2F678}" name="subviews">
-        <FILE id="AxDCkU" name="OrionInstrumentView.cpp" compile="1" resource="0"
-              file="src/subviews/OrionInstrumentView.cpp"/>
-        <FILE id="RBTrTt" name="OrionInstrumentView.h" compile="0" resource="0"
-              file="src/subviews/OrionInstrumentView.h"/>
-        <FILE id="hOkFjz" name="ArrangementWindowComponent.h" compile="0" resource="0"
-              file="src/subviews/ArrangementWindowComponent.h"/>
-        <FILE id="WuGQvx" name="ArrangementWindowComponent.cpp" compile="1"
+      <GROUP id="{DB88CE35-38FF-58B3-15C3-C9788E771707}" name="subviews">
+        <FILE id="tVEXhp" name="ArrangementWindowComponent.cpp" compile="1"
               resource="0" file="src/subviews/ArrangementWindowComponent.cpp"/>
-        <FILE id="ee1pJe" name="OrionMenuBar.h" compile="0" resource="0" file="src/subviews/OrionMenuBar.h"/>
-        <FILE id="GcTBjE" name="OrionMenuBar.cpp" compile="1" resource="0"
+        <FILE id="P2rt5Z" name="ArrangementWindowComponent.h" compile="0" resource="0"
+              file="src/subviews/ArrangementWindowComponent.h"/>
+        <FILE id="ETA2G6" name="OrionInstrumentView.cpp" compile="1" resource="0"
+              file="src/subviews/OrionInstrumentView.cpp"/>
+        <FILE id="j47KlQ" name="OrionInstrumentView.h" compile="0" resource="0"
+              file="src/subviews/OrionInstrumentView.h"/>
+        <FILE id="W6G6WQ" name="OrionMenuBar.cpp" compile="1" resource="0"
               file="src/subviews/OrionMenuBar.cpp"/>
-        <FILE id="Ekmnvy" name="SidePanelComponent.h" compile="0" resource="0"
-              file="src/subviews/SidePanelComponent.h"/>
-        <FILE id="G1sjES" name="SidePanelComponent.cpp" compile="1" resource="0"
-              file="src/subviews/SidePanelComponent.cpp"/>
-        <FILE id="ekzd2f" name="PrimaryPaneComponent.h" compile="0" resource="0"
-              file="src/subviews/PrimaryPaneComponent.h"/>
-        <FILE id="uMNzri" name="PrimaryPaneComponent.cpp" compile="1" resource="0"
+        <FILE id="xVEQrR" name="OrionMenuBar.h" compile="0" resource="0" file="src/subviews/OrionMenuBar.h"/>
+        <FILE id="PmdLjh" name="PrimaryPaneComponent.cpp" compile="1" resource="0"
               file="src/subviews/PrimaryPaneComponent.cpp"/>
-        <GROUP id="{A4FAFCDF-D4A8-CFFE-1BBC-8EA5D011C6AB}" name="dropdown">
-          <FILE id="FChOEh" name="DropdownTable.cpp" compile="1" resource="0"
-                file="src/components/DropdownTable.cpp"/>
-          <FILE id="MTl7hz" name="DropdownTable.h" compile="0" resource="0" file="src/components/DropdownTable.h"/>
-          <FILE id="r2aXt8" name="TabComponentHolder.h" compile="0" resource="0"
-                file="src/components/TabComponentHolder.h"/>
-          <FILE id="csNh2M" name="OrionTabComponent.h" compile="0" resource="0"
-                file="src/components/OrionTabComponent.h"/>
-          <FILE id="RTYdbu" name="OrionTabComponent.cpp" compile="1" resource="0"
-                file="src/components/OrionTabComponent.cpp"/>
-          <FILE id="vtvxEx" name="OrionEQConfiguration.h" compile="0" resource="0"
-                file="src/components/OrionEQConfiguration.h"/>
-          <FILE id="cbs8Ml" name="OrionEQConfiguration.cpp" compile="1" resource="0"
-                file="src/components/OrionEQConfiguration.cpp"/>
-          <FILE id="ErIrex" name="OrionEnvConfiguration.h" compile="0" resource="0"
-                file="src/components/OrionEnvConfiguration.h"/>
-          <FILE id="igJ6pM" name="OrionEnvConfiguration.cpp" compile="1" resource="0"
-                file="src/components/OrionEnvConfiguration.cpp"/>
-          <FILE id="UotE1D" name="OrionClipConfiguration.h" compile="0" resource="0"
-                file="src/components/OrionClipConfiguration.h"/>
-          <FILE id="mDY8BU" name="OrionClipConfiguration.cpp" compile="1" resource="0"
-                file="src/components/OrionClipConfiguration.cpp"/>
-          <FILE id="X1xeDc" name="OrionEffectsConfiguration.h" compile="0" resource="0"
-                file="src/components/OrionEffectsConfiguration.h"/>
-          <FILE id="V9QYjn" name="OrionEffectsConfiguration.cpp" compile="1"
-                resource="0" file="src/components/OrionEffectsConfiguration.cpp"/>
-          <GROUP id="{E405DB40-F673-2C5B-99F1-D1853DE29BE9}" name="FX">
-            <FILE id="Rg8O4I" name="OrionEffectComp.cpp" compile="1" resource="0"
-                  file="src/components/OrionEffectComp.cpp"/>
-            <FILE id="CvWsUl" name="OrionEffectComp.h" compile="0" resource="0"
-                  file="src/components/OrionEffectComp.h"/>
-            <FILE id="AxHHQj" name="OrionEffectReverb.cpp" compile="1" resource="0"
-                  file="src/components/OrionEffectReverb.cpp"/>
-            <FILE id="GSJvfm" name="OrionEffectReverb.h" compile="0" resource="0"
-                  file="src/components/OrionEffectReverb.h"/>
-            <FILE id="U6DDHq" name="OrionEffectDelay.cpp" compile="1" resource="0"
-                  file="src/components/OrionEffectDelay.cpp"/>
-            <FILE id="KSxizx" name="OrionEffectDelay.h" compile="0" resource="0"
-                  file="src/components/OrionEffectDelay.h"/>
-          </GROUP>
-        </GROUP>
+        <FILE id="CTwpfX" name="PrimaryPaneComponent.h" compile="0" resource="0"
+              file="src/subviews/PrimaryPaneComponent.h"/>
+        <FILE id="iKW1xL" name="SidePanelComponent.cpp" compile="1" resource="0"
+              file="src/subviews/SidePanelComponent.cpp"/>
+        <FILE id="fvkypL" name="SidePanelComponent.h" compile="0" resource="0"
+              file="src/subviews/SidePanelComponent.h"/>
       </GROUP>
-      <GROUP id="{F60B614E-5A25-D666-60DF-B13BA57AD93A}" name="util">
-        <FILE id="ef7064" name="qtils.cpp" compile="1" resource="0" file="src/util/qtils.cpp"/>
-        <FILE id="VvYKhP" name="qtils.h" compile="0" resource="0" file="src/util/qtils.h"/>
+      <GROUP id="{12FF4F91-BFFC-AA85-08A9-61611DC8A8E4}" name="util">
+        <FILE id="xPW8MF" name="qtils.cpp" compile="1" resource="0" file="src/util/qtils.cpp"/>
+        <FILE id="o33KH7" name="qtils.h" compile="0" resource="0" file="src/util/qtils.h"/>
       </GROUP>
+      <FILE id="TNjd2i" name="GlobalCoefficients.h" compile="0" resource="0"
+            file="src/GlobalCoefficients.h"/>
+      <FILE id="GqzZH4" name="MirrorViews.h" compile="0" resource="0" file="src/MirrorViews.h"/>
+      <FILE id="IevVrK" name="OrionGlobalVars.h" compile="0" resource="0"
+            file="src/OrionGlobalVars.h"/>
+      <FILE id="EPznbR" name="PluginEditor.cpp" compile="1" resource="0"
+            file="src/PluginEditor.cpp"/>
+      <FILE id="MaF990" name="PluginEditor.h" compile="0" resource="0" file="src/PluginEditor.h"/>
+      <FILE id="cNc1SY" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="src/PluginProcessor.cpp"/>
+      <FILE id="JVhGXX" name="PluginProcessor.h" compile="0" resource="0"
+            file="src/PluginProcessor.h"/>
     </GROUP>
-    <GROUP id="{7A6553AB-6E6B-EA2D-75C7-9554276FF724}" name="assets">
-      <GROUP id="{B8F62692-B69C-B69B-E117-F99A372E475A}" name="graphics">
-        <GROUP id="{EF230E58-F26B-EB18-D136-98D3BF714CE3}" name="resizeButton">
-          <FILE id="NZzWSk" name="ResizeOff.png" compile="0" resource="1" file="assets/graphics/ResizeButton/ResizeOff.png"/>
-          <FILE id="GwGPXj" name="ResizeOn.png" compile="0" resource="1" file="assets/graphics/ResizeButton/ResizeOn.png"/>
+    <GROUP id="{3F5A8D5F-A725-27F3-EAF5-C62FC9F1D477}" name="orion-plugin-assets">
+      <GROUP id="{68079D5A-30F1-AFBB-B28E-461E2AE22826}" name="graphics">
+        <GROUP id="{0AAD1663-9BFA-CA52-1646-EDE3C77AD8B3}" name="1x">
+          <FILE id="xcNxoE" name="background.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/1x/background.png"/>
         </GROUP>
-        <GROUP id="{834A6700-4659-B839-FD14-CFDAC2E37681}" name="arrows">
-          <FILE id="Vxn1pc" name="arrow_downOn.png" compile="0" resource="1"
-                file="assets/graphics/primaryPane/arrows/arrow_downOn.png"/>
-          <FILE id="keCXSL" name="arrow_left.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_left.png"/>
-          <FILE id="RBflzW" name="arrow_leftOn.png" compile="0" resource="1"
-                file="assets/graphics/primaryPane/arrows/arrow_leftOn.png"/>
-          <FILE id="jAsaAf" name="arrow_right.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_right.png"/>
-          <FILE id="HCUTpk" name="arrow_rightOn.png" compile="0" resource="1"
-                file="assets/graphics/primaryPane/arrows/arrow_rightOn.png"/>
-          <FILE id="e56Cb3" name="arrow_upOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_upOn.png"/>
-          <FILE id="WDyAxU" name="arrow_down.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_down.png"/>
-          <FILE id="QsXHPH" name="arrow_up.png" compile="0" resource="1" file="assets/graphics/primaryPane/arrows/arrow_up.png"/>
-        </GROUP>
-        <GROUP id="{A5B9F44F-D618-CD65-DCB3-FCD06889DA74}" name="sidePanel">
-          <GROUP id="{EA94EC5C-14D1-0F22-D1FB-6BC288246666}" name="indicateButton">
-            <FILE id="qYDGvV" name="dirBackOff.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
-            <FILE id="scqVlY" name="dirBackOn.png" compile="0" resource="1" file="assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
-            <FILE id="zdgShj" name="dirForwardOff.png" compile="0" resource="1"
-                  file="assets/graphics/sidePanel/indicateButton/dirForwardOff.png"/>
-            <FILE id="bTbkAb" name="dirForwardOn.png" compile="0" resource="1"
-                  file="assets/graphics/sidePanel/indicateButton/dirForwardOn.png"/>
+        <GROUP id="{A6C683E4-62EE-72BD-3B17-6DAB29AC74A7}" name="dropdown">
+          <GROUP id="{78BDBFCA-514C-5AEB-EAB5-9A43D2F2E82E}" name="dropdownBackgrounds">
+            <FILE id="apntW1" name="clipBackground.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/clipBackground.png"/>
+            <FILE id="ywu3mo" name="ENVBackground.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/ENVBackground.png"/>
+            <FILE id="SDXGaQ" name="EQBackground.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/EQBackground.png"/>
+            <FILE id="z94Bm9" name="FXBackground.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/FXBackground.png"/>
           </GROUP>
-          <GROUP id="{FEEA064F-2287-A81C-A93B-58995064039C}" name="icons">
-            <FILE id="RJh3aX" name="folder_On.png" compile="0" resource="1" file="assets/graphics/sidePanel/icons/folder_On.png"/>
-            <FILE id="tR38kI" name="folder_Off.png" compile="0" resource="1" file="assets/graphics/sidePanel/icons/folder_Off.png"/>
-          </GROUP>
-          <FILE id="trPDMz" name="sidePanelBackground.png" compile="0" resource="1"
-                file="assets/graphics/sidePanel/sidePanelBackground.png"/>
-          <FILE id="JugQyc" name="logo.png" compile="0" resource="1" file="assets/graphics/sidePanel/logo.png"/>
-        </GROUP>
-        <GROUP id="{B74DE6F3-E717-806A-956B-7975BA656720}" name="menuBar">
-          <FILE id="rO09Qq" name="a.png" compile="0" resource="1" file="assets/graphics/a.png"/>
-          <FILE id="NKBuef" name="a_button.png" compile="0" resource="1" file="assets/graphics/a_button.png"/>
-        </GROUP>
-        <GROUP id="{72F10338-F3B8-5B05-6B5F-1DACD9B97E53}" name="primaryPane">
-          <FILE id="Mm4LLu" name="PrimaryPane_Footer.png" compile="0" resource="1"
-                file="assets/graphics/primaryPane/PrimaryPane_Footer.png"/>
-          <FILE id="XDcPxI" name="PrimaryBackground.svg" compile="0" resource="1"
-                file="assets/graphics/primaryPane/PrimaryBackground.svg"/>
-          <GROUP id="{90B3EBFC-0C8A-3367-A73C-9CF0AC76F6CD}" name="soloButton">
-            <FILE id="sOXwBg" name="SoloOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/soloButton/SoloOff.png"/>
-            <FILE id="O5qjiH" name="SoloOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/soloButton/SoloOn.png"/>
-          </GROUP>
-          <GROUP id="{06D7087B-8944-8BEA-DC70-76D7A0694A82}" name="muteButton">
-            <FILE id="Td74lX" name="MuteOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/muteButton/MuteOff.png"/>
-            <FILE id="Z1YH43" name="MuteOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/muteButton/MuteOn.png"/>
-          </GROUP>
-          <GROUP id="{ED1D9512-93F5-1E03-8C32-263090C7DF9B}" name="instruments">
-            <FILE id="CvL4sY" name="ClapOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/ClapOff.png"/>
-            <FILE id="lNHnlt" name="ClapOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/ClapOn.png"/>
-            <FILE id="wgPZmh" name="CrashOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/CrashOff.png"/>
-            <FILE id="FI4G1P" name="CrashOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/CrashOn.png"/>
-            <FILE id="XDPKxr" name="HHCOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHCOff.png"/>
-            <FILE id="IdQRtB" name="HHCOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHCOn.png"/>
-            <FILE id="sj8YDJ" name="HHOOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHOOff.png"/>
-            <FILE id="GyMzwj" name="HHOOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/HHOOn.png"/>
-            <FILE id="oqyj6H" name="KickOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOff.png"/>
-            <FILE id="HpFGm2" name="KickOn .png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOn .png"/>
-            <FILE id="nYBn2P" name="KickOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/KickOn.png"/>
-            <FILE id="PuA7Ax" name="PercOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/PercOff.png"/>
-            <FILE id="oASupD" name="PercOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/PercOn.png"/>
-            <FILE id="dt5IG2" name="SnapOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnapOff.png"/>
-            <FILE id="w0mIo9" name="SnapOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnapOn.png"/>
-            <FILE id="jo6DTi" name="SnareOff.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnareOff.png"/>
-            <FILE id="U0uhIK" name="SnareOn.png" compile="0" resource="1" file="assets/graphics/primaryPane/instruments/SnareOn.png"/>
+          <GROUP id="{6D7A67F4-BFF1-41A1-3A65-896FA721EED6}" name="dropdownTab">
+            <FILE id="p4tGRq" name="ClipButtonOff.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/dropdown/dropdownTab/ClipButtonOff.png"/>
+            <FILE id="DgnajW" name="ClipButtonOn.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/dropdown/dropdownTab/ClipButtonOn.png"/>
+            <FILE id="MpKCCK" name="ENVButtonOff.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/dropdown/dropdownTab/ENVButtonOff.png"/>
+            <FILE id="Vn0xqL" name="ENVButtonOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/dropdown/dropdownTab/ENVButtonOn.png"/>
+            <FILE id="K2j9Ek" name="EQButtonOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/dropdown/dropdownTab/EQButtonOff.png"/>
+            <FILE id="PJu14j" name="EQButtonOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/dropdown/dropdownTab/EQButtonOn.png"/>
+            <FILE id="IM6kiP" name="FXButtonOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/dropdown/dropdownTab/FXButtonOff.png"/>
+            <FILE id="bQ4lmI" name="FXButtonOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/dropdown/dropdownTab/FXButtonOn.png"/>
           </GROUP>
         </GROUP>
-        <GROUP id="{2F0267F7-D2FA-BE0F-E1A8-CD4D41AE0105}" name="dropdown">
-          <GROUP id="{F6DD0F87-F5DA-F643-2575-1592E508BCFE}" name="dropdownBackgrounds">
-            <FILE id="ijJylM" name="clipBackground.png" compile="0" resource="1"
-                  file="assets/graphics/dropdown/dropdownBackgrounds/clipBackground.png"/>
-            <FILE id="Ia7UMq" name="ENVBackground.png" compile="0" resource="1"
-                  file="assets/graphics/dropdown/dropdownBackgrounds/ENVBackground.png"/>
-            <FILE id="Qn5JCO" name="EQBackground.png" compile="0" resource="1"
-                  file="assets/graphics/dropdown/dropdownBackgrounds/EQBackground.png"/>
-            <FILE id="mmCmAI" name="FXBackground.png" compile="0" resource="1"
-                  file="assets/graphics/dropdown/dropdownBackgrounds/FXBackground.png"/>
-          </GROUP>
-          <GROUP id="{383C9C54-A218-8D83-4305-EA8E377F2C80}" name="dropdownTab">
-            <FILE id="v0LLlz" name="ClipButtonOff.png" compile="0" resource="1"
-                  file="assets/graphics/dropdown/dropdownTab/ClipButtonOff.png"/>
-            <FILE id="Q9vduc" name="ClipButtonOn.png" compile="0" resource="1"
-                  file="assets/graphics/dropdown/dropdownTab/ClipButtonOn.png"/>
-            <FILE id="a9m8fG" name="ENVButtonOff.png" compile="0" resource="1"
-                  file="assets/graphics/dropdown/dropdownTab/ENVButtonOff.png"/>
-            <FILE id="bSU5K9" name="ENVButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/ENVButtonOn.png"/>
-            <FILE id="ZSaqy9" name="EQButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOff.png"/>
-            <FILE id="ADezdY" name="EQButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/EQButtonOn.png"/>
-            <FILE id="RR5X7Q" name="FXButtonOff.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOff.png"/>
-            <FILE id="ASmm2A" name="FXButtonOn.png" compile="0" resource="1" file="assets/graphics/dropdown/dropdownTab/FXButtonOn.png"/>
-          </GROUP>
-          <GROUP id="{8065FEA0-D75A-588E-18EB-090F3D567EE7}" name="FX"/>
+        <GROUP id="{1C6C56BF-EA44-5D2A-6859-5428040EDDAC}" name="ModeButton">
+          <FILE id="IjWFtA" name="ModeSwitchOff.png" compile="0" resource="1"
+                file="../orion-plugin-assets/graphics/ModeButton/ModeSwitchOff.png"/>
+          <FILE id="JkR0fU" name="ModeSwitchOn.png" compile="0" resource="1"
+                file="../orion-plugin-assets/graphics/ModeButton/ModeSwitchOn.png"/>
         </GROUP>
-        <GROUP id="{B2660261-C90E-0D9B-7941-A9F4B7930E8D}" name="PowerButton">
-          <FILE id="K6YM9p" name="PowerOff.png" compile="0" resource="1" file="assets/graphics/PowerButton/PowerOff.png"/>
-          <FILE id="uxfe5t" name="PowerOn.png" compile="0" resource="1" file="assets/graphics/PowerButton/PowerOn.png"/>
+        <GROUP id="{952EEDCB-3428-FB1E-58DF-A0FCD061F98A}" name="PowerButton">
+          <FILE id="TFOxYm" name="PowerOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/PowerButton/PowerOff.png"/>
+          <FILE id="yZW29P" name="PowerOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/PowerButton/PowerOn.png"/>
         </GROUP>
-        <FILE id="kbWvlS" name="00compressorBackground.png" compile="0" resource="1"
-              file="assets/graphics/00compressorBackground.png"/>
-        <FILE id="eev5V6" name="00delayBackground.png" compile="0" resource="1"
-              file="assets/graphics/00delayBackground.png"/>
-        <FILE id="EnAm9m" name="00orionEnvBackground.png" compile="0" resource="1"
-              file="assets/graphics/00orionEnvBackground.png"/>
-        <FILE id="caW6Mb" name="00reverbBackground.png" compile="0" resource="1"
-              file="assets/graphics/00reverbBackground.png"/>
-        <FILE id="EnjRE4" name="appdir.png" compile="0" resource="1" file="assets/graphics/appdir.png"/>
-        <FILE id="zBbJGA" name="background_gradient.png" compile="0" resource="1"
-              file="assets/graphics/background_gradient.png"/>
-        <FILE id="wRWICf" name="check.png" compile="0" resource="1" file="assets/graphics/check.png"/>
-        <FILE id="C6n7Gm" name="clap_selected.png" compile="0" resource="1"
-              file="assets/graphics/clap_selected.png"/>
-        <FILE id="tLovBe" name="compressorBackground.png" compile="0" resource="1"
-              file="assets/graphics/compressorBackground.png"/>
-        <FILE id="rxivpj" name="delayBackground.png" compile="0" resource="1"
-              file="assets/graphics/delayBackground.png"/>
-        <FILE id="eLKAyZ" name="EQ_Background.png" compile="0" resource="1"
-              file="assets/graphics/EQ_Background.png"/>
-        <FILE id="zLIz7o" name="expand.png" compile="0" resource="1" file="assets/graphics/expand.png"/>
-        <FILE id="Pr6Akp" name="headphone_button.png" compile="0" resource="1"
-              file="assets/graphics/headphone_button.png"/>
-        <FILE id="AVGiaf" name="knob_1.png" compile="0" resource="1" file="assets/graphics/knob_1.png"/>
-        <FILE id="JDsX7S" name="knob_2.png" compile="0" resource="1" file="assets/graphics/knob_2.png"/>
-        <FILE id="VpcawU" name="m.png" compile="0" resource="1" file="assets/graphics/m.png"/>
-        <FILE id="XrysFq" name="meter.png" compile="0" resource="1" file="assets/graphics/meter.png"/>
-        <FILE id="WpMN08" name="navigator_background.png" compile="0" resource="1"
-              file="assets/graphics/navigator_background.png"/>
-        <FILE id="WJYRNs" name="orionBackground.png" compile="0" resource="1"
-              file="assets/graphics/orionBackground.png"/>
-        <FILE id="XUXZaF" name="orionClipBackground.png" compile="0" resource="1"
-              file="assets/graphics/orionClipBackground.png"/>
-        <FILE id="nwTmVC" name="orionEnvBackground.png" compile="0" resource="1"
-              file="assets/graphics/orionEnvBackground.png"/>
-        <FILE id="atkxdH" name="power_button.png" compile="0" resource="1"
-              file="assets/graphics/power_button.png"/>
-        <FILE id="kmSg7G" name="profile.png" compile="0" resource="1" file="assets/graphics/profile.png"/>
-        <FILE id="OH4shT" name="question.png" compile="0" resource="1" file="assets/graphics/question.png"/>
-        <FILE id="toKUSh" name="reverbBackground.png" compile="0" resource="1"
-              file="assets/graphics/reverbBackground.png"/>
-        <FILE id="d0kLXh" name="s.png" compile="0" resource="1" file="assets/graphics/s.png"/>
-        <FILE id="DLrONF" name="settings.png" compile="0" resource="1" file="assets/graphics/settings.png"/>
-        <FILE id="DU3yIN" name="sound_file.png" compile="0" resource="1" file="assets/graphics/sound_file.png"/>
-        <FILE id="pnUOOz" name="volume.png" compile="0" resource="1" file="assets/graphics/volume.png"/>
-        <FILE id="yTlhET" name="wrench_button.png" compile="0" resource="1"
-              file="assets/graphics/wrench_button.png"/>
-        <FILE id="QiPyfv" name="InvisibleButtonBackground.png" compile="0"
-              resource="1" file="assets/graphics/InvisibleButtonBackground.png"/>
+        <GROUP id="{9D635320-7D06-A229-D36A-E8801F8D5B83}" name="primaryPane">
+          <GROUP id="{03DA89EE-6E3B-9981-0584-78C7B34DB365}" name="arrows">
+            <FILE id="jO54H9" name="arrow_down.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_down.png"/>
+            <FILE id="TwfMkQ" name="arrow_downOn.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_downOn.png"/>
+            <FILE id="OFG30F" name="arrow_left.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_left.png"/>
+            <FILE id="IONbIz" name="arrow_leftOn.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_leftOn.png"/>
+            <FILE id="nm9LZy" name="arrow_right.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_right.png"/>
+            <FILE id="sndL2d" name="arrow_rightOn.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_rightOn.png"/>
+            <FILE id="V3z1Qr" name="arrow_up.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_up.png"/>
+            <FILE id="sPYRFJ" name="arrow_upOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/arrows/arrow_upOn.png"/>
+          </GROUP>
+          <GROUP id="{7D5AF67F-85D8-D2AA-C09A-0A487300D559}" name="instruments">
+            <FILE id="zKRCxn" name="ClapOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/ClapOff.png"/>
+            <FILE id="Kna1rP" name="ClapOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/ClapOn.png"/>
+            <FILE id="WTnx4Y" name="CrashOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/CrashOff.png"/>
+            <FILE id="VHtpG7" name="CrashOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/CrashOn.png"/>
+            <FILE id="ipEqxw" name="HHCOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/HHCOff.png"/>
+            <FILE id="u96Awe" name="HHCOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/HHCOn.png"/>
+            <FILE id="Ik78WT" name="HHOOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/HHOOff.png"/>
+            <FILE id="WLZd1W" name="HHOOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/HHOOn.png"/>
+            <FILE id="Y71Ald" name="KickOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/KickOff.png"/>
+            <FILE id="jtM4j2" name="KickOn .png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/KickOn .png"/>
+            <FILE id="Loz3DG" name="KickOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/KickOn.png"/>
+            <FILE id="Bd3kLp" name="PercOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/PercOff.png"/>
+            <FILE id="ZD87YO" name="PercOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/PercOn.png"/>
+            <FILE id="ciNMHw" name="SnapOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/SnapOff.png"/>
+            <FILE id="wlc6Ba" name="SnapOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/SnapOn.png"/>
+            <FILE id="cYL59o" name="SnareOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/SnareOff.png"/>
+            <FILE id="CbwxyP" name="SnareOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/instruments/SnareOn.png"/>
+          </GROUP>
+          <GROUP id="{CD090DB4-0448-D0C9-3287-1AA87D43F07D}" name="muteButton">
+            <FILE id="Bow0ug" name="MuteOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/muteButton/MuteOff.png"/>
+            <FILE id="I843HG" name="MuteOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/muteButton/MuteOn.png"/>
+          </GROUP>
+          <GROUP id="{9D4C8E6F-351E-A8F0-E8CB-B662D7CA304A}" name="soloButton">
+            <FILE id="lPuFLN" name="SoloOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/soloButton/SoloOff.png"/>
+            <FILE id="VPedGk" name="SoloOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/primaryPane/soloButton/SoloOn.png"/>
+          </GROUP>
+          <FILE id="bALtiu" name="PrimaryBackground.svg" compile="0" resource="1"
+                file="../orion-plugin-assets/graphics/primaryPane/PrimaryBackground.svg"/>
+          <FILE id="GCNCek" name="PrimaryPane_Footer.png" compile="0" resource="1"
+                file="../orion-plugin-assets/graphics/primaryPane/PrimaryPane_Footer.png"/>
+        </GROUP>
+        <GROUP id="{9CCCB52F-C783-0481-C60F-060DA8758CE4}" name="RectButton">
+          <FILE id="K57hQT" name="RectSwitchOff.png" compile="0" resource="1"
+                file="../orion-plugin-assets/graphics/RectButton/RectSwitchOff.png"/>
+          <FILE id="dI1gH8" name="RectSwitchOn.png" compile="0" resource="1"
+                file="../orion-plugin-assets/graphics/RectButton/RectSwitchOn.png"/>
+        </GROUP>
+        <GROUP id="{9180149D-4151-C403-0FC3-1AE5D43B454D}" name="ResizeButton">
+          <FILE id="TQiWSU" name="ResizeOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/ResizeButton/ResizeOff.png"/>
+          <FILE id="If7O77" name="ResizeOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/ResizeButton/ResizeOn.png"/>
+        </GROUP>
+        <GROUP id="{504BD2D6-4F27-7596-4C7F-DCF54828DA43}" name="sidePanel">
+          <GROUP id="{545508D4-2D1E-A01E-F102-BF39B342F3FC}" name="icons">
+            <FILE id="sIck5F" name="folder_Off.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/sidePanel/icons/folder_Off.png"/>
+            <FILE id="WxEDYq" name="folder_On.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/sidePanel/icons/folder_On.png"/>
+          </GROUP>
+          <GROUP id="{26779A80-C286-4BFC-83AE-2E3DBC891B34}" name="indicateButton">
+            <FILE id="ZKcalV" name="dirBackOff.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
+            <FILE id="vQ00pz" name="dirBackOn.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
+            <FILE id="cuJtpy" name="dirForwardOff.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/sidePanel/indicateButton/dirForwardOff.png"/>
+            <FILE id="rt9HEz" name="dirForwardOn.png" compile="0" resource="1"
+                  file="../orion-plugin-assets/graphics/sidePanel/indicateButton/dirForwardOn.png"/>
+          </GROUP>
+          <FILE id="exOPZ5" name="logo.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/sidePanel/logo.png"/>
+          <FILE id="qNj0ts" name="sidePanelBackground.png" compile="0" resource="1"
+                file="../orion-plugin-assets/graphics/sidePanel/sidePanelBackground.png"/>
+        </GROUP>
+        <FILE id="bMd4je" name="a.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/a.png"/>
+        <FILE id="TqEGJy" name="a_button.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/a_button.png"/>
+        <FILE id="NbEtMK" name="appdir.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/appdir.png"/>
+        <FILE id="KVfGnS" name="background_gradient.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/background_gradient.png"/>
+        <FILE id="NZUdeg" name="check.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/check.png"/>
+        <FILE id="BxJGNP" name="clap_selected.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/clap_selected.png"/>
+        <FILE id="lqYfHN" name="compressorBackground.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/compressorBackground.png"/>
+        <FILE id="MCIyiu" name="delayBackground.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/delayBackground.png"/>
+        <FILE id="wh1e7i" name="EQ_Background.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/EQ_Background.png"/>
+        <FILE id="xBsniB" name="expand.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/expand.png"/>
+        <FILE id="E4VWhP" name="headphone_button.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/headphone_button.png"/>
+        <FILE id="vN4vNN" name="hh-c_off.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/hh-c_off.png"/>
+        <FILE id="KxknpN" name="hh-c_selected.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/hh-c_selected.png"/>
+        <FILE id="sesE89" name="hh-o_off.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/hh-o_off.png"/>
+        <FILE id="GzaeMM" name="hh-o_selected.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/hh-o_selected.png"/>
+        <FILE id="CKFsWJ" name="InvisibleButtonBackground.png" compile="0"
+              resource="1" file="../orion-plugin-assets/graphics/InvisibleButtonBackground.png"/>
+        <FILE id="cAnCLm" name="kick_selected.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/kick_selected.png"/>
+        <FILE id="hNysue" name="knob_1.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/knob_1.png"/>
+        <FILE id="RuIoLa" name="knob_2.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/knob_2.png"/>
+        <FILE id="zJC2u4" name="m.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/m.png"/>
+        <FILE id="puVZt3" name="meter.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/meter.png"/>
+        <FILE id="XJiyWk" name="navigator_background.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/navigator_background.png"/>
+        <FILE id="rvqnj9" name="orionBackground.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/orionBackground.png"/>
+        <FILE id="vbGtpN" name="orionClipBackground.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/orionClipBackground.png"/>
+        <FILE id="mAfpeX" name="orionEnvBackground.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/orionEnvBackground.png"/>
+        <FILE id="qASaVw" name="power_button.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/power_button.png"/>
+        <FILE id="GBKNFr" name="profile.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/profile.png"/>
+        <FILE id="TdXrHY" name="question.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/question.png"/>
+        <FILE id="mc6TP9" name="reverbBackground.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/reverbBackground.png"/>
+        <FILE id="aOgkIh" name="s.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/s.png"/>
+        <FILE id="m2bPv5" name="settings.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/settings.png"/>
+        <FILE id="JtXJ5a" name="sound_file.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/sound_file.png"/>
+        <FILE id="jsspLS" name="volume.png" compile="0" resource="1" file="../orion-plugin-assets/graphics/volume.png"/>
+        <FILE id="lPsIxW" name="wrench_button.png" compile="0" resource="1"
+              file="../orion-plugin-assets/graphics/wrench_button.png"/>
+      </GROUP>
+      <GROUP id="{9230E4AE-259E-0E5D-33EE-076C76A1A846}" name="samples">
+        <GROUP id="{69567402-C12B-A688-9E82-093A5562C85B}" name="Claps">
+          <FILE id="HJxDs5" name="Basic Clap.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Claps/Basic Clap.wav"/>
+          <FILE id="hA5r7F" name="Break The Bank Clap.wav" compile="0" resource="1"
+                file="../orion-plugin-assets/samples/Claps/Break The Bank Clap.wav"/>
+          <FILE id="MeQw4e" name="Clap1.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Claps/Clap1.wav"/>
+          <FILE id="fil61R" name="Clap2.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Claps/Clap2.wav"/>
+          <FILE id="wnwlUa" name="Luger Slap Clap.wav" compile="0" resource="1"
+                file="../orion-plugin-assets/samples/Claps/Luger Slap Clap.wav"/>
+          <FILE id="HGfvSQ" name="Slap Clap.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Claps/Slap Clap.wav"/>
+        </GROUP>
+        <GROUP id="{C459EEBE-EA0B-2136-B815-3588C9AC2A99}" name="Crash">
+          <FILE id="h2WC4U" name="Crash.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Crash/Crash.wav"/>
+          <FILE id="EYjQa1" name="testWhiteNoise5sec.wav" compile="0" resource="1"
+                file="../orion-plugin-assets/samples/Crash/testWhiteNoise5sec.wav"/>
+        </GROUP>
+        <GROUP id="{49C6B82A-CFF1-70E2-B0FC-9F9DC33390F3}" name="HHC">
+          <FILE id="fGSlbW" name="Bourne Hihat.wav" compile="0" resource="1"
+                file="../orion-plugin-assets/samples/HHC/Bourne Hihat.wav"/>
+          <FILE id="aTALrj" name="Break The Bank Hat.wav" compile="0" resource="1"
+                file="../orion-plugin-assets/samples/HHC/Break The Bank Hat.wav"/>
+          <FILE id="i77BAx" name="Metro Hihat.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHC/Metro Hihat.wav"/>
+          <FILE id="yMnEa0" name="ok hihat.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHC/ok hihat.wav"/>
+          <FILE id="ZqQpdw" name="Open Hat.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHC/Open Hat.wav"/>
+          <FILE id="FEYPAg" name="shawty hat.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHC/shawty hat.wav"/>
+          <FILE id="qylhZA" name="Zay Hi Hat.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHC/Zay Hi Hat.wav"/>
+        </GROUP>
+        <GROUP id="{4F4496DC-025C-E367-3D5C-5DCA713A3775}" name="HHO">
+          <FILE id="oKhUtb" name="HiHatOp01.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp01.wav"/>
+          <FILE id="AhvFod" name="HiHatOp02.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp02.wav"/>
+          <FILE id="sd5qq0" name="HiHatOp03.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp03.wav"/>
+          <FILE id="UkpiKd" name="HiHatOp04.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp04.wav"/>
+          <FILE id="zUfWqW" name="HiHatOp05.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp05.wav"/>
+          <FILE id="mPctDw" name="HiHatOp06.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp06.wav"/>
+          <FILE id="rxhRWk" name="HiHatOp07.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp07.wav"/>
+          <FILE id="BM6eW7" name="HiHatOp08.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp08.wav"/>
+          <FILE id="yslMrM" name="HiHatOp09.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp09.wav"/>
+          <FILE id="OWORDP" name="HiHatOp10.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp10.wav"/>
+          <FILE id="VrNXiz" name="HiHatOp11.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/HiHatOp11.wav"/>
+          <FILE id="TxslDP" name="test.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/HHO/test.wav"/>
+        </GROUP>
+        <GROUP id="{DCF80F7B-7299-C904-432E-112997D8CE4B}" name="Kicks">
+          <FILE id="buA0gu" name="DP Beats Kick.wav" compile="0" resource="1"
+                file="../orion-plugin-assets/samples/Kicks/DP Beats Kick.wav"/>
+          <FILE id="CUdfUl" name="Kick 1.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Kick 1.wav"/>
+          <FILE id="ObN5aI" name="Kick 2.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Kick 2.wav"/>
+          <FILE id="UukW2S" name="Kick 3.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Kick 3.wav"/>
+          <FILE id="MguXJY" name="Kick 4.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Kick 4.wav"/>
+          <FILE id="tEGqeD" name="Kick 5.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Kick 5.wav"/>
+          <FILE id="EWitN9" name="Kick.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Kick.wav"/>
+          <FILE id="WoFoQO" name="Trell Kick.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Trell Kick.wav"/>
+          <FILE id="UQEIoJ" name="Zay Kick.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Kicks/Zay Kick.wav"/>
+        </GROUP>
+        <GROUP id="{D18ACDCF-5594-CF23-9159-53F820719434}" name="Percs">
+          <FILE id="xOwl7i" name="basic perc.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Percs/basic perc.wav"/>
+          <FILE id="mbwdbm" name="NM YSL Perc.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Percs/NM YSL Perc.wav"/>
+        </GROUP>
+        <GROUP id="{E8932826-DE6C-F1D2-146A-6BAF8DE5EE98}" name="Snaps">
+          <FILE id="gZrekQ" name="HHPSNP1.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP1.wav"/>
+          <FILE id="AAK848" name="HHPSNP2.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP2.wav"/>
+          <FILE id="piJZam" name="HHPSNP3.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP3.wav"/>
+          <FILE id="In3qjP" name="HHPSNP4.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP4.wav"/>
+          <FILE id="MnwiZV" name="HHPSNP5.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP5.wav"/>
+          <FILE id="VjSgFz" name="HHPSNP6.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP6.wav"/>
+          <FILE id="VSwtZf" name="HHPSNP7.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP7.wav"/>
+          <FILE id="ONJnye" name="HHPSNP8.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP8.wav"/>
+          <FILE id="j7in0w" name="HHPSNP9.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP9.wav"/>
+          <FILE id="VeHBfD" name="HHPSNP10.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP10.wav"/>
+          <FILE id="nnt2ab" name="HHPSNP11.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP11.wav"/>
+          <FILE id="E4aHIn" name="HHPSNP12.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP12.wav"/>
+          <FILE id="oKiubr" name="HHPSNP13.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP13.wav"/>
+          <FILE id="edLPHl" name="HHPSNP14.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP14.wav"/>
+          <FILE id="PKSjuP" name="HHPSNP15.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP15.wav"/>
+          <FILE id="kY0zOw" name="HHPSNP16.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snaps/HHPSNP16.wav"/>
+        </GROUP>
+        <GROUP id="{C975A175-6807-FEE4-C8E5-E2CDEA12BE25}" name="Snares">
+          <FILE id="r0GXkK" name="SXJ Snare1.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare1.wav"/>
+          <FILE id="jrN2YO" name="SXJ Snare2.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare2.wav"/>
+          <FILE id="aGAg2o" name="SXJ Snare3.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare3.wav"/>
+          <FILE id="ArK9N9" name="SXJ Snare4.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare4.wav"/>
+          <FILE id="gnhlGm" name="SXJ Snare5.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare5.wav"/>
+          <FILE id="PAzBXy" name="SXJ Snare6.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare6.wav"/>
+          <FILE id="DwAIDM" name="SXJ Snare7.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare7.wav"/>
+          <FILE id="OnKy8m" name="SXJ Snare8.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare8.wav"/>
+          <FILE id="Bx0Pim" name="SXJ Snare9.wav" compile="0" resource="1" file="../orion-plugin-assets/samples/Snares/SXJ Snare9.wav"/>
+        </GROUP>
       </GROUP>
     </GROUP>
   </MAINGROUP>

@@ -20,18 +20,11 @@ public:
     ~EnvelopeMeter() override;
     void paint (juce::Graphics&) override;
     void resized() override;
-    
-    void loadAudioFile();
+
     void initAudioFile();
     
     void updateEnvelope();
-    
-    //void setSustainBendCoefficient(float SBC){sustainBendCoef = SBC;};
-    
-    AudioBuffer<float>& getWaveForm(){return mWaveForm;};
-    
-    std::vector<float> getmAudioPoints();
-        
+
     float getAttackCoef(){return attackCoef;};
     float getDecayCoef(){return decayCoef;};
     float getSustainCoef(){return sustainCoef;};
@@ -49,34 +42,38 @@ public:
     
     float getSampleLength()
     {
-        File* audioFile;
-        audioFile = &instrumentSamplePathes[instrumetClickedSerial];
-          
-        if(audioFile != nullptr)
-        {
-            AudioFormatReader*  mFormatReader {nullptr};
-            mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetClickedSerial]);
-            auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
-            mWaveForm.setSize(1, sampleLength);
-            
-            mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-            mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-            
-            float sampleLengthInMS = 1000 * mWaveForm.getNumSamples()/globalSampleRate;
-            return sampleLengthInMS;
-        }
-        else
-        {
-            DBG("inval audio file");
-            float sampleLengthInMS = 1000 * mWaveForm.getNumSamples()/globalSampleRate;
-            return sampleLengthInMS;
-        }
+        
+        
+        float sampleLengthInMS = 1000 * instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
+        return sampleLengthInMS;
+//        File* audioFile;
+//        audioFile = &instrumentSamplePathes[instrumetClickedSerial];
+//
+//        if(audioFile != nullptr)
+//        {
+//            AudioFormatReader*  mFormatReader {nullptr};
+//            mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetClickedSerial]);
+//            auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
+//            mWaveForm.setSize(1, sampleLength);
+//
+//            mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
+//            mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
+//
+//            float sampleLengthInMS = 1000 * instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
+//            return sampleLengthInMS;
+//        }
+//        else
+//        {
+//            DBG("inval audio file");
+//            float sampleLengthInMS = 1000 * instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
+//            return sampleLengthInMS;
+//        }
         
     };
 
 private:
     //File* audioFile;
-    AudioBuffer<float> mWaveForm;
+    //AudioBuffer<float> mWaveForm;
     AudioFormatManager  mFormatManager;
     //AudioFormatReader*  mFormatReader {nullptr};
     //std::vector<float> mAudioPoints;

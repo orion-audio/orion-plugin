@@ -53,35 +53,7 @@ private:
     
     std::unique_ptr<DrawableImage> backgroundImageView;
     Rectangle<int>          plotFrame;
-    
-    
-    
-//    Slider envAttackSlider;
-//    Slider envHoldSlider;
-//    Slider envDecaySlider;
-//    Slider envReleaseSlider;
-//
-//    Slider envAttackBendSlider;
-//    Slider envSustainSlider;
-//    Slider envDecayBendSlider;
-//    Slider envReleaseBendSlider;
-//
-//
-//    ToggleButton envSwitchButton;
-//
-//    Label envAttackLabel;
-//    Label envHoldLabel;
-//    Label envDecayLabel;
-//    Label envReleaseLabel;
-//
-//    Label envAttackBendLabel;
-//    Label envSustainLabel;
-//    Label envDecayBendLabel;
-//    Label envReleaseBendLabel;
-    
-    
-    //File* envbackground;
-    
+
     //--------------------- Previous
     
     

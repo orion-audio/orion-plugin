@@ -24,9 +24,14 @@ const int HHCPitch   = 45;
 const int HHOPitch   = 47;
 const int CrashPitch = 48;
 
-const String instrumentName[8] = {"Kick",   "Snare", "Clap",   "Perc",   "Snap",   "HHO",    "HHC",    "Crash"};
-int sidechainIndex[8]          = {-1,       -1,       -1,       -1,       -1,       -1,       -1,       -1};
-bool InstrumentMakeNoise[8]    = {false,    false,    false,    false,    false,    false,    false,    false};
+const String instrumentName[8]                = {"Kick",   "Snare", "Clap",   "Perc",   "Snap",   "HHO",    "HHC",    "Crash"};
+int sidechainIndex[8]                         = {-1,       -1,       -1,       -1,       -1,       -1,       -1,       -1};
+bool InstrumentMakeNoise[8]                   = {false,    false,    false,    false,    false,    false,    false,    false};
+
+AudioBuffer<float>* instrumentSampleBuffer[8] = {nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr};
+int* instrumentSampleLength[8]                = {nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr};
+AudioBuffer<float> instrumentSampleContainer[8];
+
 
 // Global Smaple Rate
 double globalSampleRate = 44100;
@@ -52,9 +57,23 @@ File  instrumentSamplePathes       [8];
 int dropdownTabSerial = 0;
 bool dropDownVisible = false;
 
-
 // EQ
 
+// Clip
+bool  clipOnOffSwitches            [8] = {false, false, false, false, false, false, false, false};
+bool  imagerOnOffSwitches          [8] = {false, false, false, false, false, false, false, false};
+
+
+float  clipSaturationCoefficient   [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+double clipPitchCoefficient        [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+double clipFineTuneCoefficient     [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+
+float startPointCoefficient        [8] = {0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f};
+float endPointCoefficient          [8] = {1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  1.0f};
+bool  reverseSwitches              [8] = {false, false, false, false, false, false, false, false};
+bool  imagerModeSwitches           [8] = {false, false, false, false, false, false, false, false};
+float imagerCoefficient            [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
+float imagerSharpCoefficient       [8] = {0.0075f, 0.0075f, 0.0075f, 0.0075f, 0.0075f, 0.0075f, 0.0075f, 0.0075f};
 
 
 
@@ -99,6 +118,8 @@ float delayColorCoefficient        [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.
 float delayPanCoefficient          [8] = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
 
 
+
+
 #else
 extern const double globalPi;
 extern const int instrumentAmount;
@@ -115,6 +136,12 @@ extern const int CrashPitch;
 extern const String instrumentName[];
 extern int  sidechainIndex[];
 extern bool InstrumentMakeNoise[];
+
+
+// Audio
+extern AudioBuffer<float>* instrumentSampleBuffer[];
+extern int* instrumentSampleLength[];
+extern AudioBuffer<float> instrumentSampleContainer[];
 
 // Global Smaple Rate
 extern double globalSampleRate;
@@ -139,6 +166,21 @@ extern File  instrumentSamplePathes[];
 extern int dropdownTabSerial;
 extern bool dropDownVisible;
 
+// Clip
+extern bool  clipOnOffSwitches          [];
+extern bool  imagerOnOffSwitches        [];
+
+extern float  clipSaturationCoefficient [];
+extern double clipPitchCoefficient      [];
+extern double clipFineTuneCoefficient   [];
+
+extern float startPointCoefficient      [];
+extern float endPointCoefficient        [];
+extern bool  reverseSwitches            [];
+extern bool  imagerModeSwitches         [];
+extern float imagerCoefficient          [];
+extern float imagerSharpCoefficient     [];
+
 // Envelope
 extern bool  envSwitches                [];
 
@@ -151,7 +193,6 @@ extern float envAttackBendCoefficient   [];
 extern float envDecayBendCoefficient    [];
 extern float envSustainBendCoefficient  [];
 extern float envReleaseBendCoefficient  [];
-
 
 // FX Switch
 extern bool  compSwitches   [];
@@ -178,6 +219,8 @@ extern float delayTimeCoefficient         [];
 extern float delayFeedbackCoefficient     [];
 extern float delayColorCoefficient        [];
 extern float delayPanCoefficient          [];
+
+
 
 #endif
 

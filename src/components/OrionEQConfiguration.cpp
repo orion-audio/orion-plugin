@@ -54,6 +54,8 @@ OrionEQConfiguration::OrionEQConfiguration(OrionaudioAudioProcessor& p,int seria
         addAndMakeVisible(freqLabels[i].get());
         freqLabels[i]->setColour(Label::textColourId, freqLabelColor);
     }
+    
+    
 
 }
 
@@ -113,17 +115,18 @@ void OrionEQConfiguration::paint(Graphics& g)
     //g.drawFittedText (" 0 dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.5  * plotFrame.getHeight()), 50, 14, Justification::left, 1);
     // g.drawFittedText (String (- maxDB / 2) + " dB", plotFrame.getX() + 3, roundToInt (plotFrame.getY() + 2 + 0.75 * plotFrame.getHeight()), 50, 14, Justification::left, 1);
     
-    /* //plot input and output audio data
+    /*
+     //plot input and output audio data
     const Colour inputColour = Colours::greenyellow;
     const Colour outputColour = Colours::indianred;
     g.setFont (16.0f);
     processor.createAnalyserPlot (analyserPath, plotFrame, 20.0f, true);
     g.setColour (inputColour);
-    g.drawFittedText ("Input", plotFrame.reduced (8), Justification::topRight, 1);
+    //g.drawFittedText ("Input", plotFrame.reduced (8), Justification::topRight, 1);
     g.strokePath (analyserPath, PathStrokeType (1.0));
     processor.createAnalyserPlot (analyserPath, plotFrame, 20.0f, false);
     g.setColour (outputColour);
-    g.drawFittedText ("Output", plotFrame.reduced (8, 28), Justification::topRight, 1);
+    //g.drawFittedText ("Output", plotFrame.reduced (8, 28), Justification::topRight, 1);
     g.strokePath (analyserPath, PathStrokeType (1.0));
     */
     
@@ -332,10 +335,11 @@ void OrionEQConfiguration::mouseDown (const MouseEvent& e)
 
 void OrionEQConfiguration::mouseDrag (const MouseEvent& e)
 {
-    if (isPositiveAndBelow (draggingBand, 5))
+    if (isPositiveAndBelow(draggingBand, 5))
     {
         //std::cout<<"are you positive\n";
         auto pos = (e.position.getX() - plotFrame.getX()) / plotFrame.getWidth();
+        
         if(auto* voice = dynamic_cast<OrionSamplerVoice*> (processor.getSampler()->getVoice(EQserial)))
         {
             voice->eq.bands[draggingBand].frequency = getFrequencyForPosition (pos);

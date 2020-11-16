@@ -159,24 +159,75 @@ void SimpleSynth::loadSamples()
             case CRASH:
                 MidiNote = CrashPitch;
                 dir = "Crash";
-                filename = "Crash_01.WAV";
-                //filename = "testWhiteNoise5sec.wav";
+                //filename = "Crash_01.WAV";
+                filename = "testWhiteNoise5sec.wav";
+                //filename = "02.wav";
                 break;
             default:
                 break;
 
         }
-        File file(audiofolder.getChildFile(dir).getChildFile(filename));
-        instrumentSamplePathes[i] = file;
+        File filePath(audiofolder.getChildFile(dir).getChildFile(filename));
+        instrumentSamplePathes[i] = filePath;
         std::unique_ptr<AudioFormatReader> reader;
-        reader.reset(audioFormatManager.createReaderFor(file));
+        
+        reader.reset(audioFormatManager.createReaderFor(instrumentSamplePathes[i]));
         if (reader == nullptr)
             return;
+        
+        
+        //note.setRange(0, 128, true);
+        
+        //-------------------------------------------------------------------
+        //auto sampleLength = static_cast<int>(reader->lengthInSamples);
+        //AudioBuffer<float> mWaveForm;
+        
+        //mWaveForm.setSize(1, sampleLength);
+        
+        //reader->read(&mWaveForm, 0, sampleLength, 0, true, false);
+        
+        //mWaveForm.reverse(0, 0, sampleLength);
+        
+        //reader->read(&mWaveForm, 0, sampleLength, 0, true, false);
+        
+        //AudioFormatWriter* mFormatWriter {nullptr};
+        //std::unique_ptr<AudioFormatWriter> mFormatWriter;
+
+        
+        //OrionSamplerSound *sampler = new OrionSamplerSound(String(i), mFormatWriter->get(), note/* Note Range */, MidiNote/* Center Note */, 0.0f, 10.0f, 10.0f);
+        
+        //-------------------------------------------------------------------
         BigInteger note;
         note.setBit(MidiNote);
-        OrionSamplerSound *sampler = new OrionSamplerSound(String(i), *reader.get(), note, MidiNote, 0.0f, 10.0f, 10.0f);
+        
+        OrionSamplerSound *sampler = new OrionSamplerSound(String(i), *reader.get(), note/* Note Range */, MidiNote/* Center Note */, 0.0f, 10.0f, 10.0f);
+        
+        //sampler->reverseSource();
+        
+        instrumentSampleBuffer[i] = sampler->getAudioData();
+        instrumentSampleContainer[i] = *instrumentSampleBuffer[i];
+        instrumentSampleLength[i] = sampler->getLengthPtr();
+
+
+        
+//        if(i == 0)
+//        {
+//            instrumentSampleBuffer[0]->setSize(2, 10000 - 2048,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */true);
+//            instrumentSampleBuffer[0]->setDataToReferTo(instrumentSampleContainer[0].getArrayOfWritePointers(), 2, 2048, 10000);
+//            sampler->setLength(10000 - 2048);
+//        }
+//        
+    
+     
         addSound(sampler);
     }
+    
+    //std::unique_ptr<AudioFormatReader> reader;
+    
+    
+   
+    
+    
 
 
 
@@ -212,9 +263,6 @@ void SimpleSynth::changeSamples(int index,const String &f,int midi)//index shoul
     OrionSamplerSound *sampler = new OrionSamplerSound(String(index), *reader, note, midi, 0.0f, 10.0f, 10.0f);
     addSound(sampler);
     delete file;
-
-
-
 }
 
 
@@ -253,6 +301,8 @@ void SimpleSynth::noteOn(int midiChannel,
                     {
                         //instrumetNoteOnSerial = i;
                         //std::cout<<"in voice instrumetClickedSerial: "<< instrumetClickedSerial<<std::endl;
+                        
+                        voice->panVariable = instrumentsPanCoefficient[i];
                         startVoice(voice, sound.get(), midiChannel, midiNoteNumber, velocity);
                         //DBG("KeyboardPress!!");
                         

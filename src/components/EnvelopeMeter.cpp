@@ -35,32 +35,6 @@ void EnvelopeMeter::paint (Graphics& g)
 
     //DBG(audioFile->getFullPathName());//-!!!!!!!!
     //------------------------------------ Draw Waveform -------------------------------------//
-    File* audioFile;
-    audioFile = &instrumentSamplePathes[instrumetClickedSerial];
-    
-    if(audioFile != nullptr)
-    {
-        AudioFormatReader*  mFormatReader {nullptr};
-  
-        mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetClickedSerial]);
-        auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
-        //AudioBuffer<float> mWaveForm;
-        mWaveForm.setSize(1, sampleLength);
-        mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-        
-        mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-        //auto buffer = mWaveForm.getReadPointer(0);//Ch 1
-    //      for (int sample = 0; sample < mWaveForm.getNumSamples(); ++sample)
-    //      {
-    //          DBG(buffer[sample]);
-    //      }
-    }
-    else
-    {
-        return;
-    }
-    
-    
     
     /* Creat Path & Init Start Point & Change Pencil Color & Change Pencil Opeacity*/
     Path p;
@@ -70,15 +44,30 @@ void EnvelopeMeter::paint (Graphics& g)
     g.setOpacity(0.7);
     
     /* Get Waveform */
-    int ratio = mWaveForm.getNumSamples()/getWidth();
-    auto buffer = mWaveForm.getReadPointer(0);
+    int ratio = instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/getWidth();
+    
+    
+    
+    auto buffer = instrumentSampleBuffer[instrumetClickedSerial]->getReadPointer(0);
     std::vector<float> mAudioPoints;
     
     /* Scale Audio File To Window On X Axis */
-    for (int sample = 0; sample < mWaveForm.getNumSamples(); sample+=ratio)
+    if(ratio>=1)
     {
-        mAudioPoints.push_back(buffer[sample]);
+        for (int sample = 0; sample < instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples(); sample+=ratio)
+        {
+            mAudioPoints.push_back(buffer[sample]);
+        }
     }
+    else
+    {
+        for (int sample = 0; sample < instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples(); sample+=1)
+        {
+            mAudioPoints.push_back(buffer[sample]);
+        }
+        
+    }
+    
     
     /* Scale Audio File to Window on Y Axis */
     for (int sample = 0; sample < mAudioPoints.size(); ++sample)
@@ -144,34 +133,6 @@ void EnvelopeMeter::updateEnvelope()
 }
 
 
-void EnvelopeMeter::loadAudioFile()
-{
-    /*
-    if(audioFile != nullptr)
-    {
-        audioFile = &instrumentSamplePathes[instrumetClickedSerial];
-        DBG(audioFile->getFullPathName());//-!!!!!!!!
-
-        mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetClickedSerial]);
-        auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
-        
-        mWaveForm.setSize(1, sampleLength);
-        
-        mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-
-        //auto buffer = mWaveForm.getReadPointer(0);//Ch 1
-
-//        for (int sample = 0; sample < mWaveForm.getNumSamples(); ++sample)
-//        {
-//            DBG(buffer[sample]);
-//        }
-    }
-    else
-    {
-        return;
-    }
-     */
-}
 
 
 

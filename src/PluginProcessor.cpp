@@ -181,8 +181,6 @@ void OrionaudioAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     inputLevel = buffer.getRMSLevel(0, 0, buffer.getNumSamples());
     buffer.clear();
     
-    
-    
     /*
     sampler->renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 

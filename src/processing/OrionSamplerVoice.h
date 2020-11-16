@@ -30,6 +30,9 @@
 #include "compressor.h"
 #include "EQ.h"
 #include "GlobalCoefficients.h"
+#include "math.h"
+
+
 
 
 
@@ -43,12 +46,11 @@ private:
 
     //float* masterVolume = &masterVolumeCoefficient;
 
-    //Sidechain sidechain;
-    
-    
     //
     int index = 0;
     int pitchVal;
+    float saturationVal = 0;
+    double pitchCent;
     double currSampRate;
     
     //Variables from SamplerVoice Base Class
@@ -65,39 +67,64 @@ private:
     
     // dsp::Gain<float> overallgain;
     std::vector<double> magnitudes;
-    
-    
     //int* instrumetSerialPtr = &instrumetClickedSerial;
     
+    float LInVals  [3] = {0.0f, 0.0f, 0.0f};
+    float LOutVals [3] = {0.0f, 0.0f, 0.0f};
+    float RInVals  [3] = {0.0f, 0.0f, 0.0f};
+    float ROutVals [3] = {0.0f, 0.0f, 0.0f};
 
 public:
     
     int instrumetSerialInVoice = -1;
+    
+    float sqrt2 = sqrt(2);
  
     //---------- Pan ----------/
+    
+    float panPoint = 0.0f;
+    
+    //---------- Clip ----------/
+    bool clipImagerMode = false;
+    float clipImagerCoef = 0.5f;
+    
+    float panVariable = 0.0f;
+    
+    float panLMax = -1.0f;
+    float panRMax =  1.0f;
+    
+    float panLWall =  panLMax * clipImagerCoef;
+    float panRWall =  panRMax * clipImagerCoef;
+    
+    float imagerSharp = 0.0075f;
+    bool moveToL = false;
     PanPos pan;
-    //---------- Envelope ----------/
-    bool envswitch = false;
-    EnvelopeGenerator env;
-    //------- Effect Switches -------/
-    bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
     
-    //-------- Compressor --------/
-    Compressor compressor;
+    void panchange(float inputVal)
+    {
+        panLMax  = jmap<float>(inputVal, -1.0f, 1.0f, -1.0f,0.0f);
+        panRMax  = jmap<float>(inputVal, -1.0f, 1.0f,  0.0f,1.0f);
+        
+        panLWall = panLMax * clipImagerCoef;
+        panRWall = panRMax * clipImagerCoef;
+        
+        std::cout<<"panLWall: "<< panLWall << std::endl;
+        std::cout<<"panRWall: "<< panRWall << std::endl;
+    };
     
-    //---------- Reverb ----------/
-    Reverb reverb;
-    Reverb::Parameters reverb_param;
-    /* color for reverb */
-    IIRFilter reverb_lowpass;
-    IIRFilter reverb_highpass;
-    IIRCoefficients lowcoef,highcoef;
-    double reverb_lowfreq {3000};
-    double reverb_highfreq {1000};
-    float reverbColor {0};
     
-    //---------- Delay ----------/
-    Delay delay;
+    void ImagerCoefChange(float inputVal)
+    {
+        
+        clipImagerCoef = inputVal;
+    
+        panLWall = panLMax * clipImagerCoef;
+        panRWall = panRMax * clipImagerCoef;
+        
+        std::cout<<"panLWall: "<< panLWall << std::endl;
+        std::cout<<"panRWall: "<< panRWall << std::endl;
+    };
+    
     
     //---------- EQ ----------/
     EQ eq;
@@ -127,6 +154,35 @@ public:
         }
         
     };
+    
+    //---------- Clip ----------/
+    bool clipOnOffSwitch = false;
+    bool imagerOnOffSwitch = false;
+    
+    //---------- Envelope ----------/
+    bool envswitch = false;
+    EnvelopeGenerator env;
+    //------- Effect Switches -------/
+    bool delayswitch {false}, compressorswitch {false}, reverbswitch {false};
+    
+    //-------- Compressor --------/
+    Compressor compressor;
+    
+    //---------- Reverb ----------/
+    Reverb reverb;
+    Reverb::Parameters reverb_param;
+    /* color for reverb */
+    IIRFilter reverb_lowpass;
+    IIRFilter reverb_highpass;
+    IIRCoefficients lowcoef,highcoef;
+    double reverb_lowfreq {3000};
+    double reverb_highfreq {1000};
+    float reverbColor {0};
+    
+    //---------- Delay ----------/
+    Delay delay;
+    
+    
 
     std::vector<double> frequencies;
     
@@ -262,8 +318,48 @@ public:
         return midiNote[note];
         
     };
+    
+    void SatPassFilter(float f,float r,bool lowPass)
+    {
+        //r  = rez amount, from sqrt(2) to ~ 0.1
+        //f  = cutoff frequency
+        //(from ~0 Hz to SampleRate/2 - though many synths seem to filter only up to SampleRate/4)
+        
+        float a1,a2,a3,b1,b2,c;
+        
+        if(lowPass)
+        {
+            c = 1.0 / tan(PI * f / sampleRate);
+            
+            a1 = 1.0 / ( 1.0 + r * c + c * c);
+            a2 = 2* a1;
+            a3 = a1;
+            b1 = 2.0 * ( 1.0 - c*c) * a1;
+            b2 = ( 1.0 - r * c + c * c) * a1;
+        }
+        else
+        {
+            c = tan(PI * f / sampleRate);
+
+            a1 = 1.0 / ( 1.0 + r * c + c * c);
+            a2 = -2*a1;
+            a3 = a1;
+            b1 = 2.0 * ( c*c - 1.0) * a1;
+            b2 = ( 1.0 - r * c + c * c) * a1;
+        }
+        
+        LOutVals[2] = LOutVals[1];
+        ROutVals[2] = ROutVals[1];
+        
+        LOutVals[1] = LOutVals[0];
+        ROutVals[1] = ROutVals[0];
+    
+        LOutVals[0] = a1 * LInVals[0] + a2 * LInVals[1] + a3 * LInVals[2] - b1 * LOutVals[1] - b2 * LOutVals[2];
+        ROutVals[0] = a1 * RInVals[0] + a2 * RInVals[1] + a3 * RInVals[2] - b1 * ROutVals[1] - b2 * ROutVals[2];
+    };
 
 
+    //Mark Start Note
     void startNote(int midiNoteNumber, float velocity, SynthesiserSound * sampSound, int pitchWheel) override
     {
         
@@ -271,7 +367,7 @@ public:
         if (auto* sound = dynamic_cast<OrionSamplerSound*> (sampSound))
         {
             
-            pitchRatio = std::pow(2.0, ((midiNoteNumber - sound->midiRootNote) + pitchVal) / 12.0)
+            pitchRatio = std::pow(2.0, ((midiNoteNumber - sound->midiRootNote) + pitchVal + pitchCent) / 12.0)
             * sound->sourceSampleRate / getSampleRate();
             
             sourceSamplePosition = 0.0;
@@ -283,7 +379,7 @@ public:
         {
             jassertfalse; // this object can only play SamplerSounds!
         }
-        
+
     };
     
     
@@ -353,6 +449,7 @@ public:
                     // just using a very simple linear interpolation here..
                     l = (inL[pos] * invAlpha + inL[pos + 1] * alpha);
                     r = (inR != nullptr) ? (inR[pos] * invAlpha + inR[pos + 1] * alpha): l;
+                    //std::cout<<"pos: "<< pos << std::endl;
                 }
                 else
                 {
@@ -370,10 +467,101 @@ public:
                 l = eq.bysamples(l);
                 r = eq.bysamples(r);
                 
+                
+                //MARK:- Apply Clip Effects
+                if(clipOnOffSwitch)
+                {
+                    /* Generate white noise */
+                    float R1 = (float) rand() / (float) RAND_MAX;
+                    float R2 = (float) rand() / (float) RAND_MAX;
+                    float L1 = (float) rand() / (float) RAND_MAX;
+                    float L2 = (float) rand() / (float) RAND_MAX;
+                    float XL = (float) sqrt( -2.0f * log( L1 )) * cos( 2.0f * PI * L2 );
+                    float XR = (float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * PI * R2 );
+                    
+                    LInVals[2] = LInVals[1];
+                    RInVals[2] = RInVals[1];
+                    
+                    LInVals[1] = LInVals[0];
+                    RInVals[1] = RInVals[0];
+                    
+                    LInVals[0] = XL * saturationVal;
+                    RInVals[0] = XR * saturationVal;
+                    
+                    SatPassFilter(800.0f/* Freq */,0.1/* rez amount, from 0.1 to ~ sqrt(2)*/,true/* L->T, H->F */);
+              
+                    l = l*0.7 + LOutVals[0]*0.4*l;
+                    r = r*0.7 + ROutVals[0]*0.4*r;
+                }
+                else
+                {
+                    l = l*0.7;
+                    r = r*0.7;
+                }
+                
+                //MARK:- Apply Clip Imager
+                if(imagerOnOffSwitch)
+                {
+                    
+
+                    
+                    if(clipImagerMode)
+                    {
+                        float xM = (l + r)/sqrt2;
+                        float xS = (l - r)/sqrt2;
+
+                        xM = xM * (1 - clipImagerCoef);
+                        xS = xS * clipImagerCoef;
+                        l = (xM + xS)/sqrt2;
+                        r = (xM - xS)/sqrt2;
+                    }
+                    else
+                    {
+                        if(panVariable > panLWall && panVariable < panRWall)
+                        {
+                            if(moveToL)
+                            {
+                                panVariable = panVariable - imagerSharp;
+                            }
+                            else
+                            {
+                                panVariable = panVariable + imagerSharp;
+                            }
+                        }
+                        
+                        if (panVariable <= panLWall)
+                        {
+                            moveToL = false;
+                            panVariable = panVariable + imagerSharp;
+                        }
+                        
+                        
+                        if (panVariable >= panRWall)
+                        {
+                            moveToL = true;
+                            panVariable = panVariable - imagerSharp;
+                        }
+                        
+                        //DBG(panVariable);
+                        //panVariable = panVariable * instrumentsPanCoefficient[instrumetSerialInVoice];
+                        pan.setPosition(panVariable);
+                        l = pan.processLeftChannel(l);
+                        r = pan.processRightChannel(r);
+                    }
+                }
+                
+                
+                
+                
                 //MARK:- Apply Instruments Pan
                 pan.setPosition(instrumentsPanCoefficient[instrumetSerialInVoice]);
                 l = pan.processLeftChannel(l);
                 r = pan.processRightChannel(r);
+                
+                
+                
+                
+                //clipImagerCoef
                 
                 //MARK:- Apply Envelope
                 if(envswitch)
@@ -464,6 +652,22 @@ public:
                     r = r * 0.0f;
                 }
                 
+                if(l > 1)
+                {
+                    l = 1;
+                }
+                if(r > 1)
+                {
+                    r = 1;
+                }
+                if(l < -1)
+                {
+                    l = -1;
+                }
+                if(r < -1)
+                {
+                    r = -1;
+                }
 
                 if (outR != nullptr)
                 {
@@ -498,13 +702,14 @@ public:
     };
     
 
+    
     void parameterChanged(const String &parameterID, float newValue) override
     {
         /* ON-OFF SWITCHES */
         if (parameterID == String("delaySwitch" + String(index))){delayswitch = newValue;}
         if (parameterID == String("compressorSwitch" + String(index))){compressorswitch = newValue;}
         if (parameterID == String("reverbSwitch" + String(index))){reverbswitch = newValue;}
-        
+
         /* Delay */
         if (parameterID == String("delayTime" + String(index))){delay.delayLength_ = newValue;}
         if (parameterID == String("delayFeedback" + String(index))){delay.feedback_ = newValue;}
@@ -515,31 +720,31 @@ public:
             delay.dryMix_ = newValue;
             delay.wetMix_ = 1.0f - delay.dryMix_;
         }
-        
+
         delay.update();
-        
+
         /*Envelope*/
         if (parameterID == String("envAttack" + String(index))){env.setAttackTime_mSec(newValue);}
         if (parameterID == String("envHold" + String(index))){env.setSustainTime_mSec(newValue);}// problematic!!
         if (parameterID == String("envDecay" + String(index))){env.setDecayTime_mSec(newValue);}
         if (parameterID == String("envRelease" + String(index))){env.setReleaseTime_mSec(newValue);}
-       
+
         //if (parameterID == String("envAttackBend" + String(index))){compressor.ratio_ = newValue;}
         if (parameterID == String("envSustain" + String(index))){env.setSustainLevel(newValue);}
         //if (parameterID == String("envDecayBend" + String(index))){compressor.tauRelease_ = newValue;}
         //if (parameterID == String("envReleaseBend" + String(index))){compressor.threshold_ = newValue;}
-        
+
          //std::cout<<"what envelope22222"<<" "<<env.getAttackTime()<<" "<<env.getDecayTime()<<" "<<env.getSustainTime()<<" "<<env.getReleaseTime()<<"\n";
-        
+
         /* Comp */
         if (parameterID == String("compThresh" + String(index))){compressor.threshold_ = newValue;}
         if (parameterID == String("compRatio" + String(index))){compressor.ratio_ = newValue;}
         if (parameterID == String("compAttack" + String(index))){compressor.tauAttack_ = newValue;}
         if (parameterID == String("compRelease" + String(index))){compressor.tauRelease_ = newValue;}
         if (parameterID == String("compGain" + String(index))){compressor.makeUpGain_ = newValue;}
-        
+
         compressor.update();
-        
+
         /*Reverb*/
         if (parameterID == String("reverbPredelay" + String(index))){ reverb_param.width = newValue;}//0 to 1
         if (parameterID == String("reverbSize" + String(index))){reverb_param.roomSize = newValue;}//0 to 1
@@ -579,11 +784,11 @@ public:
             {
                 reverb_highfreq = 50;
             }
-            
+
             reverb_lowpass.setCoefficients(lowcoef.makeLowPass(sampleRate, reverb_lowfreq));
             reverb_highpass.setCoefficients(highcoef.makeHighPass(sampleRate, reverb_highfreq));
-           
-            
+
+
         }
         if (parameterID == String("reverbDecay" + String(index))){reverb_param.damping = newValue;}//0 to 1
         if (parameterID == String("reverbDry" + String(index)))//0 to 1
@@ -591,18 +796,17 @@ public:
             reverb_param.dryLevel = newValue;
             reverb_param.wetLevel = 1.0f - newValue;
         }
-        
-        
-        
+
+
+
         reverb.setParameters(reverb_param);
-        
+
         for(size_t i=0;i<5;i++)
         {
             eq.updateBand(i);
         }
-        
+
         /*Envelope*/
-        
     };
     
     
@@ -619,7 +823,15 @@ public:
         }
     };
     
-    void setPitchVal(int pitch) { pitchVal = pitch; };
+    void setPitchVal(int pitchIn) { pitchVal = pitchIn; };
+    void setSaturationVal(float saturationIn)
+    {
+        saturationVal = saturationIn;
+        std::cout<<"saturationVal: "<<saturationVal<<std::endl;
+    };
+    void setPitchCent(double pitchCentIn) { pitchCent = pitchCentIn; };
+    
+    
     
     int getPitchVal() { return pitchVal; };
     

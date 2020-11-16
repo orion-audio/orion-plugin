@@ -126,9 +126,6 @@ private:
             }
         }
        
-
-        
-        
         return out;
     };
     //extract magnitudes for each filter

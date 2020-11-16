@@ -463,6 +463,12 @@ void PrimaryPaneComponent::sliderValueChanged (Slider* slider)
     else if(slider == instrumentsPanSlider.get())
     {
         instrumentsPanCoefficient[instrumetClickedSerial] = instrumentsPanSlider->getValue();
+        
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*>(processor->getSampler()->getVoice(instrumetClickedSerial)))
+        {
+            voice->panchange(instrumentsPanCoefficient[instrumetClickedSerial]);
+        }
+        
     }
 }
 
