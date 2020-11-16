@@ -80,8 +80,8 @@ public:
     int getTotalLength() { return sequenceLength; }
     void setSequenceLength(int newLength);
     
-    NoteSequence::SubDivision getSubDivision() { return subdivision; };
-    void setSubDivision(NoteSequence::SubDivision s);
+    NoteSequence::SubDivision getSubDivision(int which) { return subdivisions[which]; };
+    void setSubDivision(int which, NoteSequence::SubDivision s);
     
     void setChannel(int voice, int channel) { channels[voice] = channel; };
     
@@ -107,8 +107,7 @@ private:
     AudioFormatManager formatManager;
     float lastSampleRate = globalSampleRate;
     int sequenceLength = 16;
-    NoteSequence::SubDivision currentSubDivision = NoteSequence::SubDivision::sixteenth;
-    NoteSequence::SubDivision currentSubDivisions[4] = {NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth};
+    NoteSequence::SubDivision subdivisions[4] = {NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth, NoteSequence::SubDivision::sixteenth};
 
     bool isActive = true;
     
