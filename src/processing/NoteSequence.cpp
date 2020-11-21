@@ -36,7 +36,6 @@ void NoteSequence::addNote(int pitch, double startTime, double endTime, int velo
     notes.push_back(Note(pitch, velocity, startTime, endTime));
 }
 
-
 void NoteSequence::removeNote(int pitch, double time)
 {
     for (int i = 0; i < notes.size(); i++){
