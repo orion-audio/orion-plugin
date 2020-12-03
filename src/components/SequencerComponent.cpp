@@ -1,12 +1,12 @@
 /*
-  ==============================================================================
-
-    SequencerComponent.cpp
-    Created: 8 Nov 2019 1:53:21am
-    Author:  Quin Scacheri
-
-  ==============================================================================
-*/
+ ==============================================================================
+ 
+ SequencerComponent.cpp
+ Created: 8 Nov 2019 1:53:21am
+ Author:  Quin Scacheri
+ 
+ ==============================================================================
+ */
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SequencerComponent.h"
@@ -19,7 +19,7 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     sequencer.addListener(this);
     
     setOpaque(true);
-        
+    
     startTimerHz(15);
     
     voiceNames.add("KICK");
@@ -28,18 +28,18 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     voiceNames.add("HH-OPEN");
     voiceNames.add("CRASH");
     voiceNames.add("CLAP");
-
+    
     setColour(ColourIds::backgroundColourId, Colours::black);
     setColour(ColourIds::beatColourOffId, Colours::magenta);
     setColour(ColourIds::beatColourOnId, Colours::magenta);
-
+    
     lengthSlider.reset(new Slider());
     lengthSlider->setSliderStyle(Slider::SliderStyle::Rotary);
     lengthSlider->setColour(Slider::ColourIds::rotarySliderFillColourId, findColour(ColourIds::beatColourOffId));
     lengthSlider->setColour(Slider::ColourIds::backgroundColourId, Colours::white);
     
     double beatLength = 1.0 / (double)sequencer.getSubDivision();
-
+    
     auto noteButtonFn = [&] (int pitch, double beat) {
         sequencerButtons[pitch][beat].reset(new SequencerButton(NoteSequence::noteValues[pitch], beat * beatLength));
         addAndMakeVisible(sequencerButtons[pitch][beat].get());
@@ -94,7 +94,7 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     arrangeLabel.setText("ARRANGEMENT MODE", NotificationType::dontSendNotification);
     arrangeLabel.setColour(Label::ColourIds::textColourId, Colour(0xFF36FEE2));
     addAndMakeVisible(arrangeLabel);
-        
+    
     StringArray subdivisions;
     subdivisions.add("2n");
     subdivisions.add("4n");
@@ -103,7 +103,7 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     subdivisions.add("32n");
     subdivisions.add("8n triplet");
     subdivisions.add("16n triplet");
-
+    
     subdivisionCombo.addItemList(subdivisions, 1);
     subdivisionCombo.onChange = [&] {
         NoteSequence::SubDivision newSubdivision;
@@ -146,10 +146,10 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     beatCountLabel.setText("BEAT COUNT", dontSendNotification);
     beatCountLabel.setJustificationType(Justification::centred);
     addAndMakeVisible(beatCountLabel);
-
+    
     notesLabel.setText("NOTES", NotificationType::dontSendNotification);
     addAndMakeVisible(notesLabel);
-
+    
     instLabel.setText("INSTRUMENT", dontSendNotification);
     instLabel.setJustificationType(Justification::centred);
     addAndMakeVisible(instLabel);
@@ -157,9 +157,9 @@ SequencerComponent::SequencerComponent(Sequencer &s) : sequencer(s)
     channelLabel.setText("CHANNEL", dontSendNotification);
     channelLabel.setJustificationType(Justification::centred);
     addAndMakeVisible(channelLabel);
-
+    
     setValuesFromPlugin();
-
+    
 }
 
 SequencerComponent::~SequencerComponent()
@@ -196,11 +196,18 @@ void SequencerComponent::paintBar(Graphics& g)
     int start = barLines[currentBeat].getX();
     int end = currentBeat == 3 ? plotArea.getRight() : barLines[currentBeat + 1].getRight();
     int width = end - start;
-    g.setColour(Colour(0xFF313131));
-    g.fillRect(start, plotArea.getY() - getHeight() * .025, plotArea.getRight() - start, getHeight() * .025);
-    g.setColour(Colour(0xFF36FEE2));
     Path p;
-    p.addRoundedRectangle(start, plotArea.getY() - getHeight() * .025, width, getHeight() * .025, 8, 8, currentBeat==0, false, false ,false);
+    
+    g.setColour(Colour(0xFF313131));
+    p.addRoundedRectangle(plotArea.getX(), plotArea.getY() - getHeight() * .025, plotArea.getWidth(), getHeight() * .025, 8, 8, true, false, false, false);
+    g.fillPath(p);
+    
+    
+    g.setColour(Colour(0xFF36FEE2));
+    
+    p.clear();
+    p.addRoundedRectangle(start, plotArea.getY() - getHeight() * .025, width, getHeight() * .025, 8, 8, currentBeat == 0, false, false ,false);
+    
     g.fillPath(p);
     
 }
@@ -239,7 +246,7 @@ void SequencerComponent::resized()
     const int numBeats = int(sequencer.getSubDivision());
     const int numBeatsPerSection = numBeats / numSections;
     int barNum = 0;
-    barLines[barNum] = Rectangle<int>(plotArea.getX(), plotArea.getY() - getHeight() * .025, 2, plotArea.getHeight());
+    barLines[barNum] = Rectangle<int>(plotArea.getX(),  plotArea.getY(), 2, getHeight());
     barNum++;
     for (int i = numBeatsPerSection - 1; i < numBeats - numBeatsPerSection; i+=numBeatsPerSection) {
         int right = sequencerButtons[0][i + 1]->getX();
@@ -248,7 +255,7 @@ void SequencerComponent::resized()
         barLines[barNum] = {int(xPos - 1), (int)(plotArea.getY() - getHeight() * .025), 2, getHeight()};
         barNum++;
     }
-
+    
     barButtonGroupArea = Rectangle<int>(plotArea.getX(), 0, plotArea.getWidth(), getHeight() * .15);
     barButtonGroupArea = barButtonGroupArea.withSizeKeepingCentre(plotArea.getWidth() * .33, plotArea.getHeight() * .05);
     barButtonGroupArea.translate(0, -barButtonGroupArea.getHeight() / 2);
@@ -272,14 +279,14 @@ void SequencerComponent::resized()
     instLabel.setBounds(labels[0]->getBounds().translated(0, -labels[0]->getHeight()).withHeight(labels[0]->getHeight()));
     
     channelLabel.setBounds(instLabel.getBounds().translated(instLabel.getWidth(), 0));
-
-
+    
+    
 }
 
 
 void SequencerComponent::mouseUp(const MouseEvent& e)
 {
-
+    
 }
 
 
@@ -311,7 +318,7 @@ void SequencerComponent::buttonClicked(Button* b)
     if (button != nullptr) {
         int pitch = button->getPitch();
         double beat = button->getBeat();
-//        std::cout << pitch << "," << beat << std::endl;
+        //        std::cout << pitch << "," << beat << std::endl;
         NoteSequence* sequence = sequencer.getNoteSequence(currentSequence);
         if (!sequence->checkAndRemoveNote(pitch, beat))
         {
@@ -333,7 +340,7 @@ void SequencerComponent::notePlayed(int part, int beat) {
 }
 
 void SequencerComponent::handleButtonPress(int pitch, int beat, bool buttonState) { 
-
+    
 }
 
 void SequencerComponent::setSequenceLength(int newLength) {
@@ -354,7 +361,7 @@ void SequencerComponent::sequenceLengthChanged(int newLength) {
 void SequencerComponent::setSubDivision(NoteSequence::SubDivision s) {
     sequencer.setSubDivision(s);
     double beatLength = 1.0 / (double)sequencer.getSubDivision();
-
+    
     for (int i = 0; i < NUM_VOICES; i++) {
         for (double j = 0; j < 32; j++) {
             double beat = j * beatLength;
@@ -375,7 +382,7 @@ void SequencerComponent::setValuesFromPlugin() {
         }
     }
     resized();
-
+    
 }
 
 void SequencerComponent::comboBoxChanged(juce::ComboBox *combo) {

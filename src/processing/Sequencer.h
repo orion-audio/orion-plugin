@@ -97,7 +97,7 @@ private:
     std::map<int, int> channels;
     std::array<bool, 4> activeSequences = {true, true, true, true};
     NoteSequence::SubDivision subdivision = NoteSequence::SubDivision::sixteenth;
-    double loopEnd = 4;
+    double loopEnd = 1;
     void notifyListenersNotePlayed(int pitch, int note);
     std::vector<Listener*> listeners;
     
