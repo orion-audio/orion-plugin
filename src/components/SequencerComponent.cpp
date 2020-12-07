@@ -280,6 +280,7 @@ void SequencerComponent::resized()
     
     channelLabel.setBounds(instLabel.getBounds().translated(instLabel.getWidth(), 0));
     
+    repaint();
     
 }
 
