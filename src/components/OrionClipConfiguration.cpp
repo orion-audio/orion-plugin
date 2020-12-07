@@ -851,101 +851,120 @@ void OrionClipConfiguration::clipStretchUpdate(double value)
     
     instrumentSampleContainer[instrumetClickedSerial] = instrumentOriginalSampleContainer[instrumetClickedSerial];
     
-    double scale = 1;
     AudioBuffer<float> container;
     int newSampleLength = origSampleLength;
+    int times =  floor(value);
     
-    // Integer Times Part
-    int times =  floor(value * scale);
-    for(int k = 0; k < times; k++)
+    
+    if(value < 1.0f){value = 1.0f;}//临时
+    
+    if(value == 1.0f)
     {
-        newSampleLength = newSampleLength * 2;
-        container.setSize(originalChannelNum, newSampleLength ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
-        
-        int count = 0;
-        for (int i = 0; i < newSampleLength; i++)
-        {
-            for (int ch = 0; ch < 2; ch++)
-            {
-                float source = 0;
-                
-                if ( i % 2 == 0)
-                {
-                    source = instrumentSampleContainer[instrumetClickedSerial].getSample(ch, i - count);
-                }
-                else
-                {
-                    source = container.getSample(ch, i - 1);
-                }
-                container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
-            }
-            
-            if ( i % 2 != 0)
-            {
-                count += 1;
-            }
-        }
-        
-        instrumentSampleContainer[instrumetClickedSerial] = container;
         instrumentSampleContainer[instrumetClickedSerial].setSize(originalChannelNum, newSampleLength ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
         
         if (auto* sound = dynamic_cast<OrionSamplerSound*> (processor.sampler->getSound(instrumetClickedSerial).get()))
         {
             sound->setLength(newSampleLength);
         }
-
     }
-
-    
-    // Decimal Times Part
-    float decimal = value - times;
-    
-    if(decimal != 0)
+    else if(value > 1.0f)//
     {
-        int n = origSampleLength * decimal;//Amount of Adding Decimal Point
-
-        int addingPointRuler = newSampleLength/n;
+        // Integer Times Part
         
-        int newSampleLength2 = newSampleLength + newSampleLength * decimal;
-        container.setSize(originalChannelNum, newSampleLength2 ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
-        
-        int tmp = 0;
-        int count = 0;
-        
-        float source = 0;
-        
-        for (int i = 0; i < newSampleLength; i++)
+        for(int k = 0; k < times; k++)
         {
-            if (tmp == addingPointRuler)
+            newSampleLength = newSampleLength * 2;
+            container.setSize(originalChannelNum, newSampleLength ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+            
+            int count = 0;
+            for (int i = 0; i < newSampleLength; i++)
             {
                 for (int ch = 0; ch < 2; ch++)
                 {
-                    source = container.getSample(ch, i - 1);
+                    float source = 0;
+                    
+                    if ( i % 2 == 0)
+                    {
+                        source = instrumentSampleContainer[instrumetClickedSerial].getSample(ch, i - count);
+                    }
+                    else
+                    {
+                        source = container.getSample(ch, i - 1);
+                    }
                     container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
                 }
-                count += 1;
-                tmp = 0;
-            }
-            else
-            {
-                for (int ch = 0; ch < 2; ch++)
+                
+                if ( i % 2 != 0)
                 {
-                    source = instrumentSampleContainer[instrumetClickedSerial].getSample(ch, i - count);
-                    container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
+                    count += 1;
                 }
+            }
+            
+            instrumentSampleContainer[instrumetClickedSerial] = container;
+            instrumentSampleContainer[instrumetClickedSerial].setSize(originalChannelNum, newSampleLength ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+            
+            if (auto* sound = dynamic_cast<OrionSamplerSound*> (processor.sampler->getSound(instrumetClickedSerial).get()))
+            {
+                sound->setLength(newSampleLength);
             }
 
-            tmp += 1;
         }
+
         
-        instrumentSampleContainer[instrumetClickedSerial] = container;
-        instrumentSampleContainer[instrumetClickedSerial].setSize(originalChannelNum, newSampleLength2 ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+        // Decimal Times Part
+        float decimal = value - times;
         
-        if (auto* sound = dynamic_cast<OrionSamplerSound*> (processor.sampler->getSound(instrumetClickedSerial).get()))
+        if(decimal != 0)
         {
-            sound->setLength(newSampleLength2);
+            int n = origSampleLength * decimal;//Amount of Adding Decimal Point
+
+            int addingPointRuler = newSampleLength/n;
+            
+            int newSampleLength2 = newSampleLength + newSampleLength * decimal;
+            container.setSize(originalChannelNum, newSampleLength2 ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+            
+            int tmp = 0;
+            int count = 0;
+            
+            float source = 0;
+            
+            for (int i = 0; i < newSampleLength; i++)
+            {
+                if (tmp == addingPointRuler)
+                {
+                    for (int ch = 0; ch < 2; ch++)
+                    {
+                        source = container.getSample(ch, i - 1);
+                        container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
+                    }
+                    count += 1;
+                    tmp = 0;
+                }
+                else
+                {
+                    for (int ch = 0; ch < 2; ch++)
+                    {
+                        source = instrumentSampleContainer[instrumetClickedSerial].getSample(ch, i - count);
+                        container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
+                    }
+                }
+
+                tmp += 1;
+            }
+            
+            instrumentSampleContainer[instrumetClickedSerial] = container;
+            instrumentSampleContainer[instrumetClickedSerial].setSize(originalChannelNum, newSampleLength2 ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+            
+            if (auto* sound = dynamic_cast<OrionSamplerSound*> (processor.sampler->getSound(instrumetClickedSerial).get()))
+            {
+                sound->setLength(newSampleLength2);
+            }
         }
+        
     }
+    
+    
+    
 
 
     // Update To the Part of Selected Audio
