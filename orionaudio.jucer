@@ -7,6 +7,58 @@
               displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{7972F1E0-9D9D-922F-3576-753B71DD33A4}" name="src">
+      <GROUP id="{701CD081-39E4-E95A-4E28-87D4F4881C80}" name="SoundTouch">
+        <FILE id="z89oOy" name="AAFilter.cpp" compile="1" resource="0" file="src/SoundTouch/AAFilter.cpp"/>
+        <FILE id="gT3lB8" name="AAFilter.h" compile="0" resource="0" file="src/SoundTouch/AAFilter.h"/>
+        <FILE id="EAI4Mj" name="BPMDetect.cpp" compile="1" resource="0" file="src/SoundTouch/BPMDetect.cpp"/>
+        <FILE id="DUmYEV" name="BPMDetect.h" compile="0" resource="0" file="src/SoundTouch/BPMDetect.h"/>
+        <FILE id="gQ3w9q" name="cpu_detect.h" compile="0" resource="0" file="src/SoundTouch/cpu_detect.h"/>
+        <FILE id="d3eSd2" name="cpu_detect_x86.cpp" compile="1" resource="0"
+              file="src/SoundTouch/cpu_detect_x86.cpp"/>
+        <FILE id="FA9dcg" name="FIFOSampleBuffer.cpp" compile="1" resource="0"
+              file="src/SoundTouch/FIFOSampleBuffer.cpp"/>
+        <FILE id="pqdRWD" name="FIFOSampleBuffer.h" compile="0" resource="0"
+              file="src/SoundTouch/FIFOSampleBuffer.h"/>
+        <FILE id="l2syu5" name="FIFOSamplePipe.h" compile="0" resource="0"
+              file="src/SoundTouch/FIFOSamplePipe.h"/>
+        <FILE id="Tj8kQ8" name="FIRFilter.cpp" compile="1" resource="0" file="src/SoundTouch/FIRFilter.cpp"/>
+        <FILE id="xynkIA" name="FIRFilter.h" compile="0" resource="0" file="src/SoundTouch/FIRFilter.h"/>
+        <FILE id="msqr9Q" name="InterpolateCubic.cpp" compile="1" resource="0"
+              file="src/SoundTouch/InterpolateCubic.cpp"/>
+        <FILE id="UEBBVs" name="InterpolateCubic.h" compile="0" resource="0"
+              file="src/SoundTouch/InterpolateCubic.h"/>
+        <FILE id="CWz6xW" name="InterpolateLinear.cpp" compile="1" resource="0"
+              file="src/SoundTouch/InterpolateLinear.cpp"/>
+        <FILE id="Skaziw" name="InterpolateLinear.h" compile="0" resource="0"
+              file="src/SoundTouch/InterpolateLinear.h"/>
+        <FILE id="Ng2HGr" name="InterpolateShannon.cpp" compile="1" resource="0"
+              file="src/SoundTouch/InterpolateShannon.cpp"/>
+        <FILE id="mD3lpo" name="InterpolateShannon.h" compile="0" resource="0"
+              file="src/SoundTouch/InterpolateShannon.h"/>
+        <FILE id="OKNHar" name="main.cpp" compile="1" resource="0" file="src/SoundTouch/main.cpp"/>
+        <FILE id="O9BiVx" name="mmx_optimized.cpp" compile="1" resource="0"
+              file="src/SoundTouch/mmx_optimized.cpp"/>
+        <FILE id="G4FWii" name="PeakFinder.cpp" compile="1" resource="0" file="src/SoundTouch/PeakFinder.cpp"/>
+        <FILE id="fqIO9z" name="PeakFinder.h" compile="0" resource="0" file="src/SoundTouch/PeakFinder.h"/>
+        <FILE id="Z9l90A" name="RateTransposer.cpp" compile="1" resource="0"
+              file="src/SoundTouch/RateTransposer.cpp"/>
+        <FILE id="V5rOgK" name="RateTransposer.h" compile="0" resource="0"
+              file="src/SoundTouch/RateTransposer.h"/>
+        <FILE id="pRGntS" name="RunParameters.cpp" compile="1" resource="0"
+              file="src/SoundTouch/RunParameters.cpp"/>
+        <FILE id="xZsRao" name="RunParameters.h" compile="0" resource="0" file="src/SoundTouch/RunParameters.h"/>
+        <FILE id="Kiu17i" name="SoundTouch.cpp" compile="1" resource="0" file="src/SoundTouch/SoundTouch.cpp"/>
+        <FILE id="nAqc8j" name="SoundTouch.h" compile="0" resource="0" file="src/SoundTouch/SoundTouch.h"/>
+        <FILE id="m7UByg" name="soundtouch_config.h" compile="0" resource="0"
+              file="src/SoundTouch/soundtouch_config.h"/>
+        <FILE id="TXcJp9" name="sse_optimized.cpp" compile="1" resource="0"
+              file="src/SoundTouch/sse_optimized.cpp"/>
+        <FILE id="ROEKt0" name="STTypes.h" compile="0" resource="0" file="src/SoundTouch/STTypes.h"/>
+        <FILE id="KhKvIn" name="TDStretch.cpp" compile="1" resource="0" file="src/SoundTouch/TDStretch.cpp"/>
+        <FILE id="qX9C8J" name="TDStretch.h" compile="0" resource="0" file="src/SoundTouch/TDStretch.h"/>
+        <FILE id="eRizn9" name="WavFile.cpp" compile="1" resource="0" file="src/SoundTouch/WavFile.cpp"/>
+        <FILE id="whADUT" name="WavFile.h" compile="0" resource="0" file="src/SoundTouch/WavFile.h"/>
+      </GROUP>
       <GROUP id="{84899CBE-90A2-AE76-E23F-B80F68DAC29C}" name="components">
         <FILE id="HId9tK" name="AutoLabel.cpp" compile="1" resource="0" file="src/components/AutoLabel.cpp"/>
         <FILE id="P0ai3x" name="AutoLabel.h" compile="0" resource="0" file="src/components/AutoLabel.h"/>
@@ -183,253 +235,253 @@
       <GROUP id="{B6D6A70B-13F0-5DD1-2806-F118275C3B73}" name="orion-plugin-assets">
         <GROUP id="{96675615-8B27-CBCD-2506-AEC0228902A9}" name="graphics">
           <GROUP id="{7218B48B-9BB8-AE83-A13C-569C7A695E90}" name="1x">
-            <FILE id="NI1SNN" name="background.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/1x/background.png"/>
+            <FILE id="E2K9bb" name="background.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/1x/background.png"/>
           </GROUP>
           <GROUP id="{9BFA9E9F-1F4E-AFDF-7498-6CE4463627CA}" name="dropdown">
             <GROUP id="{738F09AB-562C-0C80-B551-10F1C655D045}" name="dropdownBackgrounds">
-              <FILE id="DojFO3" name="clipBackground.png" compile="0" resource="1"
+              <FILE id="bvmBHO" name="clipBackground.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/clipBackground.png"/>
-              <FILE id="XAyyvV" name="ENVBackground.png" compile="0" resource="1"
+              <FILE id="lI32hw" name="ENVBackground.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/ENVBackground.png"/>
-              <FILE id="uicv4b" name="EQBackground.png" compile="0" resource="1"
+              <FILE id="fItkS7" name="EQBackground.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/EQBackground.png"/>
-              <FILE id="Qhk49j" name="FXBackground.png" compile="0" resource="1"
+              <FILE id="V4aMIs" name="FXBackground.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownBackgrounds/FXBackground.png"/>
             </GROUP>
             <GROUP id="{A91CDB88-FD08-CFE0-D170-CCAF7130C243}" name="dropdownTab">
-              <FILE id="AC15PJ" name="ClipButtonOff.png" compile="0" resource="1"
+              <FILE id="X8g68O" name="ClipButtonOff.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/ClipButtonOff.png"/>
-              <FILE id="K7vZNL" name="ClipButtonOn.png" compile="0" resource="1"
+              <FILE id="VftRVQ" name="ClipButtonOn.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/ClipButtonOn.png"/>
-              <FILE id="NegiJP" name="ENVButtonOff.png" compile="0" resource="1"
+              <FILE id="i233dQ" name="ENVButtonOff.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/ENVButtonOff.png"/>
-              <FILE id="Ox6Q41" name="ENVButtonOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/ENVButtonOn.png"/>
-              <FILE id="fdP17q" name="EQButtonOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/EQButtonOff.png"/>
-              <FILE id="w8sAFC" name="EQButtonOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/EQButtonOn.png"/>
-              <FILE id="mTJrXS" name="FXButtonOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/FXButtonOff.png"/>
-              <FILE id="VXzsaq" name="FXButtonOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/FXButtonOn.png"/>
+              <FILE id="RyzqkB" name="ENVButtonOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/ENVButtonOn.png"/>
+              <FILE id="nZwECj" name="EQButtonOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/EQButtonOff.png"/>
+              <FILE id="ySowP4" name="EQButtonOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/EQButtonOn.png"/>
+              <FILE id="nHwrCF" name="FXButtonOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/FXButtonOff.png"/>
+              <FILE id="V8gs4d" name="FXButtonOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/dropdown/dropdownTab/FXButtonOn.png"/>
             </GROUP>
           </GROUP>
           <GROUP id="{D2F6599F-AF35-D211-83AC-BDE74C5EFE13}" name="ModeButton">
-            <FILE id="DQeBO4" name="ModeSwitchOff.png" compile="0" resource="1"
+            <FILE id="fa06tL" name="ModeSwitchOff.png" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/graphics/ModeButton/ModeSwitchOff.png"/>
-            <FILE id="NRaKBX" name="ModeSwitchOn.png" compile="0" resource="1"
+            <FILE id="pXCX7G" name="ModeSwitchOn.png" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/graphics/ModeButton/ModeSwitchOn.png"/>
           </GROUP>
           <GROUP id="{DACE966E-D88E-8A5B-61F0-277CEAA958CB}" name="PowerButton">
-            <FILE id="A1iRVS" name="PowerOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/PowerButton/PowerOff.png"/>
-            <FILE id="gN5sFi" name="PowerOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/PowerButton/PowerOn.png"/>
+            <FILE id="Qf8Bph" name="PowerOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/PowerButton/PowerOff.png"/>
+            <FILE id="fKprKe" name="PowerOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/PowerButton/PowerOn.png"/>
           </GROUP>
           <GROUP id="{11770A00-6491-AFCE-2647-FED8A91BF8DF}" name="primaryPane">
             <GROUP id="{C0DCDF86-34F1-08C3-D52D-20B309A25BA7}" name="arrows">
-              <FILE id="mFM83C" name="arrow_down.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_down.png"/>
-              <FILE id="HdJwZp" name="arrow_downOn.png" compile="0" resource="1"
+              <FILE id="NHHUsF" name="arrow_down.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_down.png"/>
+              <FILE id="qnt1on" name="arrow_downOn.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_downOn.png"/>
-              <FILE id="bbB7cF" name="arrow_left.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_left.png"/>
-              <FILE id="OesHWd" name="arrow_leftOn.png" compile="0" resource="1"
+              <FILE id="aCOcOU" name="arrow_left.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_left.png"/>
+              <FILE id="UGmrMx" name="arrow_leftOn.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_leftOn.png"/>
-              <FILE id="aAq0rO" name="arrow_right.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_right.png"/>
-              <FILE id="AuRWdS" name="arrow_rightOn.png" compile="0" resource="1"
+              <FILE id="oEl2A2" name="arrow_right.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_right.png"/>
+              <FILE id="MTWIKV" name="arrow_rightOn.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_rightOn.png"/>
-              <FILE id="tYM5iL" name="arrow_up.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_up.png"/>
-              <FILE id="IDqqJX" name="arrow_upOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_upOn.png"/>
+              <FILE id="EVypsS" name="arrow_up.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_up.png"/>
+              <FILE id="gj89zv" name="arrow_upOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/arrows/arrow_upOn.png"/>
             </GROUP>
             <GROUP id="{517E72F9-1C78-EF79-21F4-AE38EF800421}" name="instruments">
-              <FILE id="VZnaUK" name="ClapOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/ClapOff.png"/>
-              <FILE id="V35b0i" name="ClapOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/ClapOn.png"/>
-              <FILE id="DGvYP9" name="CrashOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/CrashOff.png"/>
-              <FILE id="XLrzN5" name="CrashOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/CrashOn.png"/>
-              <FILE id="l3xh6R" name="HHCOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHCOff.png"/>
-              <FILE id="llHbwV" name="HHCOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHCOn.png"/>
-              <FILE id="JrGGtN" name="HHOOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHOOff.png"/>
-              <FILE id="c0b7fZ" name="HHOOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHOOn.png"/>
-              <FILE id="T2L5k2" name="KickOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/KickOff.png"/>
-              <FILE id="UGAgSl" name="KickOn .png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/KickOn .png"/>
-              <FILE id="XxkQIv" name="KickOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/KickOn.png"/>
-              <FILE id="MNCtCl" name="PercOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/PercOff.png"/>
-              <FILE id="vjeujz" name="PercOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/PercOn.png"/>
-              <FILE id="HZKQiD" name="SnapOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnapOff.png"/>
-              <FILE id="X6x5Xe" name="SnapOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnapOn.png"/>
-              <FILE id="aKI9Hj" name="SnareOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnareOff.png"/>
-              <FILE id="jXdjKd" name="SnareOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnareOn.png"/>
+              <FILE id="ccN2XA" name="ClapOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/ClapOff.png"/>
+              <FILE id="ZRXbmx" name="ClapOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/ClapOn.png"/>
+              <FILE id="FGWiFy" name="CrashOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/CrashOff.png"/>
+              <FILE id="Qntlyb" name="CrashOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/CrashOn.png"/>
+              <FILE id="d2a0au" name="HHCOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHCOff.png"/>
+              <FILE id="pZpEKG" name="HHCOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHCOn.png"/>
+              <FILE id="y7qEJp" name="HHOOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHOOff.png"/>
+              <FILE id="jSGBnH" name="HHOOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/HHOOn.png"/>
+              <FILE id="pV58xy" name="KickOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/KickOff.png"/>
+              <FILE id="aSSsLB" name="KickOn .png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/KickOn .png"/>
+              <FILE id="HlqQ7r" name="KickOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/KickOn.png"/>
+              <FILE id="rRloyg" name="PercOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/PercOff.png"/>
+              <FILE id="LClCqW" name="PercOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/PercOn.png"/>
+              <FILE id="s4FOIt" name="SnapOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnapOff.png"/>
+              <FILE id="tIp2lJ" name="SnapOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnapOn.png"/>
+              <FILE id="iumswS" name="SnareOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnareOff.png"/>
+              <FILE id="LaSQvM" name="SnareOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/instruments/SnareOn.png"/>
             </GROUP>
             <GROUP id="{6D083A84-C105-FE15-C191-0A504AC9D8D8}" name="muteButton">
-              <FILE id="Q1jlp2" name="MuteOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/muteButton/MuteOff.png"/>
-              <FILE id="qTavji" name="MuteOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/muteButton/MuteOn.png"/>
+              <FILE id="TpsCFy" name="MuteOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/muteButton/MuteOff.png"/>
+              <FILE id="jUI79l" name="MuteOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/muteButton/MuteOn.png"/>
             </GROUP>
             <GROUP id="{11483280-57F2-76F1-3826-730E4FE42557}" name="soloButton">
-              <FILE id="Tppgyd" name="SoloOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/soloButton/SoloOff.png"/>
-              <FILE id="yMTh1a" name="SoloOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/soloButton/SoloOn.png"/>
+              <FILE id="wXd8E5" name="SoloOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/soloButton/SoloOff.png"/>
+              <FILE id="ustzYm" name="SoloOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/soloButton/SoloOn.png"/>
             </GROUP>
-            <FILE id="MgkOF2" name="PrimaryBackground.svg" compile="0" resource="1"
+            <FILE id="tnkk4p" name="PrimaryBackground.svg" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/PrimaryBackground.svg"/>
-            <FILE id="k9f7P1" name="PrimaryPane_Footer.png" compile="0" resource="1"
+            <FILE id="Jfp8ps" name="PrimaryPane_Footer.png" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/graphics/primaryPane/PrimaryPane_Footer.png"/>
           </GROUP>
           <GROUP id="{1AA6E157-D64D-7AE8-F62C-81B526D8E624}" name="RectButton">
-            <FILE id="Zhrmf6" name="RectSwitchOff.png" compile="0" resource="1"
+            <FILE id="PdJhwM" name="RectSwitchOff.png" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/graphics/RectButton/RectSwitchOff.png"/>
-            <FILE id="JiGSlV" name="RectSwitchOn.png" compile="0" resource="1"
+            <FILE id="moGojv" name="RectSwitchOn.png" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/graphics/RectButton/RectSwitchOn.png"/>
           </GROUP>
           <GROUP id="{C12A1189-86C0-4B86-ACA9-4AA92BDEC38A}" name="ResizeButton">
-            <FILE id="jkROUJ" name="ResizeOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/ResizeButton/ResizeOff.png"/>
-            <FILE id="deSQ2d" name="ResizeOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/ResizeButton/ResizeOn.png"/>
+            <FILE id="qEsgdq" name="ResizeOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/ResizeButton/ResizeOff.png"/>
+            <FILE id="jBblL9" name="ResizeOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/ResizeButton/ResizeOn.png"/>
           </GROUP>
           <GROUP id="{C59DCF81-BBCF-1580-856C-E4F540A22C21}" name="sidePanel">
             <GROUP id="{B78E188B-0177-9CBC-420B-BC4F064F1C02}" name="icons">
-              <FILE id="VfghGg" name="folder_Off.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/icons/folder_Off.png"/>
-              <FILE id="BEfPQ0" name="folder_On.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/icons/folder_On.png"/>
+              <FILE id="PIGGyw" name="folder_Off.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/icons/folder_Off.png"/>
+              <FILE id="bktrrh" name="folder_On.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/icons/folder_On.png"/>
             </GROUP>
             <GROUP id="{911884FB-F2D7-46FE-19AA-62FBA3B1273B}" name="indicateButton">
-              <FILE id="fsdo5n" name="dirBackOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
-              <FILE id="hbqNjn" name="dirBackOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
-              <FILE id="R3sLAK" name="dirForwardOff.png" compile="0" resource="1"
+              <FILE id="alv2T1" name="dirBackOff.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/indicateButton/dirBackOff.png"/>
+              <FILE id="ZyROoI" name="dirBackOn.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/indicateButton/dirBackOn.png"/>
+              <FILE id="mF2Hv5" name="dirForwardOff.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/indicateButton/dirForwardOff.png"/>
-              <FILE id="SPysMv" name="dirForwardOn.png" compile="0" resource="1"
+              <FILE id="Iv8ckN" name="dirForwardOn.png" compile="0" resource="1"
                     file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/indicateButton/dirForwardOn.png"/>
             </GROUP>
-            <FILE id="ZXdMV2" name="logo.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/logo.png"/>
-            <FILE id="PO1djS" name="sidePanelBackground.png" compile="0" resource="1"
+            <FILE id="BTtA3u" name="logo.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/logo.png"/>
+            <FILE id="r7Vd6h" name="sidePanelBackground.png" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sidePanel/sidePanelBackground.png"/>
           </GROUP>
-          <FILE id="VfDDfd" name="a.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/a.png"/>
-          <FILE id="le6ajl" name="a_button.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/a_button.png"/>
-          <FILE id="uuBXcO" name="appdir.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/appdir.png"/>
-          <FILE id="WL6ttm" name="background_gradient.png" compile="0" resource="1"
+          <FILE id="ZZI9NV" name="a.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/a.png"/>
+          <FILE id="fdcUsQ" name="a_button.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/a_button.png"/>
+          <FILE id="w3MHcN" name="appdir.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/appdir.png"/>
+          <FILE id="cO4C4u" name="background_gradient.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/background_gradient.png"/>
-          <FILE id="EzMIvN" name="check.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/check.png"/>
-          <FILE id="EXUCm9" name="clap_selected.png" compile="0" resource="1"
+          <FILE id="PkloQ1" name="check.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/check.png"/>
+          <FILE id="eJDE03" name="clap_selected.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/clap_selected.png"/>
-          <FILE id="qTdMqU" name="compressorBackground.png" compile="0" resource="1"
+          <FILE id="XeHNdR" name="compressorBackground.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/compressorBackground.png"/>
-          <FILE id="tVkx2k" name="delayBackground.png" compile="0" resource="1"
+          <FILE id="GuEwtR" name="delayBackground.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/delayBackground.png"/>
-          <FILE id="ZVUzXJ" name="EQ_Background.png" compile="0" resource="1"
+          <FILE id="eRs3wl" name="EQ_Background.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/EQ_Background.png"/>
-          <FILE id="jm1F8f" name="expand.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/expand.png"/>
-          <FILE id="S6w1ZU" name="headphone_button.png" compile="0" resource="1"
+          <FILE id="yn78pD" name="expand.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/expand.png"/>
+          <FILE id="CGr2tS" name="headphone_button.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/headphone_button.png"/>
-          <FILE id="RowANL" name="hh-c_off.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/hh-c_off.png"/>
-          <FILE id="cum229" name="hh-c_selected.png" compile="0" resource="1"
+          <FILE id="lI1lcs" name="hh-c_off.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/hh-c_off.png"/>
+          <FILE id="XoTXpL" name="hh-c_selected.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/hh-c_selected.png"/>
-          <FILE id="jppoTu" name="hh-o_off.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/hh-o_off.png"/>
-          <FILE id="nS8Bnd" name="hh-o_selected.png" compile="0" resource="1"
+          <FILE id="LeaiFb" name="hh-o_off.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/hh-o_off.png"/>
+          <FILE id="ozHOjR" name="hh-o_selected.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/hh-o_selected.png"/>
-          <FILE id="WPN21C" name="InvisibleButtonBackground.png" compile="0"
+          <FILE id="iH0HNy" name="InvisibleButtonBackground.png" compile="0"
                 resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/InvisibleButtonBackground.png"/>
-          <FILE id="SglEUi" name="kick_selected.png" compile="0" resource="1"
+          <FILE id="NHBPau" name="kick_selected.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/kick_selected.png"/>
-          <FILE id="U1QxIk" name="knob_1.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/knob_1.png"/>
-          <FILE id="CFpJAL" name="knob_2.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/knob_2.png"/>
-          <FILE id="I9lcfy" name="m.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/m.png"/>
-          <FILE id="fCGtgj" name="meter.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/meter.png"/>
-          <FILE id="x1XUOp" name="navigator_background.png" compile="0" resource="1"
+          <FILE id="hHT8BJ" name="knob_1.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/knob_1.png"/>
+          <FILE id="Uwi2rU" name="knob_2.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/knob_2.png"/>
+          <FILE id="A0bbAt" name="m.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/m.png"/>
+          <FILE id="Uv8h6m" name="meter.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/meter.png"/>
+          <FILE id="SyyPAw" name="navigator_background.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/navigator_background.png"/>
-          <FILE id="dkoL1y" name="orionBackground.png" compile="0" resource="1"
+          <FILE id="GapHQA" name="orionBackground.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/orionBackground.png"/>
-          <FILE id="yffD67" name="orionClipBackground.png" compile="0" resource="1"
+          <FILE id="ntP3A5" name="orionClipBackground.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/orionClipBackground.png"/>
-          <FILE id="krdvFt" name="orionEnvBackground.png" compile="0" resource="1"
+          <FILE id="LanF8T" name="orionEnvBackground.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/orionEnvBackground.png"/>
-          <FILE id="opLlEl" name="power_button.png" compile="0" resource="1"
+          <FILE id="pEN8A2" name="power_button.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/power_button.png"/>
-          <FILE id="zReQHJ" name="profile.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/profile.png"/>
-          <FILE id="EP4aeD" name="question.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/question.png"/>
-          <FILE id="qlGURe" name="reverbBackground.png" compile="0" resource="1"
+          <FILE id="JSbZLt" name="profile.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/profile.png"/>
+          <FILE id="kL3n5h" name="question.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/question.png"/>
+          <FILE id="dwgUoV" name="reverbBackground.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/reverbBackground.png"/>
-          <FILE id="e1tQ7U" name="s.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/s.png"/>
-          <FILE id="nlBRD0" name="settings.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/settings.png"/>
-          <FILE id="qR0WPM" name="sound_file.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sound_file.png"/>
-          <FILE id="ERnBG4" name="volume.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/volume.png"/>
-          <FILE id="nWF2Kr" name="wrench_button.png" compile="0" resource="1"
+          <FILE id="p4ueOO" name="s.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/s.png"/>
+          <FILE id="E0lcPH" name="settings.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/settings.png"/>
+          <FILE id="VjCmoj" name="sound_file.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/sound_file.png"/>
+          <FILE id="fZr553" name="volume.png" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/graphics/volume.png"/>
+          <FILE id="pFRSG8" name="wrench_button.png" compile="0" resource="1"
                 file="../../../../Documents/GitHub/orion-plugin-assets/graphics/wrench_button.png"/>
         </GROUP>
         <GROUP id="{E612FA92-763A-31EC-FEED-EE2A6F310B98}" name="samples">
           <GROUP id="{FBFA86EE-798D-2C71-CA78-E7ECCBEF9D21}" name="Claps">
-            <FILE id="OStcqp" name="Basic Clap.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Basic Clap.wav"/>
-            <FILE id="r0bYET" name="Break The Bank Clap.wav" compile="0" resource="1"
+            <FILE id="mLN6G5" name="Basic Clap.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Basic Clap.wav"/>
+            <FILE id="H1tzI7" name="Break The Bank Clap.wav" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Break The Bank Clap.wav"/>
-            <FILE id="EhSrH3" name="Clap1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Clap1.wav"/>
-            <FILE id="E41qeF" name="Clap2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Clap2.wav"/>
-            <FILE id="zwy4j7" name="Luger Slap Clap.wav" compile="0" resource="1"
+            <FILE id="cCORHX" name="Clap1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Clap1.wav"/>
+            <FILE id="Pb5CFK" name="Clap2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Clap2.wav"/>
+            <FILE id="PqZuVL" name="Luger Slap Clap.wav" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Luger Slap Clap.wav"/>
-            <FILE id="WH4Vtm" name="Slap Clap.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Slap Clap.wav"/>
+            <FILE id="t3wgMF" name="Slap Clap.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Claps/Slap Clap.wav"/>
           </GROUP>
           <GROUP id="{589B6136-1FF7-A5A8-9E5B-EFA3D5C60375}" name="Crash">
-            <FILE id="hoDAIu" name="Crash.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Crash/Crash.wav"/>
-            <FILE id="wxSje3" name="testWhiteNoise5sec.wav" compile="0" resource="1"
+            <FILE id="TYb5IR" name="Crash.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Crash/Crash.wav"/>
+            <FILE id="felstd" name="testWhiteNoise5sec.wav" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/samples/Crash/testWhiteNoise5sec.wav"/>
           </GROUP>
           <GROUP id="{FC00CB7A-B524-8975-B185-7E97D4AC8676}" name="HHC">
-            <FILE id="WET6ZF" name="Bourne Hihat.wav" compile="0" resource="1"
+            <FILE id="VrCano" name="Bourne Hihat.wav" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Bourne Hihat.wav"/>
-            <FILE id="l357aQ" name="Break The Bank Hat.wav" compile="0" resource="1"
+            <FILE id="TOYEb3" name="Break The Bank Hat.wav" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Break The Bank Hat.wav"/>
-            <FILE id="W4dDZz" name="Metro Hihat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Metro Hihat.wav"/>
-            <FILE id="SLAnWm" name="ok hihat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/ok hihat.wav"/>
-            <FILE id="qDad3z" name="Open Hat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Open Hat.wav"/>
-            <FILE id="HugyBN" name="shawty hat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/shawty hat.wav"/>
-            <FILE id="GqJssT" name="Zay Hi Hat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Zay Hi Hat.wav"/>
+            <FILE id="blmLEX" name="Metro Hihat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Metro Hihat.wav"/>
+            <FILE id="UYjc1Y" name="ok hihat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/ok hihat.wav"/>
+            <FILE id="Cfx9hS" name="Open Hat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Open Hat.wav"/>
+            <FILE id="zbG3XG" name="shawty hat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/shawty hat.wav"/>
+            <FILE id="j4XFna" name="Zay Hi Hat.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHC/Zay Hi Hat.wav"/>
           </GROUP>
           <GROUP id="{F8492CF2-FC11-580B-0787-E6D65CB7F28E}" name="HHO">
-            <FILE id="YXqBbk" name="HiHatOp01.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp01.wav"/>
-            <FILE id="SNyosn" name="HiHatOp02.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp02.wav"/>
-            <FILE id="GJySda" name="HiHatOp03.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp03.wav"/>
-            <FILE id="BO5e0H" name="HiHatOp04.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp04.wav"/>
-            <FILE id="NwbbKc" name="HiHatOp05.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp05.wav"/>
-            <FILE id="UpOlVg" name="HiHatOp06.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp06.wav"/>
-            <FILE id="p5o8YO" name="HiHatOp07.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp07.wav"/>
-            <FILE id="sbc856" name="HiHatOp08.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp08.wav"/>
-            <FILE id="twSSQB" name="HiHatOp09.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp09.wav"/>
-            <FILE id="oEVTc8" name="HiHatOp10.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp10.wav"/>
-            <FILE id="ChD3GA" name="HiHatOp11.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp11.wav"/>
-            <FILE id="IAhTdO" name="test.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/test.wav"/>
+            <FILE id="v8quer" name="HiHatOp01.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp01.wav"/>
+            <FILE id="BH5O4o" name="HiHatOp02.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp02.wav"/>
+            <FILE id="FEY9lL" name="HiHatOp03.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp03.wav"/>
+            <FILE id="dgJ9vU" name="HiHatOp04.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp04.wav"/>
+            <FILE id="vlX02i" name="HiHatOp05.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp05.wav"/>
+            <FILE id="T13rsK" name="HiHatOp06.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp06.wav"/>
+            <FILE id="NCoCHT" name="HiHatOp07.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp07.wav"/>
+            <FILE id="x5yJ8x" name="HiHatOp08.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp08.wav"/>
+            <FILE id="vR90Ip" name="HiHatOp09.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp09.wav"/>
+            <FILE id="zYo8fG" name="HiHatOp10.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp10.wav"/>
+            <FILE id="fKqo28" name="HiHatOp11.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/HiHatOp11.wav"/>
+            <FILE id="n2laiP" name="test.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/HHO/test.wav"/>
           </GROUP>
           <GROUP id="{F6C30671-13EB-38B8-AA14-793B9373B27B}" name="Kicks">
-            <FILE id="s9O4UZ" name="DP Beats Kick.wav" compile="0" resource="1"
+            <FILE id="WtsBTy" name="DP Beats Kick.wav" compile="0" resource="1"
                   file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/DP Beats Kick.wav"/>
-            <FILE id="LWg8E2" name="Kick 1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 1.wav"/>
-            <FILE id="fAnjvJ" name="Kick 2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 2.wav"/>
-            <FILE id="bLo3ga" name="Kick 3.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 3.wav"/>
-            <FILE id="ZmENUD" name="Kick 4.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 4.wav"/>
-            <FILE id="mD6g0k" name="Kick 5.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 5.wav"/>
-            <FILE id="qzdTXw" name="Kick.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick.wav"/>
-            <FILE id="CQYULB" name="Trell Kick.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Trell Kick.wav"/>
-            <FILE id="RR1dOz" name="Zay Kick.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Zay Kick.wav"/>
+            <FILE id="z8u8b5" name="Kick 1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 1.wav"/>
+            <FILE id="HjELvD" name="Kick 2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 2.wav"/>
+            <FILE id="gfBDaX" name="Kick 3.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 3.wav"/>
+            <FILE id="BC6dOd" name="Kick 4.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 4.wav"/>
+            <FILE id="Fv0t0B" name="Kick 5.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick 5.wav"/>
+            <FILE id="vRbNKl" name="Kick.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Kick.wav"/>
+            <FILE id="xFaQ5s" name="Trell Kick.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Trell Kick.wav"/>
+            <FILE id="CUWb0O" name="Zay Kick.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Kicks/Zay Kick.wav"/>
           </GROUP>
           <GROUP id="{6214B474-A2EF-F368-7541-15D7E777AFEC}" name="Percs">
-            <FILE id="xCObPA" name="basic perc.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Percs/basic perc.wav"/>
-            <FILE id="pcvhFW" name="NM YSL Perc.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Percs/NM YSL Perc.wav"/>
+            <FILE id="wiRskR" name="basic perc.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Percs/basic perc.wav"/>
+            <FILE id="hQ27QL" name="NM YSL Perc.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Percs/NM YSL Perc.wav"/>
           </GROUP>
           <GROUP id="{CB89B723-0D69-D614-075F-2F87DDC982E5}" name="Snaps">
-            <FILE id="qXkDKJ" name="HHPSNP1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP1.wav"/>
-            <FILE id="vKq36r" name="HHPSNP2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP2.wav"/>
-            <FILE id="PjucIq" name="HHPSNP3.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP3.wav"/>
-            <FILE id="WkvFwO" name="HHPSNP4.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP4.wav"/>
-            <FILE id="G5YZyy" name="HHPSNP5.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP5.wav"/>
-            <FILE id="AeV5UW" name="HHPSNP6.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP6.wav"/>
-            <FILE id="DbIUN8" name="HHPSNP7.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP7.wav"/>
-            <FILE id="jO8mEj" name="HHPSNP8.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP8.wav"/>
-            <FILE id="DF7YRO" name="HHPSNP9.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP9.wav"/>
-            <FILE id="kNFRdW" name="HHPSNP10.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP10.wav"/>
-            <FILE id="ICTWkJ" name="HHPSNP11.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP11.wav"/>
-            <FILE id="ITSy4X" name="HHPSNP12.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP12.wav"/>
-            <FILE id="WgDsn7" name="HHPSNP13.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP13.wav"/>
-            <FILE id="W9ZrrM" name="HHPSNP14.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP14.wav"/>
-            <FILE id="Tmajdw" name="HHPSNP15.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP15.wav"/>
-            <FILE id="mssjRM" name="HHPSNP16.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP16.wav"/>
+            <FILE id="UYl28W" name="HHPSNP1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP1.wav"/>
+            <FILE id="T1aGaB" name="HHPSNP2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP2.wav"/>
+            <FILE id="Jj3AZU" name="HHPSNP3.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP3.wav"/>
+            <FILE id="Qu11r6" name="HHPSNP4.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP4.wav"/>
+            <FILE id="OuCLta" name="HHPSNP5.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP5.wav"/>
+            <FILE id="CNWYxW" name="HHPSNP6.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP6.wav"/>
+            <FILE id="T8d8xe" name="HHPSNP7.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP7.wav"/>
+            <FILE id="SkdCH2" name="HHPSNP8.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP8.wav"/>
+            <FILE id="xmmjgd" name="HHPSNP9.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP9.wav"/>
+            <FILE id="gCWB9J" name="HHPSNP10.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP10.wav"/>
+            <FILE id="QQtnpE" name="HHPSNP11.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP11.wav"/>
+            <FILE id="St5iy0" name="HHPSNP12.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP12.wav"/>
+            <FILE id="TxFTQV" name="HHPSNP13.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP13.wav"/>
+            <FILE id="cvx9es" name="HHPSNP14.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP14.wav"/>
+            <FILE id="QqhkSn" name="HHPSNP15.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP15.wav"/>
+            <FILE id="ftvz3w" name="HHPSNP16.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snaps/HHPSNP16.wav"/>
           </GROUP>
           <GROUP id="{C695FCE8-6AD2-2FC6-5724-C62994D5C7F6}" name="Snares">
-            <FILE id="wW6oFi" name="SXJ Snare1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare1.wav"/>
-            <FILE id="wF32La" name="SXJ Snare2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare2.wav"/>
-            <FILE id="ZjYZeJ" name="SXJ Snare3.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare3.wav"/>
-            <FILE id="NXtYF1" name="SXJ Snare4.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare4.wav"/>
-            <FILE id="KoSrwv" name="SXJ Snare5.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare5.wav"/>
-            <FILE id="uKmJpM" name="SXJ Snare6.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare6.wav"/>
-            <FILE id="b9RQiE" name="SXJ Snare7.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare7.wav"/>
-            <FILE id="FCvFPb" name="SXJ Snare8.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare8.wav"/>
-            <FILE id="RVkbJ6" name="SXJ Snare9.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare9.wav"/>
+            <FILE id="ulbqnB" name="SXJ Snare1.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare1.wav"/>
+            <FILE id="VVMe63" name="SXJ Snare2.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare2.wav"/>
+            <FILE id="Qs2uWw" name="SXJ Snare3.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare3.wav"/>
+            <FILE id="kvJ7Pe" name="SXJ Snare4.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare4.wav"/>
+            <FILE id="r57thl" name="SXJ Snare5.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare5.wav"/>
+            <FILE id="fDQQ3F" name="SXJ Snare6.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare6.wav"/>
+            <FILE id="uPJp9O" name="SXJ Snare7.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare7.wav"/>
+            <FILE id="WRbZWe" name="SXJ Snare8.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare8.wav"/>
+            <FILE id="KOSgoj" name="SXJ Snare9.wav" compile="0" resource="1" file="../../../../Documents/GitHub/orion-plugin-assets/samples/Snares/SXJ Snare9.wav"/>
           </GROUP>
         </GROUP>
       </GROUP>
@@ -438,8 +490,8 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;"/>
-        <CONFIGURATION isDebug="0" name="Release" headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;../../src/SoundTouch"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="../../src&#10;../../src/subviews&#10;../../src/components&#10;../../src/processing&#10;../../src/laf&#10;../../src/util&#10;../../src/SoundTouch&#10;"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../Documents/music tech/JUCE/modules"/>

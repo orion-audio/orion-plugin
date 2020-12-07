@@ -10,6 +10,8 @@
 #define __MIRRORVIEWMAIN__
 #include "MirrorViews.h"
 
+//#include "maximilian.h"
+
 using namespace std;
 using namespace juce;
 //==============================================================================
@@ -517,9 +519,12 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
             dropdownTable->clipConfiguration->setimagerSwitchImage(imagerModeSwitches[instrumetClickedSerial]);
             
             dropdownTable->clipConfiguration->clipSaturationValueChange(clipSaturationCoefficient[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->clipSaturationFreqValueChange(clipSaturationFreqCoefficient[instrumetClickedSerial]);
             
             dropdownTable->clipConfiguration->clipPitchKnobValueChange(clipPitchCoefficient[instrumetClickedSerial]);
             dropdownTable->clipConfiguration->clipFineTuneKnobValueChange(clipFineTuneCoefficient[instrumetClickedSerial]);
+            dropdownTable->clipConfiguration->clipStretchSpeedKnobValueChange(clipStretchSpeedCoefficient[instrumetClickedSerial]);
+            
             dropdownTable->clipConfiguration->clipImagerSliderValueChange(imagerCoefficient[instrumetClickedSerial]);
             dropdownTable->clipConfiguration->clipImagerSharpSliderValueChange(imagerSharpCoefficient[instrumetClickedSerial]);
             dropdownTable->clipConfiguration->setReverseMode(reverseSwitches[instrumetClickedSerial]);
@@ -606,9 +611,7 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
                 dropdownTable->effectConfiguration->setSwitchImage(false, 2);//--!!!!!!!!!!!
             }
             
-            
             /* Set Sidechain Image */
-            
             if(sidechainIndex[instrumetClickedSerial] == -1)
             {
                 dropdownTable->effectConfiguration->setCompressorComboBoxDisplay("None");
@@ -618,7 +621,6 @@ void OrionaudioAudioProcessorEditor::drumButtonClicked(int midiNote, int tabInde
                 dropdownTable->effectConfiguration->setCompressorComboBoxDisplay(instrumentName[sidechainIndex[instrumetClickedSerial]]);
             }
   
-            
             //------------ Set Slidervalues ----------------//
             dropdownTable->effectConfiguration->compThreshSliderValueChange(compressorThreshCoefficient[instrumetClickedSerial]);
             dropdownTable->effectConfiguration->compRatioSliderValueChange(compressorRatioCoefficient[instrumetClickedSerial]);

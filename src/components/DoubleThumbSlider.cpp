@@ -15,7 +15,7 @@
 #include "OrionClipConfiguration.h"
 
 
-DoubleThumbSlider::DoubleThumbSlider(ClipMeter* cm)
+DoubleThumbSlider::DoubleThumbSlider(ClipMeter* cm,OrionaudioAudioProcessor& p) : processor(p)
 {
     ellipseDiameter = getHeight();
     TLX = 0.0f;
@@ -84,9 +84,16 @@ void DoubleThumbSlider::audioRangeChange()
     int newSampleLength = RVal * originalLength - LVal * originalLength;
     
     
-    instrumentSampleBuffer[instrumetClickedSerial]->setSize(originalChannelNum, newSampleLength,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
-    instrumentSampleBuffer[instrumetClickedSerial]->setDataToReferTo(instrumentSampleContainer[instrumetClickedSerial].getArrayOfWritePointers(), originalChannelNum, LVal * originalLength, RVal * originalLength);
-    *instrumentSampleLength[instrumetClickedSerial] = newSampleLength;
+    instrumentSampleBufferPointer[instrumetClickedSerial]->setSize(originalChannelNum, newSampleLength,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+    instrumentSampleBufferPointer[instrumetClickedSerial]->setDataToReferTo(instrumentSampleContainer[instrumetClickedSerial].getArrayOfWritePointers(), originalChannelNum, LVal * originalLength, RVal * originalLength);
+    
+    
+    if (auto* sound = dynamic_cast<OrionSamplerSound*> (processor.sampler->getSound(instrumetClickedSerial).get()))
+    {
+        sound->setLength(newSampleLength);
+    }
+    
+    //*instrumentSampleLength[instrumetClickedSerial] = newSampleLength;
     
 }
 

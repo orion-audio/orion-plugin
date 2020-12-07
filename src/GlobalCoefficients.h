@@ -28,8 +28,11 @@ const String instrumentName[8]                = {"Kick",   "Snare", "Clap",   "P
 int sidechainIndex[8]                         = {-1,       -1,       -1,       -1,       -1,       -1,       -1,       -1};
 bool InstrumentMakeNoise[8]                   = {false,    false,    false,    false,    false,    false,    false,    false};
 
-AudioBuffer<float>* instrumentSampleBuffer[8] = {nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr};
-int* instrumentSampleLength[8]                = {nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr};
+
+//int* instrumentSampleLength[8]                = {nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr};
+
+AudioBuffer<float>* instrumentSampleBufferPointer[8] = {nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr};
+AudioBuffer<float> instrumentOriginalSampleContainer[8];
 AudioBuffer<float> instrumentSampleContainer[8];
 
 
@@ -64,9 +67,12 @@ bool  clipOnOffSwitches            [8] = {false, false, false, false, false, fal
 bool  imagerOnOffSwitches          [8] = {false, false, false, false, false, false, false, false};
 
 
-float  clipSaturationCoefficient   [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
-double clipPitchCoefficient        [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
-double clipFineTuneCoefficient     [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+float  clipSaturationCoefficient     [8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+float  clipSaturationFreqCoefficient [8] = {800.0f, 800.0f, 800.0f, 800.0f, 800.0f, 800.0f, 800.0f, 800.0f};
+
+double clipPitchCoefficient        [8] = {0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f};
+double clipFineTuneCoefficient     [8] = {0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f};
+double clipStretchSpeedCoefficient [8] = {1.00f, 1.00f, 1.00f, 1.00f, 1.00f, 1.00f, 1.00f, 1.00f};
 
 float startPointCoefficient        [8] = {0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f,  0.0f};
 float endPointCoefficient          [8] = {1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  1.0f};
@@ -139,8 +145,9 @@ extern bool InstrumentMakeNoise[];
 
 
 // Audio
-extern AudioBuffer<float>* instrumentSampleBuffer[];
-extern int* instrumentSampleLength[];
+extern AudioBuffer<float>* instrumentSampleBufferPointer[];
+//extern int* instrumentSampleLength[];
+extern AudioBuffer<float> instrumentOriginalSampleContainer[];
 extern AudioBuffer<float> instrumentSampleContainer[];
 
 // Global Smaple Rate
@@ -170,9 +177,11 @@ extern bool dropDownVisible;
 extern bool  clipOnOffSwitches          [];
 extern bool  imagerOnOffSwitches        [];
 
-extern float  clipSaturationCoefficient [];
-extern double clipPitchCoefficient      [];
-extern double clipFineTuneCoefficient   [];
+extern float  clipSaturationCoefficient     [];
+extern float  clipSaturationFreqCoefficient [];
+extern double clipPitchCoefficient          [];
+extern double clipFineTuneCoefficient       [];
+extern double clipStretchSpeedCoefficient   [];
 
 extern float startPointCoefficient      [];
 extern float endPointCoefficient        [];

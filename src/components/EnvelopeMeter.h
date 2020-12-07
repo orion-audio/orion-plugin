@@ -44,30 +44,8 @@ public:
     {
         
         
-        float sampleLengthInMS = 1000 * instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
+        float sampleLengthInMS = 1000 * instrumentSampleBufferPointer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
         return sampleLengthInMS;
-//        File* audioFile;
-//        audioFile = &instrumentSamplePathes[instrumetClickedSerial];
-//
-//        if(audioFile != nullptr)
-//        {
-//            AudioFormatReader*  mFormatReader {nullptr};
-//            mFormatReader = mFormatManager.createReaderFor(instrumentSamplePathes[instrumetClickedSerial]);
-//            auto sampleLength = static_cast<int>(mFormatReader->lengthInSamples);
-//            mWaveForm.setSize(1, sampleLength);
-//
-//            mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-//            mFormatReader->read(&mWaveForm, 0, sampleLength, 0, true, false);
-//
-//            float sampleLengthInMS = 1000 * instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
-//            return sampleLengthInMS;
-//        }
-//        else
-//        {
-//            DBG("inval audio file");
-//            float sampleLengthInMS = 1000 * instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
-//            return sampleLengthInMS;
-//        }
         
     };
 

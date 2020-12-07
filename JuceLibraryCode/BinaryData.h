@@ -12,7 +12,7 @@ namespace BinaryData
     const int            background_pngSize = 12898;
 
     extern const char*   clipBackground_png;
-    const int            clipBackground_pngSize = 159115;
+    const int            clipBackground_pngSize = 147062;
 
     extern const char*   ENVBackground_png;
     const int            ENVBackground_pngSize = 257280;

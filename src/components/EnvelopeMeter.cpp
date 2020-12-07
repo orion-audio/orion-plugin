@@ -44,24 +44,24 @@ void EnvelopeMeter::paint (Graphics& g)
     g.setOpacity(0.7);
     
     /* Get Waveform */
-    int ratio = instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/getWidth();
+    int ratio = instrumentSampleBufferPointer[instrumetClickedSerial]->getNumSamples()/getWidth();
     
     
     
-    auto buffer = instrumentSampleBuffer[instrumetClickedSerial]->getReadPointer(0);
+    auto buffer = instrumentSampleBufferPointer[instrumetClickedSerial]->getReadPointer(0);
     std::vector<float> mAudioPoints;
     
     /* Scale Audio File To Window On X Axis */
     if(ratio>=1)
     {
-        for (int sample = 0; sample < instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples(); sample+=ratio)
+        for (int sample = 0; sample < instrumentSampleBufferPointer[instrumetClickedSerial]->getNumSamples(); sample+=ratio)
         {
             mAudioPoints.push_back(buffer[sample]);
         }
     }
     else
     {
-        for (int sample = 0; sample < instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples(); sample+=1)
+        for (int sample = 0; sample < instrumentSampleBufferPointer[instrumetClickedSerial]->getNumSamples(); sample+=1)
         {
             mAudioPoints.push_back(buffer[sample]);
         }

@@ -114,9 +114,9 @@ void SimpleSynth::loadSamples()
     }
     int MidiNote;
     audiofolder = File("/Library/Application\ Support/Orion/Orion\ Plugin/Samples");
-    
     String dir;
     String filename;
+    
     for(int i = 0; i < MAX_VOICES; i++)
     {
         switch(i)
@@ -167,6 +167,7 @@ void SimpleSynth::loadSamples()
                 break;
 
         }
+        
         File filePath(audiofolder.getChildFile(dir).getChildFile(filename));
         instrumentSamplePathes[i] = filePath;
         std::unique_ptr<AudioFormatReader> reader;
@@ -174,8 +175,7 @@ void SimpleSynth::loadSamples()
         reader.reset(audioFormatManager.createReaderFor(instrumentSamplePathes[i]));
         if (reader == nullptr)
             return;
-        
-        
+
         //note.setRange(0, 128, true);
         
         //-------------------------------------------------------------------
@@ -204,21 +204,19 @@ void SimpleSynth::loadSamples()
         
         //sampler->reverseSource();
         
-        instrumentSampleBuffer[i] = sampler->getAudioData();
-        instrumentSampleContainer[i] = *instrumentSampleBuffer[i];
-        instrumentSampleLength[i] = sampler->getLengthPtr();
+        instrumentSampleBufferPointer[i] = sampler->getAudioData();
+        instrumentOriginalSampleContainer[i] = *instrumentSampleBufferPointer[i];
+        instrumentSampleContainer[i] = instrumentOriginalSampleContainer[i];
+        //instrumentSampleLength[i] = sampler->getLengthPtr();
 
-
-        
 //        if(i == 0)
 //        {
-//            instrumentSampleBuffer[0]->setSize(2, 10000 - 2048,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */true);
-//            instrumentSampleBuffer[0]->setDataToReferTo(instrumentSampleContainer[0].getArrayOfWritePointers(), 2, 2048, 10000);
+//            instrumentSampleBufferPointer[0]->setSize(2, 10000 - 2048,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */true);
+//            instrumentSampleBufferPointer[0]->setDataToReferTo(instrumentSampleContainer[0].getArrayOfWritePointers(), 2, 2048, 10000);
 //            sampler->setLength(10000 - 2048);
 //        }
 //        
-    
-     
+
         addSound(sampler);
     }
     
@@ -275,7 +273,6 @@ void SimpleSynth::noteOn(int midiChannel,
     //DBG("Hey");
     for(int j = 0; j < getNumSounds(); j++)
     {
-        
         auto sound = getSound(j);
         if(sound->appliesToNote(midiNoteNumber) && sound->appliesToChannel(midiChannel))
         {

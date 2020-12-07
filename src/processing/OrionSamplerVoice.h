@@ -50,6 +50,7 @@ private:
     int index = 0;
     int pitchVal;
     float saturationVal = 0;
+    float saturationLPFFreq = 800.0f;
     double pitchCent;
     double currSampRate;
     
@@ -366,7 +367,6 @@ public:
         
         if (auto* sound = dynamic_cast<OrionSamplerSound*> (sampSound))
         {
-            
             pitchRatio = std::pow(2.0, ((midiNoteNumber - sound->midiRootNote) + pitchVal + pitchCent) / 12.0)
             * sound->sourceSampleRate / getSampleRate();
             
@@ -488,7 +488,8 @@ public:
                     LInVals[0] = XL * saturationVal;
                     RInVals[0] = XR * saturationVal;
                     
-                    SatPassFilter(800.0f/* Freq */,0.1/* rez amount, from 0.1 to ~ sqrt(2)*/,true/* L->T, H->F */);
+       
+                    SatPassFilter(saturationLPFFreq/* Freq */,0.1/* rez amount, from 0.1 to ~ sqrt(2)*/,true/* L->T, H->F */);
               
                     l = l*0.7 + LOutVals[0]*0.4*l;
                     r = r*0.7 + ROutVals[0]*0.4*r;
@@ -828,6 +829,12 @@ public:
     {
         saturationVal = saturationIn;
         std::cout<<"saturationVal: "<<saturationVal<<std::endl;
+    };
+    
+    void setSaturationLPFFreqVal(float FreqIn)
+    {
+        saturationLPFFreq = FreqIn;
+        std::cout<<"saturationLPFFreq: "<<saturationLPFFreq<<std::endl;
     };
     void setPitchCent(double pitchCentIn) { pitchCent = pitchCentIn; };
     

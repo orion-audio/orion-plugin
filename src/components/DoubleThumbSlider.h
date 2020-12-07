@@ -12,10 +12,11 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "GlobalCoefficients.h"
 #include "ClipMeter.h"
+#include "PluginProcessor.h"
 class DoubleThumbSlider  : public Component
 {
     public:
-    DoubleThumbSlider(ClipMeter*);
+    DoubleThumbSlider(ClipMeter*,OrionaudioAudioProcessor& p);
     ~DoubleThumbSlider() override;
     
     void paint (juce::Graphics&) override;
@@ -38,6 +39,7 @@ class DoubleThumbSlider  : public Component
     Value RValue;
     
     private:
+    OrionaudioAudioProcessor& processor;
     ClipMeter* meter;
 
 

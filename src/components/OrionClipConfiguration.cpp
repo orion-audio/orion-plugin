@@ -11,6 +11,12 @@
 #include "OrionClipConfiguration.h"
 
 
+
+
+
+#include "main.cpp"
+
+
 //==============================================================================
 OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : processor(p)
 {
@@ -24,7 +30,65 @@ OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : pr
     
     
     
+    //------------------------------------ Decoration Paths ------------------------------------//
+    horizontalKnobGroupDecorationPath.reset(new DrawablePath());
+    addAndMakeVisible(horizontalKnobGroupDecorationPath.get());
+    horizontalKnobGroupDecorationPath->replaceColour(Colours::black,Colours::grey);
+    
+    
+    verticalKnobGroupDecorationPath.reset(new DrawablePath());
+    addAndMakeVisible(verticalKnobGroupDecorationPath.get());
+    verticalKnobGroupDecorationPath->replaceColour(Colours::black,Colours::grey);
+    
+    
     //------------------------------------ Clip EFX Knobs ------------------------------------//
+    
+    //====== Title Labels
+    
+    // Saturation Name Label
+    saturationNameLabel.reset(new Label("SATURATION", "SATURATION"));
+    saturationNameLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(saturationNameLabel.get());
+    saturationNameLabel->setAlpha(0.8);
+    //saturationNameLabel->setColour(Label::outlineColourId, Colour(0xff635E5D));
+    
+    // Saturation Ratio Label
+    saturationRatioTitleLabel.reset(new Label("Ratio", "Ratio"));
+    saturationRatioTitleLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(saturationRatioTitleLabel.get());
+    saturationRatioTitleLabel->setAlpha(0.8);
+    //saturationRatioTitleLabel->setColour(Label::outlineColourId, Colour(0xff635E5D));
+     
+    // Saturation LPF Label
+    saturationLPFTitleLabel.reset(new Label("LPF", "LPF"));
+    saturationLPFTitleLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(saturationLPFTitleLabel.get());
+    saturationLPFTitleLabel->setAlpha(0.8);
+    //saturationLPFTitleLabel->setColour(Label::outlineColourId, Colour(0xff635E5D));
+    
+    // Pitch Title Label
+    pitchTitleLabel.reset(new Label("Pitch", "Pitch"));
+    pitchTitleLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(pitchTitleLabel.get());
+    pitchTitleLabel->setAlpha(0.8);
+    //pitchTitleLabel->setColour(Label::outlineColourId, Colour(0xff635E5D));
+    
+    // Fine Tune Title Label
+    fineTuneTitleLabel.reset(new Label("Fine Tune", "Fine Tune"));
+    fineTuneTitleLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(fineTuneTitleLabel.get());
+    fineTuneTitleLabel->setAlpha(0.8);
+    //fineTuneTitleLabel->setColour(Label::outlineColourId, Colour(0xff635E5D));
+
+    // Stretch Title Label
+    stretchTitleLabel.reset(new Label("Stretch", "Stretch"));
+    stretchTitleLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(stretchTitleLabel.get());
+    stretchTitleLabel->setAlpha(0.8);
+    //stretchTitleLabel->setColour(Label::outlineColourId, Colour(0xff635E5D));
+    
+    //====== Knobs & Variable Labels
+    
     // Saturation
     saturationKnob.reset(new Slider());
     saturationKnob->setSliderStyle(Slider::SliderStyle::Rotary);
@@ -39,19 +103,18 @@ OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : pr
     addAndMakeVisible(saturationLabel.get());
     saturationLabel->setAlpha(0.8);
     
-    // Stretch
-    stretchKnob.reset(new Slider());
-    stretchKnob->setSliderStyle(Slider::SliderStyle::Rotary);
-    stretchKnob->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
-    stretchKnob->setRange(0, 1);
-    stretchKnob->setValue(0.5);
-    stretchKnob->addListener(this);
-    addAndMakeVisible(stretchKnob.get());
+    saturationLPFKnob.reset(new Slider());
+    saturationLPFKnob->setSliderStyle(Slider::SliderStyle::Rotary);
+    saturationLPFKnob->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
+    saturationLPFKnob->setRange(20, 20000);
+    saturationLPFKnob->setValue(800);
+    saturationLPFKnob->addListener(this);
+    addAndMakeVisible(saturationLPFKnob.get());
       
-    stretchLabel.reset(new Label("100.0 %", "100.0 %"));
-    stretchLabel->setJustificationType(juce::Justification::horizontallyCentred);
-    addAndMakeVisible(stretchLabel.get());
-    stretchLabel->setAlpha(0.8);
+    saturationLPFLabel.reset(new Label("800.0 Hz", "800.0 Hz"));
+    saturationLPFLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(saturationLPFLabel.get());
+    saturationLPFLabel->setAlpha(0.8);
     
     // Pitch
     pitchKnob.reset(new Slider());
@@ -80,6 +143,22 @@ OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : pr
     fineTuneLabel->setJustificationType(juce::Justification::horizontallyCentred);
     addAndMakeVisible(fineTuneLabel.get());
     fineTuneLabel->setAlpha(0.8);
+    
+    // Stretch
+    stretchSpeedKnob.reset(new Slider());
+    stretchSpeedKnob->setSliderStyle(Slider::SliderStyle::Rotary);
+    stretchSpeedKnob->setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);//Hide Text
+    stretchSpeedKnob->setRange(0.01, 7.00f);
+    stretchSpeedKnob->setValue(1.00);
+    stretchSpeedKnob->addListener(this);
+    addAndMakeVisible(stretchSpeedKnob.get());
+      
+    stretchSpeedLabel.reset(new Label("x1.00", "x1.00"));
+    stretchSpeedLabel->setJustificationType(juce::Justification::horizontallyCentred);
+    addAndMakeVisible(stretchSpeedLabel.get());
+    stretchSpeedLabel->setAlpha(0.8);
+    
+    
     
     
     // Reverse Label
@@ -216,7 +295,7 @@ OrionClipConfiguration::OrionClipConfiguration(OrionaudioAudioProcessor& p) : pr
     
     
     // SEPoint Slider
-    SEPointSlider.reset(new DoubleThumbSlider(clipMeter.get()));
+    SEPointSlider.reset(new DoubleThumbSlider(clipMeter.get(),processor));
     addAndMakeVisible(SEPointSlider.get());
     
 }
@@ -244,7 +323,8 @@ void OrionClipConfiguration::resized()
     float reverseSwitchSize = getWidth()/77;
     
     // Clip On/Off Switch
-    area = Rectangle<int>(getWidth() * 0.1970, getHeight() * 0.020, onOffSwitchSize, onOffSwitchSize);
+    //area = Rectangle<int>(getWidth() * JUCE_LIVE_CONSTANT(0.0999), getHeight() * 0.020, onOffSwitchSize, onOffSwitchSize);
+    area = Rectangle<int>(getWidth() * 0.0999, getHeight() * 0.020, onOffSwitchSize, onOffSwitchSize);
     clipOnOffSwitch->setBounds(area);
 
     // Imager On/Off Switch
@@ -259,20 +339,130 @@ void OrionClipConfiguration::resized()
     area = Rectangle<int>(getWidth() * 0.8925, getHeight() * 0.845,  switchSize, switchSize);
     imagerModeSwitch->setBounds(area);
     
-    //------------------------------------ ADSR Knobs ------------------------------------//
-    // Attack
+    
+    
+    
+    
+    //------------------------------------ Decoration Paths ------------------------------------//
+    
+    
+    // horizontal Knob Group Decoration Path
+    
+//    float PathY =  getHeight() * JUCE_LIVE_CONSTANT(0.47);
+//    float verticalPathX =  getWidth() * JUCE_LIVE_CONSTANT(0.108);
+//    float horizontalPathWidth =  getWidth() * JUCE_LIVE_CONSTANT(0.2168);
+//    float verticalPathHeight =  getHeight() * JUCE_LIVE_CONSTANT(0.5);
+    
+    float PathY =  getHeight() * 0.47;
+    float verticalPathX =  getWidth() * 0.108;
+    float horizontalPathWidth =  getWidth() * 0.2168;
+    float verticalPathHeight =  getHeight() * 0.5;
+    
+    Path path;
+    path.addRectangle (0, PathY, horizontalPathWidth, 1);
+    horizontalKnobGroupDecorationPath->setPath(path);
+    horizontalKnobGroupDecorationPath->setAlpha(0.3);
+    
+    Path path2;
+    path2.addRectangle (verticalPathX, PathY, 1, verticalPathHeight);
+    verticalKnobGroupDecorationPath->setPath(path2);
+    verticalKnobGroupDecorationPath->setAlpha(0.3);
+    
+
+//    Point<float> point3    = {static_cast<float>(verticalPathX),static_cast<float>(PathY)};
+//
+//    Point<float> point4    = {static_cast<float>(verticalPathX),static_cast<float>(getHeight())};
+//
+//    p.startNewSubPath(point3);
+//    p.lineTo(point4);
+//
+//    verticalKnobGroupDecorationPath->setAlpha(0.3);
+//    verticalKnobGroupDecorationPath->setPath(p);
+    
+ 
+    
+
+    
+    //------------------------------------ Knobs Name Label ------------------------------------//
+    
+
+//    float LabelWidth =  getWidth() * JUCE_LIVE_CONSTANT(0.069);
+//    float LabelHeight =  getHeight()* JUCE_LIVE_CONSTANT(0.15);
+    
+    float LabelWidth =  getWidth() * 0.069;
+    float LabelHeight =  getHeight()* 0.15;
+    
+    
+    
+    
+//    float LabelX1 =  getWidth() * JUCE_LIVE_CONSTANT(0.021);
+//    float LabelX2 =  getWidth() * JUCE_LIVE_CONSTANT(0.131);
+//    float LabelY1 =  getHeight() * JUCE_LIVE_CONSTANT(0.031);
+//    float LabelY2 =  getHeight() * JUCE_LIVE_CONSTANT(0.4725);
+    
+    float LabelX1 =  getWidth() * 0.021;
+    float LabelX2 =  getWidth() * 0.131;
+    float LabelY1 =  getHeight() * 0.031;
+    float LabelY2 =  getHeight() * 0.4725;
+    
+    
+    
+//    float fineTuneTitleLabelX =  getWidth() * JUCE_LIVE_CONSTANT(0.22);
+//    float fineTuneTitleLabelY =  getHeight() * JUCE_LIVE_CONSTANT(0.7);
+    
+//    float saturationNameLabelX =  getWidth() * JUCE_LIVE_CONSTANT(0.074);
+//    float saturationNameLabelY =  getHeight() * JUCE_LIVE_CONSTANT(0.37);
+    float saturationNameLabelX =  getWidth() * 0.074;
+    float saturationNameLabelY =  getHeight() * 0.37;
+    
+    float fineTuneTitleLabelX =  getWidth() * 0.22;
+    float fineTuneTitleLabelY =  getHeight() * 0.7;
+    
+   
+//    float satuLabelWidth = getWidth() * JUCE_LIVE_CONSTANT(0.069);
+//    float satuLabelHeight = getHeight() * JUCE_LIVE_CONSTANT(0.1);
+    float satuLabelWidth = getWidth() * 0.069;
+    float satuLabelHeight = getHeight() * 0.1;
+
+    area = Rectangle<int>(saturationNameLabelX, saturationNameLabelY, satuLabelWidth, satuLabelHeight);
+    //area = Rectangle<int>(saturationNameLabelX, saturationNameLabelY, LabelWidth * 1.070, LabelHeight);
+    saturationNameLabel->setBounds(area);
+    
+    
+    area = Rectangle<int>(LabelX1, LabelY1, LabelWidth, LabelHeight);
+    saturationRatioTitleLabel->setBounds(area);
+    
+    area = Rectangle<int>(LabelX2, LabelY1, LabelWidth, LabelHeight);
+    saturationLPFTitleLabel->setBounds(area);
+    
+    area = Rectangle<int>(LabelX1, LabelY2, LabelWidth, LabelHeight);
+    pitchTitleLabel->setBounds(area);
+    
+    area = Rectangle<int>(LabelX2, LabelY2, LabelWidth, LabelHeight);
+    fineTuneTitleLabel->setBounds(area);
+    
+    
+    
+    area = Rectangle<int>(fineTuneTitleLabelX, fineTuneTitleLabelY, LabelWidth, LabelHeight);
+    stretchTitleLabel->setBounds(area);
+    
+
+    //------------------------------------ Knobs & Variable Label ------------------------------------//
+    // Saturation
     area = Rectangle<int>(getWidth()/29, knobY1,  knobSize, knobSize);
     saturationKnob->setBounds(area);
 
     area = Rectangle<int>(getWidth()/29 - knobSize/2, TextY1,  2 * knobSize, TextHeight);
     saturationLabel->setBounds(area);
+    
+   
   
     // Decay
     area = Rectangle<int>(getWidth()/7, knobY1,  knobSize, knobSize);
-    stretchKnob->setBounds(area);
+    saturationLPFKnob->setBounds(area);
 
     area = Rectangle<int>(getWidth()/7 - knobSize/2, TextY1,  2 * knobSize, TextHeight);
-    stretchLabel->setBounds(area);
+    saturationLPFLabel->setBounds(area);
    
     // Hold
     area = Rectangle<int>(getWidth()/29, knobY2,  knobSize, knobSize);
@@ -281,12 +471,30 @@ void OrionClipConfiguration::resized()
     area = Rectangle<int>(getWidth()/29 - knobSize/2, TextY2,  2 * knobSize, TextHeight);
     pitchLabel->setBounds(area);
     
-    // Release
+    // Fine Tune
     area = Rectangle<int>(getWidth()/7, knobY2,  knobSize, knobSize);
     fineTuneKnob->setBounds(area);
 
     area = Rectangle<int>(getWidth()/7 - knobSize/2, TextY2,  2 * knobSize, TextHeight);
     fineTuneLabel->setBounds(area);
+    
+    // Stretch
+    
+//    float stretchSpeedKnobX = getWidth() * JUCE_LIVE_CONSTANT(0.296);
+//    float stretchSpeedKnobY = getHeight() * JUCE_LIVE_CONSTANT(0.65);
+//    float stretchSpeedLabelX = getWidth() * JUCE_LIVE_CONSTANT(0.276);
+//    float stretchSpeedLabelY = getHeight() * JUCE_LIVE_CONSTANT(0.84);
+    float stretchSpeedKnobX = getWidth() * 0.296;
+    float stretchSpeedKnobY = getHeight() * 0.65;
+    float stretchSpeedLabelX = getWidth() * 0.276;
+    float stretchSpeedLabelY = getHeight() * 0.825;
+    
+    area = Rectangle<int>(stretchSpeedKnobX, stretchSpeedKnobY,  knobSize, knobSize);
+    stretchSpeedKnob->setBounds(area);
+
+    area = Rectangle<int>(stretchSpeedLabelX, stretchSpeedLabelY,  2 * knobSize, TextHeight);
+    stretchSpeedLabel->setBounds(area);
+   
     
     
     //------------------------------------ Meters ------------------------------------//
@@ -452,6 +660,8 @@ void OrionClipConfiguration::reverseSwitchClicked(bool isDown)
 {
     if(isDown)
     {
+        
+        instrumentOriginalSampleContainer[instrumetClickedSerial].reverse(0, instrumentOriginalSampleContainer[instrumetClickedSerial].getNumSamples());
         instrumentSampleContainer[instrumetClickedSerial].reverse(0, instrumentSampleContainer[instrumetClickedSerial].getNumSamples());
         reverseSwitches[instrumetClickedSerial] = !reverseSwitches[instrumetClickedSerial];
         setReverseSwitchImage(reverseSwitches[instrumetClickedSerial]);
@@ -495,7 +705,6 @@ void OrionClipConfiguration::imagerSwitchClicked(bool isDown)
     }
 }
 
-
 void OrionClipConfiguration::sliderValueChanged (Slider* slider)
 {
     
@@ -515,9 +724,17 @@ void OrionClipConfiguration::sliderValueChanged (Slider* slider)
         saturationLabel->setText(value,dontSendNotification);
 
     }
-    else if(slider == stretchKnob.get())// Stretch Knob
+    else if(slider == saturationLPFKnob.get())// Saturation LPF Freq Knob
     {
+        clipSaturationFreqCoefficient[instrumetClickedSerial] = saturationLPFKnob->getValue();
+        if(auto* voice = dynamic_cast<OrionSamplerVoice*>(processor.getSampler()->getVoice(instrumetClickedSerial)))
+        {
+            voice->setSaturationLPFFreqVal(clipSaturationFreqCoefficient[instrumetClickedSerial]);
+        }
         
+        String value = String(int(clipSaturationFreqCoefficient[instrumetClickedSerial]));
+        value.append(" Hz",5);
+        saturationLPFLabel->setText(value,dontSendNotification);
     }
     else if(slider == pitchKnob.get())// Pitch Knob
     {
@@ -545,7 +762,26 @@ void OrionClipConfiguration::sliderValueChanged (Slider* slider)
         value.append(" cent",5);
         fineTuneLabel->setText(value,dontSendNotification);
     }
-    
+    else if(slider == stretchSpeedKnob.get())// Stretch Speed Knob
+    {
+        clipStretchSpeedCoefficient[instrumetClickedSerial] = stretchSpeedKnob->getValue();
+        
+        String preVale = "x";
+        
+        String value = "";
+        
+        if(clipStretchSpeedCoefficient[instrumetClickedSerial] == 7)
+        {
+            value = "7.00";
+        }
+        else
+        {
+            value = String(clipStretchSpeedCoefficient[instrumetClickedSerial]);
+        }
+        preVale.append(value,4);
+        stretchSpeedLabel->setText(preVale,dontSendNotification);
+        //clipStretchUpdate(clipStretchSpeedCoefficient[instrumetClickedSerial]);
+    }
     
     
     //------------------------------------ Imager ------------------------------------//
@@ -572,6 +808,151 @@ void OrionClipConfiguration::sliderValueChanged (Slider* slider)
         
     }
     
+}
+
+void OrionClipConfiguration::sliderDragEnded (Slider* slider)
+{
+    if(slider == stretchSpeedKnob.get())// Stretch Speed Knob
+    {
+        
+        clipStretchSpeedCoefficient[instrumetClickedSerial] = stretchSpeedKnob->getValue();
+        
+//        if(auto* voice = dynamic_cast<OrionSamplerVoice*>(processor.getSampler()->getVoice(instrumetClickedSerial)))
+//        {
+//            voice->setPitchCent(clipStretchSpeedCoefficient[instrumetClickedSerial]);
+//        }
+        
+        String preVale = "x";
+        
+        String value = "";
+        
+        if(clipStretchSpeedCoefficient[instrumetClickedSerial] == 7)
+        {
+            value = "7.00";
+        }
+        else
+        {
+            value = String(clipStretchSpeedCoefficient[instrumetClickedSerial]);
+        }
+        preVale.append(value,4);
+        stretchSpeedLabel->setText(preVale,dontSendNotification);
+        clipStretchUpdate(clipStretchSpeedCoefficient[instrumetClickedSerial]);
+
+    }
+}
+
+
+void OrionClipConfiguration::clipStretchUpdate(double value)
+{
+    DBG(value);
+    
+    int origSampleLength = instrumentOriginalSampleContainer[instrumetClickedSerial].getNumSamples();
+    int originalChannelNum = instrumentOriginalSampleContainer[instrumetClickedSerial].getNumChannels();
+    
+    instrumentSampleContainer[instrumetClickedSerial] = instrumentOriginalSampleContainer[instrumetClickedSerial];
+    
+    double scale = 1;
+    AudioBuffer<float> container;
+    int newSampleLength = origSampleLength;
+    
+    // Integer Times Part
+    int times =  floor(value * scale);
+    for(int k = 0; k < times; k++)
+    {
+        newSampleLength = newSampleLength * 2;
+        container.setSize(originalChannelNum, newSampleLength ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+        
+        int count = 0;
+        for (int i = 0; i < newSampleLength; i++)
+        {
+            for (int ch = 0; ch < 2; ch++)
+            {
+                float source = 0;
+                
+                if ( i % 2 == 0)
+                {
+                    source = instrumentSampleContainer[instrumetClickedSerial].getSample(ch, i - count);
+                }
+                else
+                {
+                    source = container.getSample(ch, i - 1);
+                }
+                container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
+            }
+            
+            if ( i % 2 != 0)
+            {
+                count += 1;
+            }
+        }
+        
+        instrumentSampleContainer[instrumetClickedSerial] = container;
+        instrumentSampleContainer[instrumetClickedSerial].setSize(originalChannelNum, newSampleLength ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+        
+        if (auto* sound = dynamic_cast<OrionSamplerSound*> (processor.sampler->getSound(instrumetClickedSerial).get()))
+        {
+            sound->setLength(newSampleLength);
+        }
+
+    }
+
+    
+    // Decimal Times Part
+    float decimal = value - times;
+    
+    if(decimal != 0)
+    {
+        int n = origSampleLength * decimal;//Amount of Adding Decimal Point
+
+        int addingPointRuler = newSampleLength/n;
+        
+        int newSampleLength2 = newSampleLength + newSampleLength * decimal;
+        container.setSize(originalChannelNum, newSampleLength2 ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+        
+        int tmp = 0;
+        int count = 0;
+        
+        float source = 0;
+        
+        for (int i = 0; i < newSampleLength; i++)
+        {
+            if (tmp == addingPointRuler)
+            {
+                for (int ch = 0; ch < 2; ch++)
+                {
+                    source = container.getSample(ch, i - 1);
+                    container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
+                }
+                count += 1;
+                tmp = 0;
+            }
+            else
+            {
+                for (int ch = 0; ch < 2; ch++)
+                {
+                    source = instrumentSampleContainer[instrumetClickedSerial].getSample(ch, i - count);
+                    container.copyFrom(ch/* CH */, i/* Dinstinate Start Sample */, &source /* Source Data */, 1/* numSamples */);
+                }
+            }
+
+            tmp += 1;
+        }
+        
+        instrumentSampleContainer[instrumetClickedSerial] = container;
+        instrumentSampleContainer[instrumetClickedSerial].setSize(originalChannelNum, newSampleLength2 ,/* keepExistingContent: */false,/* clearExtraSpace: */true,/* avoidReallocating: */false);
+        
+        if (auto* sound = dynamic_cast<OrionSamplerSound*> (processor.sampler->getSound(instrumetClickedSerial).get()))
+        {
+            sound->setLength(newSampleLength2);
+        }
+    }
+
+
+    // Update To the Part of Selected Audio
+    SEPointSlider->audioRangeChange();
+    
+    // Update Audio Image
+    clipMeter->repaint();
 }
 
 

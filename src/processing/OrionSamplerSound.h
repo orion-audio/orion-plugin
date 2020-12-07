@@ -22,7 +22,7 @@ public:
     
     void setLength(int newLength){length = newLength;};
     
-    int* getLengthPtr(){return &length;};
+    //int* getLengthPtr(){return &length;};
     
     
 };

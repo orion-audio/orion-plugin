@@ -149,7 +149,6 @@ private:
     AudioFormatManager formatManager;
     double startTime;
     
-    TooltipWindow tooltip;
     
     bool resizeViewVisible = false;
     bool arrangementWindowVisible = false;

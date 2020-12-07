@@ -29,7 +29,7 @@ public:
     
 //    float getSampleLength()
 //    {
-//        float sampleLengthInMS = 1000 * instrumentSampleBuffer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
+//        float sampleLengthInMS = 1000 * instrumentSampleBufferPointer[instrumetClickedSerial]->getNumSamples()/globalSampleRate;
 //        return sampleLengthInMS;
 //    };
     

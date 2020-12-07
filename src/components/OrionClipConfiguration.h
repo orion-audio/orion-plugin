@@ -42,13 +42,17 @@ public:
     void setimagerSwitchImage(bool On);
     void imagerSwitchClicked(bool isDown);
     void sliderValueChanged (Slider* slider)override;
+    void sliderDragEnded (Slider* slider)override;
 
     void setImagerMode(bool inputVal){imagerMeter->setImagerMode(inputVal);}
     void setReverseMode(bool inputVal){clipMeter->setReverseMode(inputVal);}
     void clipSaturationValueChange(double value){saturationKnob->setValue(value,sendNotificationSync);};
+    void clipSaturationFreqValueChange(double value){saturationLPFKnob->setValue(value,sendNotificationSync);};
     
     void clipPitchKnobValueChange(double value){pitchKnob->setValue(value,sendNotificationSync);};
     void clipFineTuneKnobValueChange(double value){fineTuneKnob->setValue(value,sendNotificationSync);};
+    void clipStretchSpeedKnobValueChange(double value){stretchSpeedKnob->setValue(value,sendNotificationSync);};
+    void clipStretchUpdate(double value);
     
     void clipImagerSliderValueChange(double value)
     {
@@ -90,6 +94,12 @@ private:
     std::unique_ptr<DrawableImage> backgroundImageView;
     
     
+    
+    /* Decorations */
+    
+    std::unique_ptr<DrawablePath> horizontalKnobGroupDecorationPath;
+    std::unique_ptr<DrawablePath> verticalKnobGroupDecorationPath;
+    
     /* On Off Switches */
     
     std::unique_ptr<ImageButton> clipOnOffSwitch;
@@ -104,14 +114,27 @@ private:
 
     /* Clip EFX */
     std::unique_ptr<Slider> saturationKnob;
-    std::unique_ptr<Slider> stretchKnob;
+    std::unique_ptr<Slider> saturationLPFKnob;
     std::unique_ptr<Slider> pitchKnob;
     std::unique_ptr<Slider> fineTuneKnob;
+    std::unique_ptr<Slider> stretchSpeedKnob;
     
     std::unique_ptr<Label> saturationLabel;
-    std::unique_ptr<Label> stretchLabel;
+    std::unique_ptr<Label> saturationLPFLabel;
     std::unique_ptr<Label> pitchLabel;
     std::unique_ptr<Label> fineTuneLabel;
+    std::unique_ptr<Label> stretchSpeedLabel;
+    
+    
+    std::unique_ptr<Label> saturationNameLabel;
+    std::unique_ptr<Label> saturationRatioTitleLabel;
+    std::unique_ptr<Label> saturationLPFTitleLabel;
+    std::unique_ptr<Label> pitchTitleLabel;
+    std::unique_ptr<Label> fineTuneTitleLabel;
+    std::unique_ptr<Label> stretchTitleLabel;
+
+    
+    
     
     /* Imager */
     std::unique_ptr<ImagerMeter> imagerMeter;
