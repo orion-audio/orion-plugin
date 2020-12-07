@@ -34,17 +34,13 @@ void SequencerButton::paintButton (Graphics& g, bool shouldDrawButtonAsHighlight
     
     Colour colour;
     if (getToggleState() && frameCount == 0) {
-        g.setColour(findColour(ColourIds::fillColourOn));
+        g.setColour(Colours::white);
         g.fillEllipse(buttonArea.withSizeKeepingCentre(diameter - 2, diameter - 2));
-        g.setColour(findColour(ColourIds::borderColourOn));
-        g.drawEllipse(buttonArea.withSizeKeepingCentre(diameter - 2, diameter - 2), 2.5);
     }
     
     else if (!getToggleState()) {
-        g.setColour(findColour(ColourIds::fillColourOff));
+        g.setColour(Colours::darkgrey);
         g.fillEllipse(buttonArea.withSizeKeepingCentre(diameter - 2, diameter - 2));
-        g.setColour(findColour(ColourIds::borderColourOff));
-        g.drawEllipse(buttonArea.withSizeKeepingCentre(diameter - 2, diameter - 2), 2.5);
     }
     
     else if (frameCount != 0) {
