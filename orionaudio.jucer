@@ -4,7 +4,7 @@
               pluginFormats="buildAU,buildStandalone,buildVST3" companyName="Orion"
               pluginAUMainType="'aumu'" pluginManufacturerCode="Orio" pluginCode="orpg"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
-              displaySplashScreen="1" jucerFormatVersion="1" jucerVersion="5.4.7">
+              displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="PeSdbo" name="Orion Plugin">
     <GROUP id="{7972F1E0-9D9D-922F-3576-753B71DD33A4}" name="src">
       <FILE id="wj17AJ" name="MirrorViews.h" compile="0" resource="0" file="src/MirrorViews.h"/>
